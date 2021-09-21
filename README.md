@@ -10,7 +10,7 @@ ForeverLearn seeks to create a virtual space that allows its users to teach, sea
 
 The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, and secondly, a forum system that expands them and will serve as to evaluate the students.
 ## Phase 1
-In this phase we will define the objectives to be achieved, the types of users of the system and the requirements to be met to satisfy their needs.
+In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
 
 All the information described below can be in greater detail in the file "Memoria.doc".
 ### Objectives
@@ -45,3 +45,11 @@ The order in which the user types are treated is important, as they are arranged
 - Registered user: It has control over all the information related to his account, but what is really important is that, on the one hand, it has at its disposal all the necessary tools to create courses and organize them at its convenience, and on the other hand, it can register in courses and access all their content, as well as evaluate them and have a good follow-up of all those in which it has registered.
 - Administrator user: Has permissions to prohibit access to the system to all users whose behavior does not meet civic standards and common sense, and block access to courses that are irrelevant or harmful.
 
+### Technology stack
+For the development of the project we have decided to use the following set of technologies:
+- The application code is packaged using Maven.
+- The frontend of the application is written in HTML, CSS and JavaScript, without using any modern framework.
+- The backend of the application is written in Java, using Spring Boot as framework.
+- The persistence of the data is implemented through a relational database, using MySQL as the management system. 
+- The version control system used is Git.
+- The public repository which stores the proyect is on Github.
