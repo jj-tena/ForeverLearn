@@ -1,26 +1,31 @@
 # ForeverLearn
 ## Context
-This project includes the realization of two Bachelor's Degree Final Project, a first one for Software Engineering that proposes a base platform and a second one for Computer Science that expands and completes the work done in the first one.
+This project includes the realization of two Bachelor's Degree Final Project, a first one for Computer Science that proposes a base platform and a second one for Software Engineering that expands and completes the work done in the first one.
 
 The project will be developed by myself, José Justo Tena Agudo, with the mentoring of my tutor Oriol Borrás Gené, from whom the original idea comes from.
 ## Description
-MOOCs, as their acronym indicates, are massive open online courses that seek to bring education to the widest possible audience. In our case we will focus on CMOOCs, a variant that focuses on the knowledge community that can arise by taking advantage of the large volume of students in this type of courses, but presents the difficulty of evaluating students not based on the content learned but on their contribution to the community, it was due to this difficulty that they fell into oblivion without ever having a real implementation.
+MOOCs, as their acronym indicates, are massive open online courses that seek to bring education to the widest possible audience. In our case we will focus on cMOOCs, a variant that focuses on the knowledge community that can arise by taking advantage of the large volume of students in this type of courses, but presents the difficulty of evaluating students not based on the content learned but on their contribution to the community, it was due to this difficulty that they fell into oblivion without ever having a real implementation.
 
-ForeverLearn seeks to create a virtual space that allows its users to teach, search and enroll in CMOOCs, which will be accompanied by a forum system in which students can discuss, clarify their doubts and expand the course content. Students will be graded based on their participation in these forums, which will be incentivized through a gamification system that will give them different levels of privileges.
+ForeverLearn seeks to create a virtual space that allows its users to teach, search and enroll in cMOOCs, which will be accompanied by a forum system in which students can discuss, clarify their doubts and expand the course content. Students will be graded based on their participation in these forums, which will be incentivized through a gamification system that will give them different levels of privileges.
 
-The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, and secondly, a forum system that expands them and will serve as to evaluate the students.
+The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2 and 3, and secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out in the following phases.
 ## Phase 1
 In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
 
 All the information described below can be in greater detail in the file "Memoria.doc".
 ### Objectives
-The application has a series of essential objectives that needs to achieve in order to consider the initial problem solved.
+The application has a series of essential objectives to satisfy the concerns and challenges posed by the problem described in the previous point.
 
-- With the aim of promoting a philosophy of learning and personal growth, any registered user has access to all the functions that would correspond to both the role of teacher and student.
-- All courses should be free of charge in order to be a genuinely open education for all those interested in learning.
-- Teachers should be able to create as many courses as they wish, divide them into the modules or topics they consider and upload files: pdf, images, videos, etc.
-- Students should be able to find the courses easily and effectively, for this there will be a section that allows them to see all available courses as a store, as well as filter by categories or directly search based on the name of these.
-- Students should be able to register for the courses in the store and have access to all the content of the courses regardless of their enrollment.
+We propose a main objective that corresponds directly to the heart of our goal:
+- To promote a philosophy of open learning, accessible by all and for all, through which our users can grow professionally and personally.
+
+This main objective is accompanied by a series of secondary objectives that the system must meet, which are listed below:
+- To access the content of the courses free of charge and without the need to register in order to make it a genuinely open education for all those interested in learning.
+- To allow any registered user to perform all the functions that would correspond to both the role of teacher and student.
+- To design courses as desired, divide them into modules or topics and add content to them.
+- To find courses easily and effectively, for this there will be a section as a store that allows you to see all available courses, as well as filter by categories or directly search based on the name of these.
+- To be able to register in a course of the store to participate in its system of forums and thus obtain a title that accredits its overcoming.
+
 ### User roles
 The platform must be able to respond to the needs of its users and to do so it needs to understand that not everyone will interact with the system in the same way, which translates into a study of the division between them and the particularities of each type.
 
