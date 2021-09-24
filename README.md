@@ -8,7 +8,7 @@ MOOCs, as their acronym indicates, are massive open online courses that seek to 
 
 ForeverLearn seeks to create a virtual space that allows its users to teach, search and enroll in cMOOCs, which will be accompanied by a forum system in which students can discuss, clarify their doubts and expand the course content. Students will be graded based on their participation in these forums, which will be incentivized through a gamification system that will give them different levels of privileges.
 
-The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2 and 3, and secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out in the following phases.
+The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2 and 3, and secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out starting in phase 4.
 ## Phase 1
 In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
 
