@@ -58,3 +58,9 @@ For the development of the project we have decided to use the following set of t
 - The persistence of the data is implemented through a relational database, using MySQL as the management system. 
 - The version control system used is Git.
 - The public repository which stores the proyect is on Github.
+## Phase 2
+In this phase I will display the frontend of the application, therefore the layout of web pages and the navigation scheme between screens. 
+
+The application interface will be designed taking into account the principles of usability and accessibility.
+### Pages
+This is the list of pages that make up the frontend of the website.
