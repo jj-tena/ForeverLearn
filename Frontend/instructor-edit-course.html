@@ -69,8 +69,25 @@
                         <span class="d-none d-md-block">ForeverLearn</span>
                     </a>
 
-                    <button class="btn btn-black mr-16pt" data-toggle="modal" data-target="#courses">Cursos <i class="material-icons">arrow_drop_down</i></button>
-
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-black mr-16pt dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos</button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">Categorías</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="library.html">Informática y software</a>
+                          <a class="dropdown-item" href="library.html">Negocios</a>
+                          <a class="dropdown-item" href="library.html">Finanzas y contabilidad</a>
+                          <a class="dropdown-item" href="library.html">Profesiones</a>
+                          <a class="dropdown-item" href="library.html">Desarrollo personal</a>
+                          <a class="dropdown-item" href="library.html">Diseño</a>
+                          <a class="dropdown-item" href="library.html">Marketing</a>
+                          <a class="dropdown-item" href="library.html">Estilo de vida</a>
+                          <a class="dropdown-item" href="library.html">Fotografía y video</a>
+                          <a class="dropdown-item" href="library.html">Salud y deporte</a>
+                          <a class="dropdown-item" href="library.html">Música</a>
+                          <a class="dropdown-item" href="library.html">Disciplinas académicas</a>
+                        </div>
+                      </div>
                     <form class="search-form search-form--black search-form-courses d-none d-md-flex" action="library-filters.html">
                         <input type="text" class="form-control" placeholder="¿Qué te gustaría aprender?">
                         <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
@@ -171,7 +188,7 @@
                     <div class="col-md-4">
 
                         <div class="mb-heading d-flex align-items-center">
-                            <h4 class="flex mb-0">Main Video</h4>
+                            <h4 class="flex mb-0">Trailer</h4>
                             <a href="#" class="text-underline">Edit</a>
                         </div>
 
@@ -182,7 +199,7 @@
                         </div>
 
                         <div class="mb-heading d-flex align-items-center">
-                            <h4 class="flex mb-0">Course Options</h4>
+                            <h4 class="flex mb-0">Datos del curso</h4>
                             <a href="#" class="text-underline">Add</a>
                         </div>
 
@@ -191,9 +208,18 @@
                                 <div class="form-group">
                                     <label>Categoría</label>
                                     <select name="category" class="form-control custom-select">
-                                        <option value="vuejs">VueJs</option>
-                                        <option value="vuejs">Angular</option>
-                                        <option value="vuejs">React</option>
+                                        <option value="vuejs">Informática y software</option>
+                                        <option value="vuejs">Negocios</option>
+                                        <option value="vuejs">Finanzas y contabilidad</option>
+                                        <option value="vuejs">Profesiones</option>
+                                        <option value="vuejs">Desarrollo personal</option>
+                                        <option value="vuejs">Diseño</option>
+                                        <option value="vuejs">Marketing</option>
+                                        <option value="vuejs">Estilo de vida</option>
+                                        <option value="vuejs">Fotografía y video</option>
+                                        <option value="vuejs">Salud y deporte</option>
+                                        <option value="vuejs">Música</option>
+                                        <option value="vuejs">Disciplinas académicas</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
