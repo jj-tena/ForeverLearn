@@ -120,7 +120,7 @@
                         <h2 class="text-white mb-0">Elijah Murray</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
-                    <a href="student-edit-account.html" class="btn btn-outline-white">Editar cuenta</a>
+                    <a href="student-profile.html" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
@@ -165,17 +165,46 @@
                                     </div>
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Categoría</label>
+                                            <label class="col-form-label col-sm-3" for="category">Categoría</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce la categoría">
+                                                <select id="category" name="category" required="" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una categoría</option>
+                                                    <option value="Informática y software">Informática y software</option>
+                                                    <option value="Entretenimiento">Entretenimiento</option>
+                                                    <option value="Finanzas">Finanzas</option>
+                                                    <option value="Profesiones">Profesiones</option>
+                                                    <option value="Desarrollo personal">Desarrollo personal</option>
+                                                    <option value="Diseño">Diseño</option>
+                                                    <option value="Marketing">Marketing</option>
+                                                    <option value="Deportes">Deportes</option>
+                                                    <option value="Fotografía y video">Fotografía y video</option>
+                                                    <option value="Salud">Salud</option>
+                                                    <option value="Música">Música</option>
+                                                    <option value="Disciplinas académicas">Disciplinas académicas</option>
+
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Dificultad</label>
+                                            <label class="col-form-label col-sm-3" for="difficulty">Dificultad</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce la dificultad">
+                                                <select id="difficulty" name="difficulty" required="" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una dificultad</option>
+                                                    <option value="Principiante">Principiante</option>
+                                                    <option value="Intermedio">Intermedio</option>
+                                                    <option value="Avanzado">Avanzado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Duración</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Introduce la duración">
                                             </div>
                                         </div>
                                     </div>
@@ -192,30 +221,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">¿Qué aprenderás?</label>
-                                            <div class="col-sm-9">
-                                                <textarea rows="3" class="form-control" placeholder="Introduce qué aprenderas"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Etiquetas</label>
-                                            <div class="col-sm-9">
-                                                <textarea rows="3" class="form-control" placeholder="Introduce las etiquetas del curso"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Temas</label>
-                                            <div class="col-sm-9">
-                                                <textarea rows="3" class="form-control" placeholder="Introduce los temas del curso"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="text-center">
                                     <button class="btn btn-lg btn-accent">Crear curso</button>
