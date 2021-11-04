@@ -52,32 +52,55 @@
         <div id="header" class="mdk-header bg-dark js-mdk-header mb-0" data-effects="waterfall blend-background" data-fixed data-condenses>
             <div class="mdk-header__content">
 
-                <div data-primary class="navbar navbar-expand-sm navbar-dark bg-dark p-0" id="default-navbar">
-                    <div class="container">
+                <div class="navbar navbar-expand-sm navbar-dark bg-dark pr-0 pr-md-16pt" id="default-navbar" data-primary>
 
-                        <!-- Navbar Brand -->
-                        <a href="index.html" class="navbar-brand">
-                            <img class="navbar-brand-icon" src="assets/images/logo/white-100@2x.png" width="30" alt="Tutorio">
-                            <span class="d-none d-md-block">ForeverLearn</span>
-                        </a>
+                    <!-- Navbar toggler -->
+                    <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <!-- Main Navigation -->
-                        <ul class="nav navbar-nav ml-auto d-none d-sm-flex">
-                            <li class="nav-item active">
-                                <a href="signup.html" class="nav-link">Registrarse</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="login.html" class="nav-link">Iniciar sesión</a>
-                            </li>
-                        </ul>
-                        <!-- // END Main Navigation -->
+                    <!-- Navbar Brand -->
+                    <a href="index.html" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/logo/white-100@2x.png" width="30" alt="Tutorio">
+                        <span class="d-none d-md-block">ForeverLearn</span>
+                    </a>
 
-                        <!-- Navbar toggler -->
-                        <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-black mr-16pt dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cursos</button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">Categorías</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="library.html">Informática y software</a>
+                          <a class="dropdown-item" href="library.html">Negocios</a>
+                          <a class="dropdown-item" href="library.html">Finanzas y contabilidad</a>
+                          <a class="dropdown-item" href="library.html">Profesiones</a>
+                          <a class="dropdown-item" href="library.html">Desarrollo personal</a>
+                          <a class="dropdown-item" href="library.html">Diseño</a>
+                          <a class="dropdown-item" href="library.html">Marketing</a>
+                          <a class="dropdown-item" href="library.html">Estilo de vida</a>
+                          <a class="dropdown-item" href="library.html">Fotografía y video</a>
+                          <a class="dropdown-item" href="library.html">Salud y deporte</a>
+                          <a class="dropdown-item" href="library.html">Música</a>
+                          <a class="dropdown-item" href="library.html">Disciplinas académicas</a>
+                        </div>
+                      </div>
 
-                    </div>
+                    <form class="search-form search-form--black search-form-courses d-none d-md-flex" action="library-filters.html">
+                        <input type="text" class="form-control" placeholder="¿Qué te gustaría aprender?">
+                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                    </form>
+
+                    <!-- Main Navigation -->
+
+                    <ul class="nav navbar-nav ml-auto flex-nowrap" style="white-space: nowrap;">
+                        
+                        <li class="d-none d-sm-flex nav-item">
+                            <a href="login.html" class="btn btn-accent">Iniciar sesión</a>
+                        </li>
+                    </ul>
+
+                    <!-- // END Main Navigation -->
+
                 </div>
 
             </div>
@@ -95,9 +118,9 @@
                         <h1 class="text-white mb-8pt">Registrarse</h1>
                         <p class="lead measure-lead text-white-50">Forma parte de una inmensa red de difusión y aprendizaje de conocimiento.</p>
                     </div>
-                    <a href="" class="btn btn-outline-white flex-column">
-                        ¿Tienes preguntas?
-                        <span class="btn__secondary-text">Visita nuestro centro de ayuda</span>
+                    <a href="login.html" class="btn btn-outline-white flex-column">
+                        ¿Tienes cuenta?
+                        <span class="btn__secondary-text">Inicia sesión</span>
                     </a>
                 </div>
             </div>
