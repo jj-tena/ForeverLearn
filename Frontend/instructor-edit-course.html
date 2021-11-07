@@ -121,126 +121,334 @@
                         <h2 class="text-white mb-0">Elijah Murray</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
-                    <a href="student-edit-account.html" class="btn btn-outline-white">Editar cuenta</a>
+                    <a href="student-profile.html" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
+            <div class="container page__container">
+                <form action="instructor-courses.html">
+                    <div class="row">
+                        <div class="col-lg-12">
 
-            <div class="page-section bg-white border-bottom-2">
-                <div class="container page__container">
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <h4>Título</h4>
-                            <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="Course title" value="Javascript Basics">
-                            </div>
+                            <div class="page-section">
+                                <h4>Editar curso</h4>
+                                <div class="list-group list-group-form">
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Título</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Introduce el título">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Miniatura</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Descripción</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Duración</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Introduce la duración">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Trailer</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <h4>Descripción</h4>
-                            <textarea class="form-control" rows="3" placeholder="Course description goes here.."></textarea>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card m-0">
-                                <div class="card-header text-center">
-                                    <a href="#" class="btn btn-accent">Guardar cambios</a>
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Temario</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <button data-toggle="modal" data-target="#createTheme" class="btn btn-lg btn-accent mb-16pt" style="float:right">Crear tema</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+                                                    
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                                        <li class="accordion__item">
+                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-1">
+                                                                <span class="flex">Course Overview</span>
+                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-lg btn-accent ml-16pt" style="float:right">Crear lección</button>
+
+                                                            </a>
+                                                            <div class="accordion__menu">
+                                                                <ul class="list-unstyled collapse" id="course-toc-1">
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Watch Trailer</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-2">
+                                                                <span class="flex">Getting Started with Angular</span>
+                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-lg btn-accent ml-16pt" style="float:right">Crear lección</button>
+
+                                                            </a>
+                                                            <div class="accordion__menu">
+                                                                <ul class="list-unstyled collapse" id="course-toc-2">
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Introduction</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                    </li>
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Introduction to TypeScript</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>                                                                    </li>
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Comparing Angular to AngularJS</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-3">
+                                                                <span class="flex">Creating and Communicating Between Angular Components</span>
+                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-lg btn-accent ml-16pt" style="float:right">Crear lección</button>
+
+                                                            </a>
+                                                            <div class="accordion__menu">
+                                                                <ul class="list-unstyled collapse" id="course-toc-3">
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Angular Components</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="accordion__item">
+                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-4">
+                                                                <span class="flex">Exploring the Angular Template Syntax</span>
+                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-lg btn-accent ml-16pt" style="float:right">Crear lección</button>
+                                                            </a>
+                                                            <div class="accordion__menu">
+                                                                <ul class="list-unstyled collapse" id="course-toc-4">
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">Template Syntax</a>
+                                                                        <button class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                        
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Requisitos</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <button data-toggle="modal" data-target="#createRequirement" class="btn btn-lg btn-accent mb-16pt" style="float:right">Crear requisito</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+                                                    
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 1</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 2</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>                                                     
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 3</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>            
+                                                        </li>
+                                                        
+                                                    </ul>
+                        
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Objetivos</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <button data-toggle="modal" data-target="#createObjective" class="btn btn-lg btn-accent mb-16pt" style="float:right">Crear objetivo</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+                                                    
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 1</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 2</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>                                                     
+                                                        </li>
+                        
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 3</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                            </div>            
+                                                        </li>
+                                                        
+                                                    </ul>
+                        
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="category">Categoría</label>
+                                            <div class="col-sm-9">
+                                                <select id="category" name="category" required="" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una categoría</option>
+                                                    <option value="Informática y software">Informática y software</option>
+                                                    <option value="Entretenimiento">Entretenimiento</option>
+                                                    <option value="Finanzas">Finanzas</option>
+                                                    <option value="Profesiones">Profesiones</option>
+                                                    <option value="Desarrollo personal">Desarrollo personal</option>
+                                                    <option value="Diseño">Diseño</option>
+                                                    <option value="Marketing">Marketing</option>
+                                                    <option value="Deportes">Deportes</option>
+                                                    <option value="Fotografía y video">Fotografía y video</option>
+                                                    <option value="Salud">Salud</option>
+                                                    <option value="Música">Música</option>
+                                                    <option value="Disciplinas académicas">Disciplinas académicas</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="difficulty">Dificultad</label>
+                                            <div class="col-sm-9">
+                                                <select id="difficulty" name="difficulty" required="" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una dificultad</option>
+                                                    <option value="Principiante">Principiante</option>
+                                                    <option value="Intermedio">Intermedio</option>
+                                                    <option value="Avanzado">Avanzado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="card-header text-center">
-                                    <a href="#" class="btn btn-dark">Borrar curso</a>
+
+
+                                <div class="container page__container">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="text-center" style="padding:1rem">
+                                                <a href="instructor-courses.html" class="btn btn-accent">Guardar cambios</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                               
                             </div>
 
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="container page__container page-section">
-                <div class="row">
-                    <div class="col-md-8">
-
-                        <div class="mb-heading d-flex align-items-center">
-                            <h4 class="flex mb-0">Temas</h4>
-                            <a href="#" class="text-underline">Cambiar orden</a>
-                        </div>
-                        <div class="card stack">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Índice</h4>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Quick Overview</li>
-                                <li class="list-group-item">Basic Setup</li>
-                                <li class="list-group-item">Browserify: Writing Modular Javascript</li>
-                            </ul>
-                        </div>
-                        <div class="card stack">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Contenido</h4>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Quick Overview</li>
-                                <li class="list-group-item">Basic Setup</li>
-                                <li class="list-group-item">Browserify: Writing Modular Javascript</li>
-                            </ul>
-                        </div>
-                        <a href="#" class="btn btn-outline-secondary mb-24pt mb-sm-0">Añadir tema</a>
-                    </div>
-                    <div class="col-md-4">
-
-                        <div class="mb-heading d-flex align-items-center">
-                            <h4 class="flex mb-0">Trailer</h4>
-                            <a href="#" class="text-underline">Edit</a>
-                        </div>
-
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                            </div>
-                        </div>
-
-                        <div class="mb-heading d-flex align-items-center">
-                            <h4 class="flex mb-0">Datos del curso</h4>
-                            <a href="#" class="text-underline">Add</a>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>Categoría</label>
-                                    <select name="category" class="form-control custom-select">
-                                        <option value="vuejs">Informática y software</option>
-                                        <option value="vuejs">Entretenimiento</option>
-                                        <option value="vuejs">Finanzas</option>
-                                        <option value="vuejs">Profesiones</option>
-                                        <option value="vuejs">Desarrollo personal</option>
-                                        <option value="vuejs">Diseño</option>
-                                        <option value="vuejs">Marketing</option>
-                                        <option value="vuejs">Deporte</option>
-                                        <option value="vuejs">Fotografía y video</option>
-                                        <option value="vuejs">Salud</option>
-                                        <option value="vuejs">Música</option>
-                                        <option value="vuejs">Disciplinas académicas</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Etiquetas</label>
-                                    <input type="text" name="tags" class="form-control" placeholder="enter, badges, here">
-                                </div>
-
-                                <small class="text-muted">Tus etiquetas:</small>
-                                <a href="#" class="float-right"><small>Borrar todo</small></a>
-                                <div class="clearfix"></div>
-                                <span class="badge badge-primary badge-filter">
-                                    <a href="#"><i class="material-icons">close</i></a> Basic Angular
-                                </span>
-                                <span class="badge badge-primary badge-filter">
-                                    <a href="#"><i class="material-icons">close</i></a> Guide
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                </form>
             </div>
 
 
@@ -278,813 +486,462 @@
     </div>
     <!-- // END Header Layout -->
 
-    <!-- Modal -->
-    <div class="modal courses-modal" id="courses" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-i8-plus bg-body pr-0">
-                            <div class="py-16pt pl-16pt menu">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#courses-development" data-toggle="tab">Informática y software</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-entertainment" data-toggle="tab">Entretenimiento</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-finances" data-toggle="tab">Finanzas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-professions" data-toggle="tab">Profesiones</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-personal" data-toggle="tab">Desarrollo personal</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-design" data-toggle="tab">Diseño</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-marketing" data-toggle="tab">Marketing</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-sports" data-toggle="tab">Deporte</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-photografy" data-toggle="tab">Fotografía</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-health" data-toggle="tab">Salud</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-music" data-toggle="tab">Música</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#courses-academy" data-toggle="tab">Disciplinas académicas</a>
-                                    </li>
-                                </ul>
+    <!-- // Modal create theme-->
+    <div class="modal fade" id="createTheme">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Crear tema</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Título</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el título">
                             </div>
-                        </div>
-                        <div class="col-md-8 col-sm-6 col-i8-plus-auto tab-content">
-
-
-                            <div id="courses-development" class="tab-pane show active">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo web</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ciencias de la información</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo móvil</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Lenguajes de programación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo de videojuegos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Bases de datos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Testing</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ingeniería de software</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Herramientas de desarrollo</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo sin código</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Certificaciones</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Redes y seguridad</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Hardware</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Sistemas operativos y servidores</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Informática, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                </div>
-                            </div>
-
-
-                            <div id="courses-business" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Emprendimiento</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Comunicación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Gestión empresarial</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ventas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Estrategia de negocios</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Operaciones</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Gestión de proyectos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Analítica e inteligencia empresarial</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Recursos humanos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Industria</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Comercio electrónico</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Medios de comunicación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Bienes inmuebles</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Negocios, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-
-                            <div id="courses-finances" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Contabilidad y tesorería</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Cumplimiento de normas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Criptomonedas y Blockchain</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Economía</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Finanzas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Certificación financiera</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Modelos y análisis financieros</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Inversión y comercio</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Herramientas de gestión monetaria</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Impuestos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Finanzas y contabilidad, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-
-                            <div id="courses-productivity" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Microsoft</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Apple</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Google</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">SAP</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Oracle</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Productividad en la oficina, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-personal" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Transformación personal</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Productividad personal</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Liderazgo</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo profesional</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Paternidad y relaciones</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Felicidad</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Prácticas esotéricas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Religión y espiritualidad</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo de marca personal</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Creatividad</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Influencia</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Autoestima y confianza</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Gestión del estrés</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Memoria y técnicas de estudio</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Motivación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo personal, otros</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Desarrollo personal, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-design" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño web</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">DIseño gráfico e ilustración</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Herramientas de diseño</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño de experiencia de usuario</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño de juegos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Animación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño de moda</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño arquitectónico</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño de interfaces</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-marketing" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing digital</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Optimización de motores de búsqueda</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing de redes sociales</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Creación de marca</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fundamentos de marketing</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Automatización y análisis de marketing</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Relaciones públicas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Publicidad de pago</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing con vídeo y móviles</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing de contenidos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Estrategia de posicionamiento</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing de afiliados</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing de producto</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Marketing, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-lifestyle" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Arte y manualidades</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Belleza</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Comida y bebida</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Juegos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Mejoras en el hogar y jardinería</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Cuidado y entrenamiento de mascotas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Viajes</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Estilo de vida, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-photografy" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fotografía digital</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Retratos fotográficos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Herramientas de fotografía</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fotografía comercial</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Diseño de video</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fotografía y video, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-health" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fitness</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Salud general</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Deportes</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Nutrición y ditética</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Yoga</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Salud mental</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Artes marciales y autodefensa</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Seguridad y primeros auxilios</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Danza</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Meditación</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Salud y deporte, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-music" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Instrumentos</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Producción musical</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Fundamentos sobre música</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Vocal</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Técnicas musicales</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Software de música</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Música, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div id="courses-academy" class="tab-pane">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 p-0">
-                                        <div class="p-24pt d-flex h-100 flex-column">
-                                            <div class="flex">
-                                                <h5 class="text-black-100">Cursos</h5>
-                                                <ul class="nav flex-column mb-24pt">
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ingeniería</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Humanidades</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Matemáticas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ciencia</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Educación física</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Ciencias sociales</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Idiomas</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Formación de profesorado</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Preparación de exámenes oficiales</a>
-                                                    </li>
-
-                                                    <li class="nav-item">
-                                                        <a class="nav-link px-0" href="library.html">Disciplinas académicas, otros</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <a href="library.html" class="btn btn-block text-center btn-secondary">Buscar cursos</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Descripción</label>
+                            <div class="col-sm-9">
+                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Crear tema</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal edit theme-->
+    <div class="modal fade" id="editTheme">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Editar tema</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Título</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el título">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Descripción</label>
+                            <div class="col-sm-9">
+                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Guardar cambios</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal delete theme-->
+    <div class="modal fade" id="deleteTheme">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Borrar tema</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                ¿Está seguro de que desea borrar este tema?
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Borrar tema</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal create lesson-->
+    <div class="modal fade" id="createLesson">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Crear lección</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Título</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el título">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Descripción</label>
+                            <div class="col-sm-9">
+                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Material</label>
+                            <div class="col-sm-9 media align-items-center">
+                                <div class="media-body">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Crear lección</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal edit lesson-->
+    <div class="modal fade" id="editLesson">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Editar lección</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Título</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el título">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Descripción</label>
+                            <div class="col-sm-9">
+                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Material</label>
+                            <div class="col-sm-9 media align-items-center">
+                                <div class="media-body">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Editar lección</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal delete lesson-->
+    <div class="modal fade" id="deleteLesson">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Borrar lección</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                ¿Está seguro de que desea borrar este lección?
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Borrar lección</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal create requirement-->
+    <div class="modal fade" id="createRequirement">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Crear requisito</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Requisito</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el nuevo requisito">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Crear requisito</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal edit requirement-->
+    <div class="modal fade" id="editRequirement">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Editar requisito</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                <div class="list-group list-group-form">
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Requisito</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="Introduce el requisito modificado">
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Editar requisito</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+    <!-- // Modal delete requirement-->
+    <div class="modal fade" id="deleteRequirement">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+              <h4 class="modal-title">Borrar requisito</h4>
+              <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+      
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                ¿Está seguro de que desea borrar este requisito?
+            </div>
+      
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-accent">Borrar requisito</button>
+                </div>            
+            </div>
+      
+          </div>
+        </div>
+    </div> 
+
+        <!-- // Modal create objective-->
+        <div class="modal fade" id="createObjective">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Crear objetivo</h4>
+                  <button type="button" class="close" data-dismiss="modal">X</button>
                 </div>
+          
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Objetivo</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Introduce el nuevo objetivo">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>            
+                </div>
+          
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-accent">Crear objetivo</button>
+                    </div>            
+                </div>
+          
+              </div>
+            </div>
+        </div> 
+    
+        <!-- // Modal edit objective-->
+        <div class="modal fade" id="editObjective">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Editar objetivo</h4>
+                  <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+          
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Objetivo</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Introduce el objetivo modificado">
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+          
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-accent">Editar objetivo</button>
+                    </div>            
+                </div>
+          
+              </div>
+            </div>
+        </div> 
+    
+        <!-- // Modal delete objective-->
+        <div class="modal fade" id="deleteObjective">
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Borrar objetivo</h4>
+                  <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+          
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    ¿Está seguro de que desea borrar este objetivo?
+                </div>
+          
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-accent">Borrar objetivo</button>
+                    </div>            
+                </div>
+          
+              </div>
             </div>
         </div>
-    </div>
+    
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>
