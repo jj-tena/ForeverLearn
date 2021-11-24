@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lesson Details</title>
+    <title>Profile</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
@@ -39,6 +39,7 @@
 </head>
 
 <body>
+
 
     <div class="preloader">
         <div class="sk-double-bounce">
@@ -111,56 +112,77 @@
         <!-- // END Header -->
 
         <!-- Header Layout Content -->
-        <div class="mdk-header-layout__content page-content pb-0">
+        <div class="mdk-header-layout__content page-content ">
+
+            <div class="bg-gradient-primary border-bottom-white py-32pt">
+                <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+                    <img src="assets/images/illustration/user/128/w.svg" style="width: 7%; height: auto;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                    <div class="flex mb-32pt mb-md-0">
+                        <h2 class="text-white mb-0">Alexander Watson</h2>
+                        <p class="lead text-white-50 d-flex align-items-center">Usuario</p>
+                    </div>
+                    <a href="student-edit-account.html" class="btn btn-outline-white">Editar cuenta</a>
+                </div>
+            </div>
 
 
-            <div class="navbar navbar-submenu navbar-light border-0 navbar-expand">
-                <div class="container justify-content-center">
-                    <div class="media flex-nowrap">
-                        <div class="media-left mr-16pt">
-                            <a href="course.html"><img src="assets/images/paths/angular_64x64.png" width="40" alt="Angular" class="rounded"></a>
+            <div class="page-section bg-gradient-primary">
+                <div class="container page__container">
+                    <div class="row">
+
+
+                        <div class="col-lg-6" >
+                            <div class="card" onclick="location.href='instructor-courses.html';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center">
+                                    <div class="h2 mb-0 mr-3 text-70">
+                                        Área profesor
+                                    </div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="chart" style="height: 344px;">
+                                        <img src="assets/images/illustration/teacher/128/white.svg" style="display: block; width: 460px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="media-body">
-                            <a href="course.html" class="card-title text-body mb-0">Angular Fundamentals</a>
-                            <p class="lh-1 d-flex align-items-center mb-0">
-                                <span class="text-50 small font-weight-bold mr-8pt">Elijah Murray</span>
-                            </p>
+
+
+                        <div class="col-lg-6">
+                            <div class="card" onclick="location.href='courses-enrolled.html';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center"> 
+                                    <div class="h2 mb-0 mr-3 text-70">Área alumno</div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="" style="height: 344px;">
+                                        <img src="assets/images/illustration/student/128/white.svg" style="display: block; width: 460px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <div class="card" onclick="location.href='admin-options.html';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center"> 
+                                    <div class="h2 mb-0 mr-3 text-70">Área administrador</div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="" style="height: 344px;">
+                                        <img src="assets/images/illustration/admin/128/police-svgrepo-com.svg" style="display:inherit; width: 460px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
                     </div>
                 </div>
             </div>
-            <div class="bg-gradient-primary pb-lg-64pt py-32pt">
-                <div class="container">
-                    
 
-                    <div class="d-flex flex-wrap align-items-end mb-16pt">
-                        <h1 class="text-white flex m-0">Introduction to TypeScript</h1>
-                    </div>
-
-                    <p class="hero__lead measure-hero-lead text-white-50 mb-24pt">JavaScript is now used to power backends, create hybrid mobile applications, architect cloud solutions, design neural networks and even control robots. Enter TypeScript: a superset of JavaScript for scalable, secure, performant and feature-rich applications.</p>
-
-                    
-                    <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
-                        <div class="player embed-responsive-item">
-                            <div class="player__content">
-                                <div class="player__image" style="--player-image: url(assets/images/illustration/player.svg)"></div>
-                                <a href="" class="player__play">
-                                    <span class="material-icons">play_arrow</span>
-                                </a>
-                            </div>
-                            <div class="player__embed d-none">
-                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0" allowfullscreen=""></iframe>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            
 
             <div class="js-fix-footer bg-white">
-                
                 <div class="bg-footer page-section py-lg-32pt">
                     <div class="container">
                         <div class="row">
@@ -192,9 +214,6 @@
 
     </div>
     <!-- // END Header Layout -->
-    
-    <!-- // END drawer -->
-
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>
@@ -228,7 +247,21 @@
     <script src="assets/js/app-settings.js"></script>
 
 
+    <!-- Global Settings -->
+    <script src="assets/js/settings.js"></script>
 
+    <!-- Moment.js -->
+    <script src="assets/vendor/moment.min.js"></script>
+    <script src="assets/vendor/moment-range.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- Charts JS -->
+    <script src="assets/js/chartjs.js"></script>
+
+    <!-- Chart.js Samples -->
+    <script src="assets/js/page.student-profile.js"></script>
 
 </body>
 
