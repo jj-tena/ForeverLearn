@@ -156,11 +156,40 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Descripción</label>
+                                            <label class="col-form-label col-sm-3" for="category">Categoría</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                                <select id="category" name="category" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una categoría</option>
+                                                    <option value="Informática y software">Informática y software</option>
+                                                    <option value="Entretenimiento">Entretenimiento</option>
+                                                    <option value="Finanzas">Finanzas</option>
+                                                    <option value="Profesiones">Profesiones</option>
+                                                    <option value="Desarrollo personal">Desarrollo personal</option>
+                                                    <option value="Diseño">Diseño</option>
+                                                    <option value="Marketing">Marketing</option>
+                                                    <option value="Deportes">Deportes</option>
+                                                    <option value="Fotografía y video">Fotografía y video</option>
+                                                    <option value="Salud">Salud</option>
+                                                    <option value="Música">Música</option>
+                                                    <option value="Disciplinas académicas">Disciplinas académicas</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="difficulty">Dificultad</label>
+                                            <div class="col-sm-9">
+                                                <select id="difficulty" name="difficulty" class="custom-select">
+                                                    <option value="" ng-reflect-value="">Elige una dificultad</option>
+                                                    <option value="Principiante">Principiante</option>
+                                                    <option value="Intermedio">Intermedio</option>
+                                                    <option value="Avanzado">Avanzado</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -187,6 +216,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Descripción</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="page-section border-bottom-2">
                                         <div class="container page__container">
                                             <div class="row">
@@ -397,43 +435,6 @@
                                         </div>
                                     </div>
                                     
-                                    
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3" for="category">Categoría</label>
-                                            <div class="col-sm-9">
-                                                <select id="category" name="category" class="custom-select">
-                                                    <option value="" ng-reflect-value="">Elige una categoría</option>
-                                                    <option value="Informática y software">Informática y software</option>
-                                                    <option value="Entretenimiento">Entretenimiento</option>
-                                                    <option value="Finanzas">Finanzas</option>
-                                                    <option value="Profesiones">Profesiones</option>
-                                                    <option value="Desarrollo personal">Desarrollo personal</option>
-                                                    <option value="Diseño">Diseño</option>
-                                                    <option value="Marketing">Marketing</option>
-                                                    <option value="Deportes">Deportes</option>
-                                                    <option value="Fotografía y video">Fotografía y video</option>
-                                                    <option value="Salud">Salud</option>
-                                                    <option value="Música">Música</option>
-                                                    <option value="Disciplinas académicas">Disciplinas académicas</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3" for="difficulty">Dificultad</label>
-                                            <div class="col-sm-9">
-                                                <select id="difficulty" name="difficulty" class="custom-select">
-                                                    <option value="" ng-reflect-value="">Elige una dificultad</option>
-                                                    <option value="Principiante">Principiante</option>
-                                                    <option value="Intermedio">Intermedio</option>
-                                                    <option value="Avanzado">Avanzado</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
 
@@ -514,7 +515,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
                             </div>
                         </div>
                     </div>
@@ -558,7 +559,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
                             </div>
                         </div>
                     </div>
@@ -629,7 +630,8 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
                             </div>
                         </div>
                     </div>
@@ -686,7 +688,8 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="3" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
                             </div>
                         </div>
                     </div>
