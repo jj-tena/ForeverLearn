@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Edit Account</title>
+    <title>Editar perfil</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
@@ -117,49 +117,94 @@
 
             <div class="bg-gradient-primary border-bottom-white py-32pt">
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                    <img src="assets/images/illustration/user/128/w.svg" style="width: 7%; height: auto;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                    <a href="user-profile.html" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/user/128/w.svg" width="75" alt="Tutorio">
+                    </a>
                     <div class="flex mb-32pt mb-md-0">
                         <h2 class="text-white mb-0">Alexander Watson</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Usuario</p>
                     </div>
-                    <a href="student-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
-
-
             <div class="container page__container">
-                <form action="student-edit-account.html">
+                <form action="user-edit-account.html">
                     <div class="row">
                         <div class="col-lg-9">
 
                             <div class="page-section">
-                                <h4>Información básica</h4>
+                                <h4>Información de perfil</h4>
                                 <div class="list-group list-group-form">
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Nombre</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="Alexander" placeholder="Introduce tu nombre">
+                                            <label class="col-form-label col-sm-3">Tu foto</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <a href="" class="media-left mr-16pt">
+                                                    <img src="assets/images/people/110/guy-3.jpg" alt="people" width="56" class="rounded-circle" />
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Apellidos</label>
+                                            <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="Watson" placeholder="Introduce tus apellidos">
+                                                <textarea rows="3" class="form-control" placeholder="Introduce tu descripción"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Email</label>
+                                            <label class="col-form-label col-sm-3">Contacto</label>
                                             <div class="col-sm-9">
-                                                <input type="email" class="form-control" value="alexander.watson@fake-mail.com" placeholder="Introduce tu correo electrónico">
+                                                <textarea rows="3" class="form-control" placeholder="Introduce tu información de contacto"></textarea>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Facebook</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></div>
+
+                                                <div class="media-body">
+                                                    <input type="text" class="form-control" value="" placeholder="Introduce tu nombre de usuario de facebook">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Twitter</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></div>
+
+                                                <div class="media-body">
+                                                    <input type="text" class="form-control" value="" placeholder="Introduce tu nombre de usuario de Twitter">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Youtube</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="text-accent fab fa-youtube-square font-size-24pt mr-8pt"></div>
+
+                                                <div class="media-body">
+                                                    <input type="text" class="form-control" value="" placeholder="Introduce el nombre de tu canal de Youtube">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -167,9 +212,9 @@
                         <div class="col-lg-3 page-nav">
                             <div class="page-section pt-lg-112pt">
                                 <nav class="nav page-nav__menu">
-                                    <a class="nav-link active" href="student-edit-account.html">Información básica</a>
-                                    <a class="nav-link" href="student-edit-account-profile.html">Información de perfil</a>
-                                    <a class="nav-link" href="student-edit-account-password.html">Cambiar contraseña</a>
+                                    <a class="nav-link" href="user-edit-account.html">Información básica</a>
+                                    <a class="nav-link active" href="user-edit-account-profile.html">Información de perfil</a>
+                                    <a class="nav-link" href="user-edit-account-password.html">Cambiar contraseña</a>
                                 </nav>
                                 <div class="page-nav__content">
                                     <button type="submit" class="btn btn-accent">Guardar cambios</button>
@@ -249,6 +294,7 @@
         </div>
     </div>
     <!-- // END drawer -->
+
 
 
     <!-- jQuery -->
