@@ -1,4 +1,5 @@
 # ForeverLearn
+
 ## Context
 This project includes the realization of two Bachelor's Degree Final Project, a first one for Computer Science that proposes a base platform and a second one for Software Engineering that expands and completes the work done in the first one.
 
@@ -66,81 +67,107 @@ The application interface will be designed taking into account the principles of
 These are the pages that make up the frontend of the website.
 #### Admin courses
 Screen for the administrator to manage the courses as he/she wishes, being able to view, search, ban, unban and delete them.
+
 ![admin-courses](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-courses.png)
 #### Admin options
 Page with the actions that can be performed by the administrator user.
+
 ![admin-options](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-options.png)
 #### Admin profile
 Administrator user options page.
+
 ![admin-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-profile.png)
 #### Admin users
 Pantalla para que el administrador gestione como desee los usuarios, pudiendo verlos, buscarlos, banearlos, desbanearlos y borrarlos.
+
 ![admin-users](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-users.png)
 #### Course
 Page where the user can view the content of a course.
+
 ![course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/course.png)
 #### Help center
 This page answers questions about the operation and concept of the system.
+
 ![help-center](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/help-center.png)
 #### Index
 The home page that the user receives when it searches the system.
+
 ![index](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/index.png)
 #### Instructor courses
 Page where the user can see the list of courses that he/she has created.
+
 ![instructor-courses](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-courses.png)
 #### Instructor create course
 Page for a user to create a course.
+
 ![instructor-create-course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-create-course.png)
 #### Instructor edit course
 Page for the user to edit one of the courses he/she has created.
+
 ![instructor-edit-course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-edit-course.png)
 #### Instructor profile
 Page where you can view profile information and courses created by a user other than yourself.
+
 ![instructor-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-profile.png)
 #### Lesson
 Page where the user can view the content of a lesson of a course topic.
+
 ![lesson](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/lesson.png)
 #### Library
 Page to view and filter courses in a simple way.
+
 ![library](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/library.png)
 #### Library list
 Page to view and filter courses in more detail.
+
 ![library-list](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/library-list.png)
 #### Login
 Page for the user to log in to the system.
+
 ![login](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/login.png)
 #### Privacy policy
 Page where you can see the privacy policy of the system.
+
 ![privacy-policy](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/privacy-policy.png)
 #### Reset password
 Page for the user to reset the password in case he/she does not remember the password when trying to log in.
+
 ![reset-password](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/reset-password.png)
 #### Signup
 Page for the user to register in the system.
+
 ![signup](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/signup.png)
 #### Student courses completed
 Page where the user can view their list of completed courses.
+
 ![student-courses-completed](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-completed.png)
 #### Student courses enrolled
 Page where the user can see the list of courses in which he/she has enrolled.
+
 ![student-courses-enrolled](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-enrolled.png)
 #### Student courses wished
 Page where the user can see the list of courses they have liked.
+
 ![student-courses-wished](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-wished.png)
 #### Terms of service
 Page where you can see the terms of use of the system.
+
 ![terms-of-service](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/terms-of-service.png)
 #### User edit account
 Page for the user to configure their base information.
+
 ![user-edit-account](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account.png)
 #### User edit account password
 Page for the user to edit his or her password.
+
 ![user-edit-account-password](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account-password.png)
 #### User edit account profile
 Page for the user to configure their profile information.
+
 ![user-edit-account-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account-profile.png)
 #### User profile
 Non-administrator user options page.
+
 ![user-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-profile.png)
 ### Navigation diagram
 Once we have stablished which are the pages that compose our system, we shall take a look at the flow between pages.
