@@ -63,4 +63,84 @@ In this phase I will display the frontend of the application, therefore the layo
 
 The application interface will be designed taking into account the principles of usability and accessibility.
 ### Pages
-This is the list of pages that make up the frontend of the website.
+These are the pages that make up the frontend of the website.
+#### Admin courses
+Screen for the administrator to manage the courses as he/she wishes, being able to view, search, ban, unban and delete them.
+![admin-courses](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-courses.png)
+#### Admin options
+Page with the actions that can be performed by the administrator user.
+![admin-options]()
+#### Admin profile
+Administrator user options page.
+![admin-profile]()
+#### Admin users
+Pantalla para que el administrador gestione como desee los usuarios, pudiendo verlos, buscarlos, banearlos, desbanearlos y borrarlos.
+![admin-users]()
+#### Course
+Page where the user can view the content of a course.
+![course]()
+#### Help center
+This page answers questions about the operation and concept of the system.
+![help-center]()
+#### Index
+The home page that the user receives when it searches the system.
+![index]()
+#### Instructor courses
+Page where the user can see the list of courses that he/she has created.
+![instructor-courses]()
+#### Instructor create course
+Page for a user to create a course.
+![instructor-create-course]()
+#### Instructor edit course
+Page for the user to edit one of the courses he/she has created.
+![instructor-edit-course]()
+#### Instructor profile
+Page where you can view profile information and courses created by a user other than yourself.
+![instructor-profile]()
+#### Lesson
+Page where the user can view the content of a lesson of a course topic.
+![lesson]()
+#### Library
+Page to view and filter courses in a simple way.
+![library]()
+#### Library list
+Page to view and filter courses in more detail.
+![library-list]()
+#### Login
+Page for the user to log in to the system.
+![login]()
+#### Privacy policy
+Page where you can see the privacy policy of the system.
+![privacy-policy]()
+#### Reset password
+Page for the user to reset the password in case he/she does not remember the password when trying to log in.
+![reset-password]()
+#### Signup
+Page for the user to register in the system.
+![signup]()
+#### Student courses completed
+Page where the user can view their list of completed courses.
+![student-courses-completed]()
+#### Student courses enrolled
+Page where the user can see the list of courses in which he/she has enrolled.
+![student-courses-enrolled]()
+#### Student courses wished
+Page where the user can see the list of courses they have liked.
+![student-courses-wished]()
+#### Terms of service
+Page where you can see the terms of use of the system.
+![terms-of-service]()
+#### User edit account
+Page for the user to configure their base information.
+![user-edit-account]()
+#### User edit account password
+Page for the user to edit his or her password.
+![user-edit-account-password]()
+#### User edit account profile
+Page for the user to configure their profile information.
+![user-edit-account-profile]()
+#### User profile
+Non-administrator user options page.
+![user-profile]()
+### Navigation diagram
+Once we have stablished which are the pages that compose our system, we shall take a look at the flow between pages.
