@@ -172,4 +172,4 @@ Non-administrator user options page.
 ### Navigation diagram
 Once we have stablished which are the pages that compose our system, we shall take a look at the flow between pages.
 
-![navigation-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/navigation-diagram.png)
+![navigation-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/navigationDiagram.png)
