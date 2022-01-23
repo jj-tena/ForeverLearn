@@ -1,11 +1,13 @@
 package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.List;
 
+@Data
 @Entity
 public class Course {
 
@@ -41,4 +43,6 @@ public class Course {
     @OneToMany
     private List<Topic> topics;
 
+    public Course() {
+    }
 }

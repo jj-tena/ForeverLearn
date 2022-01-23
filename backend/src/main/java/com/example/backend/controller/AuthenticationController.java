@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+
 @Controller
 public class AuthenticationController {
 
@@ -32,7 +34,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signupUser")
-    public String signupUser(Model model, User user){
+    public String signupUser(Model model, User user) throws IOException {
         userService.create(user);
         return "user-profile";
     }

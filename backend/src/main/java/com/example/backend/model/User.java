@@ -36,7 +36,7 @@ public class User {
 
     @Lob
     @JsonIgnore
-    private Blob picture;
+    private Blob profilePhoto;
 
     public User(){
 
@@ -50,7 +50,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String surname, String email, String password, String description, String contact, String facebook, String twitter, String youtube, boolean isAdmin, Blob picture) {
+    public User(String name, String surname, String email, String password, String description, String contact, String facebook, String twitter, String youtube, boolean isAdmin, Blob profilePhoto) {
         super();
         this.name = name;
         this.surname = surname;
@@ -62,6 +62,6 @@ public class User {
         this.twitter = twitter;
         this.youtube = youtube;
         this.isAdmin = isAdmin;
-        this.picture = picture;
+        this.profilePhoto = profilePhoto;
     }
 }
