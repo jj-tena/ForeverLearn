@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +11,9 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public void create(User user){
+        userRepository.save(user);
     }
 }
