@@ -69,23 +69,14 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Categorías</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="library.html">Crecimiento personal</a>
-                        <a class="dropdown-item" href="library.html">Deporte</a>
-                        <a class="dropdown-item" href="library.html">Disciplinas académicas</a>
-                        <a class="dropdown-item" href="library.html">Diseño</a>
-                        <a class="dropdown-item" href="library.html">Finanzas</a>
-                        <a class="dropdown-item" href="library.html">Fotografía y video</a>
-                        <a class="dropdown-item" href="library.html">Informática y software</a>
-                        <a class="dropdown-item" href="library.html">Marketing</a>
-                        <a class="dropdown-item" href="library.html">Música</a>
-                        <a class="dropdown-item" href="library.html">Profesiones</a>
-                        <a class="dropdown-item" href="library.html">Salud</a>
-                        <a class="dropdown-item" href="library.html">Otros</a>
+                        {{#categories}}
+                        <a class="dropdown-item" href="/category-{{id}}">{{name}}</a>
+                        {{/categories}}
                     </div>
                 </div>
 
-                <form class="search-form search-form--black search-form-courses d-none d-md-flex" action="library-filters.html">
-                    <input type="text" class="form-control" placeholder="¿Qué te gustaría aprender?">
+                <form class="search-form search-form--black search-form-courses d-none d-md-flex" action="/find-course">
+                    <input type="text" name="name" class="form-control" placeholder="¿Qué te gustaría aprender?">
                     <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
                 </form>
 

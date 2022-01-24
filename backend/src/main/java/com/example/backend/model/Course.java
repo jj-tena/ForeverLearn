@@ -45,4 +45,13 @@ public class Course {
 
     public Course() {
     }
+
+    public Course(String name, String description, Category category, String difficulty, Integer length) {
+        super();
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.difficulty = difficulty;
+        this.length = length;
+    }
 }

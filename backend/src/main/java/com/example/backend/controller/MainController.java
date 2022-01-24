@@ -40,4 +40,22 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/help-center")
+    public String helpCenterLink(Model model){
+        model.addAttribute("categories", categoryService.findAll());
+        return "help-center";
+    }
+
+    @GetMapping("/terms-of-service")
+    public String termsOfServiceLink(Model model){
+        model.addAttribute("categories", categoryService.findAll());
+        return "terms-of-service";
+    }
+
+    @GetMapping("/privacy-policy")
+    public String privacyPolicyLink(Model model){
+        model.addAttribute("categories", categoryService.findAll());
+        return "privacy-policy";
+    }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,6 +34,18 @@ public class User {
     private String youtube;
 
     private boolean isAdmin;
+
+    @OneToMany
+    private List<Course> userCourses;
+
+    @OneToMany
+    private List<Course> completedCourses;
+
+    @OneToMany
+    private List<Course> enrolledCourses;
+
+    @OneToMany
+    private List<Course> wishedCourses;
 
     @Lob
     @JsonIgnore

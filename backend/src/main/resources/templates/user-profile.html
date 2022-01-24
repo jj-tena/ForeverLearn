@@ -9,10 +9,10 @@
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/user/128/w.svg" width="75" alt="Tutorio">
                     </a>
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Alexander Watson</h2>
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Usuario</p>
                     </div>
-                    <a href="user-edit-account.html" class="btn btn-outline-white">Editar cuenta</a>
+                    <a href="/user-edit-account" class="btn btn-outline-white">Editar cuenta</a>
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
 
 
                         <div class="col-lg-6" >
-                            <div class="card" onclick="location.href='instructor-courses.html';" style="cursor:pointer; background: grey;">
+                            <div class="card" onclick="location.href='/instructor-section';" style="cursor:pointer; background: grey;">
                                 <div class="card-header d-flex justify-content-center">
                                     <div class="h2 mb-0 mr-3 text-70">
                                         Área profesor
@@ -39,7 +39,7 @@
 
 
                         <div class="col-lg-6">
-                            <div class="card" onclick="location.href='student-courses-enrolled.html';" style="cursor:pointer; background: grey;">
+                            <div class="card" onclick="location.href='/student-section';" style="cursor:pointer; background: grey;">
                                 <div class="card-header d-flex justify-content-center"> 
                                     <div class="h2 mb-0 mr-3 text-70">Área alumno</div>
                                 </div>
@@ -73,9 +73,9 @@
                             </div>
                             <div class="col-md-6 text-md-right">
                                 <p class="mb-8pt d-flex align-items-md-center justify-content-md-end">
-                                    <a href="help-center.html" class="text-white-70 text-underline mr-16pt">Centro de ayuda</a>
-                                    <a href="terms-of-service.html" class="text-white-70 text-underline mr-16pt">Términos de servicio</a>
-                                    <a href="privacy-policy.html" class="text-white-70 text-underline">Política de privacidad</a>
+                                    <a href="/help-center" class="text-white-70 text-underline mr-16pt">Centro de ayuda</a>
+                                    <a href="/terms-of-service" class="text-white-70 text-underline mr-16pt">Términos de servicio</a>
+                                    <a href="/privacy-policy" class="text-white-70 text-underline">Política de privacidad</a>
                                 </p>
                                 <p class="text-white-50 mb-0">Copyright 2021 &copy; Todos los derechos reservados.</p>
                             </div>

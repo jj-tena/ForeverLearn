@@ -5,14 +5,14 @@
 
             <div class="bg-gradient-primary border-bottom-white py-32pt">
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                    <a href="user-profile.html" class="navbar-brand">
+                    <a href="/user-profile" class="navbar-brand">
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
                     </a>    
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Elijah Murray</h2>
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
-                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
@@ -21,11 +21,12 @@
             <div class="container page__container page-section">
                 <div class="mb-heading d-flex align-items-center">
                     <h4 class="flex m-0">Cursos propios</h4>
-                    <a href="instructor-create-course.html" class="btn btn-accent">Crear curso</a>
+                    <a href="/instructor-create-course" class="btn btn-accent">Crear curso</a>
                 </div>
                 <div class="row">
 
-                    <div class="col-sm-6 col-md-4 col-xl-3">
+
+                        <div class="col-sm-6 col-md-4 col-xl-3">
 
                         <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                             <a href="instructor-edit-course.html" class="js-image" data-position="">
@@ -42,7 +43,7 @@
                                         <div class="flex">
                                             <a class="card-title mb-4pt" href="instructor-edit-course.html">Learn Angular fundamentals</a>
                                         </div>
-                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                        <a href="/instructor-edit-course" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
                                     </div>
                                 </div>
                             </div>
@@ -66,128 +67,7 @@
 
                     </div>
 
-                    <div class="col-sm-6 col-md-4 col-xl-3">
 
-                        <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
-                            <a href="instructor-edit-course.html" class="js-image" data-position="">
-                                <img src="assets/images/paths/swift_430x168.png" alt="course">
-                                <span class="overlay__content">
-                                    <span class="overlay__action d-flex flex-column text-center">
-                                        Opciones                                    </span>
-                                </span>
-                            </a>
-                            <div class="mdk-reveal__content">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex">
-                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Build an iOS Application in Swift</a>
-                                        </div>
-                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popoverContainer d-none">
-
-
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <a href="course.html" class="btn btn-primary">Ver curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-edit-course.html" class="btn btn-accent">Editar curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-courses.html" class="btn btn-dark">Borrar curso</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-xl-3">
-
-                        <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
-                            <a href="instructor-edit-course.html" class="js-image" data-position="">
-                                <img src="assets/images/paths/wordpress_430x168.png" alt="course">
-                                <span class="overlay__content">
-                                    <span class="overlay__action d-flex flex-column text-center">
-                                        Opciones
-                                    </span>
-                                </span>
-                            </a>
-                            <div class="mdk-reveal__content">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex">
-                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Build a WordPress Website</a>
-                                        </div>
-                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popoverContainer d-none">
-
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <a href="course.html" class="btn btn-primary">Ver curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-edit-course.html" class="btn btn-accent">Editar curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-courses.html" class="btn btn-dark">Borrar curso</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-xl-3">
-
-                        <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
-                            <a href="instructor-edit-course.html" class="js-image" data-position="left">
-                                <img src="assets/images/paths/react_430x168.png" alt="course">
-                                <span class="overlay__content">
-                                    <span class="overlay__action d-flex flex-column text-center">
-                                        Opciones
-                                    </span>
-                                </span>
-                            </a>
-                            <div class="mdk-reveal__content">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex">
-                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Become a React Native Developer</a>
-                                        </div>
-                                        <a href="instructor-edit-course.html" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popoverContainer d-none">
-
-
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <a href="course.html" class="btn btn-primary">Ver curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-edit-course.html" class="btn btn-accent">Editar curso</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="instructor-courses.html" class="btn btn-dark">Borrar curso</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
                 <!-- Pagination -->
@@ -235,9 +115,9 @@
                             </div>
                             <div class="col-md-6 text-md-right">
                                 <p class="mb-8pt d-flex align-items-md-center justify-content-md-end">
-                                    <a href="help-center.html" class="text-white-70 text-underline mr-16pt">Centro de ayuda</a>
-                                    <a href="terms-of-service.html" class="text-white-70 text-underline mr-16pt">Términos de servicio</a>
-                                    <a href="privacy-policy.html" class="text-white-70 text-underline">Política de privacidad</a>
+                                    <a href="/help-center" class="text-white-70 text-underline mr-16pt">Centro de ayuda</a>
+                                    <a href="/terms-of-service" class="text-white-70 text-underline mr-16pt">Términos de servicio</a>
+                                    <a href="/privacy-policy" class="text-white-70 text-underline">Política de privacidad</a>
                                 </p>
                                 <p class="text-white-50 mb-0">Copyright 2021 &copy; Todos los derechos reservados.</p>
                             </div>
