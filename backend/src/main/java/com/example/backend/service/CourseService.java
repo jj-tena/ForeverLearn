@@ -56,4 +56,17 @@ public class CourseService {
         }
         return optionalCourse;
     }
+
+    @Transactional
+    public Optional<Course> createCourse(Course course) throws IOException {
+        Optional<Course> optionalCourse = Optional.empty();
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            course.setAuthor(optionalUser.get());
+            Course savedCourse = courseRepository.save(course);
+            userService.addUserCourse(optionalUser.get(), savedCourse);
+            optionalCourse = Optional.of(savedCourse);
+        }
+        return optionalCourse;
+    }
 }

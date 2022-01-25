@@ -9,17 +9,17 @@
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
                     </a>                     
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Elijah Murray</h2>
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
-                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
 
 
             <div class="container page__container">
-                <form action="instructor-courses.html">
+                <form action="/create-course" method="post">
                     <div class="row">
                         <div class="col-lg-12">
 
@@ -30,7 +30,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Título</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce el título">
+                                                <input type="text" name="name" class="form-control" placeholder="Introduce el título">
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3" for="category">Categoría</label>
                                             <div class="col-sm-9">
-                                                <select id="category" name="category" required="" class="custom-select">
+                                                <select id="category" name="categoryName" required="" class="custom-select">
                                                     <option value="" >Elige una categoría</option>
                                                     <option value=" Crecimiento personal">Crecimiento personal</option>
                                                     <option value="Deportes">Deporte</option>
@@ -88,7 +88,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Duración</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce la duración">
+                                                <input type="text" name="length" class="form-control" placeholder="Introduce la duración">
                                             </div>
                                         </div>
                                     </div>
@@ -109,14 +109,14 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                                <textarea name="description" rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn btn-lg btn-accent">Crear curso</button>
+                                    <button type="submit" class="btn btn-lg btn-accent">Crear curso</button>
                                 </div>
                             </div>
 

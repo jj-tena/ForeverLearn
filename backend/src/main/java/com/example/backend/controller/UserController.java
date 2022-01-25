@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -104,6 +105,16 @@ public class UserController {
         return "instructor-create-course";
     }
 
+    @PostMapping("/create-course")
+    public String createCourse(Model model, Course course, String categoryName) throws IOException {
+        courseService.createCourse(course);
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        model.addAttribute("categories", categoryService.findAll());
+        return "instructor-courses";
+    }
+
     @GetMapping("/instructor-edit-course-{id}")
     public String instructorEditCourse(Model model, @PathVariable Long id){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
@@ -118,8 +129,8 @@ public class UserController {
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         Optional<Course> optionalCourse = courseService.findCourseById(id);
-        if (optionalCourse.isPresent()){
-            //userService.deleteCourse(userService.getActiveUser(), optionalCourse.get());
+        if ((optionalCourse.isPresent()) && (userService.getActiveUser().isPresent())){
+            userService.deleteCourse(userService.getActiveUser().get(), optionalCourse.get());
         }
         return "instructor-courses";
     }
@@ -131,6 +142,31 @@ public class UserController {
         model.addAttribute("categories", categoryService.findAll());
         return "student-courses-enrolled";
     }
+
+    @GetMapping("/student-courses-enrolled")
+    public String studentCoursesEnrolledLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        return "student-courses-enrolled";
+    }
+
+    @GetMapping("/student-courses-completed")
+    public String studentCoursesCompletedLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        return "student-courses-completed";
+    }
+
+    @GetMapping("/student-courses-wished")
+    public String studentCoursesWishedLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        return "student-courses-wished";
+    }
+
 
 
 
