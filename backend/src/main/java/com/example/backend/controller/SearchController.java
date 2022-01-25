@@ -2,8 +2,10 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
 import com.example.backend.service.CourseService;
+import com.example.backend.service.UserService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -26,9 +28,12 @@ public class SearchController {
 
     private final CategoryService categoryService;
 
-    public SearchController(CourseService courseService, CategoryService categoryService) {
+    private final UserService userService;
+
+    public SearchController(CourseService courseService, CategoryService categoryService, UserService userService) {
         this.courseService = courseService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/library")
@@ -71,7 +76,7 @@ public class SearchController {
     }
 
     @GetMapping("/find-course")
-    public String findCourse(Model model, String name){
+    public String findCourseByName(Model model, String name){
         List<Course> list = new ArrayList<>();
         Optional<Course> course = courseService.findCourseByName(name);
         course.ifPresent(list::add);
@@ -79,6 +84,31 @@ public class SearchController {
         model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
         return "library";
+    }
+
+    @GetMapping("/course-{id}")
+    public String getCourse(Model model, @PathVariable Long id){
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Course> course = courseService.findCourseById(id);
+        if (course.isPresent()){
+            model.addAttribute("course", course.get());
+            return "course";
+        } else {
+            return "index";
+        }
+    }
+
+    @GetMapping("/instructor-profile-{id}")
+    public String getInstructorProfile(Model model, @PathVariable Long id){
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<User> user = userService.findUserById(id);
+        if (user.isPresent()){
+            model.addAttribute("user", user.get());
+            model.addAttribute("courses", user.get().getUserCourses());
+            return "instructor-profile";
+        } else {
+            return "index";
+        }
     }
 
 

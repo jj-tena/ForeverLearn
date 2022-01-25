@@ -7,8 +7,8 @@
                 <div class="mdk-box__content">
                     <div class="hero py-64pt text-center text-sm-left">
                         <div class="container">
-                            <h1 class="text-white">Angular Fundamentals</h1>
-                            <p class="lead text-white-50 measure-hero-lead">This course will teach you the fundamentals o*f working with Angular 2. You *will learn everything you need to know to create complete applications including: components, services, directives, pipes, routing, HTTP, and even testing.</p>
+                            <h1 class="text-white">{{course.name}}</h1>
+                            <p class="lead text-white-50 measure-hero-lead">{{course.description}}</p>
                             <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
                                 <a href="lesson.html" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Ver trailer <i class="material-icons icon--right">play_circle_outline</i></a>
                             </div>
@@ -26,18 +26,18 @@
                                     <img src="assets/images/people/50/guy-6.jpg" width="40" alt="avatar" class="rounded-circle">
                                 </span>
                                 <div class="media-body">
-                                    <a class="card-title m-0" href="instructor-profile.html">Eddie Bryan</a>
+                                    <a class="card-title m-0" href="/instructor-profile-{{course.author.id}}">{{course.author.name}}</a>
                                     <p class="text-50 lh-1 mb-0">Profesor</p>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item navbar-list__item">
                             <i class="material-icons text-muted icon--left">schedule</i>
-                            6 horas
+                            {{course.length}} horas
                         </li>
                         <li class="nav-item navbar-list__item">
                             <i class="material-icons text-muted icon--left">assessment</i>
-                            Principiante
+                            {{course.difficulty}}
                         </li>
                         <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
                             <div class="rating rating-24">

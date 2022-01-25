@@ -2,8 +2,8 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
-import org.hibernate.engine.OptimisticLockStyle;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -18,8 +18,11 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
 
-    public CourseService(CourseRepository courseRepository) {
+    private final UserService userService;
+
+    public CourseService(CourseRepository courseRepository, UserService userService) {
         this.courseRepository = courseRepository;
+        this.userService = userService;
     }
 
     public List<Course> findCourses(){
@@ -38,10 +41,11 @@ public class CourseService {
         return courseRepository.findCoursesByCategory(category);
     }
 
-    public void create(String name, String description, Category category, String difficulty, String imagePath, Integer length) throws IOException {
-        Course course = new Course(name, description, category, difficulty, length);
+    public Course create(String name, String description, Category category, String difficulty, String imagePath, Integer length, User user) throws IOException {
+        Course course = new Course(name, description, category, difficulty, length, user);
+        courseRepository.save(course);
         Resource image = new ClassPathResource(imagePath);
         course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-        courseRepository.save(course);
+        return courseRepository.save(course);
     }
 }

@@ -81,4 +81,13 @@ public class UserService {
     public List<Course> getUserCourses(){
         return activeUser.getUserCourses();
     }
+
+    public Optional<User> findUserById(Long id){
+        return userRepository.findUserById(id);
+    }
+
+    public User addUserCourse(User user, Course course){
+        user.addUserCourse(course);
+        return userRepository.save(user);
+    }
 }

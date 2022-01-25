@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -36,16 +37,16 @@ public class User {
     private boolean isAdmin;
 
     @OneToMany
-    private List<Course> userCourses;
+    private List<Course> userCourses = new LinkedList<>();
 
     @OneToMany
-    private List<Course> completedCourses;
+    private List<Course> completedCourses = new LinkedList<>();
 
     @OneToMany
-    private List<Course> enrolledCourses;
+    private List<Course> enrolledCourses = new LinkedList<>();
 
     @OneToMany
-    private List<Course> wishedCourses;
+    private List<Course> wishedCourses = new LinkedList<>();
 
     @Lob
     @JsonIgnore
@@ -76,5 +77,9 @@ public class User {
         this.youtube = youtube;
         this.isAdmin = isAdmin;
         this.profilePhoto = profilePhoto;
+    }
+
+    public void addUserCourse(Course course){
+        this.userCourses.add(course);
     }
 }

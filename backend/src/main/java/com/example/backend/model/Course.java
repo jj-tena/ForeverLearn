@@ -43,15 +43,19 @@ public class Course {
     @OneToMany
     private List<Topic> topics;
 
+    @ManyToOne
+    private User author;
+
     public Course() {
     }
 
-    public Course(String name, String description, Category category, String difficulty, Integer length) {
+    public Course(String name, String description, Category category, String difficulty, Integer length, User author) {
         super();
         this.name = name;
         this.description = description;
         this.category = category;
         this.difficulty = difficulty;
         this.length = length;
+        this.author = author;
     }
 }
