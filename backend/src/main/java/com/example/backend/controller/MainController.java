@@ -1,7 +1,9 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Category;
+import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
+import com.example.backend.service.UserService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -19,12 +21,16 @@ public class MainController {
 
     private final CategoryService categoryService;
 
-    public MainController(CategoryService categoryService) {
+    private final UserService userService;
+
+    public MainController(CategoryService categoryService, UserService userService) {
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public String indexLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         return "index";
     }
@@ -43,18 +49,21 @@ public class MainController {
 
     @GetMapping("/help-center")
     public String helpCenterLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         return "help-center";
     }
 
     @GetMapping("/terms-of-service")
     public String termsOfServiceLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         return "terms-of-service";
     }
 
     @GetMapping("/privacy-policy")
     public String privacyPolicyLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         return "privacy-policy";
     }

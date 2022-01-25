@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.sql.Blob;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -37,7 +38,7 @@ public class User {
     private boolean isAdmin;
 
     @OneToMany
-    private List<Course> userCourses = new LinkedList<>();
+    private List<Course> userCourses;
 
     @OneToMany
     private List<Course> completedCourses = new LinkedList<>();
@@ -80,6 +81,25 @@ public class User {
     }
 
     public void addUserCourse(Course course){
+        if(Objects.isNull(this.userCourses)){
+            this.userCourses = new LinkedList<>();
+        }
         this.userCourses.add(course);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", contact='" + contact + '\'' +
+                ", facebook='" + facebook + '\'' +
+                ", twitter='" + twitter + '\'' +
+                ", youtube='" + youtube + '\'' +
+                '}';
     }
 }

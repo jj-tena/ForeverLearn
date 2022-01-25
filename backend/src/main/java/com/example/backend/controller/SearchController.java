@@ -38,6 +38,7 @@ public class SearchController {
 
     @GetMapping("/library")
     public String librayLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
         model.addAttribute("courses", list);
@@ -47,12 +48,14 @@ public class SearchController {
 
     @GetMapping("/library-list")
     public String librayListLink(Model model){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         return "library-list";
     }
 
     @GetMapping("/category-{id}")
     public String libraryByCategory(Model model, @PathVariable Long id){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
         if (category.isPresent())
@@ -77,6 +80,7 @@ public class SearchController {
 
     @GetMapping("/find-course")
     public String findCourseByName(Model model, String name){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         List<Course> list = new ArrayList<>();
         Optional<Course> course = courseService.findCourseByName(name);
         course.ifPresent(list::add);
@@ -88,6 +92,7 @@ public class SearchController {
 
     @GetMapping("/course-{id}")
     public String getCourse(Model model, @PathVariable Long id){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         Optional<Course> course = courseService.findCourseById(id);
         if (course.isPresent()){
@@ -100,6 +105,7 @@ public class SearchController {
 
     @GetMapping("/instructor-profile-{id}")
     public String getInstructorProfile(Model model, @PathVariable Long id){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
         Optional<User> user = userService.findUserById(id);
         if (user.isPresent()){

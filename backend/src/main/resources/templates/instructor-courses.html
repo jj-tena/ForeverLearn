@@ -25,12 +25,12 @@
                 </div>
                 <div class="row">
 
-
+                    {{#courses}}
                         <div class="col-sm-6 col-md-4 col-xl-3">
 
                         <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                             <a href="instructor-edit-course.html" class="js-image" data-position="">
-                                <img src="assets/images/paths/angular_430x168.png" alt="course">
+                                <img src="/courses/{{id}}/picture" alt="course">
                                 <span class="overlay__content">
                                     <span class="overlay__action d-flex flex-column text-center">
                                         Opciones
@@ -41,9 +41,9 @@
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="flex">
-                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">Learn Angular fundamentals</a>
+                                            <a class="card-title mb-4pt" href="instructor-edit-course.html">{{name}}</a>
                                         </div>
-                                        <a href="/instructor-edit-course" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                        <a href="#" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
                                     </div>
                                 </div>
                             </div>
@@ -53,19 +53,20 @@
 
                             <div class="row align-items-center">
                                 <div class="col-md-4">
-                                    <a href="course.html" class="btn btn-primary">Ver curso</a>
+                                    <a href="/course-{{id}}" class="btn btn-primary">Ver curso</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="instructor-edit-course.html" class="btn btn-accent">Editar curso</a>
+                                    <a href="#" class="btn btn-accent">Editar curso</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="instructor-courses.html" class="btn btn-dark">Borrar curso</a>
+                                    <a href="#" class="btn btn-dark">Borrar curso</a>
                                 </div>
                             </div>
 
                         </div>
 
                     </div>
+                    {{/courses}}
 
 
 

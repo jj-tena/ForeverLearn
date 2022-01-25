@@ -84,9 +84,21 @@
 
                 <ul class="nav navbar-nav ml-auto flex-nowrap" style="white-space: nowrap;">
 
+                    {{^activeUser}}
                     <li class="d-none d-sm-flex nav-item">
                         <a href="/login" class="btn btn-accent">Iniciar sesión</a>
                     </li>
+                    {{/activeUser}}
+
+                    {{#activeUser}}
+                    <li class="d-none d-sm-flex nav-item">
+                        <a href="/user-profile" class="btn btn-accent">Ver perfil</a>
+                    </li>
+                    <li class="d-none d-sm-flex nav-item">
+                        <a href="/logout" class="btn btn-accent">Cerrar sesión</a>
+                    </li>
+                    {{/activeUser}}
+
                 </ul>
 
 

@@ -8,6 +8,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,11 +42,18 @@ public class CourseService {
         return courseRepository.findCoursesByCategory(category);
     }
 
-    public Course create(String name, String description, Category category, String difficulty, String imagePath, Integer length, User user) throws IOException {
-        Course course = new Course(name, description, category, difficulty, length, user);
-        courseRepository.save(course);
-        Resource image = new ClassPathResource(imagePath);
-        course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-        return courseRepository.save(course);
+    @Transactional
+    public Optional<Course> create(String name, String description, Category category, String difficulty, String imagePath, Integer length, Long id) throws IOException {
+        Optional<Course> optionalCourse = Optional.empty();
+        Optional<User> user = userService.findUserById(id);
+        if (user.isPresent()){
+            Course course = new Course(name, description, category, difficulty, length, user.get());
+            Resource image = new ClassPathResource(imagePath);
+            course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+            Course savedCourse = courseRepository.save(course);
+            userService.addUserCourse(user.get(), savedCourse);
+            optionalCourse = Optional.of(savedCourse);
+        }
+        return optionalCourse;
     }
 }
