@@ -87,6 +87,13 @@ public class User {
         this.userCourses.add(course);
     }
 
+    public void enrollCourse(Course course){
+        if(Objects.isNull(this.enrolledCourses)){
+            this.enrolledCourses = new LinkedList<>();
+        }
+        this.enrolledCourses.add(course);
+    }
+
     @Override
     public String toString() {
         return "User{" +

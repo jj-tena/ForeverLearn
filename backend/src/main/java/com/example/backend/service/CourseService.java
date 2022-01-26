@@ -21,9 +21,12 @@ public class CourseService {
 
     private final UserService userService;
 
-    public CourseService(CourseRepository courseRepository, UserService userService) {
+    private final CategoryService categoryService;
+
+    public CourseService(CourseRepository courseRepository, UserService userService, CategoryService categoryService) {
         this.courseRepository = courseRepository;
         this.userService = userService;
+        this.categoryService = categoryService;
     }
 
     public List<Course> findCourses(){
@@ -58,15 +61,37 @@ public class CourseService {
     }
 
     @Transactional
-    public Optional<Course> createCourse(Course course) throws IOException {
+    public Optional<Course> createCourse(Course course, String categoryName) throws IOException {
         Optional<Course> optionalCourse = Optional.empty();
         Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
+        Optional<Category> optionalCategory = categoryService.findByName(categoryName);
+        if (optionalUser.isPresent() && optionalCategory.isPresent()){
             course.setAuthor(optionalUser.get());
+            course.setCategory(optionalCategory.get());
             Course savedCourse = courseRepository.save(course);
             userService.addUserCourse(optionalUser.get(), savedCourse);
             optionalCourse = Optional.of(savedCourse);
         }
         return optionalCourse;
+    }
+
+    public void updateCourse(Long courseId, Course newCourse, String categoryName) {
+        Optional<Course> optionalOldCourse = courseRepository.findById(courseId);
+        if (optionalOldCourse.isPresent()){
+            Course oldCourse = optionalOldCourse.get();
+            if (!newCourse.getName().contentEquals("")){
+                oldCourse.setName(newCourse.getName());
+            } if (!newCourse.getDescription().contentEquals("")){
+                oldCourse.setDescription(newCourse.getDescription());
+            } if (!newCourse.getDescription().contentEquals("")){
+                oldCourse.setDescription(newCourse.getDescription());
+            } if (!newCourse.getDifficulty().contentEquals("")){
+                oldCourse.setDifficulty(newCourse.getDifficulty());
+            }
+            oldCourse.setLength(newCourse.getLength());
+            Optional<Category> optionalCategory = categoryService.findByName(categoryName);
+            optionalCategory.ifPresent(oldCourse::setCategory);
+            courseRepository.save(oldCourse);
+        }
     }
 }

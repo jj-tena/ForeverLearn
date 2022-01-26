@@ -4,6 +4,7 @@ import com.example.backend.model.Course;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import com.example.backend.repository.UserRepository;
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class UserService {
     @Transactional
     public User create(User user) throws IOException {
         Resource image = new ClassPathResource("/static/assets/images/default-profile.jpg");
-        //user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+        user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
         user.setDescription("");
         user.setContact("");
         user.setFacebook("");
@@ -110,5 +111,17 @@ public class UserService {
 
     public void logout() {
         this.activeId = null;
+    }
+
+    @Transactional
+    public void enrollCourse(Long courseId){
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if(optionalCourse.isPresent()){
+            Optional<User> optionalUser = getActiveUser();
+            if (optionalUser.isPresent()){
+                optionalUser.get().enrollCourse(optionalCourse.get());
+                userRepository.save(optionalUser.get());
+            }
+        }
     }
 }

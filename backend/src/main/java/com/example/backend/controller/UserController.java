@@ -5,6 +5,10 @@ import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
 import com.example.backend.service.CourseService;
 import com.example.backend.service.UserService;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 @Controller
@@ -27,6 +32,18 @@ public class UserController {
         this.categoryService = categoryService;
         this.userService = userService;
         this.courseService = courseService;
+    }
+
+    @GetMapping("/user/{id}/profilePhoto")
+    public ResponseEntity<Object> downloadUserProfilePhoto(@PathVariable long id) throws SQLException {
+        Optional<User> user = userService.findUserById(id);
+        if (user.isPresent()) {
+            Resource file = new InputStreamResource(user.get().getProfilePhoto().getBinaryStream());
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+                    .contentLength(user.get().getProfilePhoto().length()).body(file);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/user-profile")
@@ -107,7 +124,7 @@ public class UserController {
 
     @PostMapping("/create-course")
     public String createCourse(Model model, Course course, String categoryName) throws IOException {
-        courseService.createCourse(course);
+        courseService.createCourse(course, categoryName);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
@@ -120,7 +137,18 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(id).get());
         return "instructor-edit-course";
+    }
+
+    @PostMapping("/edit-course-{courseId}")
+    public String editCourse(Model model, Course course, String categoryName, @PathVariable Long courseId) throws IOException {
+        courseService.updateCourse(courseId, course, categoryName);
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        model.addAttribute("categories", categoryService.findAll());
+        return "instructor-courses";
     }
 
     @GetMapping("/instructor-delete-course-{id}")
@@ -140,6 +168,7 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
         return "student-courses-enrolled";
     }
 
@@ -147,6 +176,7 @@ public class UserController {
     public String studentCoursesEnrolledLink(Model model){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
         model.addAttribute("categories", categoryService.findAll());
         return "student-courses-enrolled";
     }
@@ -156,6 +186,7 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("courses", userService.getActiveUser().get().getCompletedCourses());
         return "student-courses-completed";
     }
 
@@ -164,7 +195,18 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("courses", userService.getActiveUser().get().getWishedCourses());
         return "student-courses-wished";
+    }
+
+    @GetMapping("/enroll-course-{courseId}")
+    public String enrollCourse(Model model, @PathVariable Long courseId){
+        userService.enrollCourse(courseId);
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
+        model.addAttribute("categories", categoryService.findAll());
+        return "student-courses-enrolled";
     }
 
 

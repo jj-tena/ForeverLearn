@@ -5,19 +5,19 @@
 
             <div class="bg-gradient-primary border-bottom-white py-32pt">
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                    <a href="instructor-courses.html" class="navbar-brand">
+                    <a href="/instructor-courses" class="navbar-brand">
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
                     </a>    
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Elijah Murray</h2>
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
-                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
             <div class="container page__container">
-                <form action="instructor-courses.html" id="edit-course-form">
+                <form action="/edit-course-{{course.id}}" method="post" id="edit-course-form">
                     <div class="row">
                         <div class="col-lg-12">
 
@@ -28,7 +28,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Título</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce el título">
+                                                <input name="name" value="{{course.name}}" type="text" class="form-control" placeholder="Introduce el título">
                                             </div>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3" for="category">Categoría</label>
                                             <div class="col-sm-9">
-                                                <select id="category" name="category" class="custom-select">
+                                                <select id="category" name="categoryName" class="custom-select">
                                                     <option value="" ng-reflect-value="">Elige una categoría</option>
                                                     <option value="Informática y software">Informática y software</option>
                                                     <option value="Entretenimiento">Entretenimiento</option>
@@ -87,7 +87,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Duración</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Introduce la duración">
+                                                <input name="length" value="{{course.length}}" type="number" class="form-control" placeholder="Introduce la duración">
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                                <textarea name="description" value="{{course.description}}" rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -458,7 +458,7 @@
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Guardar cambios</button>
+                    <button type="submit" class="btn btn-lg btn-accent">Guardar cambios</button>
                 </div>            
             </div>
       

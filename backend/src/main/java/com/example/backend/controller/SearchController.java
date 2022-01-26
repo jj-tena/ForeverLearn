@@ -67,7 +67,7 @@ public class SearchController {
     }
 
     @GetMapping("/courses/{id}/picture")
-    public ResponseEntity<Object> downloadCategoryPicture(@PathVariable long id) throws SQLException {
+    public ResponseEntity<Object> downloadCoursePicture(@PathVariable long id) throws SQLException {
         Optional<Course> course = courseService.findCourseById(id);
         if (course.isPresent() && course.get().getPicture() != null) {
             Resource file = new InputStreamResource(course.get().getPicture().getBinaryStream());

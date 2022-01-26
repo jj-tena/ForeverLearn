@@ -11,6 +11,9 @@
                             <p class="lead text-white-50 measure-hero-lead">{{course.description}}</p>
                             <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
                                 <a href="lesson.html" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Ver trailer <i class="material-icons icon--right">play_circle_outline</i></a>
+                                {{#activeUser}}
+                                    <a href="/enroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Matricularse<i class="material-icons icon--right">play_circle_outline</i></a>
+                                {{/activeUser}}
                             </div>
                         </div>
                     </div>
@@ -23,7 +26,7 @@
                         <li class="nav-item navbar-list__item">
                             <div class="media align-items-center">
                                 <span class="media-left mr-16pt">
-                                    <img src="assets/images/people/50/guy-6.jpg" width="40" alt="avatar" class="rounded-circle">
+                                    <img src="/user/{{course.author.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle">
                                 </span>
                                 <div class="media-body">
                                     <a class="card-title m-0" href="/instructor-profile-{{course.author.id}}">{{course.author.name}}</a>
@@ -333,19 +336,19 @@
                     <div class="row">
                         <div class="col-md-7 mb-24pt mb-md-0">
                             <h4>Sobre el autor</h4>
-                            <p class="text-70 mb-24pt">Eddie Bryan is a software developer at LearnD*ash. With more than 20 years o*f software development experience, he has gained a passion for Agile software development -- especially Lean.</p>
+                            <p class="text-70 mb-24pt">{{course.author.description}}</p>
 
                         </div>
                         <div class="col-md-5 border-left-md pt-sm-32pt pt-md-0 d-flex flex-column align-items-center justify-content-center">
                             <div class="text-center">
                                 <p class="mb-16pt">
-                                    <img src="assets/images/people/110/guy-6.jpg" alt="guy-6" class="rounded-circle" width="64">
+                                    <img src="/user/{{course.author.id}}/profilePhoto" alt="guy-6" class="rounded-circle" width="64">
                                 </p>
-                                <h4 class="m-0">Eddie Bryan</h4>
+                                <h4 class="m-0">{{course.author.name}}</h4>
                                 <p class="lh-1">
                                 </p>
                                 <div class="d-flex flex-column align-items-center justify-content-start">
-                                    <a href="instructor-profile.html" class="btn btn-outline-secondary">Ver perfil</a>
+                                    <a href="/instructor-profile-{{course.author.id}}" class="btn btn-outline-secondary">Ver perfil</a>
                                 </div>
                             </div>
                         </div>
