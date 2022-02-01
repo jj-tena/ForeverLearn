@@ -1,10 +1,9 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Course;
+import com.example.backend.model.Theme;
 import com.example.backend.model.User;
-import com.example.backend.service.CategoryService;
-import com.example.backend.service.CourseService;
-import com.example.backend.service.UserService;
+import com.example.backend.service.*;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,10 +29,16 @@ public class UserController {
 
     private final CourseService courseService;
 
-    public UserController(CategoryService categoryService, UserService userService, CourseService courseService) {
+    private final ThemeService themeService;
+
+    private final LessonService lessonService;
+
+    public UserController(CategoryService categoryService, UserService userService, CourseService courseService, ThemeService themeService, LessonService lessonService) {
         this.categoryService = categoryService;
         this.userService = userService;
         this.courseService = courseService;
+        this.themeService = themeService;
+        this.lessonService = lessonService;
     }
 
     @GetMapping("/user/{id}/profilePhoto")
@@ -88,9 +95,9 @@ public class UserController {
     }
 
     @PostMapping("/update-profile-information")
-    public String updateProfileInformation(Model model, User user){
+    public String updateProfileInformation(Model model, User user, @RequestParam("image") MultipartFile multipartFile) throws SQLException, IOException {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        userService.updateProfileInformation(user);
+        userService.updateProfileInformation(user, multipartFile);
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         return "user-profile";
@@ -123,8 +130,8 @@ public class UserController {
     }
 
     @PostMapping("/create-course")
-    public String createCourse(Model model, Course course, String categoryName) throws IOException {
-        courseService.createCourse(course, categoryName);
+    public String createCourse(Model model, Course course, String categoryName, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        courseService.createCourse(course, categoryName, multipartFile);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
@@ -142,8 +149,8 @@ public class UserController {
     }
 
     @PostMapping("/edit-course-{courseId}")
-    public String editCourse(Model model, Course course, String categoryName, @PathVariable Long courseId) throws IOException {
-        courseService.updateCourse(courseId, course, categoryName);
+    public String editCourse(Model model, Course course, String categoryName, @PathVariable Long courseId, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        courseService.updateCourse(courseId, course, categoryName, multipartFile);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
@@ -209,8 +216,71 @@ public class UserController {
         return "student-courses-enrolled";
     }
 
+    @PostMapping("/create-theme-for-course-{courseId}")
+    public String createTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long courseId){
+        Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        themeService.createTheme(nameTheme, descriptionTheme, optionalCourse.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
+
+    @PostMapping("/edit-theme-{themeId}-for-course-{courseId}")
+    public String editTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long themeId, @PathVariable Long courseId){
+        Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        themeService.updateTheme(themeId, nameTheme, descriptionTheme, optionalCourse.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
+
+    @GetMapping("/delete-theme-{themeId}-for-course-{courseId}")
+    public String deleteTheme(Model model, @PathVariable Long themeId, @PathVariable Long courseId){
+        Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        themeService.deleteTheme(themeId, optionalCourse.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
+
+    @PostMapping("/create-lesson-for-theme-{themeId}-for-course-{courseId}")
+    public String createTheme(Model model, String nameLesson, String descriptionLesson, @PathVariable Long themeId, @PathVariable Long courseId){
+        Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+        lessonService.createLesson(nameLesson, descriptionLesson, optionalTheme.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
 
 
+    @PostMapping("/edit-lesson-{lessonId}-for-theme-{themeId}-for-course-{courseId}")
+    public String editTheme(Model model, String nameLesson, String descriptionLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
+        Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+        lessonService.updateLesson(lessonId, nameLesson, descriptionLesson, optionalTheme.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
 
+    @GetMapping("delete-lesson-{lessonId}-for-theme-{themeId}-for-course-{courseId}")
+    public String deleteTheme(Model model, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
+        Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+        lessonService.deleteLesson(lessonId, optionalTheme.get());
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("course", courseService.findCourseById(courseId).get());
+        return "instructor-edit-course";
+    }
 
 }

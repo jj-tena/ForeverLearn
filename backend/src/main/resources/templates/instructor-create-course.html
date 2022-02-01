@@ -19,7 +19,7 @@
 
 
             <div class="container page__container">
-                <form action="/create-course" method="post">
+                <form action="/create-course" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-12">
 
@@ -40,7 +40,7 @@
                                             <div class="col-sm-9 media align-items-center">
                                                 <div class="media-body">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                                        <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" accept="image/png, image/jpeg">
                                                         <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
                                                     </div>
                                                 </div>
@@ -53,7 +53,7 @@
                                             <div class="col-sm-9">
                                                 <select id="category" name="categoryName" required="" class="custom-select">
                                                     <option value="" >Elige una categoría</option>
-                                                    <option value=" Crecimiento personal">Crecimiento personal</option>
+                                                    <option value="Crecimiento personal">Crecimiento personal</option>
                                                     <option value="Deportes">Deporte</option>
                                                     <option value="Disciplinas académicas">Disciplinas académicas</option>
                                                     <option value="Diseño">Diseño</option>
@@ -65,7 +65,6 @@
                                                     <option value="Profesiones">Profesiones</option>
                                                     <option value="Salud">Salud</option>
                                                     <option value="Otros">Otros</option>
-
                                                 </select>
                                             </div>
                                         </div>
@@ -98,8 +97,8 @@
                                             <div class="col-sm-9 media align-items-center">
                                                 <div class="media-body">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Elegir archivo</label>
                                                     </div>
                                                 </div>
                                             </div>

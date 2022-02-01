@@ -5,7 +5,7 @@
 
             <div class="bg-gradient-primary border-bottom-white py-32pt">
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                    <a href="/instructor-courses" class="navbar-brand">
+                    <a href="/instructor-section" class="navbar-brand">
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
                     </a>    
                     <div class="flex mb-32pt mb-md-0">
@@ -17,7 +17,7 @@
             </div>
 
             <div class="container page__container">
-                <form action="/edit-course-{{course.id}}" method="post" id="edit-course-form">
+                <form action="/edit-course-{{course.id}}" method="post" id="edit-course-form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-12">
 
@@ -38,8 +38,8 @@
                                             <div class="col-sm-9 media align-items-center">
                                                 <div class="media-body">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                        <input name="image" type="file" class="custom-file-input" id="inputGroupFile00" accept="image/png, image/jpeg">
+                                                        <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,18 +52,18 @@
                                             <div class="col-sm-9">
                                                 <select id="category" name="categoryName" class="custom-select">
                                                     <option value="" ng-reflect-value="">Elige una categoría</option>
-                                                    <option value="Informática y software">Informática y software</option>
-                                                    <option value="Entretenimiento">Entretenimiento</option>
-                                                    <option value="Finanzas">Finanzas</option>
-                                                    <option value="Profesiones">Profesiones</option>
-                                                    <option value="Desarrollo personal">Desarrollo personal</option>
-                                                    <option value="Diseño">Diseño</option>
-                                                    <option value="Marketing">Marketing</option>
-                                                    <option value="Deportes">Deportes</option>
-                                                    <option value="Fotografía y video">Fotografía y video</option>
-                                                    <option value="Salud">Salud</option>
-                                                    <option value="Música">Música</option>
+                                                    <option value="Crecimiento personal">Crecimiento personal</option>
+                                                    <option value="Deportes">Deporte</option>
                                                     <option value="Disciplinas académicas">Disciplinas académicas</option>
+                                                    <option value="Diseño">Diseño</option>
+                                                    <option value="Finanzas">Finanzas</option>
+                                                    <option value="Fotografía y video">Fotografía y video</option>
+                                                    <option value="Informática y software">Informática y software</option>
+                                                    <option value="Marketing">Marketing</option>
+                                                    <option value="Música">Música</option>
+                                                    <option value="Profesiones">Profesiones</option>
+                                                    <option value="Salud">Salud</option>
+                                                    <option value="Otros">Otros</option>
 
                                                 </select>
                                             </div>
@@ -97,8 +97,8 @@
                                             <div class="col-sm-9 media align-items-center">
                                                 <div class="media-body">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Elegir archivo</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,216 +110,6 @@
                                             <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
                                                 <textarea name="description" value="{{course.description}}" rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Temario</h4>
-
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createTheme" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear tema</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-                                                    
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-                                                        <li class="accordion__item">
-                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-1">
-                                                                <span class="flex">Course Overview</span>
-                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-
-                                                            </a>
-                                                            <div class="accordion__menu">
-                                                                <ul class="list-unstyled collapse" id="course-toc-1">
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Watch Trailer</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-2">
-                                                                <span class="flex">Getting Started with Angular</span>
-                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-
-                                                            </a>
-                                                            <div class="accordion__menu">
-                                                                <ul class="list-unstyled collapse" id="course-toc-2">
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Introduction</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                                    </li>
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Introduction to TypeScript</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>                                                                    </li>
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Comparing Angular to AngularJS</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-3">
-                                                                <span class="flex">Creating and Communicating Between Angular Components</span>
-                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-
-                                                            </a>
-                                                            <div class="accordion__menu">
-                                                                <ul class="list-unstyled collapse" id="course-toc-3">
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Angular Components</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                        <li class="accordion__item">
-                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-4">
-                                                                <span class="flex">Exploring the Angular Template Syntax</span>
-                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                <button data-toggle="modal" data-target="#createLesson" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-                                                            </a>
-                                                            <div class="accordion__menu">
-                                                                <ul class="list-unstyled collapse" id="course-toc-4">
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">Template Syntax</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                        
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Requisitos</h4>
-
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createRequirement" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear requisito</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-                                                    
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 1</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 2</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>                                                     
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 3</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>            
-                                                        </li>
-                                                        
-                                                    </ul>
-                        
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Objetivos</h4>
-
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createObjective" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear objetivo</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-                                                    
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 1</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 2</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>                                                     
-                                                        </li>
-                        
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 3</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>            
-                                                        </li>
-                                                        
-                                                    </ul>
-                        
-                                                </div>
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -343,6 +133,161 @@
                 </form>
             </div>
 
+            <div class="container page__container">
+                <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="page-section">
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Temario</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <a data-toggle="modal" data-target="#createTheme" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear tema</a>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc-themes">
+                                                        {{#course.themes}}
+                                                            <li class="accordion__item">
+                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
+                                                                <span class="flex">{{nameTheme}}</span>
+                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                <button data-toggle="modal" data-target="#createLessonForTheme-{{idTheme}}" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
+
+                                                            </a>
+                                                            <div class="accordion__menu">
+                                                                <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
+                                                                    {{#lessons}}
+                                                                    <li class="accordion__menu-link">
+                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                        <a class="flex" href="lesson.html">{{nameLesson}}</a>
+                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                                    </li>
+                                                                    {{/lessons}}
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        {{/course.themes}}
+
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Requisitos</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <a data-toggle="modal" data-target="#createRequirement" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear requisito</a>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 1</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 2</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Requisito 3</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="page-section border-bottom-2">
+                                        <div class="container page__container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h4>Objetivos</h4>
+
+                                                </div>
+                                                <div class="col-7"></div>
+                                                <div class="col-3">
+                                                    <a data-toggle="modal" data-target="#createObjective" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear objetivo</a>
+                                                </div>
+                                            </div>
+                                            <div class="card-group card-group--lg-up mb-0">
+                                                <div class="card col-lg-12 p-0">
+
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 1</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 2</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="accordion__item">
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                                <span class="flex">Objetivo 3</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
 
 
             <div class="js-fix-footer bg-white border-top-2">
@@ -380,8 +325,9 @@
 
     <!-- // Modal create theme-->
     <div class="modal fade" id="createTheme">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <form action="/create-theme-for-course-{{course.id}}" method="post" id="create-theme-for-course-form">
+            <div class="modal-dialog">
+            <div class="modal-content">
       
             <!-- cabecera del diálogo -->
             <div class="modal-header">
@@ -396,7 +342,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Título</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el título">
+                                <input type="text" name="nameTheme" class="form-control" placeholder="Introduce el título">
                             </div>
                         </div>
                     </div>
@@ -404,7 +350,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea name="descriptionTheme" rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
                             </div>
                         </div>
                     </div>
@@ -414,18 +360,22 @@
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Crear tema</button>
+                    <button type="submit" form="create-theme-for-course-form" value="Submit" class="btn btn-lg btn-accent">Crear tema</button>
                 </div>            
             </div>
       
           </div>
         </div>
-    </div> 
+        </form>
+    </div>
 
-    <!-- // Modal edit theme-->
-    <div class="modal fade" id="editTheme">
-        <div class="modal-dialog">
-          <div class="modal-content">
+
+    {{#course.themes}}
+        <!-- // Modal edit theme-->
+        <div class="modal fade" id="editTheme-{{idTheme}}">
+            <form action="/edit-theme-{{idTheme}}-for-course-{{course.id}}" method="post" id="edit-theme-for-course-form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
       
             <!-- cabecera del diálogo -->
             <div class="modal-header">
@@ -440,7 +390,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Título</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el título">
+                                <input type="text" name="nameTheme" value="{{nameTheme}}" class="form-control" placeholder="Introduce el título">
                             </div>
                         </div>
                     </div>
@@ -448,26 +398,27 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="10"  name="descriptionTheme" value="{{descriptionTheme}}" class="form-control" placeholder="Introduce la descripción"></textarea>
                             </div>
                         </div>
                     </div>
-                </div>            
+                </div>
             </div>
       
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-lg btn-accent">Guardar cambios</button>
+                    <button type="submit" form="edit-theme-for-course-form" value="Submit" class="btn btn-lg btn-accent">Editar tema</button>
                 </div>            
             </div>
       
           </div>
+                </div>
+            </form>
         </div>
-    </div> 
 
-    <!-- // Modal delete theme-->
-    <div class="modal fade" id="deleteTheme">
+        <!-- // Modal delete theme-->
+        <div class="modal fade" id="deleteTheme-{{idTheme}}">
         <div class="modal-dialog">
           <div class="modal-content">
       
@@ -479,47 +430,48 @@
       
             <!-- cuerpo del diálogo -->
             <div class="modal-body">
-                ¿Está seguro de que desea borrar este tema?
+                ¿Está seguro de que desea borrar el tema: {{nameTheme}}?
             </div>
       
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Borrar tema</button>
+                    <a href="/delete-theme-{{idTheme}}-for-course-{{course.id}}" class="btn btn-lg btn-accent">Borrar tema</a>
                 </div>            
             </div>
       
           </div>
         </div>
-    </div> 
+    </div>
 
-    <!-- // Modal create lesson-->
-    <div class="modal fade" id="createLesson">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Crear lección</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="list-group list-group-form">
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Título</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el título">
+        <!-- // Modal create lesson-->
+        <div class="modal fade" id="createLessonForTheme-{{idTheme}}">
+            <form action="/create-lesson-for-theme-{{idTheme}}-for-course-{{course.Id}}" method="post" id="create-lesson-for-theme-form">
+                <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Crear lección</h4>
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Título</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nameLesson" class="form-control" placeholder="Introduce el título">
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <div class="list-group-item">
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea name="descriptionLesson" rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
                                 <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
                             </div>
                         </div>
@@ -545,112 +497,120 @@
                             </div>
                         </div>
                     </div>
-                </div>            
+                </div>
             </div>
-      
+
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Crear lección</button>
-                </div>            
+                    <button type="submit" form="create-lesson-for-theme-form" value="Submit" class="btn btn-lg btn-accent">Crear lección</button>
+                </div>
             </div>
-      
-          </div>
-        </div>
-    </div> 
 
-    <!-- // Modal edit lesson-->
-    <div class="modal fade" id="editLesson">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Editar lección</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="list-group list-group-form">
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Título</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el título">
+        </div>
+    </div>
+            </form>
+        </div>
+
+        {{#lessons}}
+
+            <!-- // Modal edit lesson-->
+            <div class="modal fade" id="editLesson-{{idLesson}}">
+                <form action="/edit-lesson-{{idLesson}}-for-theme-{{idTheme}}-for-course-{{course.id}}" method="post" id="edit-lesson-for-theme-for-course-form">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- cabecera del diálogo -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar lección</h4>
+                                <button type="button" class="close" data-dismiss="modal">X</button>
                             </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Descripción</label>
-                            <div class="col-sm-9">
-                                <textarea rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
-                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
-                            <div class="col-sm-9">
-                                <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Material</label>
-                            <div class="col-sm-9 media align-items-center">
-                                <div class="media-body">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+
+                            <!-- cuerpo del diálogo -->
+                            <div class="modal-body">
+                                <div class="list-group list-group-form">
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Título</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="nameLesson" value="{{nameLesson}}" class="form-control" placeholder="Introduce el título">
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Descripción</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="15" name="descriptionLesson" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Material</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile-{{idLesson}}">
+                                                        <label class="custom-file-label" for="inputGroupFile-{{idLesson}}">Elegir archivo</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- pie del diálogo -->
+                            <div class="modal-footer">
+                                <div class="text-center">
+                                    <button type="submit" form="edit-lesson-for-theme-for-course-form" value="Submit" class="btn btn-lg btn-accent">Editar lección</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- // Modal delete lesson-->
+            <div class="modal fade" id="deleteLesson-{{idLesson}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- cabecera del diálogo -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Borrar lección</h4>
+                                <button type="button" class="close" data-dismiss="modal">X</button>
+                            </div>
+
+                            <!-- cuerpo del diálogo -->
+                            <div class="modal-body">
+                                ¿Está seguro de que desea borrar la lección: {{nameLesson}}?
+                            </div>
+
+                            <!-- pie del diálogo -->
+                            <div class="modal-footer">
+                                <div class="text-center">
+                                    <a href="/delete-lesson-{{idLesson}}-for-theme-{{idTheme}}-for-course-{{course.id}}" class="btn btn-lg btn-accent">Borrar lección</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>            
             </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Editar lección</button>
-                </div>            
-            </div>
-      
-          </div>
-        </div>
-    </div> 
 
-    <!-- // Modal delete lesson-->
-    <div class="modal fade" id="deleteLesson">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Borrar lección</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                ¿Está seguro de que desea borrar este lección?
-            </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Borrar lección</button>
-                </div>            
-            </div>
-      
-          </div>
-        </div>
-    </div> 
+        {{/lessons}}
+
+    {{/course.themes}}
 
     <!-- // Modal create requirement-->
     <div class="modal fade" id="createRequirement">

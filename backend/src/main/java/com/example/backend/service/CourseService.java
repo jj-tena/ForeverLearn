@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,13 +62,16 @@ public class CourseService {
     }
 
     @Transactional
-    public Optional<Course> createCourse(Course course, String categoryName) throws IOException {
+    public Optional<Course> createCourse(Course course, String categoryName, MultipartFile image) throws IOException {
         Optional<Course> optionalCourse = Optional.empty();
         Optional<User> optionalUser = userService.getActiveUser();
         Optional<Category> optionalCategory = categoryService.findByName(categoryName);
         if (optionalUser.isPresent() && optionalCategory.isPresent()){
             course.setAuthor(optionalUser.get());
             course.setCategory(optionalCategory.get());
+            if (image != null) {
+                course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+            }
             Course savedCourse = courseRepository.save(course);
             userService.addUserCourse(optionalUser.get(), savedCourse);
             optionalCourse = Optional.of(savedCourse);
@@ -75,7 +79,7 @@ public class CourseService {
         return optionalCourse;
     }
 
-    public void updateCourse(Long courseId, Course newCourse, String categoryName) {
+    public void updateCourse(Long courseId, Course newCourse, String categoryName, MultipartFile image) throws IOException {
         Optional<Course> optionalOldCourse = courseRepository.findById(courseId);
         if (optionalOldCourse.isPresent()){
             Course oldCourse = optionalOldCourse.get();
@@ -91,7 +95,14 @@ public class CourseService {
             oldCourse.setLength(newCourse.getLength());
             Optional<Category> optionalCategory = categoryService.findByName(categoryName);
             optionalCategory.ifPresent(oldCourse::setCategory);
+            if (image != null) {
+                oldCourse.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+            }
             courseRepository.save(oldCourse);
         }
+    }
+
+    public Course save(Course course) {
+        return courseRepository.save(course);
     }
 }

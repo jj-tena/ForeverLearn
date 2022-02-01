@@ -5,7 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -41,7 +43,7 @@ public class Course {
     private Integer length;
 
     @OneToMany
-    private List<Topic> topics;
+    private List<Theme> themes;
 
     @ManyToOne
     private User author;
@@ -57,5 +59,16 @@ public class Course {
         this.difficulty = difficulty;
         this.length = length;
         this.author = author;
+    }
+
+    public void addUserCourse(Theme theme){
+        if(Objects.isNull(this.themes)){
+            this.themes = new LinkedList<>();
+        }
+        this.themes.add(theme);
+    }
+
+    public void deleteTheme(Theme theme) {
+        this.themes.remove(theme);
     }
 }

@@ -37,7 +37,7 @@ public class DatabaseController {
 
         //Categories initialization
         categoryService.create("Crecimiento personal", "/static/assets/images/categories/personal/dificil.png");
-        categoryService.create("Deporte", "/static/assets/images/categories/sports/ejercicio.png");
+        categoryService.create("Deportes", "/static/assets/images/categories/sports/ejercicio.png");
         categoryService.create("Disciplinas académicas", "/static/assets/images/categories/academy/biblioteca.png");
         categoryService.create("Diseño", "/static/assets/images/categories/design/ocurrencia.png");
         categoryService.create("Finanzas", "/static/assets/images/categories/finances/prestamo.png");
@@ -52,7 +52,7 @@ public class DatabaseController {
         //Courses initialization
         Optional<Course> course1 = courseService.create("Curso1", "Descripcion1", categoryService.findByName("Crecimiento personal").get(), "Principiante", "/static/assets/images/paths/angular_430x168.png", 6, savedUser1.getId());
         //userService.addUserCourse(user1, course1);
-        Optional<Course>  course2 = courseService.create("Curso2", "Descripcion2", categoryService.findByName("Deporte").get(), "Principiante", "/static/assets/images/paths/swift_430x168.png", 6, savedUser1.getId());
+        Optional<Course>  course2 = courseService.create("Curso2", "Descripcion2", categoryService.findByName("Deportes").get(), "Principiante", "/static/assets/images/paths/swift_430x168.png", 6, savedUser1.getId());
         //userService.addUserCourse(user1, course2);
         Optional<Course>  course3 = courseService.create("Curso3", "Descripcion3", categoryService.findByName("Disciplinas académicas").get(), "Principiante", "/static/assets/images/paths/photoshop_430x168.png", 6, savedUser1.getId());
         //userService.addUserCourse(user1, course3);

@@ -9,8 +9,10 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,13 +69,21 @@ public class UserService {
         userRepository.save(getActiveUser().get());
     }
 
-    public void updateProfileInformation(User user){
-        if (user.getDescription() != null) getActiveUser().get().setDescription(user.getDescription());
-        if (user.getContact() != null) getActiveUser().get().setContact(user.getContact());
-        if (user.getFacebook() != null) getActiveUser().get().setFacebook(user.getFacebook());
-        if (user.getTwitter() != null) getActiveUser().get().setTwitter(user.getTwitter());
-        if (user.getYoutube() != null) getActiveUser().get().setYoutube(user.getYoutube());
-        userRepository.save(getActiveUser().get());
+    @Transactional
+    public void updateProfileInformation(User user, MultipartFile profilePhoto) throws SQLException, IOException {
+        Optional<User> optionalUser = getActiveUser();
+        if (optionalUser.isPresent()){
+            User activeUser = optionalUser.get();
+            if (user.getDescription() != null) activeUser.setDescription(user.getDescription());
+            if (user.getContact() != null) activeUser.setContact(user.getContact());
+            if (user.getFacebook() != null) activeUser.setFacebook(user.getFacebook());
+            if (user.getTwitter() != null) activeUser.setTwitter(user.getTwitter());
+            if (user.getYoutube() != null) activeUser.setYoutube(user.getYoutube());
+            if (profilePhoto != null) {
+                activeUser.setProfilePhoto(BlobProxy.generateProxy(profilePhoto.getInputStream(), profilePhoto.getSize()));
+            }
+            userRepository.save(activeUser);
+        }
     }
 
     public void updatePassword(String password1, String password2){
@@ -124,4 +134,5 @@ public class UserService {
             }
         }
     }
+
 }
