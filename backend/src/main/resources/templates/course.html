@@ -74,72 +74,25 @@
                             
                             <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
 
+                                {{#course.themes}}
                                 <li class="accordion__item">
-                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-1">
-                                        <span class="flex">Course Overview</span>
+                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
+                                        <span class="flex">{{nameTheme}}</span>
                                         <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
                                     </a>
                                     <div class="accordion__menu">
-                                        <ul class="list-unstyled collapse" id="course-toc-1">
+                                        <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
+                                            {{#lessons}}
                                             <li class="accordion__menu-link active">
                                                 <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Watch Trailer</a>
+                                                <a class="flex" href="lesson.html">{{nameLesson}}</a>
                                             </li>
+                                            {{/lessons}}
                                         </ul>
                                     </div>
                                 </li>
+                                {{/course.themes}}
 
-                                <li class="accordion__item">
-                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-2">
-                                        <span class="flex">Getting Started with Angular</span>
-                                        <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                    </a>
-                                    <div class="accordion__menu">
-                                        <ul class="list-unstyled collapse" id="course-toc-2">
-                                            <li class="accordion__menu-link">
-                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Introduction</a>
-                                            </li>
-                                            <li class="accordion__menu-link">
-                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Introduction to TypeScript</a>
-                                            </li>
-                                            <li class="accordion__menu-link">
-                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Comparing Angular to AngularJS</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="accordion__item">
-                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-3">
-                                        <span class="flex">Creating and Communicating Between Angular Components</span>
-                                        <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                    </a>
-                                    <div class="accordion__menu">
-                                        <ul class="list-unstyled collapse" id="course-toc-3">
-                                            <li class="accordion__menu-link">
-                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Angular Components</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="accordion__item">
-                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-4">
-                                        <span class="flex">Exploring the Angular Template Syntax</span>
-                                        <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                    </a>
-                                    <div class="accordion__menu">
-                                        <ul class="list-unstyled collapse" id="course-toc-4">
-                                            <li class="accordion__menu-link">
-                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">Template Syntax</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
                             </ul>
 
                         </div>
@@ -158,75 +111,28 @@
                             <div class="col-md-6">
                                 <h4>Requisitos</h4>
                                 <ul class="list-unstyled">
+                                    {{#course.requirements}}
                                     <li class="d-flex align-items-center">
                                         <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Fundamentals of working with Angular</span>
+                                        <span class="text-70">{{nameRequirement}}</span>
                                     </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Create complete Angular applications</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Working with the Angular CLI</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Understanding Dependency Injection</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
+                                    {{/course.requirements}}
                                 </ul>
                             </div>
                             <div class="col-md-5">
                                 <h4>Objetivos</h4>
                                 <ul class="list-unstyled">
+                                    {{#course.objectives}}
                                     <li class="d-flex align-items-center">
                                         <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Fundamentals of working with Angular</span>
+                                        <span class="text-70">{{nameObjective}}</span>
                                     </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Create complete Angular applications</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Working with the Angular CLI</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Understanding Dependency Injection</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">Testing with Angular</span>
-                                    </li>
+                                    {{/course.objectives}}
                                 </ul>
                             </div>
-                            
                         </div>
                     </div>
-                    
                 </div>
-
             </div>
 
             <div class="container page__container">
@@ -239,92 +145,51 @@
                                 <h2 class="mb-16pt">Temario</h2>
                             </div>
 
-                            <div class="d-flex align-items-center page-num-container">
-                                <div class="page-num">1</div>
-                                <h4>Getting Started With Angular</h4>
-                            </div>
+                            {{#course.themes}}
 
-                            <p class="text-70 mb-24pt">Good tools make application development quick*er and easier to maintain than* if you did everything by hand. The goal in this guide is to build and run a simple Angular application in TypeScript, using the Angular CLI while adhering to the Style Guide recommendations that benefit every Angular project.</p>
+                                <div class="d-flex align-items-center page-num-container">
+                                    <div id="theme-{{idTheme}}" class="page-num">{{-index}}</div>
+                                    <h4>{{nameTheme}}</h4>
+                                </div>
 
-                            <div class="card mb-32pt mb-lg-64pt">
-                                <ul class="accordion accordion--boxed js-accordion mb-0" id="toc-1">
-                                    <li class="accordion__item">
-                                        <a class="accordion__toggle" data-toggle="collapse" data-parent="#toc-1" href="#toc-content-1">
-                                            <span class="flex">Lecciones</span>
-                                            <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                        </a>
-                                        <div class="accordion__menu">
-                                            <ul class="list-unstyled collapse" id="toc-content-1">
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="lesson.html">Introduction</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="lesson.html">Introduction to TypeScript</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="lesson.html">Comparing Angular to AngularJS</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="lesson.html">Quiz: Getting Started With Angular</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                <p class="text-70 mb-24pt">{{descriptionTheme}}</p>
 
-                            <div class="d-flex align-items-center page-num-container">
-                                <div class="page-num">2</div>
-                                <h4>Creating and Communicating Between Angular Components</h4>
-                            </div>
-                            <p class="text-70 mb-24pt">Data sharing is an essential concept to understand before diving into your first Angular project. In this section, you will learn four different methods for sharing data between Angular components.</p>
+                                <div class="card mb-32pt mb-lg-64pt">
+                                    <ul class="accordion accordion--boxed js-accordion mb-0" id="toc-{{idTheme}}">
+                                        <li class="accordion__item">
+                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#toc-{{idTheme}}" href="#toc-content-{{idTheme}}">
+                                                <span class="flex">Lecciones</span>
+                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                            </a>
+                                            <div class="accordion__menu">
+                                                <ul class="list-unstyled collapse" id="toc-content-{{idTheme}}">
+                                                    {{#lessons}}
+                                                        <li class="accordion__menu-link">
+                                                            <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
+                                                            <a class="flex" href="/lesson-{{idLesson}}">{{nameLesson}}</a>
+                                                        </li>
+                                                    {{/lessons}}
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                            <div class="card mb-0">
-                                <ul class="accordion accordion--boxed js-accordion mb-0" id="toc-2">
-                                    <li class="accordion__item">
-                                        <a class="accordion__toggle" data-toggle="collapse" data-parent="#toc-2" href="#toc-content-2">
-                                            <span class="flex">Lecciones</span>
-                                            <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                        </a>
-                                        <div class="accordion__menu">
-                                            <ul class="list-unstyled collapse" id="toc-content-2">
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="student-take-lesson.html">Introduction</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="student-take-lesson.html">Introduction to TypeScript</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="student-take-lesson.html">Comparing Angular to AngularJS</a>
-                                                </li>
-                                                <li class="accordion__menu-link">
-                                                    <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                    <a class="flex" href="student-take-quiz.html">Quiz: Getting Started With Angular</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            {{/course.themes}}
 
                         </div>
+
                     </div>
+
                     <div class="col-lg-5 page-nav">
                         <div class="page-section">
                             <div class="page-nav__content">
                                 <h4 class="mb-16pt">Índice</h4>
                             </div>
                             <nav class="nav page-nav__menu">
-                                <a class="nav-link" href="">Getting Started With Angular</a>
-                                <a class="nav-link" href="">Creating and Communicating Between Angular Components</a>
-                                <a class="nav-link" href="">Exploring the Angular Template Syntax</a>
+                                {{#course.themes}}
+                                    <a class="nav-link" href="#theme-{{idTheme}}">{{nameTheme}}</a>
+                                {{/course.themes}}
                             </nav>
                         </div>
                     </div>

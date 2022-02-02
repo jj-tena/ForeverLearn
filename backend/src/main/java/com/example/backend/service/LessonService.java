@@ -49,4 +49,9 @@ public class LessonService {
     }
 
 
+    public Optional<Lesson> findLessonById(Long id) {
+        return lessonRepository.findById(id);
+    }
+
+
 }

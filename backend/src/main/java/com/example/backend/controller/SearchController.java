@@ -2,9 +2,11 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.Lesson;
 import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
 import com.example.backend.service.CourseService;
+import com.example.backend.service.LessonService;
 import com.example.backend.service.UserService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -30,10 +32,13 @@ public class SearchController {
 
     private final UserService userService;
 
-    public SearchController(CourseService courseService, CategoryService categoryService, UserService userService) {
+    private final LessonService lessonService;
+
+    public SearchController(CourseService courseService, CategoryService categoryService, UserService userService, LessonService lessonService) {
         this.courseService = courseService;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.lessonService = lessonService;
     }
 
     @GetMapping("/library")
@@ -112,6 +117,19 @@ public class SearchController {
             model.addAttribute("user", user.get());
             model.addAttribute("courses", user.get().getUserCourses());
             return "instructor-profile";
+        } else {
+            return "index";
+        }
+    }
+
+    @GetMapping("/lesson-{id}")
+    public String getLesson(Model model, @PathVariable Long id){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Lesson> lesson = lessonService.findLessonById(id);
+        if (lesson.isPresent()){
+            model.addAttribute("lesson", lesson.get());
+            return "lesson";
         } else {
             return "index";
         }
