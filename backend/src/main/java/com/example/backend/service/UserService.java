@@ -114,6 +114,10 @@ public class UserService {
         Optional<User> courseOwner = userRepository.findUserByUserCoursesContains(course);
         if (courseOwner.isPresent()){
             if (courseOwner.get().equals(activeUser)){
+                courseOwner.get().deleteUserCourse(course);
+                userRepository.findUsersByEnrolledCoursesContaining(course).forEach(user -> user.deleteEnrolledCourse(course));
+                userRepository.findUsersByWishedCoursesContaining(course).forEach(user -> user.deleteWishedCourse(course));
+                userRepository.findUsersByCompletedCoursesContaining(course).forEach(user -> user.deleteCompletedCourse(course));
                 courseRepository.delete(course);
             }
         }
@@ -129,7 +133,7 @@ public class UserService {
         if(optionalCourse.isPresent()){
             Optional<User> optionalUser = getActiveUser();
             if (optionalUser.isPresent()){
-                optionalUser.get().enrollCourse(optionalCourse.get());
+                optionalUser.get().addEnrolledCourse(optionalCourse.get());
                 userRepository.save(optionalUser.get());
             }
         }

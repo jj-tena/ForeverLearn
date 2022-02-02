@@ -87,11 +87,41 @@ public class User {
         this.userCourses.add(course);
     }
 
-    public void enrollCourse(Course course){
+    public void deleteUserCourse(Course course){
+        this.userCourses.remove(course);
+    }
+
+    public void addEnrolledCourse(Course course){
         if(Objects.isNull(this.enrolledCourses)){
             this.enrolledCourses = new LinkedList<>();
         }
         this.enrolledCourses.add(course);
+    }
+
+    public void deleteEnrolledCourse(Course course){
+        this.enrolledCourses.remove(course);
+    }
+
+    public void addCompletedCourse(Course course){
+        if(Objects.isNull(this.completedCourses)){
+            this.completedCourses = new LinkedList<>();
+        }
+        this.completedCourses.add(course);
+    }
+
+    public void deleteCompletedCourse(Course course){
+        this.completedCourses.remove(course);
+    }
+
+    public void addWishedCourse(Course course){
+        if(Objects.isNull(this.wishedCourses)){
+            this.wishedCourses = new LinkedList<>();
+        }
+        this.wishedCourses.add(course);
+    }
+
+    public void deleteWishedCourse(Course course){
+        this.wishedCourses.remove(course);
     }
 
     @Override

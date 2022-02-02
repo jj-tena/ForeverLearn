@@ -174,6 +174,7 @@ public class UserController {
         if ((optionalCourse.isPresent()) && (userService.getActiveUser().isPresent())){
             userService.deleteCourse(userService.getActiveUser().get(), optionalCourse.get());
         }
+        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
         return "instructor-courses";
     }
 

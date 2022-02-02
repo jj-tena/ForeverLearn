@@ -122,17 +122,32 @@ public class SearchController {
         }
     }
 
-    @GetMapping("/lesson-{id}")
-    public String getLesson(Model model, @PathVariable Long id){
+    @GetMapping("/lesson-{lessonId}-from-course-{courseId}")
+    public String getLesson(Model model, @PathVariable Long lessonId, @PathVariable Long courseId){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("categories", categoryService.findAll());
-        Optional<Lesson> lesson = lessonService.findLessonById(id);
-        if (lesson.isPresent()){
+        Optional<Lesson> lesson = lessonService.findLessonById(lessonId);
+        Optional<Course> course = courseService.findCourseById(courseId);
+        if (lesson.isPresent() && course.isPresent()){
             model.addAttribute("lesson", lesson.get());
+            model.addAttribute("course", course.get());
             return "lesson";
         } else {
             return "index";
         }
+    }
+
+    @GetMapping("/category-{id}-difficulty-filter")
+    public String filterLibrary(Model model, @PathVariable Long id){
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<Category> category = categoryService.findById(id);
+        List<Course> list = new LinkedList<>();
+        if (category.isPresent())
+            list = courseService.findCoursesByCategory(category.get());
+        model.addAttribute("results", list.size());
+        model.addAttribute("courses", list);
+        model.addAttribute("categories", categoryService.findAll());
+        return "library";
     }
 
 

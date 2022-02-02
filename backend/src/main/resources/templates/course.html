@@ -85,7 +85,7 @@
                                             {{#lessons}}
                                             <li class="accordion__menu-link active">
                                                 <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                <a class="flex" href="lesson.html">{{nameLesson}}</a>
+                                                <a class="flex" href="/lesson-{{idLesson}}-from-course-{{course.id}}">{{nameLesson}}</a>
                                             </li>
                                             {{/lessons}}
                                         </ul>
@@ -166,7 +166,7 @@
                                                     {{#lessons}}
                                                         <li class="accordion__menu-link">
                                                             <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
-                                                            <a class="flex" href="/lesson-{{idLesson}}">{{nameLesson}}</a>
+                                                            <a class="flex" href="/lesson-{{idLesson}}-from-course-{{course.id}}">{{nameLesson}}</a>
                                                         </li>
                                                     {{/lessons}}
                                                 </ul>

@@ -4,6 +4,7 @@ import com.example.backend.model.Course;
 import com.example.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -15,5 +16,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findUserById(Long id);
 
     Optional<User> findUserByUserCoursesContains(Course course);
+
+    List<User> findUsersByEnrolledCoursesContaining(Course course);
+
+    List<User> findUsersByCompletedCoursesContaining(Course course);
+
+    List<User> findUsersByWishedCoursesContaining(Course course);
 
 }

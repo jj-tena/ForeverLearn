@@ -7,13 +7,10 @@
             <div class="navbar navbar-submenu navbar-light border-0 navbar-expand">
                 <div class="container justify-content-center">
                     <div class="media flex-nowrap">
-                        <div class="media-left mr-16pt">
-                            <a href="course.html"><img src="assets/images/paths/angular_64x64.png" width="40" alt="Angular" class="rounded"></a>
-                        </div>
                         <div class="media-body">
-                            <a href="course.html" class="card-title text-body mb-0">Angular Fundamentals</a>
+                            <a href="/course-{{course.id}}" class="card-title text-body mb-0">{{course.name}}</a>
                             <p class="lh-1 d-flex align-items-center mb-0">
-                                <span class="text-50 small font-weight-bold mr-8pt">Elijah Murray</span>
+                                <span class="text-50 small font-weight-bold mr-8pt">{{course.author.name}}</span>
                             </p>
                         </div>
                     </div>
@@ -24,10 +21,10 @@
                     
 
                     <div class="d-flex flex-wrap align-items-end mb-16pt">
-                        <h1 class="text-white flex m-0">Introduction to TypeScript</h1>
+                        <h1 class="text-white flex m-0">{{lesson.nameLesson}}</h1>
                     </div>
 
-                    <p class="hero__lead measure-hero-lead text-white-50 mb-24pt">JavaScript is now used to power backends, create hybrid mobile applications, architect cloud solutions, design neural networks and even control robots. Enter TypeScript: a superset of JavaScript for scalable, secure, performant and feature-rich applications.</p>
+                    <p class="hero__lead measure-hero-lead text-white-50 mb-24pt">{{lesson.descriptionLesson}}</p>
 
                     
                     <div class="js-player embed-responsive embed-responsive-16by9 mb-32pt">
@@ -43,7 +40,6 @@
                             </div>
                         </div>
                     </div>
-
                     
                 </div>
             </div>
