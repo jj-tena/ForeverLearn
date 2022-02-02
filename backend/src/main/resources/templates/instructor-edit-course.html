@@ -85,7 +85,7 @@
                                     
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Duración</label>
+                                            <label class="col-form-label col-sm-3">Duración en horas</label>
                                             <div class="col-sm-9">
                                                 <input name="length" value="{{course.length}}" type="number" class="form-control" placeholder="Introduce la duración">
                                             </div>
@@ -156,27 +156,26 @@
                                                     <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc-themes">
                                                         {{#course.themes}}
                                                             <li class="accordion__item">
-                                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
-                                                                <span class="flex">{{nameTheme}}</span>
-                                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                <button data-toggle="modal" data-target="#createLessonForTheme-{{idTheme}}" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-
-                                                            </a>
-                                                            <div class="accordion__menu">
-                                                                <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
-                                                                    {{#lessons}}
-                                                                    <li class="accordion__menu-link">
-                                                                        <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                        <a class="flex" href="lesson.html">{{nameLesson}}</a>
-                                                                        <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                                    </li>
-                                                                    {{/lessons}}
-                                                                </ul>
-                                                            </div>
-                                                        </li>
+                                                                <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
+                                                                    <span class="flex">{{nameTheme}}</span>
+                                                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                                    <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                                    <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                                    <button data-toggle="modal" data-target="#createLessonForTheme-{{idTheme}}" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
+                                                                </a>
+                                                                <div class="accordion__menu">
+                                                                    <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
+                                                                        {{#lessons}}
+                                                                        <li class="accordion__menu-link">
+                                                                            <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                            <a class="flex" href="lesson.html">{{nameLesson}}</a>
+                                                                            <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                            <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                                        </li>
+                                                                        {{/lessons}}
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
                                                         {{/course.themes}}
 
                                                     </ul>
@@ -416,69 +415,69 @@
 
         <!-- // Modal create lesson-->
         <div class="modal fade" id="createLessonForTheme-{{idTheme}}">
-            <form action="/create-lesson-for-theme-{{idTheme}}-for-course-{{course.Id}}" method="post" id="create-lesson-for-theme-form">
+            <form action="/create-lesson-for-theme-{{idTheme}}-for-course-{{course.Id}}" method="post" id="create-lesson-for-theme-{{idTheme}}-form">
                 <div class="modal-dialog">
-                <div class="modal-content">
+                    <div class="modal-content">
 
-                <!-- cabecera del diálogo -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Crear lección</h4>
-                    <button type="button" class="close" data-dismiss="modal">X</button>
-                </div>
+                    <!-- cabecera del diálogo -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Crear lección</h4>
+                        <button type="button" class="close" data-dismiss="modal">X</button>
+                    </div>
 
-                <!-- cuerpo del diálogo -->
-                <div class="modal-body">
-                    <div class="list-group list-group-form">
+                    <!-- cuerpo del diálogo -->
+                    <div class="modal-body">
+                        <div class="list-group list-group-form">
+                            <div class="list-group-item">
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-3">Título</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="nameLesson" class="form-control" placeholder="Introduce el título">
+                                    </div>
+                                </div>
+                            </div>
                         <div class="list-group-item">
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Título</label>
+                                <label class="col-form-label col-sm-3">Descripción</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nameLesson" class="form-control" placeholder="Introduce el título">
+                                    <textarea name="descriptionLesson" rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                    <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
                                 </div>
                             </div>
                         </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Descripción</label>
-                            <div class="col-sm-9">
-                                <textarea name="descriptionLesson" rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
-                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
+                                <div class="col-sm-9">
+                                    <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
-                            <div class="col-sm-9">
-                                <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Material</label>
-                            <div class="col-sm-9 media align-items-center">
-                                <div class="media-body">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Material</label>
+                                <div class="col-sm-9 media align-items-center">
+                                    <div class="media-body">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                            <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button type="submit" form="create-lesson-for-theme-form" value="Submit" class="btn btn-lg btn-accent">Crear lección</button>
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="create-lesson-for-theme-{{idTheme}}-form" value="Submit" class="btn btn-lg btn-accent">Crear lección</button>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
+            </div>
+                </div>
             </form>
         </div>
 

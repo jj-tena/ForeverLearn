@@ -257,19 +257,20 @@ public class UserController {
     }
 
     @PostMapping("/create-lesson-for-theme-{themeId}-for-course-{courseId}")
-    public String createTheme(Model model, String nameLesson, String descriptionLesson, @PathVariable Long themeId, @PathVariable Long courseId){
+    public String createLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.createLesson(nameLesson, descriptionLesson, optionalTheme.get());
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
+        Course demo = courseService.findCourseById(courseId).get();
         model.addAttribute("course", courseService.findCourseById(courseId).get());
         return "instructor-edit-course";
     }
 
 
     @PostMapping("/edit-lesson-{lessonId}-for-theme-{themeId}-for-course-{courseId}")
-    public String editTheme(Model model, String nameLesson, String descriptionLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
+    public String editLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.updateLesson(lessonId, nameLesson, descriptionLesson, optionalTheme.get());
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
@@ -280,7 +281,7 @@ public class UserController {
     }
 
     @GetMapping("delete-lesson-{lessonId}-for-theme-{themeId}-for-course-{courseId}")
-    public String deleteTheme(Model model, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
+    public String deleteLesson(Model model, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.deleteLesson(lessonId, optionalTheme.get());
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
