@@ -28,7 +28,7 @@ public class ThemeService {
     public Theme createTheme(String nameTheme, String descriptionTheme, Course course) {
         Theme theme = new Theme(nameTheme, descriptionTheme);
         Theme savedTheme = themeRepository.save(theme);
-        course.addUserCourse(savedTheme);
+        course.addTheme(savedTheme);
         courseService.save(course);
         return savedTheme;
     }
@@ -43,7 +43,7 @@ public class ThemeService {
         }
     }
 
-    public void updateTheme(Long themeId, String nameTheme, String descriptionTheme, Course course) {
+    public void updateTheme(Long themeId, String nameTheme, String descriptionTheme) {
         Optional<Theme> theme = themeRepository.findById(themeId);
         if(theme.isPresent()){
             if (Objects.nonNull(nameTheme)){

@@ -34,11 +34,11 @@ public class Course {
     @JsonIgnore
     private Blob trailer;
 
-    @ElementCollection
-    private List<String> objectives;
+    @OneToMany
+    private List<Objective> objectives;
 
-    @ElementCollection
-    private List<String> requirements;
+    @OneToMany
+    private List<Requirement> requirements;
 
     private Integer length;
 
@@ -61,7 +61,7 @@ public class Course {
         this.author = author;
     }
 
-    public void addUserCourse(Theme theme){
+    public void addTheme(Theme theme){
         if(Objects.isNull(this.themes)){
             this.themes = new LinkedList<>();
         }
@@ -71,4 +71,27 @@ public class Course {
     public void deleteTheme(Theme theme) {
         this.themes.remove(theme);
     }
+
+    public void addObjective(Objective objective){
+        if(Objects.isNull(this.objectives)){
+            this.objectives = new LinkedList<>();
+        }
+        this.objectives.add(objective);
+    }
+
+    public void deleteObjective(Objective objective) {
+        this.objectives.remove(objective);
+    }
+
+    public void addRequirement(Requirement requirement){
+        if(Objects.isNull(this.requirements)){
+            this.requirements = new LinkedList<>();
+        }
+        this.requirements.add(requirement);
+    }
+
+    public void deleteRequirement(Requirement requirement) {
+        this.requirements.remove(requirement);
+    }
+
 }

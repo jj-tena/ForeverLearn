@@ -202,30 +202,17 @@
                                             <div class="card-group card-group--lg-up mb-0">
                                                 <div class="card col-lg-12 p-0">
 
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 1</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
+                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="">
 
+                                                        {{#course.requirements}}
                                                         <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 2</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="">
+                                                                <span class="flex">{{nameRequirement}}</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
                                                             </div>
                                                         </li>
-
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Requisito 3</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
+                                                        {{/course.requirements}}
 
                                                     </ul>
 
@@ -251,40 +238,23 @@
                                                 <div class="card col-lg-12 p-0">
 
                                                     <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 1</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
 
+                                                        {{#course.objectives}}
                                                         <li class="accordion__item">
                                                             <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 2</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                                <span class="flex">{{nameObjective}}</span>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
                                                             </div>
                                                         </li>
-
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">Objetivo 3</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
+                                                        {{/course.objectives}}
 
                                                     </ul>
-
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
-
                             </div>
-
                         </div>
                     </div>
             </div>
@@ -614,106 +584,114 @@
 
     <!-- // Modal create requirement-->
     <div class="modal fade" id="createRequirement">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Crear requisito</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="list-group list-group-form">
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Requisito</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el nuevo requisito">
+        <form action="/create-requirement-for-course-{{course.id}}" method="post" id="create-requirement-for-course-form">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Crear requisito</h4>
+                  <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Requisito</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nameRequirement" class="form-control" placeholder="Introduce el nuevo requisito">
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    
-                </div>            
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="create-requirement-for-course-form" value="Submit" class="btn btn-lg btn-accent">Crear requisito</button>
+                    </div>
+                </div>
+
+              </div>
             </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Crear requisito</button>
-                </div>            
-            </div>
-      
-          </div>
-        </div>
+        </form>
     </div> 
 
-    <!-- // Modal edit requirement-->
-    <div class="modal fade" id="editRequirement">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Editar requisito</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="list-group list-group-form">
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Requisito</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Introduce el requisito modificado">
+    {{#course.requirements}}
+
+        <!-- // Modal edit requirement-->
+        <div class="modal fade" id="editRequirement-{{idRequirement}}">
+            <form action="/edit-requirement-{{idRequirement}}-for-course-{{course.id}}" method="post" id="edit-requirement-{{idRequirement}}-for-course-form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- cabecera del diálogo -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Editar requisito</h4>
+                            <button type="button" class="close" data-dismiss="modal">X</button>
+                        </div>
+
+                        <!-- cuerpo del diálogo -->
+                        <div class="modal-body">
+                            <div class="list-group list-group-form">
+                                <div class="list-group-item">
+                                    <div class="form-group row mb-0">
+                                        <label class="col-form-label col-sm-3">Requisito</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="nameRequirement" value="{{nameRequirement}}" class="form-control" placeholder="Introduce el requisito modificado">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>            
-            </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Editar requisito</button>
-                </div>            
-            </div>
-      
-          </div>
-        </div>
-    </div> 
 
-    <!-- // Modal delete requirement-->
-    <div class="modal fade" id="deleteRequirement">
-        <div class="modal-dialog">
-          <div class="modal-content">
-      
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Borrar requisito</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-      
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                ¿Está seguro de que desea borrar este requisito?
-            </div>
-      
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Borrar requisito</button>
-                </div>            
-            </div>
-      
-          </div>
+                        <!-- pie del diálogo -->
+                        <div class="modal-footer">
+                            <div class="text-center">
+                                <button type="submit" form="edit-requirement-{{idRequirement}}-for-course-form" value="Submit" class="btn btn-lg btn-accent">Editar requisito</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
         </div>
-    </div> 
+
+        <!-- // Modal delete requirement-->
+        <div class="modal fade" id="deleteRequirement-{{idRequirement}}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- cabecera del diálogo -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Borrar requisito</h4>
+                        <button type="button" class="close" data-dismiss="modal">X</button>
+                    </div>
+
+                    <!-- cuerpo del diálogo -->
+                    <div class="modal-body">
+                        ¿Está seguro de que desea borrar el requisito: {{nameRequirement}}?
+                    </div>
+
+                    <!-- pie del diálogo -->
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <a href="/delete-requirement-{{idRequirement}}-for-course-{{course.id}}" class="btn btn-lg btn-accent">Borrar requisito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{/course.requirements}}
+
 
     <!-- // Modal create objective-->
     <div class="modal fade" id="createObjective">
+        <form action="/create-objective-for-course-{{course.id}}" method="post" id="create-objective-for-course-form">
             <div class="modal-dialog">
               <div class="modal-content">
           
@@ -730,7 +708,7 @@
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">Objetivo</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Introduce el nuevo objetivo">
+                                    <input type="text" name="nameObjective" class="form-control" placeholder="Introduce el nuevo objetivo">
                                 </div>
                             </div>
                         </div>
@@ -741,76 +719,85 @@
                 <!-- pie del diálogo -->
                 <div class="modal-footer">
                     <div class="text-center">
-                        <button class="btn btn-lg btn-accent">Crear objetivo</button>
+                        <button type="submit" form="create-objective-for-course-form" value="Submit" class="btn btn-lg btn-accent">Crear objetivo</button>
                     </div>            
                 </div>
           
               </div>
             </div>
-    </div> 
-    
-    <!-- // Modal edit objective-->
-    <div class="modal fade" id="editObjective">
-            <div class="modal-dialog">
-              <div class="modal-content">
-          
-                <!-- cabecera del diálogo -->
-                <div class="modal-header">
-                  <h4 class="modal-title">Editar objetivo</h4>
-                  <button type="button" class="close" data-dismiss="modal">X</button>
-                </div>
-          
-                <!-- cuerpo del diálogo -->
-                <div class="modal-body">
-                    <div class="list-group list-group-form">
-                        <div class="list-group-item">
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Objetivo</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Introduce el objetivo modificado">
+        </form>
+    </div>
+
+    {{#course.objectives}}
+
+        <!-- // Modal edit objective-->
+        <div class="modal fade" id="editObjective-{{idObjective}}">
+            <form action="/edit-objective-{{idObjective}}-for-course-{{course.id}}" method="post" id="edit-objective-{{idObjective}}-for-course-form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- cabecera del diálogo -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Editar objetivo</h4>
+                            <button type="button" class="close" data-dismiss="modal">X</button>
+                        </div>
+
+                        <!-- cuerpo del diálogo -->
+                        <div class="modal-body">
+                            <div class="list-group list-group-form">
+                                <div class="list-group-item">
+                                    <div class="form-group row mb-0">
+                                        <label class="col-form-label col-sm-3">Objetivo</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="nameObjective" value="{{nameObjective}}" class="form-control" placeholder="Introduce el objetivo modificado">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>            
+
+                        <!-- pie del diálogo -->
+                        <div class="modal-footer">
+                            <div class="text-center">
+                                <button type="submit" form="edit-objective-{{idObjective}}-for-course-form" value="Submit" class="btn btn-lg btn-accent">Editar objetivo</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-          
-                <!-- pie del diálogo -->
-                <div class="modal-footer">
-                    <div class="text-center">
-                        <button class="btn btn-lg btn-accent">Editar objetivo</button>
-                    </div>            
-                </div>
-          
-              </div>
-            </div>
-    </div> 
-    
-    <!-- // Modal delete objective-->
-    <div class="modal fade" id="deleteObjective">
+            </form>
+        </div>
+
+        <!-- // Modal delete objective-->
+        <div class="modal fade" id="deleteObjective-{{idObjective}}">
             <div class="modal-dialog">
-              <div class="modal-content">
-          
-                <!-- cabecera del diálogo -->
-                <div class="modal-header">
-                  <h4 class="modal-title">Borrar objetivo</h4>
-                  <button type="button" class="close" data-dismiss="modal">X</button>
+                <div class="modal-content">
+
+                    <!-- cabecera del diálogo -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Borrar objetivo</h4>
+                        <button type="button" class="close" data-dismiss="modal">X</button>
+                    </div>
+
+                    <!-- cuerpo del diálogo -->
+                    <div class="modal-body">
+                        ¿Está seguro de que desea borrar el objetivo: {{nameObjective}}?
+                    </div>
+
+                    <!-- pie del diálogo -->
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <a href="/delete-objective-{{idObjective}}-for-course-{{course.id}}" class="btn btn-lg btn-accent">Borrar objetivo</a>
+                        </div>
+                    </div>
+
                 </div>
-          
-                <!-- cuerpo del diálogo -->
-                <div class="modal-body">
-                    ¿Está seguro de que desea borrar este objetivo?
-                </div>
-          
-                <!-- pie del diálogo -->
-                <div class="modal-footer">
-                    <div class="text-center">
-                        <button class="btn btn-lg btn-accent">Borrar objetivo</button>
-                    </div>            
-                </div>
-          
-              </div>
             </div>
-    </div>
+        </div>
+
+    {{/course.objectives}}
+
+
     
     <!-- DRAWER (MOBILE NAVBAR) -->
     <div class="mdk-drawer js-mdk-drawer" id="default-drawer">

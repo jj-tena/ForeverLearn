@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.Requirement;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -95,7 +97,7 @@ public class CourseService {
             oldCourse.setLength(newCourse.getLength());
             Optional<Category> optionalCategory = categoryService.findByName(categoryName);
             optionalCategory.ifPresent(oldCourse::setCategory);
-            if (image != null) {
+            if (image.getOriginalFilename() != "") {
                 oldCourse.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             courseRepository.save(oldCourse);
