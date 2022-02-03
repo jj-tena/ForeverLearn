@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -122,7 +123,10 @@ public class UserController {
     public String instructorSectionLink(Model model){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
+        Boolean coursesFound = userCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", userCourses);
         model.addAttribute("categories", categoryService.findAll());
         return "instructor-courses";
     }
@@ -140,7 +144,10 @@ public class UserController {
         courseService.createCourse(course, categoryName, multipartFile);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
+        Boolean coursesFound = userCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", userCourses);
         model.addAttribute("categories", categoryService.findAll());
         return "instructor-courses";
     }
@@ -160,7 +167,10 @@ public class UserController {
         courseService.updateCourse(courseId, course, categoryName, multipartFile);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
+        Boolean coursesFound = userCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", userCourses);
         model.addAttribute("categories", categoryService.findAll());
         return "instructor-courses";
     }
@@ -174,7 +184,10 @@ public class UserController {
         if ((optionalCourse.isPresent()) && (userService.getActiveUser().isPresent())){
             userService.deleteCourse(userService.getActiveUser().get(), optionalCourse.get());
         }
-        model.addAttribute("courses", userService.getActiveUser().get().getUserCourses());
+        List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
+        Boolean coursesFound = userCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", userCourses);
         return "instructor-courses";
     }
 
@@ -183,7 +196,10 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
+        List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
+        Boolean coursesFound = enrolledCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", enrolledCourses);
         return "student-courses-enrolled";
     }
 
@@ -191,8 +207,11 @@ public class UserController {
     public String studentCoursesEnrolledLink(Model model){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
         model.addAttribute("categories", categoryService.findAll());
+        List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
+        Boolean coursesFound = enrolledCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", enrolledCourses);
         return "student-courses-enrolled";
     }
 
@@ -201,7 +220,10 @@ public class UserController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("courses", userService.getActiveUser().get().getCompletedCourses());
+        List<Course> completedCourses = userService.getActiveUser().get().getCompletedCourses();
+        Boolean coursesFound = completedCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", completedCourses);
         return "student-courses-completed";
     }
 
@@ -211,6 +233,10 @@ public class UserController {
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("courses", userService.getActiveUser().get().getWishedCourses());
+        List<Course> wishedCourses = userService.getActiveUser().get().getWishedCourses();
+        Boolean coursesFound = wishedCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", wishedCourses);
         return "student-courses-wished";
     }
 
@@ -219,8 +245,11 @@ public class UserController {
         userService.enrollCourse(courseId);
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("courses", userService.getActiveUser().get().getEnrolledCourses());
         model.addAttribute("categories", categoryService.findAll());
+        List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
+        Boolean coursesFound = enrolledCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", enrolledCourses);
         return "student-courses-enrolled";
     }
 
@@ -357,4 +386,5 @@ public class UserController {
         model.addAttribute("course", courseService.findCourseById(courseId).get());
         return "instructor-edit-course";
     }
+
 }
