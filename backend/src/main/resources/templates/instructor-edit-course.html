@@ -52,18 +52,10 @@
                                             <div class="col-sm-9">
                                                 <select id="category" name="categoryName" class="custom-select">
                                                     <option value="" ng-reflect-value="">Elige una categoría</option>
-                                                    <option value="Crecimiento personal">Crecimiento personal</option>
-                                                    <option value="Deportes">Deporte</option>
-                                                    <option value="Disciplinas académicas">Disciplinas académicas</option>
-                                                    <option value="Diseño">Diseño</option>
-                                                    <option value="Finanzas">Finanzas</option>
-                                                    <option value="Fotografía y video">Fotografía y video</option>
-                                                    <option value="Informática y software">Informática y software</option>
-                                                    <option value="Marketing">Marketing</option>
-                                                    <option value="Música">Música</option>
-                                                    <option value="Profesiones">Profesiones</option>
-                                                    <option value="Salud">Salud</option>
-                                                    <option value="Otros">Otros</option>
+                                                    {{#categories}}
+                                                    <option value="{{name}}">{{name}}</option>
+                                                    {{/categories}}
+
 
                                                 </select>
                                             </div>
@@ -191,7 +183,6 @@
                                             <div class="row">
                                                 <div class="col-2">
                                                     <h4>Requisitos</h4>
-
                                                 </div>
                                                 <div class="col-7"></div>
                                                 <div class="col-3">
