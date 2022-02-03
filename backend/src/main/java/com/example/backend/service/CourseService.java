@@ -8,6 +8,8 @@ import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +38,10 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
+    /*public Page<Course> findPageCourses(){
+        return courseRepository.findCourses(PageRequest.of(0, 12));
+    }*/
+
     public Optional<Course> findCourseById(Long id){
         return courseRepository.findById(id);
     }
@@ -47,6 +53,10 @@ public class CourseService {
     public List<Course> findCoursesByCategory(Category category){
         return courseRepository.findCoursesByCategory(category);
     }
+
+    /*public Page<Course> findPageCoursesByCategory(Category category){
+        return  courseRepository.findCoursesByCategory(category, PageRequest.of(0, 12));
+    }*/
 
     @Transactional
     public Optional<Course> create(String name, String description, Category category, String difficulty, String imagePath, Integer length, Long id) throws IOException {

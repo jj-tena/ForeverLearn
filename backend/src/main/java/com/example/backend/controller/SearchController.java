@@ -46,16 +46,10 @@ public class SearchController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
+        //model.addAttribute("courses", courseService.findPageCourses());
         model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
         return "library";
-    }
-
-    @GetMapping("/library-list")
-    public String librayListLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        model.addAttribute("categories", categoryService.findAll());
-        return "library-list";
     }
 
     @GetMapping("/category-{id}")

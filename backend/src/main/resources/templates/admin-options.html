@@ -5,25 +5,26 @@
 
             <div class="bg-gradient-primary border-bottom-white py-32pt">
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
-                    <a href="admin-profile.html" class="navbar-brand">
+                    <a href="/admin-options" class="navbar-brand">
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/admin/128/police-svgrepo-com.svg" width="75" alt="Tutorio">
                     </a>
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Alexander Watson</h2>
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Administrador</p>
                     </div>
-                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="/user-edit-account" class="btn btn-outline-white">Editar cuenta</a>
                 </div>
             </div>
 
 
             <div class="page-section bg-gradient-primary">
                 <div class="container page__container">
+
                     <div class="row">
 
 
                         <div class="col-lg-6" >
-                            <div class="card" onclick="location.href='admin-courses.html';" style="cursor:pointer; background: grey;">
+                            <div class="card" onclick="location.href='/admin-courses';" style="cursor:pointer; background: grey;">
                                 <div class="card-header d-flex justify-content-center">
                                     <div class="h2 mb-0 mr-3 text-70">
                                         Administrar cursos
@@ -39,7 +40,7 @@
 
 
                         <div class="col-lg-6">
-                            <div class="card" onclick="location.href='admin-users.html';" style="cursor:pointer; background: grey;">
+                            <div class="card" onclick="location.href='/admin-users';" style="cursor:pointer; background: grey;">
                                 <div class="card-header d-flex justify-content-center"> 
                                     <div class="h2 mb-0 mr-3 text-70">Administrar usuarios</div>
                                 </div>
@@ -53,6 +54,24 @@
 
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <div class="card" onclick="location.href='/admin-categories';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center">
+                                    <div class="h2 mb-0 mr-3 text-70">Administrar categorías</div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="" style="height: 344px;">
+                                        <img src="assets/images/illustration/admin/128/police-svgrepo-com.svg" style="display:inherit; width: 460px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+
                 </div>
             </div>
 
