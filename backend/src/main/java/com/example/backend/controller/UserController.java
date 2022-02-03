@@ -253,6 +253,19 @@ public class UserController {
         return "student-courses-enrolled";
     }
 
+    @GetMapping("/unenroll-course-{courseId}")
+    public String unenrollCourse(Model model, @PathVariable Long courseId){
+        userService.unenrollCourse(courseId);
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
+        Boolean coursesFound = enrolledCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", enrolledCourses);
+        return "student-courses-enrolled";
+    }
+
     @PostMapping("/create-theme-for-course-{courseId}")
     public String createTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);

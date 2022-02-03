@@ -12,7 +12,17 @@
                             <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
                                 <a href="lesson.html" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Ver trailer <i class="material-icons icon--right">play_circle_outline</i></a>
                                 {{#activeUser}}
-                                    <a href="/enroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Matricularse<i class="material-icons icon--right">play_circle_outline</i></a>
+                                    {{#courseOwner}}
+                                        <a href="#" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Eres el creador de este curso</a>
+                                    {{/courseOwner}}
+                                    {{^courseOwner}}
+                                        {{#courseEnrolled}}
+                                        <a href="/unenroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Desmatricularse</a>
+                                        {{/courseEnrolled}}
+                                        {{^courseEnrolled}}
+                                        <a href="/enroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Matricularse</a>
+                                        {{/courseEnrolled}}
+                                    {{/courseOwner}}
                                 {{/activeUser}}
                             </div>
                         </div>

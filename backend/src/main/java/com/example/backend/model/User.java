@@ -139,4 +139,8 @@ public class User {
                 ", youtube='" + youtube + '\'' +
                 '}';
     }
+
+    public Boolean isCourseEnrolled(Course course) {
+        return this.enrolledCourses.contains(course);
+    }
 }

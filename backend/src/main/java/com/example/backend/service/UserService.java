@@ -141,4 +141,24 @@ public class UserService {
         }
     }
 
+    public Boolean isCourseOwner(User user, Course course) {
+        return (user.equals(course.getAuthor()));
+    }
+
+    public Boolean isCourseEnrolled(User user, Course course) {
+        return user.isCourseEnrolled(course);
+    }
+
+    @Transactional
+    public void unenrollCourse(Long courseId) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if(optionalCourse.isPresent()){
+            Optional<User> optionalUser = getActiveUser();
+            if (optionalUser.isPresent()){
+                optionalUser.get().deleteEnrolledCourse(optionalCourse.get());
+                userRepository.save(optionalUser.get());
+            }
+        }
+    }
+
 }

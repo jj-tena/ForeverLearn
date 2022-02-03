@@ -204,6 +204,14 @@ public class SearchController {
         Optional<Course> course = courseService.findCourseById(id);
         if (course.isPresent()){
             model.addAttribute("course", course.get());
+            Boolean courseOwner = false;
+            Boolean courseEnrolled = false;
+            if (userService.getActiveUser().isPresent()){
+                courseOwner = userService.isCourseOwner(userService.getActiveUser().get(), course.get());
+                courseEnrolled = userService.isCourseEnrolled(userService.getActiveUser().get(), course.get());
+            }
+            model.addAttribute("courseOwner", courseOwner);
+            model.addAttribute("courseEnrolled", courseEnrolled);
             return "course";
         } else {
             return "index";
