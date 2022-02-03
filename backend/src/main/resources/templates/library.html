@@ -94,31 +94,61 @@
                                 </div>
                                 {{/courses}}
                             </div>
-                            <!-- Pagination -->
-                            <ul class="pagination justify-content-center pagination-sm">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true" class="material-icons">chevron_left</span>
-                                        <span>Prev</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" aria-label="1">
-                                        <span>1</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="1">
-                                        <span>2</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span>Next</span>
-                                        <span aria-hidden="true" class="material-icons">chevron_right</span>
-                                    </a>
-                                </li>
-                            </ul>
+
+                            {{#coursesFound}}
+                                <!-- Pagination -->
+                                {{^activeCategory}}
+                                <ul class="pagination justify-content-center pagination-sm">
+                                    <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
+                                        <a class="page-link" href="/library-prev-page-{{pageNumber}}" aria-label="Previous">
+                                            <span aria-hidden="true" class="material-icons">chevron_left</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#" aria-label="1">
+                                            <span>{{numberPage}}</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
+                                        <a class="page-link" href="/library-next-page-{{pageNumber}}" aria-label="Next">
+                                            <span aria-hidden="true" class="material-icons">chevron_right</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {{/activeCategory}}
+                                {{#activeCategory}}
+                                <ul class="pagination justify-content-center pagination-sm">
+                                    <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
+                                        <a class="page-link" href="/category-{{activeCategory}}-library-prev-page-{{pageNumber}}" aria-label="Previous">
+                                            <span aria-hidden="true" class="material-icons">chevron_left</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#" aria-label="1">
+                                            <span>{{numberPage}}</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
+                                        <a class="page-link" href="/category-{{activeCategory}}-library-next-page-{{pageNumber}}" aria-label="Next">
+                                            <span aria-hidden="true" class="material-icons">chevron_right</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {{/activeCategory}}
+                            {{/coursesFound}}
+
+                            {{^coursesFound}}
+                            <h1>No se han encontrado cursos</h1>
+                            {{/coursesFound}}
+
+
+
                         </div>
                     </div>
                 </div>
@@ -138,7 +168,7 @@
                                             <nav class="accordion__menu collapse" id="library-all">
                                                 <a class="accordion__menu-link active" href="/library">Todas las categorías</a>
                                                 {{#categories}}
-                                                <a class="accordion__menu-link" href="/category-{{id}}">{{name}}</a>
+                                                <a class="accordion__menu-link" href="/category-{{id}}-library-page-0">{{name}}</a>
                                                 {{/categories}}
                                             </nav>
 

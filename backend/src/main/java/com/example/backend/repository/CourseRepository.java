@@ -15,7 +15,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Optional<Course> findCourseByName(String name);
 
-    Page<Course> findCourses(Pageable page);
+    Page<Course> findAll(Pageable page);
 
-    //Page<Course> findCoursesByCategory(Category category, Pageable page);
+    Page<Course> findCoursesByCategory(Category category, Pageable page);
 }

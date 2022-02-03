@@ -38,9 +38,9 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    /*public Page<Course> findPageCourses(){
-        return courseRepository.findCourses(PageRequest.of(0, 12));
-    }*/
+    public Page<Course> findPageCourses(Integer numberPage){
+        return courseRepository.findAll(PageRequest.of(numberPage, 12));
+    }
 
     public Optional<Course> findCourseById(Long id){
         return courseRepository.findById(id);
@@ -54,9 +54,9 @@ public class CourseService {
         return courseRepository.findCoursesByCategory(category);
     }
 
-    /*public Page<Course> findPageCoursesByCategory(Category category){
-        return  courseRepository.findCoursesByCategory(category, PageRequest.of(0, 12));
-    }*/
+    public Page<Course> findPageCoursesByCategory(Integer pageNumber, Category category){
+        return  courseRepository.findCoursesByCategory(category, PageRequest.of(pageNumber, 12));
+    }
 
     @Transactional
     public Optional<Course> create(String name, String description, Category category, String difficulty, String imagePath, Integer length, Long id) throws IOException {

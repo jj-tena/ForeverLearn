@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class SearchController {
@@ -41,29 +38,138 @@ public class SearchController {
         this.lessonService = lessonService;
     }
 
-    @GetMapping("/library")
-    public String librayLink(Model model){
+    @GetMapping("/library-page-{pageNumber}")
+    public String librayLink(Model model, @PathVariable Integer pageNumber){
+        if (pageNumber==0){
+            model.addAttribute("firstPage", true);
+        }
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
-        //model.addAttribute("courses", courseService.findPageCourses());
-        model.addAttribute("courses", list);
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
         model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+
         return "library";
     }
 
-    @GetMapping("/category-{id}")
-    public String libraryByCategory(Model model, @PathVariable Long id){
+    @GetMapping("/library-prev-page-{pageNumber}")
+    public String librayLinkPrevPage(Model model, @PathVariable Integer pageNumber){
+        if (pageNumber==0){
+            model.addAttribute("firstPage", true);
+        }
+        if (pageNumber>0){
+            pageNumber--;
+        }
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        List<Course> list = courseService.findCourses();
+        model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
+        model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+        return "library";
+    }
+
+    @GetMapping("/library-next-page-{pageNumber}")
+    public String librayLinkNextPage(Model model, @PathVariable Integer pageNumber){
+        pageNumber++;
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        List<Course> list = courseService.findCourses();
+        model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
+            model.addAttribute("lastPage", true);
+        }
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
+        model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+        return "library";
+    }
+
+    @GetMapping("/category-{id}-library-page-{pageNumber}")
+    public String libraryByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
+        if (pageNumber==0){
+            model.addAttribute("firstPage", true);
+        }
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
-        if (category.isPresent())
+        if (category.isPresent()) {
             list = courseService.findCoursesByCategory(category.get());
+            Boolean coursesFound = list.size()>0;
+            model.addAttribute("coursesFound", coursesFound);
+            if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
+                model.addAttribute("lastPage", true);
+            }
+            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
+            model.addAttribute("activeCategory", category.get().getId());
+        }
         model.addAttribute("results", list.size());
-        model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
         return "library";
     }
+
+    @GetMapping("/category-{id}-library-prev-page-{pageNumber}")
+    public String libraryPrevPageByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
+        if (pageNumber==0){
+            model.addAttribute("firstPage", true);
+        }
+        if (pageNumber>0){
+            pageNumber--;
+        }
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<Category> category = categoryService.findById(id);
+        List<Course> list = new LinkedList<>();
+        if (category.isPresent()) {
+            list = courseService.findCoursesByCategory(category.get());
+            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
+            model.addAttribute("activeCategory", category.get().getId());
+        }
+        model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+        return "library";
+    }
+
+    @GetMapping("/category-{id}-library-next-page-{pageNumber}")
+    public String libraryNextPageByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
+        pageNumber++;
+        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<Category> category = categoryService.findById(id);
+        List<Course> list = new LinkedList<>();
+        if (category.isPresent()) {
+            list = courseService.findCoursesByCategory(category.get());
+            if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
+                model.addAttribute("lastPage", true);
+            }
+            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
+            model.addAttribute("activeCategory", category.get().getId());
+        }
+        model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("categories", categoryService.findAll());
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+        return "library";
+    }
+
+
+
+
 
     @GetMapping("/courses/{id}/picture")
     public ResponseEntity<Object> downloadCoursePicture(@PathVariable long id) throws SQLException {
@@ -84,6 +190,8 @@ public class SearchController {
         Optional<Course> course = courseService.findCourseByName(name);
         course.ifPresent(list::add);
         model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
         return "library";
@@ -139,6 +247,8 @@ public class SearchController {
         if (category.isPresent())
             list = courseService.findCoursesByCategory(category.get());
         model.addAttribute("results", list.size());
+        Boolean coursesFound = list.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
         return "library";
