@@ -80,6 +80,10 @@ public class UserController {
     public String userEditAccountProfileLink(Model model){
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         model.addAttribute("user", userService.getActiveUser().get());
+        Boolean hasDescription = !userService.getActiveUser().get().getDescription().contentEquals("");
+        model.addAttribute("hasDescription", hasDescription);
+        Boolean hasContact = !userService.getActiveUser().get().getContact().contentEquals("");
+        model.addAttribute("hasContact", hasContact);
         model.addAttribute("categories", categoryService.findAll());
         return "user-edit-account-profile";
     }

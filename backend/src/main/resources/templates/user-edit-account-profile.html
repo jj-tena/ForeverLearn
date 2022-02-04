@@ -44,7 +44,12 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
+                                                {{#hasDescription}}
+                                                <textarea rows="3" class="form-control" name="description" placeholder="{{user.description}}"></textarea>
+                                                {{/hasDescription}}
+                                                {{^hasDescription}}
                                                 <textarea rows="3" class="form-control" name="description" placeholder="Introduce tu descripción"></textarea>
+                                                {{/hasDescription}}
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +57,12 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Contacto</label>
                                             <div class="col-sm-9">
+                                                {{#hasContact}}
+                                                <textarea rows="3" class="form-control" name="contact" placeholder="{{user.contact}}"></textarea>
+                                                {{/hasContact}}
+                                                {{^hasContact}}
                                                 <textarea rows="3" class="form-control" name="contact" placeholder="Introduce tu información de contacto"></textarea>
+                                                {{/hasContact}}
                                             </div>
                                         </div>
                                     </div>

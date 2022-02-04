@@ -89,11 +89,11 @@ public class UserService {
         Optional<User> optionalUser = getActiveUser();
         if (optionalUser.isPresent()){
             User activeUser = optionalUser.get();
-            if (user.getDescription() != null) activeUser.setDescription(user.getDescription());
-            if (user.getContact() != null) activeUser.setContact(user.getContact());
-            if (user.getFacebook() != null) activeUser.setFacebook(user.getFacebook());
-            if (user.getTwitter() != null) activeUser.setTwitter(user.getTwitter());
-            if (user.getYoutube() != null) activeUser.setYoutube(user.getYoutube());
+            if (!user.getDescription().contentEquals("")) activeUser.setDescription(user.getDescription());
+            if (!user.getContact().contentEquals("")) activeUser.setContact(user.getContact());
+            if (!user.getFacebook().contentEquals("")) activeUser.setFacebook(user.getFacebook());
+            if (!user.getTwitter().contentEquals("")) activeUser.setTwitter(user.getTwitter());
+            if (!user.getYoutube().contentEquals("")) activeUser.setYoutube(user.getYoutube());
             if (profilePhoto.getOriginalFilename() != "") {
                 activeUser.setProfilePhoto(BlobProxy.generateProxy(profilePhoto.getInputStream(), profilePhoto.getSize()));
             }
