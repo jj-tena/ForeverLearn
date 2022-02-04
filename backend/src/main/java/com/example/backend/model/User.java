@@ -25,8 +25,10 @@ public class User {
 
     private String password;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(columnDefinition = "TEXT")
     private String contact;
 
     private String facebook;

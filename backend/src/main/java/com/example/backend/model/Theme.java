@@ -17,6 +17,7 @@ public class Theme {
 
     private String nameTheme;
 
+    @Column(columnDefinition = "TEXT")
     private String descriptionTheme;
 
     @OneToMany

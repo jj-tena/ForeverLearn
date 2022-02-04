@@ -46,6 +46,9 @@ public class SearchController {
         model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
+        if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
+            model.addAttribute("lastPage", true);
+        }
         Boolean coursesFound = list.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", courseService.findPageCourses(pageNumber));
@@ -167,10 +170,6 @@ public class SearchController {
         return "library";
     }
 
-
-
-
-
     @GetMapping("/courses/{id}/picture")
     public ResponseEntity<Object> downloadCoursePicture(@PathVariable long id) throws SQLException {
         Optional<Course> course = courseService.findCourseById(id);
@@ -230,6 +229,12 @@ public class SearchController {
         if (user.isPresent()){
             model.addAttribute("user", user.get());
             model.addAttribute("courses", user.get().getUserCourses());
+            Boolean hasFacebook = !user.get().getFacebook().contentEquals("");
+            model.addAttribute("hasFacebook", hasFacebook);
+            Boolean hasTwitter = !user.get().getTwitter().contentEquals("");
+            model.addAttribute("hasTwitter", hasTwitter);
+            Boolean hasYoutube = !user.get().getYoutube().contentEquals("");
+            model.addAttribute("hasYoutube", hasYoutube);
             return "instructor-profile";
         } else {
             return "index";

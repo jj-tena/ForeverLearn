@@ -20,12 +20,12 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public void create(String name, String imagePath) throws IOException {
+    public Category create(String name, String imagePath) throws IOException {
         Category category = new Category();
         category.setName(name);
         Resource image = new ClassPathResource(imagePath);
         category.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-        categoryRepository.save(category);
+        return categoryRepository.save(category);
     }
 
     public List<Category> findAll(){

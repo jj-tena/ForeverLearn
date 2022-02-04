@@ -1,6 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.model.Course;
 import com.example.backend.model.Lesson;
 import com.example.backend.model.Theme;
 import com.example.backend.repository.LessonRepository;
@@ -21,11 +20,12 @@ public class LessonService {
         this.themeService = themeService;
     }
 
-    public void createLesson(String nameLesson, String descriptionLesson, Theme theme) {
+    public Lesson createLesson(String nameLesson, String descriptionLesson, Theme theme) {
         Lesson lesson = new Lesson(nameLesson, descriptionLesson);
         Lesson savedLesson = lessonRepository.save(lesson);
         theme.addLesson(savedLesson);
         themeService.save(theme);
+        return lesson;
     }
 
     public void deleteLesson(Long lessonId, Theme theme) {

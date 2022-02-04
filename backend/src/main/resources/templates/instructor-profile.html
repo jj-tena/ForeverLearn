@@ -7,7 +7,7 @@
                 <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
                     <img src="/user/{{user.id}}/profilePhoto" width="104" class="mr-md-32pt mb-32pt mb-md-0 rounded-circle" alt="instructor">
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">{{user.name}}</h2>
+                        <h2 class="text-white mb-0">{{user.name}} {{user.surname}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
                     </div>
                 </div>
@@ -25,10 +25,15 @@
                             <h4>Contacto</h4>
                             <p>{{user.contact}}</p>
                             <div class="d-flex align-items-center">
-                                <a href="/https://es-es.facebook.com/{{user.facebook}}" class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
-                                <a href="/https://twitter.com/{{user.twitter}}" class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
-                                <a href="/https://www.youtube.com/user/{{user.facebook}}" class="text-accent fab fa-youtube-square font-size-24pt"></a>
-
+                                {{#hasFacebook}}
+                                <a href="https://es-es.facebook.com/{{user.facebook}}" class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
+                                {{/hasFacebook}}
+                                {{#hasTwitter}}
+                                <a href="https://twitter.com/{{user.twitter}}" class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
+                                {{/hasTwitter}}
+                                {{#hasYoutube}}
+                                <a href="{{user.youtube}}" class="text-accent fab fa-youtube-square font-size-24pt"></a>
+                                {{/hasYoutube}}
                             </div>
                         </div>
                     </div>

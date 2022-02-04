@@ -14,6 +14,7 @@ public class Requirement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idRequirement;
 
+    @Column(columnDefinition = "TEXT")
     private String nameRequirement;
 
     public Requirement() {

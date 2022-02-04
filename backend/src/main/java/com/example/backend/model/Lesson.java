@@ -16,6 +16,7 @@ public class Lesson {
 
     private String nameLesson;
 
+    @Column(columnDefinition = "TEXT")
     private String descriptionLesson;
 
     @Lob
