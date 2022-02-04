@@ -81,7 +81,7 @@ public class CourseService {
         if (optionalUser.isPresent() && optionalCategory.isPresent()){
             course.setAuthor(optionalUser.get());
             course.setCategory(optionalCategory.get());
-            if (image != null) {
+            if (image.getOriginalFilename() != "")  {
                 course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             Course savedCourse = courseRepository.save(course);

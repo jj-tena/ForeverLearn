@@ -30,8 +30,12 @@ public class DatabaseController {
 
     @PostConstruct
     public void initialize() throws IOException {
-        User user1 = new User("Arturo", "Antúnez", "arturo@email.com", "aa");
-        User savedUser1 = userService.create(user1);
+        User savedUser1 = userService.createFromParameters("Arturo", "Antúnez", "arturo@email.com", "aa", "/static/assets/images/people/110/sergioPeinado.jpg",
+                "Hola soy Arturo deportista aficionado y profesional del mundo de la salud, me apasiona mantenerme en movimiento y saber más sobre" +
+                        "mi cuerpo para mejorar en mi profesión, en mis cursos hablaré sobre los deportes que domino y diversas áreas sobre las que me he formado" +
+                        "como sanitario. Además debido a mi relación con el deporte y la salud he ejercicido como coach y motivador personal. Espero que os" +
+                        "guste todo lo que tengo que enseñar. ","Podéis contactar conmigo a través de mi número de teléfono: 612345678, atenderé encantado " +
+                        "cualquiera de vuestras consultas.","","","");
         User user2 = new User("Beatriz", "Bueno", "beatriz@email.com", "bb");
         User savedUser2 = userService.create(user2);
 

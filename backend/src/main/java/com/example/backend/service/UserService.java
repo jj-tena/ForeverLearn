@@ -53,6 +53,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
+    public User createFromParameters(String name, String surname, String email, String password, String imagePath, String description, String contact, String facebook, String twitter, String youtube) throws IOException {
+        User user = new User(name, surname, email, password);
+        Resource image = new ClassPathResource(imagePath);
+        user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+        user.setDescription(description);
+        user.setContact(contact);
+        user.setFacebook(facebook);
+        user.setTwitter(twitter);
+        user.setYoutube(youtube);
+        return userRepository.save(user);
+    }
+
     public Optional<User> login(User user){
         return userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
     }
@@ -81,7 +94,7 @@ public class UserService {
             if (user.getFacebook() != null) activeUser.setFacebook(user.getFacebook());
             if (user.getTwitter() != null) activeUser.setTwitter(user.getTwitter());
             if (user.getYoutube() != null) activeUser.setYoutube(user.getYoutube());
-            if (profilePhoto != null) {
+            if (profilePhoto.getOriginalFilename() != "") {
                 activeUser.setProfilePhoto(BlobProxy.generateProxy(profilePhoto.getInputStream(), profilePhoto.getSize()));
             }
             userRepository.save(activeUser);

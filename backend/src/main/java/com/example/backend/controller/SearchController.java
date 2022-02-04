@@ -194,6 +194,10 @@ public class SearchController {
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", list);
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("pageNumber", 1);
+        model.addAttribute("numberPage", 1);
+        model.addAttribute("firstPage", true);
+        model.addAttribute("lastPage", true);
         return "library";
     }
 
