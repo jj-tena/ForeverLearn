@@ -1,0 +1,225 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
+
+            <div class="bg-gradient-primary border-bottom-white py-32pt">
+                <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+                    <a href="instructor-courses.html" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
+                    </a>                     
+                    <div class="flex mb-32pt mb-md-0">
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
+                        <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
+                    </div>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
+                </div>
+            </div>
+
+
+
+            <div class="container page__container">
+                <form action="/create-course" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="page-section">
+                                <h4>Crear curso</h4>
+                                <div class="list-group list-group-form">
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Título</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="name" class="form-control" placeholder="Introduce el título">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Miniatura</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" accept="image/png, image/jpeg">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="category">Categoría</label>
+                                            <div class="col-sm-9">
+                                                <select id="category" name="categoryName" required="" class="custom-select">
+                                                    <option value="" >Elige una categoría</option>
+                                                    {{#categories}}
+                                                    <option value="{{name}}">{{name}}</option>
+                                                    {{/categories}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="difficulty">Dificultad</label>
+                                            <div class="col-sm-9">
+                                                <select id="difficulty" name="difficulty" required="" class="custom-select">
+                                                    <option value="">Elige una dificultad</option>
+                                                    <option value="Principiante">Principiante</option>
+                                                    <option value="Intermedio">Intermedio</option>
+                                                    <option value="Avanzado">Avanzado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Duración en horas</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" name="length" class="form-control" placeholder="Introduce la duración" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Trailer</label>
+                                            <div class="col-sm-9 media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                                        <label class="custom-file-label" for="inputGroupFile02">Elegir archivo</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3">Descripción</label>
+                                            <div class="col-sm-9">
+                                                <textarea name="description" rows="10" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-lg btn-accent">Crear curso</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="js-fix-footer bg-white">
+                <div class="bg-footer page-section py-lg-32pt">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 mb-24pt mb-md-0">
+                                <p class="text-white-70 mb-8pt"><strong>Síguenos</strong></p>
+                                <nav class="nav nav-links nav--flush">
+                                    <a href="https://www.facebook.com/Forever-Learn-112547794588081" class="nav-link mr-8pt"><img src="assets/images/icon/footer/facebook-square@2x.png" width="24" height="24" alt="Facebook"></a>
+                                    <a href="https://twitter.com/ForeverLearnTw" class="nav-link mr-8pt"><img src="assets/images/icon/footer/twitter-square@2x.png" width="24" height="24" alt="Twitter"></a>
+                                    <a href="https://www.youtube.com/channel/UC3y5pAPEZfQ6JCAZwP9nu7g" class="nav-link"><img src="assets/images/icon/footer/youtube-square@2x.png" width="24" height="24" alt="YouTube"></a>
+                                </nav>
+                            </div>
+                            <div class="col-md-4 col-sm-4 mb-24pt mb-md-0 d-flex align-items-center">
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <p class="mb-8pt d-flex align-items-md-center justify-content-md-end">
+                                    <a href="/help-center" class="text-white-70 text-underline mr-16pt">Centro de ayuda</a>
+                                    <a href="/terms-of-service" class="text-white-70 text-underline mr-16pt">Términos de servicio</a>
+                                    <a href="/privacy-policy" class="text-white-70 text-underline">Política de privacidad</a>
+                                </p>
+                                <p class="text-white-50 mb-0">Copyright 2021 &copy; Todos los derechos reservados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    <!-- DRAWER (MOBILE NAVBAR) -->
+    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+        <div class="mdk-drawer__content">
+            <div class="sidebar sidebar-dark sidebar-left" data-perfect-scrollbar>
+                <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
+
+                    <!-- Brand -->
+                    <a href="index.html" class="sidebar-brand">
+                        <img class="sidebar-brand-icon" src="assets/images/logo/image.png" width="40" alt="Tutorio">
+                        <span>ForeverLearn</span>
+                    </a>
+                    <!-- // END Brand -->
+
+                    <!-- Search -->
+                    <form action="library-filters.html" class="search-form search-form--black">
+                        <input type="text" class="form-control" placeholder="Búsqueda">
+                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                    </form>
+
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button" href="library.html">Cursos</a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button" href="login.html">Iniciar sesión</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- // END drawer -->
+
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+
+
+</body>
+
+</html>
