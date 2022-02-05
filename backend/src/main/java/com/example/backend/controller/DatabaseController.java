@@ -44,6 +44,7 @@ public class DatabaseController {
                         " como sanitario. Además debido a mi relación con el deporte y la salud he ejercicido como coach y motivador personal. Espero que os" +
                         " guste todo lo que tengo que enseñar. ","Podéis contactar conmigo a través de mi número de teléfono: 612345678, atenderé encantado " +
                         "cualquiera de vuestras consultas.","EntrenaConSergioPeinado","Sergio_Trainer","https://www.youtube.com/c/EntrenaSergioPeinado");
+        userService.makeAdmin(savedUser1.getId());
         User savedUser2 = userService.createFromParameters("Marc", "Vidal", "marc@email.com", "ma", "/static/assets/images/people/110/marcVidal.jpg",
                 "Me presento, soy Marc Vidal, me dedico a la economía y las finanzas, tema del que me gustar hablar y compartir con mis seguidores," +
                         " también suelo hablar de las profesiones más demandadas y los retos del futuro a los que nos enfrentamos como sociedad. Si quieres" +
@@ -83,7 +84,7 @@ public class DatabaseController {
         Optional<Course>  course3 = courseService.create("Curso de física para segundo de bachillerato", "Descripcion3", category3, "Avanzado", "/static/assets/images/courses/cursoFisica.jpg", 6, savedUser4.getId());
         Optional<Course>  course4 = courseService.create("Curso Procreate", "Descripcion4", category4, "Principiante", "/static/assets/images/courses/cursoProcreate.png", 6, savedUser3.getId());
         Optional<Course>  course5 = courseService.create("Contabilidad y costes", "Descripcion5", category5, "Principiante", "/static/assets/images/courses/cursoEconomia.png", 6, savedUser2.getId());
-            Optional<Course>  course6 = courseService.create("Todo sobre el cine", "Descripcion6", category6, "Principiante", "/static/assets/images/courses/cursoCine.jpg", 6, savedUser3.getId());
+        Optional<Course>  course6 = courseService.create("Todo sobre el cine", "Descripcion6", category6, "Principiante", "/static/assets/images/courses/cursoCine.jpg", 6, savedUser3.getId());
         Optional<Course>  course7 = courseService.create("Introducción a la programación en Pascal", "Descripcion7", category7, "Principiante", "/static/assets/images/courses/cursoPascal.png", 6, savedUser4.getId());
         Optional<Course>  course8 = courseService.create("Técnicas de Marketing para expertos", "Descripcion8", category8, "Principiante", "/static/assets/images/courses/cursoMarketing.jpeg", 6, savedUser3.getId());
         Optional<Course>  course9 = courseService.create("Géneros musicales", "Descripcion9", category9, "Principiante", "/static/assets/images/courses/cursoGenerosMusicales.jpg", 6, savedUser3.getId());

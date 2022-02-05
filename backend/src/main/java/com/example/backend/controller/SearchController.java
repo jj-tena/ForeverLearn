@@ -43,7 +43,9 @@ public class SearchController {
         if (pageNumber==0){
             model.addAttribute("firstPage", true);
         }
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
         if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
@@ -67,7 +69,9 @@ public class SearchController {
         if (pageNumber>0){
             pageNumber--;
         }
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
         Boolean coursesFound = list.size()>0;
@@ -82,7 +86,9 @@ public class SearchController {
     @GetMapping("/library-next-page-{pageNumber}")
     public String librayLinkNextPage(Model model, @PathVariable Integer pageNumber){
         pageNumber++;
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         List<Course> list = courseService.findCourses();
         model.addAttribute("results", list.size());
         Boolean coursesFound = list.size()>0;
@@ -102,7 +108,9 @@ public class SearchController {
         if (pageNumber==0){
             model.addAttribute("firstPage", true);
         }
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
         if (category.isPresent()) {
@@ -130,7 +138,9 @@ public class SearchController {
         if (pageNumber>0){
             pageNumber--;
         }
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
         if (category.isPresent()) {
@@ -150,7 +160,9 @@ public class SearchController {
     @GetMapping("/category-{id}-library-next-page-{pageNumber}")
     public String libraryNextPageByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
         pageNumber++;
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
         if (category.isPresent()) {
@@ -184,7 +196,9 @@ public class SearchController {
 
     @GetMapping("/find-course")
     public String findCourseByName(Model model, String name){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         List<Course> list = new ArrayList<>();
         Optional<Course> course = courseService.findCourseByName(name);
         course.ifPresent(list::add);
@@ -202,7 +216,9 @@ public class SearchController {
 
     @GetMapping("/course-{id}")
     public String getCourse(Model model, @PathVariable Long id){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         Optional<Course> course = courseService.findCourseById(id);
         if (course.isPresent()){
@@ -223,7 +239,9 @@ public class SearchController {
 
     @GetMapping("/instructor-profile-{id}")
     public String getInstructorProfile(Model model, @PathVariable Long id){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         Optional<User> user = userService.findUserById(id);
         if (user.isPresent()){
@@ -243,7 +261,9 @@ public class SearchController {
 
     @GetMapping("/lesson-{lessonId}-from-course-{courseId}")
     public String getLesson(Model model, @PathVariable Long lessonId, @PathVariable Long courseId){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         Optional<Lesson> lesson = lessonService.findLessonById(lessonId);
         Optional<Course> course = courseService.findCourseById(courseId);
@@ -258,7 +278,9 @@ public class SearchController {
 
     @GetMapping("/category-{id}-difficulty-filter")
     public String filterLibrary(Model model, @PathVariable Long id){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         Optional<Category> category = categoryService.findById(id);
         List<Course> list = new LinkedList<>();
         if (category.isPresent())

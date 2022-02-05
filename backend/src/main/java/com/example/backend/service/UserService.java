@@ -174,4 +174,14 @@ public class UserService {
         }
     }
 
+    public Optional<User> makeAdmin(Long userId){
+        Optional<User> toReturn = Optional.empty();
+        Optional<User> optionalUser = userRepository.findUserById(userId);
+        if (optionalUser.isPresent()){
+            optionalUser.get().setAdmin(true);
+            toReturn = Optional.of(userRepository.save(optionalUser.get()));
+        }
+        return toReturn;
+    }
+
 }

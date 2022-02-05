@@ -25,7 +25,9 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String loginLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "login";
     }
@@ -36,7 +38,8 @@ public class AuthenticationController {
         Optional<User> activeUser = userService.login(user);
         if (activeUser.isPresent()){
             userService.setActiveUser(activeUser.get());
-            model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+            model.addAttribute("activeUser", activeUser.isPresent());
+            activeUser.ifPresent(userActive -> model.addAttribute("activeUserAdmin", userActive.isAdmin()));
             model.addAttribute("user", activeUser.get());
             return "user-profile";
         }
@@ -47,16 +50,19 @@ public class AuthenticationController {
 
     @GetMapping("/signup")
     public String signupLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "signup";
     }
 
     @PostMapping("/signupUser")
     public String signupUser(Model model, User user) throws IOException {
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
         User activeUser = userService.create(user);
         userService.setActiveUser(activeUser);
+        model.addAttribute("activeUser", true);
+        model.addAttribute("activeUserAdmin", activeUser.isAdmin());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("user", user);
         return "user-profile";
@@ -64,14 +70,18 @@ public class AuthenticationController {
 
     @GetMapping("/reset-password")
     public String resetPasswordLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "reset-password";
     }
 
     @PostMapping("/resetPasswordUser")
     public String resetPasswordUser(Model model, User user) throws IOException {
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(userActive -> model.addAttribute("activeUserAdmin", userActive.isAdmin()));
         userService.resetPassword(user);
         model.addAttribute("categories", categoryService.findAll());
         return "index";
@@ -80,7 +90,9 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public String logoutUser(Model model){
         userService.logout();
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "index";
     }

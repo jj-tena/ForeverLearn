@@ -62,70 +62,19 @@ public class UserController {
 
     @GetMapping("/user-profile")
     public String userProfileLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-profile";
-    }
-
-    @GetMapping("/user-edit-account")
-    public String userEditAccountLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-edit-account";
-    }
-
-    @GetMapping("/user-edit-account-profile")
-    public String userEditAccountProfileLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        model.addAttribute("user", userService.getActiveUser().get());
-        Boolean hasDescription = !userService.getActiveUser().get().getDescription().contentEquals("");
-        model.addAttribute("hasDescription", hasDescription);
-        Boolean hasContact = !userService.getActiveUser().get().getContact().contentEquals("");
-        model.addAttribute("hasContact", hasContact);
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-edit-account-profile";
-    }
-
-    @GetMapping("/user-edit-account-password")
-    public String userEditAccountPasswordLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-edit-account-password";
-    }
-
-    @PostMapping("/update-basic-information")
-    public String updateBasicInformation(Model model, User user){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        userService.updateBasicInformation(user);
-        model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-profile";
-    }
-
-    @PostMapping("/update-profile-information")
-    public String updateProfileInformation(Model model, User user, @RequestParam("image") MultipartFile multipartFile) throws SQLException, IOException {
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        userService.updateProfileInformation(user, multipartFile);
-        model.addAttribute("user", userService.getActiveUser().get());
-        model.addAttribute("categories", categoryService.findAll());
-        return "user-profile";
-    }
-
-    @PostMapping("/update-password")
-    public String updatePassword(Model model, String password1, String password2){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
-        userService.updatePassword(password1, password2);
-        model.addAttribute("user", userService.getActiveUser());
         model.addAttribute("categories", categoryService.findAll());
         return "user-profile";
     }
 
     @GetMapping("/instructor-section")
     public String instructorSectionLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
         Boolean coursesFound = userCourses.size()>0;
@@ -137,7 +86,9 @@ public class UserController {
 
     @GetMapping("/instructor-create-course")
     public String instructorCreateCourse(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         return "instructor-create-course";
@@ -146,7 +97,9 @@ public class UserController {
     @PostMapping("/create-course")
     public String createCourse(Model model, Course course, String categoryName, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         courseService.createCourse(course, categoryName, multipartFile);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
         Boolean coursesFound = userCourses.size()>0;
@@ -158,7 +111,9 @@ public class UserController {
 
     @GetMapping("/instructor-edit-course-{id}")
     public String instructorEditCourse(Model model, @PathVariable Long id){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         Course demo = courseService.findCourseById(id).get();
@@ -169,7 +124,9 @@ public class UserController {
     @PostMapping("/edit-course-{courseId}")
     public String editCourse(Model model, Course course, String categoryName, @PathVariable Long courseId, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         courseService.updateCourse(courseId, course, categoryName, multipartFile);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         List<Course> userCourses = userService.getActiveUser().get().getUserCourses();
         Boolean coursesFound = userCourses.size()>0;
@@ -181,7 +138,9 @@ public class UserController {
 
     @GetMapping("/instructor-delete-course-{id}")
     public String instructorDeleteCourse(Model model, @PathVariable Long id){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         Optional<Course> optionalCourse = courseService.findCourseById(id);
@@ -197,7 +156,9 @@ public class UserController {
 
     @GetMapping("/student-section")
     public String studentSectionLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
@@ -209,7 +170,9 @@ public class UserController {
 
     @GetMapping("/student-courses-enrolled")
     public String studentCoursesEnrolledLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
@@ -221,7 +184,9 @@ public class UserController {
 
     @GetMapping("/student-courses-completed")
     public String studentCoursesCompletedLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         List<Course> completedCourses = userService.getActiveUser().get().getCompletedCourses();
@@ -233,7 +198,9 @@ public class UserController {
 
     @GetMapping("/student-courses-wished")
     public String studentCoursesWishedLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("courses", userService.getActiveUser().get().getWishedCourses());
@@ -247,7 +214,9 @@ public class UserController {
     @GetMapping("/enroll-course-{courseId}")
     public String enrollCourse(Model model, @PathVariable Long courseId){
         userService.enrollCourse(courseId);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
@@ -260,7 +229,9 @@ public class UserController {
     @GetMapping("/unenroll-course-{courseId}")
     public String unenrollCourse(Model model, @PathVariable Long courseId){
         userService.unenrollCourse(courseId);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         List<Course> enrolledCourses = userService.getActiveUser().get().getEnrolledCourses();
@@ -274,7 +245,9 @@ public class UserController {
     public String createTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         themeService.createTheme(nameTheme, descriptionTheme, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -285,7 +258,9 @@ public class UserController {
     public String editTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         themeService.updateTheme(themeId, nameTheme, descriptionTheme);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -296,7 +271,9 @@ public class UserController {
     public String deleteTheme(Model model, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         themeService.deleteTheme(themeId, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -307,7 +284,9 @@ public class UserController {
     public String createLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.createLesson(nameLesson, descriptionLesson, optionalTheme.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         Course demo = courseService.findCourseById(courseId).get();
@@ -320,7 +299,9 @@ public class UserController {
     public String editLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.updateLesson(lessonId, nameLesson, descriptionLesson, optionalTheme.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -331,7 +312,9 @@ public class UserController {
     public String deleteLesson(Model model, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         lessonService.deleteLesson(lessonId, optionalTheme.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -342,7 +325,9 @@ public class UserController {
     public String createRequirement(Model model, String nameRequirement, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         requirementService.createRequirement(nameRequirement, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -353,7 +338,9 @@ public class UserController {
     public String editRequirement(Model model, String nameRequirement, @PathVariable Long requirementId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         requirementService.updateRequirement(requirementId, nameRequirement);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -364,7 +351,9 @@ public class UserController {
     public String deleteRequirement(Model model, @PathVariable Long requirementId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         requirementService.deleteRequirement(requirementId, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -375,7 +364,9 @@ public class UserController {
     public String createObjective(Model model, String nameObjective, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         objectiveService.createObjective(nameObjective, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -386,7 +377,9 @@ public class UserController {
     public String editObjective(Model model, String nameObjective, @PathVariable Long objectiveId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         objectiveService.updateObjective(objectiveId, nameObjective);
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
@@ -397,7 +390,9 @@ public class UserController {
     public String deleteObjective(Model model, @PathVariable Long objectiveId, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         objectiveService.deleteObjective(objectiveId, optionalCourse.get());
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());

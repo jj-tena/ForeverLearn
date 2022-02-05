@@ -30,7 +30,9 @@ public class MainController {
 
     @GetMapping("/")
     public String indexLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "index";
     }
@@ -49,21 +51,27 @@ public class MainController {
 
     @GetMapping("/help-center")
     public String helpCenterLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "help-center";
     }
 
     @GetMapping("/terms-of-service")
     public String termsOfServiceLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "terms-of-service";
     }
 
     @GetMapping("/privacy-policy")
     public String privacyPolicyLink(Model model){
-        model.addAttribute("activeUser", userService.getActiveUser().isPresent());
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "privacy-policy";
     }

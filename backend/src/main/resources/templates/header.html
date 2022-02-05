@@ -91,9 +91,11 @@
                     {{/activeUser}}
 
                     {{#activeUser}}
-                    <li class="d-none d-sm-flex nav-item">
-                        <a href="/admin-options" class="btn btn-success">Administrar</a>
-                    </li>
+                        {{#activeUserAdmin}}
+                            <li class="d-none d-sm-flex nav-item">
+                                <a href="/admin-options" class="btn btn-success">Administrar</a>
+                            </li>
+                        {{/activeUserAdmin}}
                     <li class="d-none d-sm-flex nav-item">
                         <a href="/user-profile" class="btn btn-warning">Ver perfil</a>
                     </li>
