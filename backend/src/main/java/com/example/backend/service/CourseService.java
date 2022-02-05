@@ -117,4 +117,8 @@ public class CourseService {
     public Course save(Course course) {
         return courseRepository.save(course);
     }
+
+    public Optional<List<Course>> findCoursesByName(String name) {
+        return courseRepository.findCoursesByName(name);
+    }
 }

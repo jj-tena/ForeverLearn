@@ -188,4 +188,7 @@ public class UserService {
         return userRepository.findAll(PageRequest.of(numberPage, content));
     }
 
+    public Optional<List<User>> findUserByName(String name) {
+        return userRepository.findUsersByName(name);
+    }
 }

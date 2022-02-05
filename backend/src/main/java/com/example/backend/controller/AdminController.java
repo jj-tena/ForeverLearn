@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,6 +105,27 @@ public class AdminController {
         return "admin-courses";
     }
 
+    @GetMapping("/admin-search-course")
+    public String findCourseByName(Model model, String name){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+
+        Optional<List<Course>> courses = courseService.findCoursesByName(name);
+        Boolean coursesFound = courses.get().size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", courses.get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("pageNumber", 1);
+        model.addAttribute("numberPage", 1);
+        model.addAttribute("firstPage", true);
+        model.addAttribute("lastPage", true);
+        return "admin-courses";
+    }
+
+
+
     @GetMapping("/admin-users-page-{pageNumber}")
     public String adminUsers(Model model, @PathVariable Integer pageNumber){
 
@@ -172,6 +194,25 @@ public class AdminController {
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
 
+        return "admin-users";
+    }
+
+    @GetMapping("/admin-search-user")
+    public String findUserByName(Model model, String name){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+
+        Optional<List<User>> users = userService.findUserByName(name);
+        Boolean coursesFound = users.get().size()>0;
+        model.addAttribute("usersFound", coursesFound);
+        model.addAttribute("users", users.get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("pageNumber", 1);
+        model.addAttribute("numberPage", 1);
+        model.addAttribute("firstPage", true);
+        model.addAttribute("lastPage", true);
         return "admin-users";
     }
 
