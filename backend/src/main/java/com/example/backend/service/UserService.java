@@ -184,4 +184,8 @@ public class UserService {
         return toReturn;
     }
 
+    public Page<User> findPageUsers(Integer numberPage, Integer content){
+        return userRepository.findAll(PageRequest.of(numberPage, content));
+    }
+
 }

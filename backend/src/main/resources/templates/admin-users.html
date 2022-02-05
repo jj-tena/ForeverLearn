@@ -9,10 +9,10 @@
                         <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/admin/128/police-svgrepo-com.svg" width="75" alt="Tutorio">
                     </a>
                     <div class="flex mb-32pt mb-md-0">
-                        <h2 class="text-white mb-0">Alexander Watson</h2>
+                        <h2 class="text-white mb-0">{{user.name}} {{user.surname}}</h2>
                         <p class="lead text-white-50 d-flex align-items-center">Administrador</p>
                     </div>
-                    <a href="user-profile.html" class="btn btn-outline-white">Ver perfil</a>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
                 </div>
             </div>
 
@@ -34,6 +34,7 @@
 
                 <div>
 
+                    {{#users}}
                     <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -42,7 +43,7 @@
                                         <div class="rounded mr-16pt z-0 o-hidden">
                                             <div class="overlay">
                                                 <div class="avatar avatar-4by3 mr-16pt">
-                                                    <img src="assets/images/people/110/guy-1.jpg" alt="Angular Routing In-Depth" class="avatar-img rounded">
+                                                    <img src="/user/{{id}}/profilePhoto" alt="Angular Routing In-Depth" class="avatar-img rounded">
                                                 </div>
                                                 <span class="overlay__content overlay__content-transparent">
                                                     <span class="overlay__action d-flex flex-column text-center lh-1">
@@ -52,157 +53,47 @@
                                             </div>
                                         </div>
                                         <div class="flex">
-                                            <div class="card-title text-body mb-4pt">Adrián Sancho Vázquez</div>
+                                            <div class="card-title text-body mb-4pt">{{name}} {{surname}}</div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="instructor-profile.html" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
+                                <a href="/instructor-profile-{{id}}" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
                                 <a data-toggle="modal" data-target="#banUser" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
                                 <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
                             </div>
                         </div>
                     </div>
+                    {{/users}}
 
-                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded mr-16pt z-0 o-hidden">
-                                            <div class="overlay">
-                                                <div class="avatar avatar-4by3 mr-16pt">
-                                                    <img src="assets/images/people/110/woman-1.jpg" alt="Angular Routing In-Depth" class="avatar-img rounded">
-                                                </div>
-                                                <span class="overlay__content overlay__content-transparent">
-                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;"></small>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="card-title text-body mb-4pt">Beatriz Cuesta Rodríguez</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="instructor-profile.html" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
-                                <a data-toggle="modal" data-target="#unbanUser" class="ml-4pt btn btn-success text-white mr-4pt">Desban</a>
-                                <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded mr-16pt z-0 o-hidden">
-                                            <div class="overlay">
-                                                <div class="avatar avatar-4by3 mr-16pt">
-                                                    <img src="assets/images/people/110/guy-2.jpg" alt="Angular Routing In-Depth" class="avatar-img rounded">
-                                                </div>
-                                                <span class="overlay__content overlay__content-transparent">
-                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;"></small>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="card-title text-body mb-4pt">Carlos Menéndez Viyuela</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="instructor-profile.html" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
-                                <a data-toggle="modal" data-target="#banUser" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
-                                <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded mr-16pt z-0 o-hidden">
-                                            <div class="overlay">
-                                                <div class="avatar avatar-4by3 mr-16pt">
-                                                    <img src="assets/images/people/110/woman-2.jpg" alt="Angular Routing In-Depth" class="avatar-img rounded">
-                                                </div>
-                                                <span class="overlay__content overlay__content-transparent">
-                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;"></small>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="card-title text-body mb-4pt">Diana Bustamante Ruíz</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="instructor-profile.html" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
-                                <a data-toggle="modal" data-target="#banUser" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
-                                <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded mr-16pt z-0 o-hidden">
-                                            <div class="overlay">
-                                                <div class="avatar avatar-4by3 mr-16pt">
-                                                    <img src="assets/images/people/110/woman-3.jpg" alt="Angular Routing In-Depth" class="avatar-img rounded">
-                                                </div>
-                                                <span class="overlay__content overlay__content-transparent">
-                                                    <span class="overlay__action d-flex flex-column text-center lh-1">
-                                                        <small class="h6 small text-white mb-0" style="font-weight: 500;"></small>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex">
-                                            <div class="card-title text-body mb-4pt">Elena Zambrano Gutiérrez</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="instructor-profile.html" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
-                                <a data-toggle="modal" data-target="#banUser" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
-                                <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
+                    {{#usersFound}}
+                    <!-- Pagination -->
 
                     <ul class="pagination justify-content-center pagination-sm">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous">
+                        <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
+                            <a class="page-link" href="/admin-users-prev-page-{{pageNumber}}" aria-label="Previous">
                                 <span aria-hidden="true" class="material-icons">chevron_left</span>
-                                <span>Prev</span>
                             </a>
                         </li>
+
+
                         <li class="page-item active">
                             <a class="page-link" href="#" aria-label="1">
-                                <span>1</span>
+                                <span>{{numberPage}}</span>
                             </a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="1">
-                                <span>2</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span>Next</span>
+
+                        <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
+                            <a class="page-link" href="/admin-users-next-page-{{pageNumber}}" aria-label="Next">
                                 <span aria-hidden="true" class="material-icons">chevron_right</span>
                             </a>
                         </li>
                     </ul>
+
+                    {{/usersFound}}
+
+                    {{^usersFound}}
+                    <h1>No se han encontrado cursos que administrar</h1>
+                    {{/usersFound}}
 
                 </div>
             </div>

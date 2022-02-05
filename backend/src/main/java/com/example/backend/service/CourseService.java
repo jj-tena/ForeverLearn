@@ -38,8 +38,8 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Page<Course> findPageCourses(Integer numberPage){
-        return courseRepository.findAll(PageRequest.of(numberPage, 12));
+    public Page<Course> findPageCourses(Integer numberPage, Integer content){
+        return courseRepository.findAll(PageRequest.of(numberPage, content));
     }
 
     public Optional<Course> findCourseById(Long id){

@@ -53,7 +53,7 @@ public class SearchController {
         }
         Boolean coursesFound = list.size()>0;
         model.addAttribute("coursesFound", coursesFound);
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
@@ -76,7 +76,7 @@ public class SearchController {
         model.addAttribute("results", list.size());
         Boolean coursesFound = list.size()>0;
         model.addAttribute("coursesFound", coursesFound);
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
@@ -96,7 +96,7 @@ public class SearchController {
         if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
             model.addAttribute("lastPage", true);
         }
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber));
+        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
