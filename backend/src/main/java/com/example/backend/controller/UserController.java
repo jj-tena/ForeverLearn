@@ -241,6 +241,36 @@ public class UserController {
         return "student-courses-enrolled";
     }
 
+    @GetMapping("/wish-course-{courseId}")
+    public String wishCourse(Model model, @PathVariable Long courseId){
+        userService.wishCourse(courseId);
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        List<Course> wishedCourses = userService.getActiveUser().get().getWishedCourses();
+        Boolean coursesFound = wishedCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", wishedCourses);
+        return "student-courses-wished";
+    }
+
+    @GetMapping("/unwish-course-{courseId}")
+    public String deleteWishCourse(Model model, @PathVariable Long courseId){
+        userService.unwishCourse(courseId);
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        List<Course> wishedCourses = userService.getActiveUser().get().getWishedCourses();
+        Boolean coursesFound = wishedCourses.size()>0;
+        model.addAttribute("coursesFound", coursesFound);
+        model.addAttribute("courses", wishedCourses);
+        return "student-courses-wished";
+    }
+
     @PostMapping("/create-theme-for-course-{courseId}")
     public String createTheme(Model model, String nameTheme, String descriptionTheme, @PathVariable Long courseId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);

@@ -191,4 +191,30 @@ public class UserService {
     public Optional<List<User>> findUserByName(String name) {
         return userRepository.findUsersByName(name);
     }
+
+    public void wishCourse(Long courseId) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if(optionalCourse.isPresent()){
+            Optional<User> optionalUser = getActiveUser();
+            if (optionalUser.isPresent()){
+                optionalUser.get().addWishedCourse(optionalCourse.get());
+                userRepository.save(optionalUser.get());
+            }
+        }
+    }
+
+    public void unwishCourse(Long courseId) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if(optionalCourse.isPresent()){
+            Optional<User> optionalUser = getActiveUser();
+            if (optionalUser.isPresent()){
+                optionalUser.get().deleteWishedCourse(optionalCourse.get());
+                userRepository.save(optionalUser.get());
+            }
+        }
+    }
+
+    public Boolean isCourseWished(User user, Course course) {
+        return user.isCourseWished(course);
+    }
 }

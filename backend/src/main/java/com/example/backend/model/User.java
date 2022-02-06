@@ -145,4 +145,8 @@ public class User {
     public Boolean isCourseEnrolled(Course course) {
         return this.enrolledCourses.contains(course);
     }
+
+    public Boolean isCourseWished(Course course) {
+        return this.wishedCourses.contains(course);
+    }
 }

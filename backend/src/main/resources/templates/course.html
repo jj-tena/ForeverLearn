@@ -16,12 +16,21 @@
                                         <a href="#" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Eres el creador de este curso</a>
                                     {{/courseOwner}}
                                     {{^courseOwner}}
+
                                         {{#courseEnrolled}}
                                         <a href="/unenroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Desmatricularse</a>
                                         {{/courseEnrolled}}
                                         {{^courseEnrolled}}
                                         <a href="/enroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Matricularse</a>
                                         {{/courseEnrolled}}
+
+                                        {{#courseWished}}
+                                        <a href="/unwish-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Quitar de deseados</a>
+                                        {{/courseWished}}
+                                        {{^courseWished}}
+                                        <a href="/wish-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Añadir a deseados</a>
+                                        {{/courseWished}}
+
                                     {{/courseOwner}}
                                 {{/activeUser}}
                             </div>
