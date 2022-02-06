@@ -55,7 +55,7 @@ public class DatabaseController {
                         "para publicitarlas, pasando por fotografía, vídeo y producción, a veces incluso me atrevo a componer algún tema de la banda sonora.","Puedes contactarme " +
                         "a través de mis redes sociales, estoy abierta a nuevas colaboraciones y proyectos. Si te gusta lo que haga no dudes en contactar,",
                 "","sarafructuoso__","https://www.youtube.com/channel/UCeZq-em4g_Jp-jMQdynKvBw");
-        User savedUser4 = userService.createFromParameters("Amy", "Hennig", "sara@email.com", "sa", "/static/assets/images/people/110/amyHennig.jpg",
+        User savedUser4 = userService.createFromParameters("Amy", "Hennig", "amy@email.com", "am", "/static/assets/images/people/110/amyHennig.jpg",
                 "Soy una profesional de la industria de los videojuegos. Con más de 20 años de experiencia, tengo créditos tanto en juegos para Atari 7800 como para " +
                         "títulos actuales como ‘Uncharted: Drake’s Fortune’. Además dedico mi tiempo a aprender sobre disciplinas como la física y las matemáticas." +
                         "En mis cursos trataré de hacer ver mi pasión por mis interesés","Actualmente mis datos de contacto son privados, disculpen las molestias.",

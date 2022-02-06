@@ -49,7 +49,12 @@ public class Course {
     @ManyToOne
     private User author;
 
+    private Integer likes = 0;
+
+    private Integer dislikes = 0;
+
     public Course() {
+
     }
 
     public Course(String name, String description, Category category, String difficulty, Integer length, User author) {
@@ -93,6 +98,22 @@ public class Course {
 
     public void deleteRequirement(Requirement requirement) {
         this.requirements.remove(requirement);
+    }
+
+    public void like(){
+        this.likes++;
+    }
+
+    public void quitLike(){
+        this.likes--;
+    }
+
+    public void dislike(){
+        this.dislikes++;
+    }
+
+    public void quitDislike(){
+        this.dislikes--;
     }
 
 }

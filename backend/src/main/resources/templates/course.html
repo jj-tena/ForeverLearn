@@ -63,23 +63,44 @@
                         </li>
                         <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
                             <div class="rating rating-24">
+                                {{#filledStars}}
                                 <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
+                                {{/filledStars}}
+                                {{#borderStars}}
                                 <div class="rating__item"><i class="material-icons">star_border</i></div>
+                                {{/borderStars}}
                             </div>
                         </li>
-                        <li class="nav-item navbar-list__item">
-                            <a href="">
-                                <i class="material-icons text-muted icon--left">thumb_up</i>
-                            </a>
-                        </li>
-                        <li class="nav-item navbar-list__item">
-                            <a href="">
-                                <i class="material-icons text-muted icon--left">thumb_down</i>
-                            </a>
-                        </li>
+                        {{#activeUser}}
+                            {{#likedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/quit-like-course-{{course.id}}">
+                                    <i class="material-icons icon--left" style="color: #19857c;">thumb_up</i>
+                                </a>
+                            </li>
+                            {{/likedCourse}}
+                            {{^likedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/like-course-{{course.id}}">
+                                    <i class="material-icons text-muted icon--left">thumb_up</i>
+                                </a>
+                            </li>
+                            {{/likedCourse}}
+                            {{#dislikedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/quit-dislike-course-{{course.id}}">
+                                    <i class="material-icons icon--left" style="color: #19857c;">thumb_down</i>
+                                </a>
+                            </li>
+                            {{/dislikedCourse}}
+                            {{^dislikedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/dislike-course-{{course.id}}">
+                                    <i class="material-icons text-muted icon--left">thumb_down</i>
+                                </a>
+                            </li>
+                            {{/dislikedCourse}}
+                        {{/activeUser}}
                     </ul>
                 </div>
             </div>

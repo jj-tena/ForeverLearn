@@ -217,4 +217,33 @@ public class UserService {
     public Boolean isCourseWished(User user, Course course) {
         return user.isCourseWished(course);
     }
+
+    public void likeCourse(User user, Course course){
+        user.likeCourse(course);
+        userRepository.save(user);
+    }
+
+    public void dislikeCourse(User user, Course course){
+        user.dislikeCourse(course);
+        userRepository.save(user);
+    }
+
+    public void quitLikeCourse(User user, Course course){
+        user.quitLikeCourse(course);
+        userRepository.save(user);
+    }
+
+    public void quitDislikeCourse(User user, Course course){
+        user.quitLikeCourse(course);
+        userRepository.save(user);
+    }
+
+    public Boolean isCourseLiked(User user, Course course){
+        return user.isCourseLiked(course);
+    }
+
+    public Boolean isCourseDisliked(User user, Course course){
+        return user.isCourseDisliked(course);
+
+    }
 }

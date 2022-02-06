@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -427,6 +429,224 @@ public class UserController {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("course", courseService.findCourseById(courseId).get());
         return "instructor-edit-course";
+    }
+
+    @GetMapping("like-course-{courseId}")
+    public String likeCourse(Model model, @PathVariable Long courseId){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Course> course = courseService.findCourseById(courseId);
+        if (course.isPresent()){
+            model.addAttribute("course", course.get());
+            Boolean courseOwner = false;
+            Boolean courseEnrolled = false;
+            Boolean courseWished = false;
+            if (activeUser.isPresent()){
+                courseOwner = userService.isCourseOwner(activeUser.get(), course.get());
+                courseEnrolled = userService.isCourseEnrolled(activeUser.get(), course.get());
+                courseWished = userService.isCourseWished(activeUser.get(), course.get());
+            }
+            model.addAttribute("courseOwner", courseOwner);
+            model.addAttribute("courseEnrolled", courseEnrolled);
+            model.addAttribute("courseWished", courseWished);
+
+            userService.likeCourse(activeUser.get(), course.get());
+            model.addAttribute("likedCourse", true);
+
+            Integer likes = course.get().getLikes();
+            Integer dislikes = course.get().getDislikes();
+            Integer totalVotes = likes + dislikes;
+            Integer effectiveLikes = likes - dislikes;
+            if (effectiveLikes <= 0){
+                model.addAttribute("borderStars", Arrays.asList(1,1,1,1,1));
+            } else {
+                Integer numFilledStars = ((effectiveLikes*5)/totalVotes);
+                if (numFilledStars.equals(5)){
+                    model.addAttribute("filledStars", Arrays.asList(1,1,1,1,1));
+                } else {
+                    Integer numBorderStars = 5 - numFilledStars;
+                    ArrayList<Integer> filledStars = new ArrayList<>();
+                    for (int i = 0; i < numFilledStars; i++) {
+                        filledStars.add(1);
+                    }
+                    model.addAttribute("filledStars", filledStars);
+                    ArrayList<Integer> borderStars = new ArrayList<>();
+                    for (int i = 0; i < numBorderStars; i++) {
+                        borderStars.add(1);
+                    }
+                    model.addAttribute("borderStars", borderStars);
+                }
+            }
+
+            return "course";
+        } else {
+            return "index";
+        }
+    }
+
+    @GetMapping("quit-like-course-{courseId}")
+    public String quitLikeCourse(Model model, @PathVariable Long courseId){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Course> course = courseService.findCourseById(courseId);
+        if (course.isPresent()){
+            model.addAttribute("course", course.get());
+            Boolean courseOwner = false;
+            Boolean courseEnrolled = false;
+            Boolean courseWished = false;
+            if (activeUser.isPresent()){
+                courseOwner = userService.isCourseOwner(activeUser.get(), course.get());
+                courseEnrolled = userService.isCourseEnrolled(activeUser.get(), course.get());
+                courseWished = userService.isCourseWished(activeUser.get(), course.get());
+            }
+            model.addAttribute("courseOwner", courseOwner);
+            model.addAttribute("courseEnrolled", courseEnrolled);
+            model.addAttribute("courseWished", courseWished);
+
+            userService.quitLikeCourse(activeUser.get(), course.get());
+
+            Integer likes = course.get().getLikes();
+            Integer dislikes = course.get().getDislikes();
+            Integer totalVotes = likes + dislikes;
+            Integer effectiveLikes = likes - dislikes;
+            if (effectiveLikes <= 0){
+                model.addAttribute("borderStars", Arrays.asList(1,1,1,1,1));
+            } else {
+                Integer numFilledStars = ((effectiveLikes*5)/totalVotes);
+                if (numFilledStars.equals(5)){
+                    model.addAttribute("filledStars", Arrays.asList(1,1,1,1,1));
+                } else {
+                    Integer numBorderStars = 5 - numFilledStars;
+                    ArrayList<Integer> filledStars = new ArrayList<>();
+                    for (int i = 0; i < numFilledStars; i++) {
+                        filledStars.add(1);
+                    }
+                    model.addAttribute("filledStars", filledStars);
+                    ArrayList<Integer> borderStars = new ArrayList<>();
+                    for (int i = 0; i < numBorderStars; i++) {
+                        borderStars.add(1);
+                    }
+                    model.addAttribute("borderStars", borderStars);
+                }
+            }
+
+            return "course";
+        } else {
+            return "index";
+        }
+    }
+
+    @GetMapping("dislike-course-{courseId}")
+    public String dislikeCourse(Model model, @PathVariable Long courseId){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Course> course = courseService.findCourseById(courseId);
+        if (course.isPresent()){
+            model.addAttribute("course", course.get());
+            Boolean courseOwner = false;
+            Boolean courseEnrolled = false;
+            Boolean courseWished = false;
+            if (activeUser.isPresent()){
+                courseOwner = userService.isCourseOwner(activeUser.get(), course.get());
+                courseEnrolled = userService.isCourseEnrolled(activeUser.get(), course.get());
+                courseWished = userService.isCourseWished(activeUser.get(), course.get());
+            }
+            model.addAttribute("courseOwner", courseOwner);
+            model.addAttribute("courseEnrolled", courseEnrolled);
+            model.addAttribute("courseWished", courseWished);
+
+            userService.dislikeCourse(activeUser.get(), course.get());
+            model.addAttribute("dislikedCourse", true);
+
+            Integer likes = course.get().getLikes();
+            Integer dislikes = course.get().getDislikes();
+            Integer totalVotes = likes + dislikes;
+            Integer effectiveLikes = likes - dislikes;
+            if (effectiveLikes <= 0){
+                model.addAttribute("borderStars", Arrays.asList(1,1,1,1,1));
+            } else {
+                Integer numFilledStars = ((effectiveLikes*5)/totalVotes);
+                if (numFilledStars.equals(5)){
+                    model.addAttribute("filledStars", Arrays.asList(1,1,1,1,1));
+                } else {
+                    Integer numBorderStars = 5 - numFilledStars;
+                    ArrayList<Integer> filledStars = new ArrayList<>();
+                    for (int i = 0; i < numFilledStars; i++) {
+                        filledStars.add(1);
+                    }
+                    model.addAttribute("filledStars", filledStars);
+                    ArrayList<Integer> borderStars = new ArrayList<>();
+                    for (int i = 0; i < numBorderStars; i++) {
+                        borderStars.add(1);
+                    }
+                    model.addAttribute("borderStars", borderStars);
+                }
+            }
+
+            return "course";
+        } else {
+            return "index";
+        }
+    }
+
+    @GetMapping("quit-dislike-course-{courseId}")
+    public String quitDislikeCourse(Model model, @PathVariable Long courseId){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("categories", categoryService.findAll());
+        Optional<Course> course = courseService.findCourseById(courseId);
+        if (course.isPresent()){
+            model.addAttribute("course", course.get());
+            Boolean courseOwner = false;
+            Boolean courseEnrolled = false;
+            Boolean courseWished = false;
+            if (activeUser.isPresent()){
+                courseOwner = userService.isCourseOwner(activeUser.get(), course.get());
+                courseEnrolled = userService.isCourseEnrolled(activeUser.get(), course.get());
+                courseWished = userService.isCourseWished(activeUser.get(), course.get());
+            }
+            model.addAttribute("courseOwner", courseOwner);
+            model.addAttribute("courseEnrolled", courseEnrolled);
+            model.addAttribute("courseWished", courseWished);
+
+            userService.quitDislikeCourse(activeUser.get(), course.get());
+
+            Integer likes = course.get().getLikes();
+            Integer dislikes = course.get().getDislikes();
+            Integer totalVotes = likes + dislikes;
+            Integer effectiveLikes = likes - dislikes;
+            if (effectiveLikes <= 0){
+                model.addAttribute("borderStars", Arrays.asList(1,1,1,1,1));
+            } else {
+                Integer numFilledStars = ((effectiveLikes*5)/totalVotes);
+                if (numFilledStars.equals(5)){
+                    model.addAttribute("filledStars", Arrays.asList(1,1,1,1,1));
+                } else {
+                    Integer numBorderStars = 5 - numFilledStars;
+                    ArrayList<Integer> filledStars = new ArrayList<>();
+                    for (int i = 0; i < numFilledStars; i++) {
+                        filledStars.add(1);
+                    }
+                    model.addAttribute("filledStars", filledStars);
+                    ArrayList<Integer> borderStars = new ArrayList<>();
+                    for (int i = 0; i < numBorderStars; i++) {
+                        borderStars.add(1);
+                    }
+                    model.addAttribute("borderStars", borderStars);
+                }
+            }
+
+            return "course";
+        } else {
+            return "index";
+        }
     }
 
 }

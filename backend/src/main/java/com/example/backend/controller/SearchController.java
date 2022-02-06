@@ -234,6 +234,36 @@ public class SearchController {
             model.addAttribute("courseOwner", courseOwner);
             model.addAttribute("courseEnrolled", courseEnrolled);
             model.addAttribute("courseWished", courseWished);
+            if (activeUser.isPresent()){
+                model.addAttribute("likedCourse", userService.isCourseLiked(activeUser.get(), course.get()));
+                model.addAttribute("dislikedCourse", userService.isCourseDisliked(activeUser.get(), course.get()));
+            }
+
+            Integer likes = course.get().getLikes();
+            Integer dislikes = course.get().getDislikes();
+            Integer totalVotes = likes + dislikes;
+            Integer effectiveLikes = likes - dislikes;
+            if (effectiveLikes <= 0){
+                model.addAttribute("borderStars", Arrays.asList(1,1,1,1,1));
+            } else {
+                Integer numFilledStars = ((effectiveLikes*5)/totalVotes);
+                if (numFilledStars.equals(5)){
+                    model.addAttribute("filledStars", Arrays.asList(1,1,1,1,1));
+                } else {
+                    Integer numBorderStars = 5 - numFilledStars;
+                    ArrayList<Integer> filledStars = new ArrayList<>();
+                    for (int i = 0; i < numFilledStars; i++) {
+                        filledStars.add(1);
+                    }
+                    model.addAttribute("filledStars", filledStars);
+                    ArrayList<Integer> borderStars = new ArrayList<>();
+                    for (int i = 0; i < numBorderStars; i++) {
+                        borderStars.add(1);
+                    }
+                    model.addAttribute("borderStars", borderStars);
+                }
+            }
+
             return "course";
         } else {
             return "index";

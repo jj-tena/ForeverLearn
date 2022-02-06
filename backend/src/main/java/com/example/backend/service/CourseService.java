@@ -121,4 +121,24 @@ public class CourseService {
     public Optional<List<Course>> findCoursesByName(String name) {
         return courseRepository.findCoursesByName(name);
     }
+
+    public void like(Course course){
+        course.like();
+        courseRepository.save(course);
+    }
+
+    public void quitLike(Course course){
+        course.quitLike();
+        courseRepository.save(course);
+    }
+
+    public void dislike(Course course){
+        course.dislike();
+        courseRepository.save(course);
+    }
+
+    public void quitDislike(Course course){
+        course.quitDislike();
+        courseRepository.save(course);
+    }
 }

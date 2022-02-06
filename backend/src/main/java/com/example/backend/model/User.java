@@ -51,6 +51,12 @@ public class User {
     @OneToMany
     private List<Course> wishedCourses = new LinkedList<>();
 
+    @ManyToMany
+    private List<Course> likedCourses = new LinkedList<>();
+
+    @ManyToMany
+    private List<Course> dislikedCourses = new LinkedList<>();
+
     @Lob
     @JsonIgnore
     private Blob profilePhoto;
@@ -126,6 +132,44 @@ public class User {
         this.wishedCourses.remove(course);
     }
 
+    public void likeCourse(Course course){
+        if(Objects.isNull(this.likedCourses)){
+            this.likedCourses = new LinkedList<>();
+        }
+        this.likedCourses.add(course);
+        course.like();
+        if (dislikedCourses.contains(course)) {
+            dislikedCourses.remove(course);
+            course.quitDislike();
+        }
+    }
+
+    public void dislikeCourse(Course course){
+        if(Objects.isNull(this.dislikedCourses)){
+            this.dislikedCourses = new LinkedList<>();
+        }
+        this.dislikedCourses.add(course);
+        course.dislike();
+        if (likedCourses.contains(course)) {
+            likedCourses.remove(course);
+            course.quitLike();
+        }
+    }
+
+    public void quitLikeCourse(Course course) {
+        if (likedCourses.contains(course)) {
+            likedCourses.remove(course);
+            course.quitLike();
+        }
+    }
+
+    public void quitDislikeCourse(Course course) {
+        if (dislikedCourses.contains(course)) {
+            dislikedCourses.remove(course);
+            course.quitDislike();
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -148,5 +192,13 @@ public class User {
 
     public Boolean isCourseWished(Course course) {
         return this.wishedCourses.contains(course);
+    }
+
+    public Boolean isCourseLiked(Course course) {
+        return this.likedCourses.contains(course);
+    }
+
+    public Boolean isCourseDisliked(Course course) {
+        return this.dislikedCourses.contains(course);
     }
 }
