@@ -208,6 +208,8 @@ public class AdminController {
     @GetMapping("/admin-users-page-{pageNumber}")
     public String adminUsers(Model model, @PathVariable Integer pageNumber){
 
+        model.addAttribute("pageNumber", pageNumber);
+
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
@@ -292,6 +294,84 @@ public class AdminController {
         model.addAttribute("numberPage", 1);
         model.addAttribute("firstPage", true);
         model.addAttribute("lastPage", true);
+        return "admin-users";
+    }
+
+    @GetMapping("/ban-user-{id}")
+    public String banUser(Model model, @PathVariable Long id){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            userService.banUser(id);
+        }
+
+        Page<User> pageUsers = userService.findPageUsers(0, 6);
+        model.addAttribute("lastPage", !pageUsers.hasNext());
+        model.addAttribute("firstPage", !pageUsers.hasPrevious());
+        model.addAttribute("users", pageUsers);
+        model.addAttribute("usersFound", pageUsers.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
+        return "admin-users";
+    }
+
+    @GetMapping("/unban-user-{id}")
+    public String unbanUser(Model model, @PathVariable Long id){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            userService.unbanUser(id);
+        }
+
+        Page<User> pageUsers = userService.findPageUsers(0, 6);
+        model.addAttribute("lastPage", !pageUsers.hasNext());
+        model.addAttribute("firstPage", !pageUsers.hasPrevious());
+        model.addAttribute("users", pageUsers);
+        model.addAttribute("usersFound", pageUsers.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
+        return "admin-users";
+    }
+
+    @GetMapping("/admin-delete-user-{id}")
+    public String deleteUser(Model model, @PathVariable Long id){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            userService.adminDeleteUser(id);
+        }
+
+        Page<User> pageUsers = userService.findPageUsers(0, 6);
+        model.addAttribute("lastPage", !pageUsers.hasNext());
+        model.addAttribute("firstPage", !pageUsers.hasPrevious());
+        model.addAttribute("users", pageUsers);
+        model.addAttribute("usersFound", pageUsers.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
         return "admin-users";
     }
 

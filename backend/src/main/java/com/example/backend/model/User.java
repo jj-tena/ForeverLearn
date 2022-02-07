@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Blob;
@@ -38,6 +39,8 @@ public class User {
     private String youtube;
 
     private boolean isAdmin;
+
+    private Boolean banned = false;
 
     @OneToMany
     private List<Course> userCourses;
@@ -200,5 +203,17 @@ public class User {
 
     public Boolean isCourseDisliked(Course course) {
         return this.dislikedCourses.contains(course);
+    }
+
+    public Boolean isBanned(){
+        return this.banned;
+    }
+
+    public void ban(){
+        this.banned = true;
+    }
+
+    public void unban(){
+        this.banned = false;
     }
 }

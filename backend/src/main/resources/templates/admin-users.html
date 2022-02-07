@@ -58,8 +58,13 @@
                                     </div>
                                 </div>
                                 <a href="/instructor-profile-{{id}}" class="ml-4pt btn btn-primary text-white mr-4pt">Ver usuario</a>
-                                <a data-toggle="modal" data-target="#banUser" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
-                                <a data-toggle="modal" data-target="#deleteUser" class="ml-4pt btn btn-black text-white">Eliminar</a>
+                                {{^banned}}
+                                <a href="/ban-user-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
+                                {{/banned}}
+                                {{#banned}}
+                                <a href="/unban-user-{{id}}" class="ml-4pt btn btn-success text-white mr-4pt">Desbanear</a>
+                                {{/banned}}
+                                <a href="/admin-delete-user-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
                             </div>
                         </div>
                     </div>
@@ -92,7 +97,7 @@
                     {{/usersFound}}
 
                     {{^usersFound}}
-                    <h1>No se han encontrado cursos que administrar</h1>
+                    <h1>No se han encontrado usuarios que administrar</h1>
                     {{/usersFound}}
 
                 </div>

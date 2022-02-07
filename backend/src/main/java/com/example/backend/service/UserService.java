@@ -261,4 +261,20 @@ public class UserService {
     public List<User> findUsersByWishedCourse(Course course){
         return userRepository.findUsersByWishedCoursesContaining(course);
     }
+
+    public void banUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        optionalUser.ifPresent(User::ban);
+        userRepository.save(optionalUser.get());
+    }
+
+    public void unbanUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        optionalUser.ifPresent(User::unban);
+        userRepository.save(optionalUser.get());
+    }
+
+    public void adminDeleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }
