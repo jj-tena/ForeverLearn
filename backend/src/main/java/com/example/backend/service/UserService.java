@@ -244,6 +244,21 @@ public class UserService {
 
     public Boolean isCourseDisliked(User user, Course course){
         return user.isCourseDisliked(course);
+    }
 
+    public Optional<User>findCourseOwner(Course course){
+        return userRepository.findUserByUserCoursesContains(course);
+    }
+
+    public List<User> findUsersByEnrolledCourse(Course course){
+        return userRepository.findUsersByEnrolledCoursesContaining(course);
+    }
+
+    public List<User> findUsersByCompletedCourse(Course course){
+        return userRepository.findUsersByCompletedCoursesContaining(course);
+    }
+
+    public List<User> findUsersByWishedCourse(Course course){
+        return userRepository.findUsersByWishedCoursesContaining(course);
     }
 }

@@ -19,6 +19,7 @@
 
                             <div class="row">
                                 {{#courses}}
+                                    {{^banned}}
                                     <div class="col-lg-4 col-xl-3 col-sm-6">
 
                                     <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
@@ -81,6 +82,7 @@
                                     </div>
 
                                 </div>
+                                {{/banned}}
                                 {{/courses}}
                             </div>
 

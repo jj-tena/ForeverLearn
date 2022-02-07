@@ -42,6 +42,9 @@ public class AdminController {
 
     @GetMapping("/admin-courses-page-{pageNumber}")
     public String adminCourses(Model model, @PathVariable Integer pageNumber){
+
+        model.addAttribute("pageNumber", pageNumber);
+
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
@@ -124,7 +127,83 @@ public class AdminController {
         return "admin-courses";
     }
 
+    @GetMapping("/ban-course-{id}")
+    public String banCourse(Model model, @PathVariable Long id){
 
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            courseService.banCourse(id);
+        }
+
+        Page<Course> pageCourses = courseService.findPageCourses(0, 6);
+        model.addAttribute("lastPage", !pageCourses.hasNext());
+        model.addAttribute("firstPage", !pageCourses.hasPrevious());
+        model.addAttribute("courses", pageCourses);
+        model.addAttribute("coursesFound", pageCourses.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
+        return "admin-courses";
+    }
+
+    @GetMapping("/unban-course-{id}")
+    public String unbanCourse(Model model, @PathVariable Long id){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            courseService.unbanCourse(id);
+        }
+
+        Page<Course> pageCourses = courseService.findPageCourses(0, 6);
+        model.addAttribute("lastPage", !pageCourses.hasNext());
+        model.addAttribute("firstPage", !pageCourses.hasPrevious());
+        model.addAttribute("courses", pageCourses);
+        model.addAttribute("coursesFound", pageCourses.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
+        return "admin-courses";
+    }
+
+    @GetMapping("/admin-delete-course-{id}")
+    public String deleteCourse(Model model, @PathVariable Long id){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent() && activeUser.get().isAdmin()){
+            courseService.adminDeleteCourse(id);
+        }
+
+        Page<Course> pageCourses = courseService.findPageCourses(0, 6);
+        model.addAttribute("lastPage", !pageCourses.hasNext());
+        model.addAttribute("firstPage", !pageCourses.hasPrevious());
+        model.addAttribute("courses", pageCourses);
+        model.addAttribute("coursesFound", pageCourses.hasContent());
+
+        model.addAttribute("numberPage", 1);
+
+        return "admin-courses";
+    }
 
     @GetMapping("/admin-users-page-{pageNumber}")
     public String adminUsers(Model model, @PathVariable Integer pageNumber){

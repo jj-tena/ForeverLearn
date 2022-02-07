@@ -141,4 +141,33 @@ public class CourseService {
         course.quitDislike();
         courseRepository.save(course);
     }
+
+    public void banCourse(Long id) {
+        Optional<Course> optionalCourse = courseRepository.findById(id);
+        optionalCourse.ifPresent(Course::ban);
+        courseRepository.save(optionalCourse.get());
+    }
+
+    public void unbanCourse(Long id) {
+        Optional<Course> optionalCourse = courseRepository.findById(id);
+        optionalCourse.ifPresent(Course::unban);
+        courseRepository.save(optionalCourse.get());
+    }
+
+    public void adminDeleteCourse(Long id) {
+        Optional<Course> optionalCourse = courseRepository.findById(id);
+        if (optionalCourse.isPresent()){
+            Optional<User> userOptional = userService.getActiveUser();
+            if (userOptional.isPresent() && userOptional.get().isAdmin()){
+                Optional<User> courseOwner = userService.findCourseOwner(optionalCourse.get());
+                if (courseOwner.isPresent()){
+                    courseOwner.get().deleteUserCourse(optionalCourse.get());
+                }
+                userService.findUsersByEnrolledCourse(optionalCourse.get()).forEach(user -> user.deleteEnrolledCourse(optionalCourse.get()));
+                userService.findUsersByWishedCourse(optionalCourse.get()).forEach(user -> user.deleteWishedCourse(optionalCourse.get()));
+                userService.findUsersByCompletedCourse(optionalCourse.get()).forEach(user -> user.deleteCompletedCourse(optionalCourse.get()));
+                courseRepository.delete(optionalCourse.get());
+            }
+        }
+    }
 }

@@ -55,9 +55,13 @@
                                     </div>
                                 </div>
                                 <a href="/course-{{id}}" class="ml-4pt btn btn-primary text-white mr-4pt">Ver curso</a>
-                                <a data-toggle="modal" data-target="/ban-course-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
-                                <a data-toggle="modal" data-target="/unban-course-{{id}}" class="ml-4pt btn btn-success text-white mr-4pt">Desban</a>
-                                <a data-toggle="modal" data-target="/admin-delete-course-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
+                                {{^banned}}
+                                <a href="/ban-course-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Banear</a>
+                                {{/banned}}
+                                {{#banned}}
+                                <a href="/unban-course-{{id}}" class="ml-4pt btn btn-success text-white mr-4pt">Desbanear</a>
+                                {{/banned}}
+                                <a href="/admin-delete-course-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +72,7 @@
 
                     <ul class="pagination justify-content-center pagination-sm">
                         <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
-                            <a class="page-link" href="/admin-users-prev-page-{{pageNumber}}" aria-label="Previous">
+                            <a class="page-link" href="/admin-courses-prev-page-{{pageNumber}}" aria-label="Previous">
                                 <span aria-hidden="true" class="material-icons">chevron_left</span>
                             </a>
                         </li>
@@ -81,7 +85,7 @@
                         </li>
 
                         <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
-                            <a class="page-link" href="/admin-users-next-page-{{pageNumber}}" aria-label="Next">
+                            <a class="page-link" href="/admin-courses-next-page-{{pageNumber}}" aria-label="Next">
                                 <span aria-hidden="true" class="material-icons">chevron_right</span>
                             </a>
                         </li>

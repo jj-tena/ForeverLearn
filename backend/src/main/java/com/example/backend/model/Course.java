@@ -53,6 +53,8 @@ public class Course {
 
     private Integer dislikes = 0;
 
+    private Boolean banned = false;
+
     public Course() {
 
     }
@@ -114,6 +116,18 @@ public class Course {
 
     public void quitDislike(){
         this.dislikes--;
+    }
+
+    public Boolean isBanned(){
+        return this.banned;
+    }
+
+    public void ban(){
+        this.banned = true;
+    }
+
+    public void unban(){
+        this.banned = false;
     }
 
 }
