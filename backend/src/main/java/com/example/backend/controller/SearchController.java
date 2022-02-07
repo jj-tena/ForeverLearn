@@ -10,12 +10,14 @@ import com.example.backend.service.LessonService;
 import com.example.backend.service.UserService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -38,92 +40,36 @@ public class SearchController {
         this.lessonService = lessonService;
     }
 
-    @GetMapping("/library-page-{pageNumber}")
-    public String librayLink(Model model, @PathVariable Integer pageNumber){
-        if (pageNumber==0){
-            model.addAttribute("firstPage", true);
-        }
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        List<Course> list = courseService.findCourses();
-        model.addAttribute("results", list.size());
-        if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
-            model.addAttribute("lastPage", true);
-        }
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
-        model.addAttribute("categories", categoryService.findAll());
-        pageNumber++;
-        model.addAttribute("numberPage", pageNumber);
-
-        return "library";
-    }
-
-    @GetMapping("/library-prev-page-{pageNumber}")
-    public String librayLinkPrevPage(Model model, @PathVariable Integer pageNumber){
-        if (pageNumber==0){
-            model.addAttribute("firstPage", true);
-        }
-        if (pageNumber>0){
-            pageNumber--;
-        }
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        List<Course> list = courseService.findCourses();
-        model.addAttribute("results", list.size());
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
-        model.addAttribute("categories", categoryService.findAll());
-        pageNumber++;
-        model.addAttribute("numberPage", pageNumber);
-        return "library";
-    }
-
-    @GetMapping("/library-next-page-{pageNumber}")
-    public String librayLinkNextPage(Model model, @PathVariable Integer pageNumber){
-        pageNumber++;
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        List<Course> list = courseService.findCourses();
-        model.addAttribute("results", list.size());
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
-        if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
-            model.addAttribute("lastPage", true);
-        }
-        model.addAttribute("courses", courseService.findPageCourses(pageNumber, 12));
-        model.addAttribute("categories", categoryService.findAll());
-        pageNumber++;
-        model.addAttribute("numberPage", pageNumber);
-        return "library";
-    }
-
     @GetMapping("/category-{id}-library-page-{pageNumber}")
     public String libraryByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
-        if (pageNumber==0){
-            model.addAttribute("firstPage", true);
-        }
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        Optional<Category> category = categoryService.findById(id);
-        List<Course> list = new LinkedList<>();
-        if (category.isPresent()) {
-            list = courseService.findCoursesByCategory(category.get());
-            Boolean coursesFound = list.size()>0;
-            model.addAttribute("coursesFound", coursesFound);
-            if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
-                model.addAttribute("lastPage", true);
+
+        Page<Course> courses;
+        int results = 0;
+        if (id.equals(Long.valueOf("-1"))){
+            model.addAttribute("activeCategory", -1);
+            courses =  courseService.findPageCourses(pageNumber, 12);
+            model.addAttribute("courses", courses);
+            model.addAttribute("firstPage", !courses.hasPrevious());
+            model.addAttribute("lastPage", !courses.hasNext());
+            model.addAttribute("coursesFound", courses.hasContent());
+            results = courses.getNumberOfElements();
+        } else {
+            Optional<Category> category = categoryService.findById(id);
+            if (category.isPresent()) {
+                courses = courseService.findPageCoursesByCategory(pageNumber, category.get());
+                model.addAttribute("courses", courses);
+                model.addAttribute("activeCategory", category.get().getId());
+                model.addAttribute("firstPage", !courses.hasPrevious());
+                model.addAttribute("lastPage", !courses.hasNext());
+                model.addAttribute("coursesFound", courses.hasContent());
+                results = courses.getNumberOfElements();
             }
-            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
-            model.addAttribute("activeCategory", category.get().getId());
         }
-        model.addAttribute("results", list.size());
+
+        model.addAttribute("results", results);
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
@@ -132,25 +78,37 @@ public class SearchController {
 
     @GetMapping("/category-{id}-library-prev-page-{pageNumber}")
     public String libraryPrevPageByCategory(Model model, @PathVariable Long id, @PathVariable Integer pageNumber){
-        if (pageNumber==0){
-            model.addAttribute("firstPage", true);
-        }
         if (pageNumber>0){
             pageNumber--;
         }
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        Optional<Category> category = categoryService.findById(id);
-        List<Course> list = new LinkedList<>();
-        if (category.isPresent()) {
-            list = courseService.findCoursesByCategory(category.get());
-            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
-            model.addAttribute("activeCategory", category.get().getId());
+
+        Page<Course> courses;
+        int results = 0;
+        if (id.equals(Long.valueOf("-1"))){
+            model.addAttribute("activeCategory", -1);
+            courses =  courseService.findPageCourses(pageNumber, 12);
+            model.addAttribute("courses", courses);
+            model.addAttribute("firstPage", !courses.hasPrevious());
+            model.addAttribute("lastPage", !courses.hasNext());
+            model.addAttribute("coursesFound", courses.hasContent());
+            results = courses.getNumberOfElements();
+        } else {
+            Optional<Category> category = categoryService.findById(id);
+            if (category.isPresent()) {
+                courses = courseService.findPageCoursesByCategory(pageNumber, category.get());
+                model.addAttribute("courses", courses);
+                model.addAttribute("activeCategory", category.get().getId());
+                model.addAttribute("firstPage", !courses.hasPrevious());
+                model.addAttribute("lastPage", !courses.hasNext());
+                model.addAttribute("coursesFound", courses.hasContent());
+                results = courses.getNumberOfElements();
+            }
         }
-        model.addAttribute("results", list.size());
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
+
+        model.addAttribute("results", results);
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
@@ -163,19 +121,31 @@ public class SearchController {
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        Optional<Category> category = categoryService.findById(id);
-        List<Course> list = new LinkedList<>();
-        if (category.isPresent()) {
-            list = courseService.findCoursesByCategory(category.get());
-            if ( ( ((list.size()/12) == pageNumber + 1) && ((list.size() % 12)==0) ) || ( ((list.size()/12) < pageNumber + 1) && ((list.size() % 12)>0) ) ) {
-                model.addAttribute("lastPage", true);
+
+        Page<Course> courses;
+        int results = 0;
+        if (id.equals(Long.valueOf("-1"))){
+            model.addAttribute("activeCategory", -1);
+            courses =  courseService.findPageCourses(pageNumber, 12);
+            model.addAttribute("courses", courses);
+            model.addAttribute("firstPage", !courses.hasPrevious());
+            model.addAttribute("lastPage", !courses.hasNext());
+            model.addAttribute("coursesFound", courses.hasContent());
+            results = courses.getNumberOfElements();
+        } else {
+            Optional<Category> category = categoryService.findById(id);
+            if (category.isPresent()) {
+                courses = courseService.findPageCoursesByCategory(pageNumber, category.get());
+                model.addAttribute("courses", courses);
+                model.addAttribute("activeCategory", category.get().getId());
+                model.addAttribute("firstPage", !courses.hasPrevious());
+                model.addAttribute("lastPage", !courses.hasNext());
+                model.addAttribute("coursesFound", courses.hasContent());
+                results = courses.getNumberOfElements();
             }
-            model.addAttribute("courses", courseService.findPageCoursesByCategory(pageNumber, category.get()));
-            model.addAttribute("activeCategory", category.get().getId());
         }
-        model.addAttribute("results", list.size());
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
+
+        model.addAttribute("results", results);
         model.addAttribute("categories", categoryService.findAll());
         pageNumber++;
         model.addAttribute("numberPage", pageNumber);
@@ -211,6 +181,9 @@ public class SearchController {
         model.addAttribute("numberPage", 1);
         model.addAttribute("firstPage", true);
         model.addAttribute("lastPage", true);
+
+        model.addAttribute("activeCategory", -1);
+
         return "library";
     }
 
@@ -307,23 +280,6 @@ public class SearchController {
         } else {
             return "index";
         }
-    }
-
-    @GetMapping("/category-{id}-difficulty-filter")
-    public String filterLibrary(Model model, @PathVariable Long id){
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        Optional<Category> category = categoryService.findById(id);
-        List<Course> list = new LinkedList<>();
-        if (category.isPresent())
-            list = courseService.findCoursesByCategory(category.get());
-        model.addAttribute("results", list.size());
-        Boolean coursesFound = list.size()>0;
-        model.addAttribute("coursesFound", coursesFound);
-        model.addAttribute("courses", list);
-        model.addAttribute("categories", categoryService.findAll());
-        return "library";
     }
 
 

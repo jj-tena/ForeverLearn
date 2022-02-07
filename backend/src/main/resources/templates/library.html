@@ -41,17 +41,6 @@
                                                         <a class="card-title" href="/course-{{id}}">{{name}}</a>
                                                         <small class="text-50 font-weight-bold mb-4pt">{{author.name}}</small>
                                                     </div>
-                                                    <a href="course.html" class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite</a>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <div class="rating flex">
-                                                        <span class="rating__item"><span class="material-icons">star</span></span>
-                                                        <span class="rating__item"><span class="material-icons">star</span></span>
-                                                        <span class="rating__item"><span class="material-icons">star</span></span>
-                                                        <span class="rating__item"><span class="material-icons">star</span></span>
-                                                        <span class="rating__item"><span class="material-icons">star_border</span></span>
-                                                    </div>
-                                                    <small class="text-50">{{length}} horas</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,29 +86,7 @@
 
                             {{#coursesFound}}
                                 <!-- Pagination -->
-                                {{^activeCategory}}
-                                <ul class="pagination justify-content-center pagination-sm">
-                                    <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
-                                        <a class="page-link" href="/library-prev-page-{{pageNumber}}" aria-label="Previous">
-                                            <span aria-hidden="true" class="material-icons">chevron_left</span>
-                                        </a>
-                                    </li>
 
-
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#" aria-label="1">
-                                            <span>{{numberPage}}</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
-                                        <a class="page-link" href="/library-next-page-{{pageNumber}}" aria-label="Next">
-                                            <span aria-hidden="true" class="material-icons">chevron_right</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                {{/activeCategory}}
-                                {{#activeCategory}}
                                 <ul class="pagination justify-content-center pagination-sm">
                                     <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
                                         <a class="page-link" href="/category-{{activeCategory}}-library-prev-page-{{pageNumber}}" aria-label="Previous">
@@ -140,7 +107,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                {{/activeCategory}}
+
                             {{/coursesFound}}
 
                             {{^coursesFound}}
@@ -176,34 +143,6 @@
                                     </ul>
                                 </div>
 
-                                <div class="px-24pt filter-section">
-                                    <ul class="accordion js-accordion mb-24pt mb-md-48pt" id="library-difficulty">
-                                        <li class="accordion__item">
-                                            <a class="accordion__toggle collapsed" data-toggle="collapse" data-parent="#library-difficulty" href="#library-difficulty-all">
-                                                <span class="flex">Dificultad</span>
-                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                            </a>
-                                            <nav class="accordion__menu collapse" id="library-difficulty-all">
-                                                <form action="#">
-                                                    <div class="form-group custom-controls-stacked">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" checked id="difficulty-beginner">
-                                                            <label class="custom-control-label" for="difficulty-beginner">Principiante</label>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" checked id="difficulty-intermediate">
-                                                            <label class="custom-control-label" for="difficulty-intermediate">Intermedio</label>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" checked id="difficulty-advanced">
-                                                            <label class="custom-control-label" for="difficulty-advanced">Avanzado</label>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </nav>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
