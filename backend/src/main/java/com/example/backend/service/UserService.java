@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -275,6 +276,18 @@ public class UserService {
     }
 
     public void adminDeleteUser(Long id) {
-        userRepository.deleteById(id);
+        Optional<User> optionalUser = userRepository.findUserById(id);
+        if (optionalUser.isPresent()){
+            List<Course> userCourses = optionalUser.get().getUserCourses();
+            List<Course> aux = new ArrayList<>();
+            userCourses.forEach(course -> {
+                course.setAuthor(null);
+                courseRepository.save(course);
+                aux.add(course);
+            });
+            optionalUser.get().getUserCourses().clear();
+            courseRepository.deleteAll(aux);
+            userRepository.delete(optionalUser.get());
+        }
     }
 }

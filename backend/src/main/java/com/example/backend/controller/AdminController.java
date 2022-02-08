@@ -372,6 +372,13 @@ public class AdminController {
 
         model.addAttribute("numberPage", 1);
 
+        if (id.equals(activeUser.get().getId())){
+            userService.logout();
+            model.addAttribute("activeUser", false);
+            model.addAttribute("activeUserAdmin", false);
+            return "index";
+        }
+
         return "admin-users";
     }
 

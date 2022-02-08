@@ -36,7 +36,7 @@ public class AuthenticationController {
     public String loginUser(Model model, User user) throws IOException {
         model.addAttribute("categories", categoryService.findAll());
         Optional<User> activeUser = userService.login(user);
-        if (activeUser.isPresent()){
+        if (activeUser.isPresent() && !activeUser.get().isBanned()){
             userService.setActiveUser(activeUser.get());
             model.addAttribute("activeUser", activeUser.isPresent());
             activeUser.ifPresent(userActive -> model.addAttribute("activeUserAdmin", userActive.isAdmin()));
