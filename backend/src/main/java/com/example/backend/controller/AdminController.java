@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.Category;
 import com.example.backend.model.Course;
 import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
@@ -380,6 +381,97 @@ public class AdminController {
         }
 
         return "admin-users";
+    }
+
+
+
+
+
+    @GetMapping("/admin-categories-page-{pageNumber}")
+    public String adminCategories(Model model, @PathVariable Integer pageNumber){
+
+        model.addAttribute("pageNumber", pageNumber);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        Page<Category> pageCategories = categoryService.findPageCategories(pageNumber, 6);
+        model.addAttribute("lastPage", !pageCategories.hasNext());
+        model.addAttribute("firstPage", !pageCategories.hasPrevious());
+        model.addAttribute("pageCategories", pageCategories);
+        model.addAttribute("categoriesFound", pageCategories.hasContent());
+
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+
+        return "admin-categories";
+    }
+
+    @GetMapping("/admin-categories-prev-page-{pageNumber}")
+    public String adminCategoriesPrevPage(Model model, @PathVariable Integer pageNumber){
+        if (pageNumber>0){
+            pageNumber--;
+            model.addAttribute("pageNumber", pageNumber);
+        }
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+
+        Page<Category> pageCategories = categoryService.findPageCategories(pageNumber, 6);
+        model.addAttribute("categoriesFound", pageCategories.hasContent());
+        model.addAttribute("pageCategories", pageCategories);
+        model.addAttribute("firstPage", !pageCategories.hasPrevious());
+        model.addAttribute("categories", categoryService.findAll());
+
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+
+        return "admin-categories";
+    }
+
+    @GetMapping("/admin-categories-next-page-{pageNumber}")
+    public String adminCategoriesNextPage(Model model, @PathVariable Integer pageNumber){
+        pageNumber++;
+        model.addAttribute("pageNumber", pageNumber);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+
+        Page<Category> pageCategories = categoryService.findPageCategories(pageNumber, 6);
+        model.addAttribute("categoriesFound", pageCategories.hasContent());
+        model.addAttribute("lastPage", !pageCategories.hasNext());
+        model.addAttribute("pageCategories", pageCategories);
+        model.addAttribute("categories", categoryService.findAll());
+
+        pageNumber++;
+        model.addAttribute("numberPage", pageNumber);
+        return "admin-categories";
+    }
+
+    @GetMapping("/admin-search-category")
+    public String findCategoryByName(Model model, String name){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        Optional<List<Category>> categoriesByName = categoryService.findCategoriesByName(name);
+        Boolean categoriesFound = categoriesByName.get().size()>0;
+        model.addAttribute("categoriesFound", categoriesFound);
+        model.addAttribute("pageCategories", categoriesByName.get());
+        model.addAttribute("pageNumber", 1);
+        model.addAttribute("numberPage", 1);
+        model.addAttribute("firstPage", true);
+        model.addAttribute("lastPage", true);
+        return "admin-categories";
     }
 
 

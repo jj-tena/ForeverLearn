@@ -1,10 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Category;
+import com.example.backend.model.Course;
 import com.example.backend.repository.CategoryRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -40,4 +43,11 @@ public class CategoryService {
         return categoryRepository.findByName(name);
     }
 
+    public Page<Category> findPageCategories(Integer numberPage, int content) {
+        return categoryRepository.findAll(PageRequest.of(numberPage, content));
+    }
+
+    public Optional<List<Category>> findCategoriesByName(String name) {
+        return categoryRepository.findAllByName(name);
+    }
 }
