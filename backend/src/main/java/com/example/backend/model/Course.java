@@ -31,10 +31,6 @@ public class Course {
     @JsonIgnore
     private Blob picture;
 
-    @Lob
-    @JsonIgnore
-    private Blob trailer;
-
     @OneToMany
     private List<Objective> objectives;
 

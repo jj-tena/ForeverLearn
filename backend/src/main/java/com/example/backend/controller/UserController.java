@@ -313,9 +313,9 @@ public class UserController {
     }
 
     @PostMapping("/create-lesson-for-theme-{themeId}-for-course-{courseId}")
-    public String createLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long themeId, @PathVariable Long courseId){
+    public String createLesson(Model model, String nameLesson, String descriptionLesson, String iframeLesson, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
-        lessonService.createLesson(nameLesson, descriptionLesson, optionalTheme.get());
+        lessonService.createLesson(nameLesson, descriptionLesson, iframeLesson, optionalTheme.get());
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
@@ -328,9 +328,9 @@ public class UserController {
 
 
     @PostMapping("/edit-lesson-{lessonId}-for-theme-{themeId}-for-course-{courseId}")
-    public String editLesson(Model model, String nameLesson, String descriptionLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
+    public String editLesson(Model model, String nameLesson, String descriptionLesson, String iframeLesson, @PathVariable Long lessonId, @PathVariable Long themeId, @PathVariable Long courseId){
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
-        lessonService.updateLesson(lessonId, nameLesson, descriptionLesson, optionalTheme.get());
+        lessonService.updateLesson(lessonId, nameLesson, descriptionLesson, iframeLesson);
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));

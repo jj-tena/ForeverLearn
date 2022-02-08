@@ -20,8 +20,8 @@ public class LessonService {
         this.themeService = themeService;
     }
 
-    public Lesson createLesson(String nameLesson, String descriptionLesson, Theme theme) {
-        Lesson lesson = new Lesson(nameLesson, descriptionLesson);
+    public Lesson createLesson(String nameLesson, String descriptionLesson, String iframeLesson, Theme theme) {
+        Lesson lesson = new Lesson(nameLesson, descriptionLesson, iframeLesson);
         Lesson savedLesson = lessonRepository.save(lesson);
         theme.addLesson(savedLesson);
         themeService.save(theme);
@@ -36,16 +36,18 @@ public class LessonService {
         }
     }
 
-    public void updateLesson(Long lessonId, String nameLesson, String descriptionLesson, Theme theme) {
+    public void updateLesson(Long lessonId, String nameLesson, String descriptionLesson, String iframeLesson) {
         Optional<Lesson> optionalLesson = lessonRepository.findById(lessonId);
         if (optionalLesson.isPresent()){
             if (Objects.nonNull(nameLesson)){
                 optionalLesson.get().setNameLesson(nameLesson);
             } if (Objects.nonNull(descriptionLesson)){
                 optionalLesson.get().setDescriptionLesson(descriptionLesson);
+            } if (Objects.nonNull(iframeLesson)){
+                optionalLesson.get().setIframeLesson(iframeLesson);
             }
+            lessonRepository.save(optionalLesson.get());
         }
-        lessonRepository.save(optionalLesson.get());
     }
 
 

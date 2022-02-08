@@ -19,15 +19,15 @@ public class Lesson {
     @Column(columnDefinition = "TEXT")
     private String descriptionLesson;
 
-    @Lob
-    @JsonIgnore
-    private Blob file;
+    @Column(columnDefinition = "TEXT")
+    private String iframeLesson;
 
     public Lesson() {
     }
 
-    public Lesson(String nameLesson, String descriptionLesson) {
+    public Lesson(String nameLesson, String descriptionLesson, String iframeLesson) {
         this.nameLesson = nameLesson;
         this.descriptionLesson = descriptionLesson;
+        this.iframeLesson = iframeLesson;
     }
 }

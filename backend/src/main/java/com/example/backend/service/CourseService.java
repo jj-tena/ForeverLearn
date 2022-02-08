@@ -2,7 +2,6 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
-import com.example.backend.model.Requirement;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -16,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

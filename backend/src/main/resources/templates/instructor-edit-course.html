@@ -358,7 +358,7 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea rows="10"  name="descriptionTheme" value="{{descriptionTheme}}" class="form-control" placeholder="Introduce la descripción"></textarea>
+                                <textarea rows="10"  name="descriptionTheme" class="form-control" placeholder="{{descriptionTheme}}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -432,7 +432,6 @@
                                 <label class="col-form-label col-sm-3">Descripción</label>
                                 <div class="col-sm-9">
                                     <textarea name="descriptionLesson" rows="15" class="form-control" placeholder="Introduce la descripción"></textarea>
-                                    <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
                                 </div>
                             </div>
                         </div>
@@ -440,20 +439,8 @@
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
                                 <div class="col-sm-9">
-                                    <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item">
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-sm-3">Material</label>
-                                <div class="col-sm-9 media align-items-center">
-                                    <div class="media-body">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                            <label class="custom-file-label" for="inputGroupFile01">Elegir archivo</label>
-                                        </div>
-                                    </div>
+                                    <textarea name="iframeLesson" rows="10" class="form-control" placeholder="Introduce el código del iframe"></textarea>
+                                    <small class="form-text text-muted">Consejo: Si quieres utilizar un video de YouTube, en las opciones del video haz click en compartir, opción insertar y copia el texto que se te muestre en este campo.</small>
                                 </div>
                             </div>
                         </div>
@@ -501,8 +488,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Descripción</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="15" name="descriptionLesson" class="form-control" placeholder="Introduce la descripción"></textarea>
-                                                <small class="form-text text-muted">Este campo admite texto en formato Markdown</small>
+                                                <textarea rows="15" name="descriptionLesson" class="form-control" placeholder="{{descriptionLesson}}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -510,7 +496,7 @@
                                         <div class="form-group row mb-0">
                                             <label class="col-form-label col-sm-3">Insertar contenido embebido</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="5" class="form-control" placeholder="Introduce el código del iframe"></textarea>
+                                                <textarea rows="10" name="iframeLesson" class="form-control" placeholder="{{iframeLesson}}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -803,7 +789,7 @@
                     <!-- // END Brand -->
 
                     <!-- Search -->
-                    <form action="library-filters.html" class="search-form search-form--black">
+                    <form action="/library" class="search-form search-form--black">
                         <input type="text" class="form-control" placeholder="Búsqueda">
                         <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
                     </form>
@@ -812,10 +798,10 @@
 
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="library.html">Cursos</a>
+                        <a class="sidebar-menu-button" href="/library">Cursos</a>
                     </li>
                     <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="login.html">Iniciar sesión</a>
+                        <a class="sidebar-menu-button" href="/login">Iniciar sesión</a>
                     </li>
                 </ul>
             </div>
