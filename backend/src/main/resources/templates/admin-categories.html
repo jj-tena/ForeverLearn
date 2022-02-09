@@ -131,97 +131,126 @@
     </div>
     <!-- // END Header Layout -->
 
-    <!-- // Modal ban course-->
-    <div class="modal fade" id="banCourse">
+<!-- // Modal create requirement-->
+<div class="modal fade" id="createCategory">
+    <form action="/create-category" method="post" id="create-category-form">
         <div class="modal-dialog">
-          <div class="modal-content">
+            <div class="modal-content">
 
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Banear curso</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Crear categoría</h4>
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
 
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                <div class="list-group list-group-form">
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-12">¿Cúantos días deseas banear este curso?</label>
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">l>
+                                <label class="col-form-label col-sm-3">Categoría</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" class="form-control" placeholder="Introduce la nueva categoría">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" placeholder="Introduce el número de días">
+
+                    </div>
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="create-category-form" value="Submit" class="btn btn-lg btn-accent">Crear categoría</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{{#pageCategories}}
+
+<!-- // Modal edit requirement-->
+<div class="modal fade" id="editCategory-{{id}}">
+    <form action="/edit-category-{{id}}" method="post" id="edit-category-{{id}}-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar categoría</h4>
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Categoría</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" value="{{name}}" class="form-control" placeholder="Introduce la categoría modificada">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-accent">Banear curso</button>
-                </div>
-            </div>
+                    <div class="list-group-item">
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-sm-3">Miniatura</label>
+                            <div class="col-sm-9 media align-items-center">
+                                <div class="media-body">
+                                    <div class="custom-file">
+                                        <input name="image" type="file" class="custom-file-input" id="inputGroupFile00" accept="image/png, image/jpeg">
+                                        <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          </div>
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="edit-category-{{id}}-form" value="Submit" class="btn btn-lg btn-accent">Editar categoría</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </form>
+</div>
 
-    <!-- // Modal unban course-->
-    <div class="modal fade" id="unbanCourse">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
+<!-- // Modal delete requirement-->
+<div class="modal fade" id="deleteCategory-{{id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <!-- cabecera del diálogo -->
             <div class="modal-header">
-              <h4 class="modal-title">Desbanear curso</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
+                <h4 class="modal-title">Borrar requisito</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
             </div>
 
             <!-- cuerpo del diálogo -->
             <div class="modal-body">
-                ¿Está seguro de que desea desbanear este curso?
+                ¿Está seguro de que desea borrar el requisito: {{name}}?
             </div>
 
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <button class="btn btn-lg btn-success">Desbanear curso</button>
+                    <a href="/delete-category-{{id}}" class="btn btn-lg btn-accent">Borrar requisito</a>
                 </div>
             </div>
-
-          </div>
         </div>
     </div>
+</div>
 
-    <!-- // Modal delete course-->
-    <div class="modal fade" id="deleteCourse">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <!-- cabecera del diálogo -->
-            <div class="modal-header">
-              <h4 class="modal-title">Borrar curso</h4>
-              <button type="button" class="close" data-dismiss="modal">X</button>
-            </div>
-
-            <!-- cuerpo del diálogo -->
-            <div class="modal-body">
-                ¿Está seguro de que desea borrar este curso?
-            </div>
-
-            <!-- pie del diálogo -->
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-lg btn-black">Borrar curso</button>
-                </div>
-            </div>
-
-          </div>
-        </div>
-    </div>
+{{/pageCategories}}
 
     <!-- DRAWER (MOBILE NAVBAR) -->
     <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
