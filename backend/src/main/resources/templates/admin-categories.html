@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="page-headline text-center">
-                    <a href="/create-category" class="ml-4pt btn btn-accent text-white mr-4pt">Crear categoría</a>
+                    <a data-toggle="modal" data-target="#createCategory" class="ml-4pt btn btn-accent text-white mr-4pt">Crear categoría</a>
                 </div>
 
                 <div>
@@ -57,8 +57,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="/ban-course-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Editar</a>
-                                <a href="/admin-delete-course-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
+                                <a data-toggle="modal" data-target="#editCategory-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Editar</a>
+                                <a data-toggle="modal" data-target="#deleteCategory-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
 
 <!-- // Modal create requirement-->
 <div class="modal fade" id="createCategory">
-    <form action="/create-category" method="post" id="create-category-form">
+    <form action="/create-category" method="post" id="create-category-form" enctype="multipart/form-data">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -147,7 +147,7 @@
                 <div class="modal-body">
                     <div class="list-group list-group-form">
                         <div class="list-group-item">
-                            <div class="form-group row mb-0">l>
+                            <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-3">Categoría</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="name" class="form-control" placeholder="Introduce la nueva categoría">
@@ -155,7 +155,22 @@
                             </div>
                         </div>
 
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Miniatura</label>
+                                <div class="col-sm-9 media align-items-center">
+                                    <div class="media-body">
+                                        <div class="custom-file">
+                                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" accept="image/png, image/jpeg">
+                                            <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
 
                 <!-- pie del diálogo -->
@@ -174,7 +189,7 @@
 
 <!-- // Modal edit requirement-->
 <div class="modal fade" id="editCategory-{{id}}">
-    <form action="/edit-category-{{id}}" method="post" id="edit-category-{{id}}-form">
+    <form action="/edit-category-{{id}}" method="post" id="edit-category-{{id}}-form" enctype="multipart/form-data">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -195,21 +210,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="list-group-item">
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-sm-3">Miniatura</label>
-                            <div class="col-sm-9 media align-items-center">
-                                <div class="media-body">
-                                    <div class="custom-file">
-                                        <input name="image" type="file" class="custom-file-input" id="inputGroupFile00" accept="image/png, image/jpeg">
-                                        <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Miniatura</label>
+                                <div class="col-sm-9 media align-items-center">
+                                    <div class="media-body">
+                                        <div class="custom-file">
+                                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile00" accept="image/png, image/jpeg">
+                                            <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
 
                 </div>
 
@@ -231,19 +248,19 @@
         <div class="modal-content">
             <!-- cabecera del diálogo -->
             <div class="modal-header">
-                <h4 class="modal-title">Borrar requisito</h4>
+                <h4 class="modal-title">Borrar categoría</h4>
                 <button type="button" class="close" data-dismiss="modal">X</button>
             </div>
 
             <!-- cuerpo del diálogo -->
             <div class="modal-body">
-                ¿Está seguro de que desea borrar el requisito: {{name}}?
+                ¿Está seguro de que desea borrar la categoría: {{name}}?
             </div>
 
             <!-- pie del diálogo -->
             <div class="modal-footer">
                 <div class="text-center">
-                    <a href="/delete-category-{{id}}" class="btn btn-lg btn-accent">Borrar requisito</a>
+                    <a href="/delete-category-{{id}}" class="btn btn-lg btn-accent">Borrar categoría</a>
                 </div>
             </div>
         </div>

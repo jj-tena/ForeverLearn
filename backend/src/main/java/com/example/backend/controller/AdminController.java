@@ -11,7 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -472,6 +476,24 @@ public class AdminController {
         model.addAttribute("firstPage", true);
         model.addAttribute("lastPage", true);
         return "admin-categories";
+    }
+
+    @PostMapping("/create-category")
+    public String createCategory(Model model, String name, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        categoryService.createCategory(name, multipartFile);
+        return this.adminCategories(model, 0);
+    }
+
+    @PostMapping("/edit-category-{id}")
+    public String editCategory(Model model, String name, @RequestParam("image") MultipartFile multipartFile, @PathVariable Long id) throws IOException {
+        categoryService.editCategory(name, multipartFile, id);
+        return this.adminCategories(model, 0);
+    }
+
+    @GetMapping("/delete-category-{id}")
+    public String deleteCategory(Model model, @PathVariable Long id) throws IOException {
+        categoryService.deleteCategory(id);
+        return this.adminCategories(model, 0);
     }
 
 
