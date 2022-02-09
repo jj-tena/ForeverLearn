@@ -17,6 +17,131 @@
             </div>
 
             <div class="container page__container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="page-section">
+                            <div class="page-section border-bottom-2">
+                                <div class="container page__container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <h4>Temario</h4>
+
+                                        </div>
+                                        <div class="col-7"></div>
+                                        <div class="col-3">
+                                            <a data-toggle="modal" data-target="#createTheme" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear tema</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-group card-group--lg-up mb-0">
+                                        <div class="card col-lg-12 p-0">
+
+                                            <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc-themes">
+                                                {{#course.themes}}
+                                                <li class="accordion__item">
+                                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
+                                                        <span class="flex">{{nameTheme}}</span>
+                                                        <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                                        <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
+                                                        <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
+                                                        <button data-toggle="modal" data-target="#createLessonForTheme-{{idTheme}}" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
+                                                    </a>
+                                                    <div class="accordion__menu">
+                                                        <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
+                                                            {{#lessons}}
+                                                            <li class="accordion__menu-link">
+                                                                <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                                                                <a class="flex" href="lesson.html">{{nameLesson}}</a>
+                                                                <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                            </li>
+                                                            {{/lessons}}
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                {{/course.themes}}
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="page-section border-bottom-2">
+                                <div class="container page__container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <h4>Requisitos</h4>
+                                        </div>
+                                        <div class="col-7"></div>
+                                        <div class="col-3">
+                                            <a data-toggle="modal" data-target="#createRequirement" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear requisito</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-group card-group--lg-up mb-0">
+                                        <div class="card col-lg-12 p-0">
+
+                                            <ul class="accordion accordion--boxed js-accordion list-group-flush" id="">
+
+                                                {{#course.requirements}}
+                                                <li class="accordion__item">
+                                                    <div class="accordion__toggle" data-toggle="collapse" data-parent="">
+                                                        <span class="flex">{{nameRequirement}}</span>
+                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                        <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                    </div>
+                                                </li>
+                                                {{/course.requirements}}
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="page-section border-bottom-2">
+                                <div class="container page__container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <h4>Objetivos</h4>
+
+                                        </div>
+                                        <div class="col-7"></div>
+                                        <div class="col-3">
+                                            <a data-toggle="modal" data-target="#createObjective" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear objetivo</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-group card-group--lg-up mb-0">
+                                        <div class="card col-lg-12 p-0">
+
+                                            <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+
+                                                {{#course.objectives}}
+                                                <li class="accordion__item">
+                                                    <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
+                                                        <span class="flex">{{nameObjective}}</span>
+                                                        <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
+                                                        <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
+                                                    </div>
+                                                </li>
+                                                {{/course.objectives}}
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container page__container">
                 <form action="/edit-course-{{course.id}}" method="post" id="edit-course-form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-12">
@@ -124,131 +249,6 @@
                     </div>
                 </form>
             </div>
-
-            <div class="container page__container">
-                <div class="row">
-                        <div class="col-lg-12">
-
-                            <div class="page-section">
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Temario</h4>
-
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createTheme" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear tema</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc-themes">
-                                                        {{#course.themes}}
-                                                            <li class="accordion__item">
-                                                                <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
-                                                                    <span class="flex">{{nameTheme}}</span>
-                                                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                                                    <button class="button-60 ml-16pt" data-toggle="modal" data-target="#editTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></button>
-                                                                    <button class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteTheme-{{idTheme}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></button>
-                                                                    <button data-toggle="modal" data-target="#createLessonForTheme-{{idTheme}}" class="btn btn-accent ml-16pt" style="float:right">Crear lección</button>
-                                                                </a>
-                                                                <div class="accordion__menu">
-                                                                    <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
-                                                                        {{#lessons}}
-                                                                        <li class="accordion__menu-link">
-                                                                            <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                            <a class="flex" href="lesson.html">{{nameLesson}}</a>
-                                                                            <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                            <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                                        </li>
-                                                                        {{/lessons}}
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        {{/course.themes}}
-
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Requisitos</h4>
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createRequirement" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear requisito</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="">
-
-                                                        {{#course.requirements}}
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="">
-                                                                <span class="flex">{{nameRequirement}}</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteRequirement-{{idRequirement}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
-                                                        {{/course.requirements}}
-
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="page-section border-bottom-2">
-                                        <div class="container page__container">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <h4>Objetivos</h4>
-
-                                                </div>
-                                                <div class="col-7"></div>
-                                                <div class="col-3">
-                                                    <a data-toggle="modal" data-target="#createObjective" class="btn btn-accent mb-16pt" style="color:white; float:right">Crear objetivo</a>
-                                                </div>
-                                            </div>
-                                            <div class="card-group card-group--lg-up mb-0">
-                                                <div class="card col-lg-12 p-0">
-
-                                                    <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-
-                                                        {{#course.objectives}}
-                                                        <li class="accordion__item">
-                                                            <div class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="">
-                                                                <span class="flex">{{nameObjective}}</span>
-                                                                <a class="button-60 ml-16pt" data-toggle="modal" data-target="#editObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
-                                                                <a class="button-60  ml-16pt" data-toggle="modal" data-target="#deleteObjective-{{idObjective}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
-                                                            </div>
-                                                        </li>
-                                                        {{/course.objectives}}
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-
 
             <div class="js-fix-footer bg-white border-top-2">
                 <div class="bg-footer page-section py-lg-32pt">

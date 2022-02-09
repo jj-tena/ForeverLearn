@@ -47,8 +47,6 @@
                     <p class="lead text-70 col-lg-8 mx-auto">Cursos de {{user.name}}</p>
                 </div>
 
-
-
                 <div class="card-columns card-columns--2">
 
                     {{#courses}}
@@ -57,26 +55,6 @@
                             <a href="/course-{{id}}" class="avatar avatar-4by3 mr-16pt">
                                 <img src="/courses/{{id}}/picture" alt="Angular Routing In-Depth" class="avatar-img rounded">
                             </a>
-                            <div class="flex">
-                                <a class="card-title mb-4pt" href="/course-{{id}}">{{name}}</a>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating mr-8pt">
-
-                                        <span class="rating__item"><span class="material-icons">star</span></span>
-
-                                        <span class="rating__item"><span class="material-icons">star</span></span>
-
-                                        <span class="rating__item"><span class="material-icons">star</span></span>
-
-
-                                        <span class="rating__item"><span class="material-icons">star_border</span></span>
-
-                                        <span class="rating__item"><span class="material-icons">star_border</span></span>
-
-                                    </div>
-                                    <small class="text-muted">3/5</small>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     {{/courses}}
