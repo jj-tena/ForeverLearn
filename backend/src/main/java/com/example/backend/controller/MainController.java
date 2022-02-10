@@ -75,4 +75,13 @@ public class MainController {
         model.addAttribute("categories", categoryService.findAll());
         return "privacy-policy";
     }
+
+    @GetMapping("/errores")
+    public String errorLink(Model model){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("categories", categoryService.findAll());
+        return "error";
+    }
 }
