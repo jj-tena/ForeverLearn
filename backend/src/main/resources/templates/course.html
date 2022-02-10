@@ -106,13 +106,12 @@
 
             <div class="page-section border-bottom-2">
                 <div class="container page__container">
-
+                    {{#hasThemes}}
                     <h4>Índice</h4>
                     <div class="card-group card-group--lg-up mb-0">
                         <div class="card col-lg-12 p-0">
                             
                             <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
-
                                 {{#course.themes}}
                                 <li class="accordion__item">
                                     <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
@@ -131,17 +130,20 @@
                                     </div>
                                 </li>
                                 {{/course.themes}}
-
                             </ul>
-
                         </div>
                         
                     </div>
+                    {{/hasThemes}}
+                    {{^hasThemes}}
+                    <div class="d-flex justify-content-center">
+                        <h2>Este curso no tiene temario aún</h2>
+                    </div>
+                    {{/hasThemes}}
                 </div>
             </div>
 
             <div class="bg-white">
-
 
                 <div class="page-separator-mask page-section pb-0 js-read-more">
                     <div class="container page__container">
@@ -150,23 +152,37 @@
                             <div class="col-md-6">
                                 <h4>Requisitos</h4>
                                 <ul class="list-unstyled">
-                                    {{#course.requirements}}
+                                    {{#hasRequirements}}
+                                        {{#course.requirements}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="material-icons text-50 mr-8pt">check</span>
+                                            <span class="text-70">{{nameRequirement}}</span>
+                                        </li>
+                                        {{/course.requirements}}
+                                    {{/hasRequirements}}
+                                    {{^hasRequirements}}
                                     <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">{{nameRequirement}}</span>
+                                        <span class="text-70">Este curso no tiene requisitos</span>
                                     </li>
-                                    {{/course.requirements}}
+                                    {{/hasRequirements}}
                                 </ul>
                             </div>
                             <div class="col-md-5">
                                 <h4>Objetivos</h4>
                                 <ul class="list-unstyled">
-                                    {{#course.objectives}}
-                                    <li class="d-flex align-items-center">
-                                        <span class="material-icons text-50 mr-8pt">check</span>
-                                        <span class="text-70">{{nameObjective}}</span>
-                                    </li>
-                                    {{/course.objectives}}
+                                    {{#hasObjectives}}
+                                        {{#course.objectives}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="material-icons text-50 mr-8pt">check</span>
+                                            <span class="text-70">{{nameObjective}}</span>
+                                        </li>
+                                        {{/course.objectives}}
+                                    {{/hasObjectives}}
+                                    {{^hasObjectives}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="text-70">Este curso no tiene objetivos</span>
+                                        </li>
+                                    {{/hasObjectives}}
                                 </ul>
                             </div>
                         </div>
@@ -175,6 +191,7 @@
             </div>
 
             <div class="container page__container">
+                {{#hasThemes}}
                 <div class="row">
                     <div class="col-lg-7">
 
@@ -233,6 +250,7 @@
                         </div>
                     </div>
                 </div>
+                {{/hasThemes}}
             </div>
 
             <div class="page-section bg-white border-bottom-2">

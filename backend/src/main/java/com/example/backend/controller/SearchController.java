@@ -236,6 +236,9 @@ public class SearchController {
                     model.addAttribute("borderStars", borderStars);
                 }
             }
+            model.addAttribute("hasThemes", !course.get().getThemes().isEmpty());
+            model.addAttribute("hasRequirements", !course.get().getRequirements().isEmpty());
+            model.addAttribute("hasObjectives", !course.get().getObjectives().isEmpty());
 
             return "course";
         } else {
