@@ -51,7 +51,7 @@
                                                             {{#lessons}}
                                                             <li class="accordion__menu-link">
                                                                 <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                                                                <a class="flex" href="lesson.html">{{nameLesson}}</a>
+                                                                <a class="flex" href="/lesson-{{idLesson}}-from-course-{{course.id}}">{{nameLesson}}</a>
                                                                 <a class="button-60" data-toggle="modal" data-target="#editLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">edit</i></a>
                                                                 <a class="button-60 ml-16pt" data-toggle="modal" data-target="#deleteLesson-{{idLesson}}" role="button"><i class="material-icons text-black-20 card-course__icon-favorite">delete</i></a>
                                                             </li>
@@ -205,19 +205,6 @@
                                             <label class="col-form-label col-sm-3">Duración en horas</label>
                                             <div class="col-sm-9">
                                                 <input name="length" value="{{course.length}}" type="number" class="form-control" placeholder="Introduce la duración">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Trailer</label>
-                                            <div class="col-sm-9 media align-items-center">
-                                                <div class="media-body">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                                        <label class="custom-file-label" for="inputGroupFile02">Elegir archivo</label>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -761,42 +748,7 @@
 
     {{/course.objectives}}
 
-
-    
-    <!-- DRAWER (MOBILE NAVBAR) -->
-    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
-        <div class="mdk-drawer__content">
-            <div class="sidebar sidebar-dark sidebar-left" data-perfect-scrollbar>
-                <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
-
-                    <!-- Brand -->
-                    <a href="index.html" class="sidebar-brand">
-                        <img class="sidebar-brand-icon" src="assets/images/logo/image.png" width="40" alt="Tutorio">
-                        <span>ForeverLearn</span>
-                    </a>
-                    <!-- // END Brand -->
-
-                    <!-- Search -->
-                    <form action="/library" class="search-form search-form--black">
-                        <input type="text" class="form-control" placeholder="Búsqueda">
-                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
-                    </form>
-
-                </div>
-
-                <ul class="sidebar-menu">
-                    <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="/library">Cursos</a>
-                    </li>
-                    <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="/login">Iniciar sesión</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!-- // END drawer -->
+    {{>drawer}}
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>

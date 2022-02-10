@@ -5,15 +5,15 @@
             <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
 
                 <!-- Brand -->
-                <a href="index.html" class="sidebar-brand">
-                    <img class="sidebar-brand-icon" src="assets/images/logo/image.png" width="40" alt="Tutorio">
+                <a href="/index" class="sidebar-brand">
+                    <img class="sidebar-brand-icon" src="assets/images/logoDef.png" width="40" alt="Tutorio">
                     <span>ForeverLearn</span>
                 </a>
                 <!-- // END Brand -->
 
                 <!-- Search -->
-                <form action="library-filters.html" class="search-form search-form--black">
-                    <input type="text" class="form-control" placeholder="Búsqueda">
+                <form action="/find-course" class="search-form search-form--black">
+                    <input type="text" name="name" class="form-control" placeholder="Búsqueda">
                     <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
                 </form>
 
@@ -21,11 +21,30 @@
 
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="/library">Cursos</a>
+                    <a class="sidebar-menu-button" href="/category--1-library-page-0">Cursos</a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="/login">Iniciar sesión</a>
-                </li>
+
+                {{^activeUser}}
+                    <li class="sidebar-menu-item">
+                        <a href="/login" class="sidebar-menu-button" >Iniciar sesión</a>
+                    </li>
+                    {{/activeUser}}
+
+                    {{#activeUser}}
+                        {{#activeUserAdmin}}
+                            <li class="sidebar-menu-item">
+                                <a href="/admin-options" class="sidebar-menu-button" >Administrar</a>
+                            </li>
+                        {{/activeUserAdmin}}
+                    <li class="sidebar-menu-item">
+                        <a href="/user-profile" class="sidebar-menu-button" >Ver perfil</a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="/logout" class="sidebar-menu-button" >Cerrar sesión</a>
+                    </li>
+                {{/activeUser}}
+
+
             </ul>
         </div>
 

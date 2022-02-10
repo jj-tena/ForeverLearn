@@ -346,40 +346,7 @@
     </div>
     <!-- // END Header Layout -->
 
-    <!-- DRAWER (MOBILE NAVBAR) -->
-    <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
-        <div class="mdk-drawer__content">
-            <div class="sidebar sidebar-dark sidebar-left" data-perfect-scrollbar>
-                <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
-
-                    <!-- Brand -->
-                    <a href="index.html" class="sidebar-brand">
-                        <img class="sidebar-brand-icon" src="assets/images/logo/image.png" width="40" alt="Tutorio">
-                        <span>ForeverLearn</span>
-                    </a>
-                    <!-- // END Brand -->
-
-                    <!-- Search -->
-                    <form action="library-filters.html" class="search-form search-form--black">
-                        <input type="text" class="form-control" placeholder="Búsqueda">
-                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
-                    </form>
-
-                </div>
-
-                <ul class="sidebar-menu">
-                    <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="library.html">Cursos</a>
-                    </li>
-                    <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="login.html">Iniciar sesión</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!-- // END drawer -->
+    {{>drawer}}
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>
