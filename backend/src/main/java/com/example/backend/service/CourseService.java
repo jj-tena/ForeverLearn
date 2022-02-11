@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.Theme;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -167,5 +168,10 @@ public class CourseService {
                 courseRepository.delete(optionalCourse.get());
             }
         }
+    }
+
+    public void addTheme(Theme theme, Course course){
+        course.addTheme(theme);
+        courseRepository.save(course);
     }
 }
