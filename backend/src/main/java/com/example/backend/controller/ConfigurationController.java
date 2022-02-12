@@ -3,9 +3,11 @@ package com.example.backend.controller;
 import com.example.backend.model.User;
 import com.example.backend.service.CategoryService;
 import com.example.backend.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,5 +93,36 @@ public class ConfigurationController {
         model.addAttribute("user", userService.getActiveUser());
         model.addAttribute("categories", categoryService.findAll());
         return "user-profile";
+    }
+
+    @GetMapping("/user-delete-account")
+    public String userDeleteAccountLink(Model model){
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", userService.getActiveUser().get());
+        model.addAttribute("categories", categoryService.findAll());
+        return "user-delete-account";
+    }
+
+    @GetMapping("/delete-account")
+    public String deleteUser(Model model){
+
+        model.addAttribute("pageNumber", 0);
+
+        Optional<User> activeUser = userService.getActiveUser();
+        model.addAttribute("activeUser", activeUser.isPresent());
+        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
+        model.addAttribute("user", activeUser.get());
+        model.addAttribute("categories", categoryService.findAll());
+
+        if (activeUser.isPresent()){
+            userService.deleteAccount();
+        }
+
+        userService.logout();
+        model.addAttribute("activeUser", false);
+        model.addAttribute("activeUserAdmin", false);
+        return "index";
     }
 }

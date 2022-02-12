@@ -290,4 +290,10 @@ public class UserService {
             userRepository.delete(optionalUser.get());
         }
     }
+
+    public void deleteAccount() {
+        if (getActiveUser().isPresent()){
+            adminDeleteUser(getActiveUser().get().getId());
+        }
+    }
 }

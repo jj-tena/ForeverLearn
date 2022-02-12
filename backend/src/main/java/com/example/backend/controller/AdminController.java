@@ -387,10 +387,6 @@ public class AdminController {
         return "admin-users";
     }
 
-
-
-
-
     @GetMapping("/admin-categories-page-{pageNumber}")
     public String adminCategories(Model model, @PathVariable Integer pageNumber){
 

@@ -17,28 +17,18 @@
             </div>
 
 
+
             <div class="container page__container">
-                <form action="/update-password" method="post">
                     <div class="row">
                         <div class="col-lg-9">
 
                             <div class="page-section">
-                                <h4>Cambiar contraseña</h4>
-
+                                <h4>Eliminar cuenta</h4>
                                 <div class="list-group list-group-form">
                                     <div class="list-group-item">
                                         <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Nueva contraseña</label>
-                                            <div class="col-sm-9">
-                                                <input type="password" name="password1" class="form-control" placeholder="Introduce tu nueva contraseña">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="form-group row mb-0">
-                                            <label class="col-form-label col-sm-3">Confirmar contraseña</label>
-                                            <div class="col-sm-9">
-                                                <input type="password" name="password2" class="form-control" placeholder="Vuelve a introducir tu nueva contraseña">
+                                            <div class="col-sm-12 d-flex justify-content-center">
+                                                <a href="/delete-account" class="btn btn-accent">Borrar cuenta</a>
                                             </div>
                                         </div>
                                     </div>
@@ -51,16 +41,12 @@
                                 <nav class="nav page-nav__menu">
                                     <a class="nav-link" href="/user-edit-account">Información básica</a>
                                     <a class="nav-link" href="/user-edit-account-profile">Información de perfil</a>
-                                    <a class="nav-link active" href="/user-edit-account-password">Cambiar contraseña</a>
-                                    <a class="nav-link" href="/user-delete-account">Eliminar cuenta</a>
+                                    <a class="nav-link" href="/user-edit-account-password">Cambiar contraseña</a>
+                                    <a class="nav-link active" href="/user-delete-account">Eliminar cuenta</a>
                                 </nav>
-                                <div class="page-nav__content">
-                                    <button type="submit" class="btn btn-accent">Guardar cambios</button>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
 
             {{>footer}}

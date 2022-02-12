@@ -78,9 +78,6 @@ public class DatabaseController {
         //Courses initialization
         Optional<Course> course1 = courseService.create("Inteligencia emocional", "Descripcion1", category1, "Intermedio", "/static/assets/images/courses/cursoInteligenciaEmocional.png", 3, savedUser1.getId());
         Optional<Course>  course2 = courseService.create("Bases del fútbol", "Descripcion2", category2, "Principiante", "/static/assets/images/courses/cursoFutbol.png", 5, savedUser1.getId());
-        
-
-
         Optional<Course>  course3 = courseService.create("Curso de física para segundo de bachillerato", "Descripcion3", category3, "Avanzado", "/static/assets/images/courses/cursoFisica.jpg", 6, savedUser4.getId());
         Optional<Course>  course4 = courseService.create("Curso Procreate", "Descripcion4", category4, "Principiante", "/static/assets/images/courses/cursoProcreate.png", 6, savedUser3.getId());
         Optional<Course>  course5 = courseService.create("Contabilidad y costes", "Descripcion5", category5, "Principiante", "/static/assets/images/courses/cursoEconomia.png", 6, savedUser2.getId());
@@ -90,8 +87,6 @@ public class DatabaseController {
         Optional<Course>  course9 = courseService.create("Géneros musicales", "Descripcion9", category9, "Principiante", "/static/assets/images/courses/cursoGenerosMusicales.jpg", 6, savedUser3.getId());
         Optional<Course>  course10 = courseService.create("La profesión del profesor", "Descripcion10", category10, "Principiante", "/static/assets/images/courses/cursoProfesor.jpg", 6, savedUser2.getId());
         Optional<Course>  course11 = courseService.create("Principales afecciones del sistema endocrino", "Descripcion11", category11, "Principiante", "/static/assets/images/courses/cursoEndocrino.png", 6, savedUser1.getId());
-        Optional<Course>  course12 = courseService.create("Introducción al mundo pokémon", "Descripcion12", category12, "Principiante", "/static/assets/images/courses/cursoPokemon.png", 6, savedUser4.getId());
-        Optional<Course>  course13 = courseService.create("Bases del baloncesto", "Descripcion12", category2, "Principiante", "/static/assets/images/courses/cursoBaloncesto.jpg", 6, savedUser1.getId());
-
+        Optional<Course>  course12 = courseService.create("Bases del baloncesto", "Descripcion12", category2, "Principiante", "/static/assets/images/courses/cursoBaloncesto.jpg", 6, savedUser1.getId());
     }
 }
