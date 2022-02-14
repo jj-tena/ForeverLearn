@@ -185,6 +185,7 @@ The application has been built following the Model-View-Controller architecture 
 - View: this is the layer that contains the system interface and therefore the code of the screens that make up the application. It is also responsible for rendering the data sent in the model to correctly display the different types of data and information it contains.
 - Controller: this is the layer in charge of responding to the requests that the user of the application will request through its interaction with the view. This layer is the one that provides functionality to the system, for this it serves as a bridge between the view and the model, receiving requests from the view that asks the model and implementing in between the logic and algorithms that support the application.
 Finally we can appreciate in a simpler way the functioning of this architecture by means of the following diagram:
+
 ![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/architecture/architectureDiagram.png)
 
 ### Database
@@ -208,7 +209,8 @@ In the project we find the following tables:
 - user_liked_courses: this table relates a user to the courses they have liked, so it is a relationship in which a single user can be associated to many different courses.
 - user_disliked_courses: this table relates a user to the courses that he/she has disliked, so it is a relationship in which a single user can be associated to a multitude of different courses.
 Finally, we can find the relationship entity model that represents all of the above: 
-![database-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/database/databaseDiagram.png)
+
+![database-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/database/drawDatabaseDiagram.png)
 
 ### Backend implementation
 The backend of the system follows a layered design: controller layer, service layer, repository layer and model layer, each of them is in charge of a responsibility, but in general terms we could say that the application logic is integrated in the controller layer, while the business logic is present in the service, model and repository layers.
@@ -217,4 +219,5 @@ The backend of the system follows a layered design: controller layer, service la
 - Repository layer: the system uses a programming model called object-relational mapping (ORM), which consists of transforming the database tables into entities that abstract the developer from the language of the database used and allow him to perform CRUD operations (create, read, modify and delete) more easily. This layer defines all the possible CRUD operations that we wish to perform on the model data in the database.
 - Model layer: this layer defines the different entities that we will store in the database and the relationships between them, therefore they will be the objects with which we will operate in the system. All the layers must have access to this layer: the controller needs to know which objects it will receive and integrate in the view that it will return in the user's requests, the service must know the model to be able to operate on it and carry out the application's functionalities, and the repository needs to know the model to know how the information in the database it is trying to access is structured.
 In the following diagram we can see the interrelation between the different layers of the system:
+
 ![backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/backend/backendDiagram.png)
