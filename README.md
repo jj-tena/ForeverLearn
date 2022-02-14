@@ -175,3 +175,46 @@ Once we have stablished which are the pages that compose our system, we shall ta
 ![navigation-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/navigationDiagram.png)
 
 ## Phase 3
+
+In this phase the backend of the application was built, developing all the functionality of the project and the design of the database.
+Through the following points we will see details about the implementation from different perspectives.
+
+### System architecture
+The application has been built following the Model-View-Controller architecture pattern, MVC for its acronym, whose main idea is to separate the code into different layers delimited by the responsibilities they will be in charge of. Specifically, we find three layers as its name indicates: model, view and controller.
+- Model: this is the layer that is in charge of the application's data, which are normally found in databases, so this layer will be in charge of providing methods to create, modify, consult and delete the stored data. The model must contain the data that will be sent to the view layer to be displayed to the user.
+- View: this is the layer that contains the system interface and therefore the code of the screens that make up the application. It is also responsible for rendering the data sent in the model to correctly display the different types of data and information it contains.
+- Controller: this is the layer in charge of responding to the requests that the user of the application will request through its interaction with the view. This layer is the one that provides functionality to the system, for this it serves as a bridge between the view and the model, receiving requests from the view that asks the model and implementing in between the logic and algorithms that support the application.
+Finally we can appreciate in a simpler way the functioning of this architecture by means of the following diagram:
+![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/architecture/architectureDiagram.png)
+
+### Database
+For the persistence of the data it was decided to use a relational database, due to the importance and abundance of relationships that exist between the entities that exist in the system as we will see later on. The need to store all these links between the data was the main factor that influenced the decision.
+In the project we find the following tables:
+- course: entity representing a course in the system.
+- category: entity representing the possible categories with which the courses can be classified.
+- requirement: entity representing a requirement that the students of a course should fulfil or at least take into account when enrolling and trying to pass the course.
+- course_requirements: this table relates a requirement to a course, each requirement must be associated with a single course, whereas multiple requirements can be associated with the same course.
+- objective: entity that represents one of the objectives that the course intends its students to achieve by passing the course.
+- course_objectives: this table relates an objective to a course, each objective must be associated with a single course, and multiple requirements can be associated with the same course.
+- lesson: entity that represents a lesson, the lessons are the content of the courses and where the educational material that the teacher tries to teach to his students is actually found.
+- theme_lessons: this table relates a lesson to a theme, each lesson must be associated with a single theme, whereas multiple lessons can be associated with the same theme.
+- theme: entity that represents a theme that makes up the course syllabus and therefore the bulk of its content.
+- course_themes: this table relates a theme to a course, each theme must be associated with a single course, while multiple requirements can be associated with the same course.
+- user: entity that represents the information associated with a user of the application.
+- user_user_courses: this table relates a user to the courses that he/she has created, therefore it is a relationship in which a single user can be associated to a multitude of different courses.
+- user_enrolled_courses: this table relates a user to the courses he/she has enrolled in, so it is a relationship in which a single user can be associated to many different courses.
+- user_completed_courses: this table relates a user to the courses he/she has completed, so it is a relationship in which a single user can be associated to many different courses.
+- user_wished_courses: this table relates a user to the courses he has added to his wish list, so it is a relationship in which a single user can be associated to many different courses.
+- user_liked_courses: this table relates a user to the courses they have liked, so it is a relationship in which a single user can be associated to many different courses.
+- user_disliked_courses: this table relates a user to the courses that he/she has disliked, so it is a relationship in which a single user can be associated to a multitude of different courses.
+Finally, we can find the relationship entity model that represents all of the above: 
+![database-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/database/databaseDiagram.png)
+
+### Backend implementation
+The backend of the system follows a layered design: controller layer, service layer, repository layer and model layer, each of them is in charge of a responsibility, but in general terms we could say that the application logic is integrated in the controller layer, while the business logic is present in the service, model and repository layers.
+- Controller layer: this layer is responsible for handling user requests, receiving the appropriate data, calling the service layer methods that perform the functionality the user is requesting and finally returning a view appropriate to the user's demand.
+- Service layer: this layer implements the functionalities of the application, any action that the user wants to perform will involve a call from the controller layer to one of the methods present here.
+- Repository layer: the system uses a programming model called object-relational mapping (ORM), which consists of transforming the database tables into entities that abstract the developer from the language of the database used and allow him to perform CRUD operations (create, read, modify and delete) more easily. This layer defines all the possible CRUD operations that we wish to perform on the model data in the database.
+- Model layer: this layer defines the different entities that we will store in the database and the relationships between them, therefore they will be the objects with which we will operate in the system. All the layers must have access to this layer: the controller needs to know which objects it will receive and integrate in the view that it will return in the user's requests, the service must know the model to be able to operate on it and carry out the application's functionalities, and the repository needs to know the model to know how the information in the database it is trying to access is structured.
+In the following diagram we can see the interrelation between the different layers of the system:
+![backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/backend/backendDiagram.png)
