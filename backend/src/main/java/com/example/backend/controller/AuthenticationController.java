@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -60,6 +61,9 @@ public class AuthenticationController {
     @PostMapping("/signupUser")
     public String signupUser(Model model, User user) throws IOException {
         User activeUser = userService.create(user);
+        if (Objects.isNull(activeUser)){
+            return "error";
+        }
         userService.setActiveUser(activeUser);
         model.addAttribute("activeUser", true);
         model.addAttribute("activeUserAdmin", activeUser.isAdmin());

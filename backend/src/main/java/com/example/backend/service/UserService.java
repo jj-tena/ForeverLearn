@@ -44,27 +44,33 @@ public class UserService {
 
     @Transactional
     public User create(User user) throws IOException {
-        Resource image = new ClassPathResource("/static/assets/images/default-profile.jpg");
-        user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-        user.setDescription("");
-        user.setContact("");
-        user.setFacebook("");
-        user.setTwitter("");
-        user.setYoutube("");
-        return userRepository.save(user);
+        if (userRepository.findUserByEmail(user.getEmail()).isEmpty()){
+            Resource image = new ClassPathResource("/static/assets/images/default-profile.jpg");
+            user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+            user.setDescription("");
+            user.setContact("");
+            user.setFacebook("");
+            user.setTwitter("");
+            user.setYoutube("");
+            return userRepository.save(user);
+        }
+        return null;
     }
 
     @Transactional
     public User createFromParameters(String name, String surname, String email, String password, String imagePath, String description, String contact, String facebook, String twitter, String youtube) throws IOException {
-        User user = new User(name, surname, email, password);
-        Resource image = new ClassPathResource(imagePath);
-        user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-        user.setDescription(description);
-        user.setContact(contact);
-        user.setFacebook(facebook);
-        user.setTwitter(twitter);
-        user.setYoutube(youtube);
-        return userRepository.save(user);
+        if (userRepository.findUserByEmail(email).isEmpty()){
+            User user = new User(name, surname, email, password);
+            Resource image = new ClassPathResource(imagePath);
+            user.setProfilePhoto(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+            user.setDescription(description);
+            user.setContact(contact);
+            user.setFacebook(facebook);
+            user.setTwitter(twitter);
+            user.setYoutube(youtube);
+            return userRepository.save(user);
+        }
+        return null;
     }
 
     public Optional<User> login(User user){
