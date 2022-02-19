@@ -195,6 +195,9 @@ public class SearchController {
         model.addAttribute("categories", categoryService.findAll());
         Optional<Course> course = courseService.findCourseById(id);
         if (course.isPresent()){
+            if (course.get().isBanned()){
+                return "/error";
+            }
             model.addAttribute("course", course.get());
             Boolean courseOwner = false;
             Boolean courseEnrolled = false;

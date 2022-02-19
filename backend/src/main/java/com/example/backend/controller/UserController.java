@@ -642,7 +642,6 @@ public class UserController {
                     model.addAttribute("borderStars", borderStars);
                 }
             }
-
             return "course";
         } else {
             return "index";

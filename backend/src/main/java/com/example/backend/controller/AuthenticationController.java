@@ -45,7 +45,7 @@ public class AuthenticationController {
             return "user-profile";
         }
         else
-            return "index";
+            return "/error";
     }
 
 

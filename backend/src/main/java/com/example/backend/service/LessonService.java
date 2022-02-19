@@ -39,11 +39,11 @@ public class LessonService {
     public void updateLesson(Long lessonId, String nameLesson, String descriptionLesson, String iframeLesson) {
         Optional<Lesson> optionalLesson = lessonRepository.findById(lessonId);
         if (optionalLesson.isPresent()){
-            if (Objects.nonNull(nameLesson)){
+            if (!nameLesson.isEmpty()){
                 optionalLesson.get().setNameLesson(nameLesson);
-            } if (Objects.nonNull(descriptionLesson)){
+            } if (!descriptionLesson.isEmpty()){
                 optionalLesson.get().setDescriptionLesson(descriptionLesson);
-            } if (Objects.nonNull(iframeLesson)){
+            } if (!iframeLesson.isEmpty()){
                 optionalLesson.get().setIframeLesson(iframeLesson);
             }
             lessonRepository.save(optionalLesson.get());

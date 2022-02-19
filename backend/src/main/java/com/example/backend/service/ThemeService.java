@@ -16,12 +16,9 @@ public class ThemeService {
 
     private final CourseService courseService;
 
-    private final UserService userService;
-
-    public ThemeService(ThemeRepository topicRepository, CourseService courseService, UserService userService) {
+    public ThemeService(ThemeRepository topicRepository, CourseService courseService) {
         this.themeRepository = topicRepository;
         this.courseService = courseService;
-        this.userService = userService;
     }
 
     @Transactional
@@ -46,9 +43,9 @@ public class ThemeService {
     public void updateTheme(Long themeId, String nameTheme, String descriptionTheme) {
         Optional<Theme> theme = themeRepository.findById(themeId);
         if(theme.isPresent()){
-            if (Objects.nonNull(nameTheme)){
+            if (!nameTheme.isEmpty()){
                 theme.get().setNameTheme(nameTheme);
-            } if (Objects.nonNull(descriptionTheme)){
+            } if (!descriptionTheme.isEmpty()){
                 theme.get().setDescriptionTheme(descriptionTheme);
             }
         }

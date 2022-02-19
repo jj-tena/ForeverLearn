@@ -40,7 +40,7 @@ public class RequirementService {
 
     public void updateRequirement(Long requirementId, String nameRequirement) {
         Optional<Requirement> optionalRequirement = requirementRepository.findById(requirementId);
-        if(optionalRequirement.isPresent()){
+        if(optionalRequirement.isPresent() && !nameRequirement.isEmpty()){
             optionalRequirement.get().setNameRequirement(nameRequirement);
             requirementRepository.save(optionalRequirement.get());
         }

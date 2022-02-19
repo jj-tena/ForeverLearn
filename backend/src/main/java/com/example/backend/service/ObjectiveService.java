@@ -29,7 +29,7 @@ public class ObjectiveService {
 
     public void updateObjective(Long objectiveId, String nameObjective) {
         Optional<Objective> optionalObjective = objectiveRepository.findById(objectiveId);
-        if (optionalObjective.isPresent()){
+        if (optionalObjective.isPresent() && !nameObjective.isEmpty()){
             optionalObjective.get().setNameObjective(nameObjective);
             objectiveRepository.save(optionalObjective.get());
         }
