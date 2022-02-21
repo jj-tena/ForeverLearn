@@ -2,7 +2,6 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
-import com.example.backend.model.Theme;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -16,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -80,7 +80,7 @@ public class CourseService {
         if (optionalUser.isPresent() && optionalCategory.isPresent()){
             course.setAuthor(optionalUser.get());
             course.setCategory(optionalCategory.get());
-            if (image.getOriginalFilename() != "")  {
+            if (!Objects.equals(image.getOriginalFilename(), ""))  {
                 course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             Course savedCourse = courseRepository.save(course);
@@ -106,7 +106,7 @@ public class CourseService {
             oldCourse.setLength(newCourse.getLength());
             Optional<Category> optionalCategory = categoryService.findByName(categoryName);
             optionalCategory.ifPresent(oldCourse::setCategory);
-            if (image.getOriginalFilename() != "") {
+            if (!Objects.requireNonNull(image.getOriginalFilename()).isEmpty()) {
                 oldCourse.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             courseRepository.save(oldCourse);
@@ -143,8 +143,11 @@ public class CourseService {
 
     public void banCourse(Long id) {
         Optional<Course> optionalCourse = courseRepository.findById(id);
-        optionalCourse.ifPresent(Course::ban);
-        courseRepository.save(optionalCourse.get());
+        if(optionalCourse.isPresent()){
+            optionalCourse.get().ban();
+            courseRepository.save(optionalCourse.get());
+        }
+
     }
 
     public void unbanCourse(Long id) {

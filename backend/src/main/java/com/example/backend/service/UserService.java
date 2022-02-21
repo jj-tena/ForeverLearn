@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -76,18 +77,15 @@ public class UserService {
         return userRepository.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
     }
 
-    public void resetPassword(User user){
-        Optional<User> userFromDB = userRepository.findUserByEmail(user.getEmail());
-        if (userFromDB.isPresent()){
-
-        }
-    }
-
     public void updateBasicInformation(User user){
-        if (user.getName() != null) getActiveUser().get().setName(user.getName());
-        if (user.getSurname() != null) getActiveUser().get().setSurname(user.getSurname());
-        if (user.getEmail() != null) getActiveUser().get().setEmail(user.getEmail());
-        userRepository.save(getActiveUser().get());
+        Optional<User> optionalUser = getActiveUser();
+        if (optionalUser.isPresent()){
+            if (user.getName() != null) optionalUser.get().setName(user.getName());
+            if (user.getSurname() != null) optionalUser.get().setSurname(user.getSurname());
+            if (user.getEmail() != null) optionalUser.get().setEmail(user.getEmail());
+            userRepository.save(optionalUser.get());
+        }
+
     }
 
     @Transactional
@@ -100,7 +98,7 @@ public class UserService {
             if (!user.getFacebook().contentEquals("")) activeUser.setFacebook(user.getFacebook());
             if (!user.getTwitter().contentEquals("")) activeUser.setTwitter(user.getTwitter());
             if (!user.getYoutube().contentEquals("")) activeUser.setYoutube(user.getYoutube());
-            if (profilePhoto.getOriginalFilename() != "") {
+            if (!Objects.requireNonNull(profilePhoto.getOriginalFilename()).contentEquals("")) {
                 activeUser.setProfilePhoto(BlobProxy.generateProxy(profilePhoto.getInputStream(), profilePhoto.getSize()));
             }
             userRepository.save(activeUser);
@@ -108,15 +106,17 @@ public class UserService {
     }
 
     public void updatePassword(String password1, String password2){
-        if((password1 != null) && (password1.contentEquals(password2))){
-            getActiveUser().get().setPassword(password1);
+        Optional<User> optionalUser = getActiveUser();
+        if((password1 != null) && (password1.contentEquals(password2)) && optionalUser.isPresent()){
+            optionalUser.get().setPassword(password1);
+            userRepository.save(optionalUser.get());
         }
-        userRepository.save(getActiveUser().get());
     }
 
     @Transactional
     public List<Course> getUserCourses(){
-        return getActiveUser().get().getUserCourses();
+        Optional<User> optionalUser = getActiveUser();
+        return optionalUser.map(User::getUserCourses).orElse(null);
     }
 
     @Transactional
@@ -270,14 +270,19 @@ public class UserService {
 
     public void banUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-        optionalUser.ifPresent(User::ban);
-        userRepository.save(optionalUser.get());
+        if (optionalUser.isPresent()){
+            optionalUser.get().ban();
+            userRepository.save(optionalUser.get());
+        }
     }
 
     public void unbanUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-        optionalUser.ifPresent(User::unban);
-        userRepository.save(optionalUser.get());
+        if (optionalUser.isPresent()){
+            optionalUser.get().unban();
+            userRepository.save(optionalUser.get());
+        }
+
     }
 
     public void adminDeleteUser(Long id) {
@@ -302,7 +307,4 @@ public class UserService {
         }
     }
 
-    public void Saludo(){
-        System.out.println("Hello");
-    }
 }

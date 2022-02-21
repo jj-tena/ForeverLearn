@@ -5,7 +5,6 @@ import com.example.backend.model.Theme;
 import com.example.backend.repository.LessonRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

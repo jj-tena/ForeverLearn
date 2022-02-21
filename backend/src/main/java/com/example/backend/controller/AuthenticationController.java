@@ -72,25 +72,6 @@ public class AuthenticationController {
         return "user-profile";
     }
 
-    @GetMapping("/reset-password")
-    public String resetPasswordLink(Model model){
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
-        model.addAttribute("categories", categoryService.findAll());
-        return "reset-password";
-    }
-
-    @PostMapping("/resetPasswordUser")
-    public String resetPasswordUser(Model model, User user) throws IOException {
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(userActive -> model.addAttribute("activeUserAdmin", userActive.isAdmin()));
-        userService.resetPassword(user);
-        model.addAttribute("categories", categoryService.findAll());
-        return "index";
-    }
-
     @GetMapping("/logout")
     public String logoutUser(Model model){
         userService.logout();

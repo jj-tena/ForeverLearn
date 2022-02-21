@@ -6,7 +6,6 @@ import com.example.backend.repository.ThemeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -48,8 +47,8 @@ public class ThemeService {
             } if (!descriptionTheme.isEmpty()){
                 theme.get().setDescriptionTheme(descriptionTheme);
             }
+            themeRepository.save(theme.get());
         }
-        themeRepository.save(theme.get());
     }
 
     public Optional<Theme> findThemeById(Long themeId){
