@@ -28,6 +28,9 @@ class UserRepositoryTest {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @BeforeEach
     void setUp(){
     }
@@ -35,6 +38,7 @@ class UserRepositoryTest {
     @AfterEach
     void tearDown(){
         courseRepository.deleteAll();
+        categoryRepository.deleteAll();
         underTest.deleteAll();
     }
 
@@ -71,7 +75,7 @@ class UserRepositoryTest {
         User user = new User("Name", "Surname", "Email", "Password");
         underTest.save(user);
         //when
-        Long id = 1L;
+        Long id = user.getId();
         Optional<User> userById = underTest.findUserById(id);
         //then
         assertTrue(userById.isPresent());
@@ -92,23 +96,85 @@ class UserRepositoryTest {
         Optional<List<User>> usersByName = underTest.findUsersByName(name1);
         //then
         assertTrue(usersByName.isPresent());
-        assertEquals(usersByName.get().size(), 3);
+        assertEquals(usersByName.get().size(), 2);
     }
 
     @Test
     void findUserByUserCoursesContains() {
+        //given
+        Category category = new Category("CategoryName");
+        categoryRepository.save(category);
+        User user = new User("Name", "Surname", "Email", "Password");
+        underTest.save(user);
+        Course course = new Course("CourseName", "CourseDescription", category, "Principiante", 5, user);
+        courseRepository.save(course);
+        user.addUserCourse(course);
+        underTest.save(user);
+        //when
+        Optional<User> userByUserCoursesContains = underTest.findUserByUserCoursesContains(course);
+        //then
+        assertTrue(userByUserCoursesContains.isPresent());
+        assertEquals(userByUserCoursesContains.get().getName(), "Name");
     }
 
     @Test
     void findUsersByEnrolledCoursesContaining() {
+        //given
+        Category category = new Category("CategoryName");
+        categoryRepository.save(category);
+        User author = new User("NameAuthor", "SurnameAuthor", "EmailAuthor", "PasswordAuthor");
+        underTest.save(author);
+        Course course = new Course("CourseName", "CourseDescription", category, "Principiante", 5, author);
+        courseRepository.save(course);
+        User user1 = new User("Name1", "Surname1", "Email1", "Password1");
+        underTest.save(user1);
+        user1.addEnrolledCourse(course);
+        underTest.save(user1);
+        //when
+        List<User> usersByEnrolledCoursesContaining = underTest.findUsersByEnrolledCoursesContaining(course);
+        //then
+        assertFalse(usersByEnrolledCoursesContaining.isEmpty());
+        assertEquals(usersByEnrolledCoursesContaining.size(), 1);
     }
 
     @Test
     void findUsersByCompletedCoursesContaining() {
+        //given
+        Category category = new Category("CategoryName");
+        categoryRepository.save(category);
+        User author = new User("NameAuthor", "SurnameAuthor", "EmailAuthor", "PasswordAuthor");
+        underTest.save(author);
+        Course course = new Course("CourseName", "CourseDescription", category, "Principiante", 5, author);
+        courseRepository.save(course);
+        User user1 = new User("Name1", "Surname1", "Email1", "Password1");
+        underTest.save(user1);
+        user1.addCompletedCourse(course);
+        underTest.save(user1);
+        //when
+        List<User> usersByCompletedCoursesContaining = underTest.findUsersByCompletedCoursesContaining(course);
+        //then
+        assertFalse(usersByCompletedCoursesContaining.isEmpty());
+        assertEquals(usersByCompletedCoursesContaining.size(), 1);
     }
 
     @Test
     void findUsersByWishedCoursesContaining() {
+        //given
+        Category category = new Category("CategoryName");
+        categoryRepository.save(category);
+        User author = new User("NameAuthor", "SurnameAuthor", "EmailAuthor", "PasswordAuthor");
+        underTest.save(author);
+        Course course = new Course("CourseName", "CourseDescription", category, "Principiante", 5, author);
+        courseRepository.save(course);
+        User user1 = new User("Name1", "Surname1", "Email1", "Password1");
+        underTest.save(user1);
+        user1.addWishedCourse(course);
+        underTest.save(user1);
+        //when
+        List<User> usersByWishedCoursesContaining = underTest.findUsersByWishedCoursesContaining(course);
+        //then
+        assertFalse(usersByWishedCoursesContaining.isEmpty());
+        assertEquals(usersByWishedCoursesContaining.size(), 1);
     }
 
     @Test
