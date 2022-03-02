@@ -68,7 +68,7 @@ public class CategoryService {
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent() && optionalUser.get().isAdmin()){
             Category category = new Category(name);
-            if (!Objects.equals(image.getOriginalFilename(), ""))  {
+            if (Objects.nonNull(image) && !Objects.equals(image.getOriginalFilename(), ""))  {
                 category.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             Category savedCategory = categoryRepository.save(category);
@@ -82,7 +82,7 @@ public class CategoryService {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalUser.isPresent() && optionalUser.get().isAdmin() && optionalCategory.isPresent()){
             optionalCategory.get().setName(name);
-            if (!Objects.equals(image.getOriginalFilename(), ""))  {
+            if (Objects.nonNull(image) && !Objects.equals(image.getOriginalFilename(), ""))  {
                 optionalCategory.get().setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             Category savedCategory = categoryRepository.save(optionalCategory.get());

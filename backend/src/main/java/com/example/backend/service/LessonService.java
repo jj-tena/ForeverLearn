@@ -32,6 +32,7 @@ public class LessonService {
         if (optionalLesson.isPresent()){
             theme.deleteLesson(optionalLesson.get());
             lessonRepository.delete(optionalLesson.get());
+            themeService.save(theme);
         }
     }
 

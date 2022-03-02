@@ -80,7 +80,7 @@ public class CourseService {
         if (optionalUser.isPresent() && optionalCategory.isPresent()){
             course.setAuthor(optionalUser.get());
             course.setCategory(optionalCategory.get());
-            if (!Objects.equals(image.getOriginalFilename(), ""))  {
+            if (Objects.nonNull(image) && !Objects.equals(image.getOriginalFilename(), ""))  {
                 course.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             Course savedCourse = courseRepository.save(course);
@@ -106,7 +106,7 @@ public class CourseService {
             oldCourse.setLength(newCourse.getLength());
             Optional<Category> optionalCategory = categoryService.findByName(categoryName);
             optionalCategory.ifPresent(oldCourse::setCategory);
-            if (!Objects.requireNonNull(image.getOriginalFilename()).isEmpty()) {
+            if (Objects.nonNull(image) && !Objects.requireNonNull(image.getOriginalFilename()).isEmpty()) {
                 oldCourse.setPicture(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
             }
             courseRepository.save(oldCourse);
