@@ -230,14 +230,14 @@ This will be the last phase of this first final degree project, in which we will
 This model is an extension of the backend implementation diagram presented at the end of the previous phase. 
 The current diagram shows all the classes that are contained under each of the layers, giving a more detailed view of the implementation.
 
-![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/class/classDiagram.png)
+![extended-backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/class/classDiagram.png)
 
 ### Use cases
 Use cases are an artefact that defines a sequence of actions that leads to an observable result, we will use them to represent the way in which a user interacts with the system in pursuit of a given objective. They graphically represent the functional requirements, as they define the functionalities that the system offers and that the user will use to achieve his objectives. 
 Use cases always pursue a specific objective, however, on many occasions we must achieve small objectives in order to reach a larger one, and this is where the relationships that link use cases that form part of the same flow of events come into play.
 Below is a diagram that shows the possible flows that can occur in the system from the use cases:
 
-![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/useCase/useCase.png)
+![use-case-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/useCase/useCaseDiagram.png)
 
 ### Testing
 
@@ -245,7 +245,9 @@ My intention from the very beginning of the system was to deliver a truly solid 
 Unit tests are one of the most widespread types of testing, used to check the correct functioning of code fragments, usually referring to methods of the application. They are so called because they test isolated code, that is, only that unit of code.
 In order to execute this type of tests in Spring Boot projects, two main technologies are usually used:
 - JUnit: this is the testing library par excellence for the Java language.
-- Mockito: it is a testing framework that allows us to establish which answers the application units return, it is a way of simulating their behaviour.
+- Mockito: it is a testing framework that allows us to establish which answers the application units return, it is a way of simulating their behaviour
+
+
 We have already seen how the structure of the backend is based on a division into three layers: controller layer, service layer and repository layer, which communicate in that order. Each layer has different responsibilities and therefore what we seek to demonstrate through unit testing will be different for each.
 We will begin by talking about the base: the repository layer, which is in charge of operating with the database and for this purpose it offers a series of default methods such as deleting or saving entities, however, when it comes to performing more complex operations such as searches based on combinations of specific parameters of the application, it will be the responsibility of the programmer to define these operations.
 We do not need to unit test the default operations, as these have already been tested by the technology manufacturer. Testing in this layer therefore focuses on the operations defined by the developer, as it is their responsibility to ensure that they work correctly.
