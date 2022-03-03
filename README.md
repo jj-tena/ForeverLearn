@@ -1,6 +1,7 @@
 # ForeverLearn
 
-<img src="https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png" width="100" height="100">
+![logo](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png =250x250)
+
 
 ## Context
 This project includes the realization of two Bachelor's Degree Final Project, a first one for Computer Science that proposes a base platform and a second one for Software Engineering that expands and completes the work done in the first one.
