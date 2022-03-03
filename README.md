@@ -1,7 +1,7 @@
 # ForeverLearn
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png">
+  <img width="500" height="500" src="https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png">
 </p>
 
 ## Context
