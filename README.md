@@ -221,3 +221,51 @@ The backend of the system follows a layered design: controller layer, service la
 In the following diagram we can see the interrelation between the different layers of the system:
 
 ![backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/backend/backendDiagram.png)
+
+## Phase 4
+
+This will be the last phase of this first final degree project, in which we will finish polishing the code, document the missing details and focus on testing for each of the layers that make up the application.
+
+### Extended backend implementation
+This model is an extension of the backend implementation diagram presented at the end of the previous phase. 
+The current diagram shows all the classes that are contained under each of the layers, giving a more detailed view of the implementation.
+
+![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/class/classDiagram.png)
+
+### Use cases
+Use cases are an artefact that defines a sequence of actions that leads to an observable result, we will use them to represent the way in which a user interacts with the system in pursuit of a given objective. They graphically represent the functional requirements, as they define the functionalities that the system offers and that the user will use to achieve his objectives. 
+Use cases always pursue a specific objective, however, on many occasions we must achieve small objectives in order to reach a larger one, and this is where the relationships that link use cases that form part of the same flow of events come into play.
+Below is a diagram that shows the possible flows that can occur in the system from the use cases:
+
+![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/useCase/useCase.png)
+
+### Testing
+
+My intention from the very beginning of the system was to deliver a truly solid and polished piece of work, one that is robust against the possible errors that users may encounter and provoke. In this section we will see what efforts have been dedicated to testing.
+Unit tests are one of the most widespread types of testing, used to check the correct functioning of code fragments, usually referring to methods of the application. They are so called because they test isolated code, that is, only that unit of code.
+In order to execute this type of tests in Spring Boot projects, two main technologies are usually used:
+- JUnit: this is the testing library par excellence for the Java language.
+- Mockito: it is a testing framework that allows us to establish which answers the application units return, it is a way of simulating their behaviour.
+We have already seen how the structure of the backend is based on a division into three layers: controller layer, service layer and repository layer, which communicate in that order. Each layer has different responsibilities and therefore what we seek to demonstrate through unit testing will be different for each.
+We will begin by talking about the base: the repository layer, which is in charge of operating with the database and for this purpose it offers a series of default methods such as deleting or saving entities, however, when it comes to performing more complex operations such as searches based on combinations of specific parameters of the application, it will be the responsibility of the programmer to define these operations.
+We do not need to unit test the default operations, as these have already been tested by the technology manufacturer. Testing in this layer therefore focuses on the operations defined by the developer, as it is their responsibility to ensure that they work correctly.
+To test the correct functioning of these operations we will need a database with which they can operate, the problem is that we do not want our tests to affect the real system and that the database of the application stores information coming from the testing. 
+To solve this problem, it was decided to use an independent database that only runs when the tests are executed. In order not to increase the number of dependencies or add unnecessary complexity to the project, it was decided to use an H2 database, which is characterised by being an in-memory database that does not require dependencies of any kind.
+In this way we can test the operations that have been defined in the repository layer by interacting with the H2 database and demonstrate that they comply with the desired operation.
+The next layer to be discussed is the service layer, this layer implements the business logic of the system and relies on the layer seen above to operate with the database. This dependency on the repository layer clashes with the unit testing philosophy of testing methods that are independent on their own without the need for other modules. 
+The solution to this problem is provided by the Mockito framework, we will use it for two purposes: we define what the repository layer methods that are invoked return and we set up argument catchers that trap the values that are passed as parameters to the repository methods.
+With all this, we will check that the filters and operations implemented by the service are correctly applied and simulate all those methods of the repository layer that are necessary to test the service layer correctly.
+Finally we have the controller layer, this receives url addresses, decides which operations of the service layer are executed, brings information from this with which it loads the model and integrates it into a view that returns to the user. Again, the dependency on the service layer is solved by Mockito, since this layer will be simulated, the data with which we load the model will also be simulated. 
+We can consider that the real interest of testing this layer in a unitary way lies in making sure that for each address available in the system, the corresponding view is returned, and that is what has been done.
+Finally, what about the integration between the layers? The unit tests of each layer respect this philosophy thanks to the fact that we have simulated the behaviour of the layers on which they depend using Mockito, this simulation has been carried out exactly according to what would be returned by the layer and given that we have verified that each one works correctly, we can affirm that if it were not a simulation, the flow of information and compatibility between the layers would occur without the appearance of any type of problem.
+
+### Conclusion
+
+I feel really satisfied with the final state of this first project, despite needing improvements and advances that will be developed in the following Final Degree Project to be complete, a good base has been built from which to start.
+With the work carried out in this first project, we now have a public and open course repository without restrictions of any kind, which allows its users to put themselves in the place of both the teacher, giving them all the necessary tools to model their courses as they wish, and the student, allowing them to enrol, evaluate courses, manage a list of desired courses, etc. 
+Although the real educational innovation will be developed in the next work, here we have added small advances that are not common in this kind of site.
+ForeverLearn has the potential to be more than just a Final Degree Project, the system we are creating as well as the concepts of: CMOOC, Open Educational Resources and Gamification that it integrates can become a serious alternative to classic assessment systems.
+In recent years a great deal of work has been done in educational innovation exploring the possibilities offered by computer science and in the long term my intention is that ForeverLearn can contribute its grain of sand on that path. 
+
+
+
