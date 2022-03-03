@@ -273,5 +273,4 @@ Although the real educational innovation will be developed in the next work, her
 ForeverLearn has the potential to be more than just a Final Degree Project, the system we are creating as well as the concepts of: CMOOC, Open Educational Resources and Gamification that it integrates can become a serious alternative to classic assessment systems.
 In recent years a great deal of work has been done in educational innovation exploring the possibilities offered by computer science and in the long term my intention is that ForeverLearn can contribute its grain of sand on that path. 
 
-
-
+![logo](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png)
