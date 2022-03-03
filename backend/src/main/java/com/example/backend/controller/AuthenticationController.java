@@ -30,7 +30,7 @@ public class AuthenticationController {
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
-        return "login";
+        return "login-page";
     }
 
     @PostMapping("/loginUser")
@@ -42,7 +42,7 @@ public class AuthenticationController {
             model.addAttribute("activeUser", activeUser.isPresent());
             activeUser.ifPresent(userActive -> model.addAttribute("activeUserAdmin", userActive.isAdmin()));
             model.addAttribute("user", activeUser.get());
-            return "user-profile";
+            return "user-profile-page";
         }
         else
             return "/error";
@@ -55,7 +55,7 @@ public class AuthenticationController {
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
-        return "signup";
+        return "signup-page";
     }
 
     @PostMapping("/signupUser")
@@ -69,7 +69,7 @@ public class AuthenticationController {
         model.addAttribute("activeUserAdmin", activeUser.isAdmin());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("user", user);
-        return "user-profile";
+        return "user-profile-page";
     }
 
     @GetMapping("/logout")

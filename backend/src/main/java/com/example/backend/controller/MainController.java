@@ -55,7 +55,7 @@ public class MainController {
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
-        return "help-center";
+        return "help";
     }
 
     @GetMapping("/terms-of-service")
@@ -64,7 +64,7 @@ public class MainController {
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
-        return "terms-of-service";
+        return "terms";
     }
 
     @GetMapping("/privacy-policy")
@@ -73,7 +73,7 @@ public class MainController {
         model.addAttribute("activeUser", activeUser.isPresent());
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
-        return "privacy-policy";
+        return "privacy";
     }
 
     @GetMapping("/errores")

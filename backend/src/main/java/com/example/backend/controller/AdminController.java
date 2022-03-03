@@ -42,7 +42,7 @@ public class AdminController {
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
-        return "admin-options";
+        return "admin-options-page";
     }
 
     @GetMapping("/admin-courses-page-{pageNumber}")

@@ -69,7 +69,7 @@ public class UserController {
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
-        return "user-profile";
+        return "user-profile-page";
     }
 
     @GetMapping("/instructor-section")
@@ -93,7 +93,7 @@ public class UserController {
         activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("user", userService.getActiveUser().get());
         model.addAttribute("categories", categoryService.findAll());
-        return "instructor-create-course";
+        return "instructor-create-course-page";
     }
 
     @PostMapping("/create-course")
@@ -167,7 +167,7 @@ public class UserController {
         Boolean coursesFound = enrolledCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", enrolledCourses);
-        return "student-courses-enrolled";
+        return "student-courses-enrolled-page";
     }
 
     @GetMapping("/student-courses-enrolled")
@@ -181,7 +181,7 @@ public class UserController {
         Boolean coursesFound = enrolledCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", enrolledCourses);
-        return "student-courses-enrolled";
+        return "student-courses-enrolled-page";
     }
 
     @GetMapping("/student-courses-completed")
@@ -195,7 +195,7 @@ public class UserController {
         Boolean coursesFound = completedCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", completedCourses);
-        return "student-courses-completed";
+        return "student-courses-completed-page";
     }
 
     @GetMapping("/student-courses-wished")
@@ -210,7 +210,7 @@ public class UserController {
         Boolean coursesFound = wishedCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", wishedCourses);
-        return "student-courses-wished";
+        return "student-courses-wished-page";
     }
 
     @GetMapping("/enroll-course-{courseId}")
@@ -225,7 +225,7 @@ public class UserController {
         Boolean coursesFound = enrolledCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", enrolledCourses);
-        return "student-courses-enrolled";
+        return "student-courses-enrolled-page";
     }
 
     @GetMapping("/unenroll-course-{courseId}")
@@ -240,7 +240,7 @@ public class UserController {
         Boolean coursesFound = enrolledCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", enrolledCourses);
-        return "student-courses-enrolled";
+        return "student-courses-enrolled-page";
     }
 
     @GetMapping("/wish-course-{courseId}")
@@ -255,7 +255,7 @@ public class UserController {
         Boolean coursesFound = wishedCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", wishedCourses);
-        return "student-courses-wished";
+        return "student-courses-wished-page";
     }
 
     @GetMapping("/unwish-course-{courseId}")
@@ -270,7 +270,7 @@ public class UserController {
         Boolean coursesFound = wishedCourses.size()>0;
         model.addAttribute("coursesFound", coursesFound);
         model.addAttribute("courses", wishedCourses);
-        return "student-courses-wished";
+        return "student-courses-wished-page";
     }
 
     @PostMapping("/create-theme-for-course-{courseId}")
