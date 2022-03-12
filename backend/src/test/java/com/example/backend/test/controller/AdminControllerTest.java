@@ -60,19 +60,6 @@ class AdminControllerTest {
     }
 
     @Test
-    void adminCourses() throws Exception {
-
-    }
-
-    @Test
-    void adminCoursesPrevPage() {
-    }
-
-    @Test
-    void adminCoursesNextPage() {
-    }
-
-    @Test
     void findCourseByName() throws Exception {
         User user = new User();
         when(userService.getActiveUser()).thenReturn(Optional.of(user));
@@ -84,30 +71,6 @@ class AdminControllerTest {
     }
 
     @Test
-    void banCourse() throws Exception {
-    }
-
-    @Test
-    void unbanCourse() {
-    }
-
-    @Test
-    void deleteCourse() {
-    }
-
-    @Test
-    void adminUsers() {
-    }
-
-    @Test
-    void adminUsersPrevPage() {
-    }
-
-    @Test
-    void adminUsersNextPage() {
-    }
-
-    @Test
     void findUserByName() throws Exception {
         User user = new User();
         when(userService.getActiveUser()).thenReturn(Optional.of(user));
@@ -116,26 +79,6 @@ class AdminControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin-users"));
-    }
-
-    @Test
-    void banUser() {
-    }
-
-    @Test
-    void unbanUser() {
-    }
-
-    @Test
-    void deleteUser() {
-    }
-
-    @Test
-    void adminCategories() {
-    }
-
-    @Test
-    void adminCategoriesPrevPage() {
     }
 
     @Test
@@ -168,10 +111,4 @@ class AdminControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
-    @Test
-    void deleteCategory() throws Exception {
-        this.mockMvc.perform(get("/delete-category-" + 1))
-                .andDo(print())
-                .andExpect(status().is4xxClientError());
-    }
 }
