@@ -79,4 +79,5 @@ class AuthenticationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
     }
+
 }

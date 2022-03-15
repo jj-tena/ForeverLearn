@@ -98,7 +98,7 @@ public class UserService {
             if (!user.getFacebook().contentEquals("")) activeUser.setFacebook(user.getFacebook());
             if (!user.getTwitter().contentEquals("")) activeUser.setTwitter(user.getTwitter());
             if (!user.getYoutube().contentEquals("")) activeUser.setYoutube(user.getYoutube());
-            if (!Objects.requireNonNull(profilePhoto.getOriginalFilename()).contentEquals("")) {
+            if (Objects.nonNull(profilePhoto) && !Objects.requireNonNull(profilePhoto.getOriginalFilename()).contentEquals("")) {
                 activeUser.setProfilePhoto(BlobProxy.generateProxy(profilePhoto.getInputStream(), profilePhoto.getSize()));
             }
             userRepository.save(activeUser);
@@ -240,7 +240,7 @@ public class UserService {
     }
 
     public void quitDislikeCourse(User user, Course course){
-        user.quitLikeCourse(course);
+        user.quitDislikeCourse(course);
         userRepository.save(user);
     }
 
@@ -289,14 +289,16 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findUserById(id);
         if (optionalUser.isPresent()){
             List<Course> userCourses = optionalUser.get().getUserCourses();
-            List<Course> aux = new ArrayList<>();
-            userCourses.forEach(course -> {
-                course.setAuthor(null);
-                courseRepository.save(course);
-                aux.add(course);
-            });
-            optionalUser.get().getUserCourses().clear();
-            courseRepository.deleteAll(aux);
+            if (Objects.nonNull(userCourses)){
+                List<Course> aux = new ArrayList<>();
+                userCourses.forEach(course -> {
+                    course.setAuthor(null);
+                    courseRepository.save(course);
+                    aux.add(course);
+                });
+                optionalUser.get().getUserCourses().clear();
+                courseRepository.deleteAll(aux);
+            }
             userRepository.delete(optionalUser.get());
         }
     }
