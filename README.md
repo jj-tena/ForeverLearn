@@ -72,111 +72,111 @@ These are the pages that make up the frontend of the website.
 #### Admin courses
 Screen for the administrator to manage the courses as he/she wishes, being able to view, search, ban, unban and delete them.
 
-![admin-courses](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-courses.png)
+![admin-courses](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/admin-courses.png)
 #### Admin options
 Page with the actions that can be performed by the administrator user.
 
-![admin-options](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-options.png)
+![admin-options](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/admin-options.png)
 #### Admin profile
 Administrator user options page.
 
-![admin-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-profile.png)
+![admin-profile](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/admin-profile.png)
 #### Admin users
 Pantalla para que el administrador gestione como desee los usuarios, pudiendo verlos, buscarlos, banearlos, desbanearlos y borrarlos.
 
-![admin-users](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/admin-users.png)
+![admin-users](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/admin-users.png)
 #### Course
 Page where the user can view the content of a course.
 
-![course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/course.png)
+![course](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/course.png)
 #### Help center
 This page answers questions about the operation and concept of the system.
 
-![help-center](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/help-center.png)
+![help-center](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/help-center.png)
 #### Index
 The home page that the user receives when it searches the system.
 
-![index](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/index.png)
+![index](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/index.png)
 #### Instructor courses
 Page where the user can see the list of courses that he/she has created.
 
-![instructor-courses](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-courses.png)
+![instructor-courses](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/instructor-courses.png)
 #### Instructor create course
 Page for a user to create a course.
 
-![instructor-create-course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-create-course.png)
+![instructor-create-course](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/instructor-create-course.png)
 #### Instructor edit course
 Page for the user to edit one of the courses he/she has created.
 
-![instructor-edit-course](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-edit-course.png)
+![instructor-edit-course](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/instructor-edit-course.png)
 #### Instructor profile
 Page where you can view profile information and courses created by a user other than yourself.
 
-![instructor-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/instructor-profile.png)
+![instructor-profile](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/instructor-profile.png)
 #### Lesson
 Page where the user can view the content of a lesson of a course topic.
 
-![lesson](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/lesson.png)
+![lesson](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/lesson.png)
 #### Library
 Page to view and filter courses in a simple way.
 
-![library](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/library.png)
+![library](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/library.png)
 #### Library list
 Page to view and filter courses in more detail.
 
-![library-list](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/library-list.png)
+![library-list](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/library-list.png)
 #### Login
 Page for the user to log in to the system.
 
-![login](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/login.png)
+![login](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/login.png)
 #### Privacy policy
 Page where you can see the privacy policy of the system.
 
-![privacy-policy](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/privacy-policy.png)
+![privacy-policy](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/privacy-policy.png)
 #### Reset password
 Page for the user to reset the password in case he/she does not remember the password when trying to log in.
 
-![reset-password](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/reset-password.png)
+![reset-password](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/reset-password.png)
 #### Signup
 Page for the user to register in the system.
 
-![signup](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/signup.png)
+![signup](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/signup.png)
 #### Student courses completed
 Page where the user can view their list of completed courses.
 
-![student-courses-completed](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-completed.png)
+![student-courses-completed](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/student-courses-completed.png)
 #### Student courses enrolled
 Page where the user can see the list of courses in which he/she has enrolled.
 
-![student-courses-enrolled](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-enrolled.png)
+![student-courses-enrolled](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/student-courses-enrolled.png)
 #### Student courses wished
 Page where the user can see the list of courses they have liked.
 
-![student-courses-wished](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/student-courses-wished.png)
+![student-courses-wished](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/student-courses-wished.png)
 #### Terms of service
 Page where you can see the terms of use of the system.
 
-![terms-of-service](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/terms-of-service.png)
+![terms-of-service](https://github.com/jj-tena/ForeverLearn/blob/main/images/TFG1/phase2/terms-of-service.png)
 #### User edit account
 Page for the user to configure their base information.
 
-![user-edit-account](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account.png)
+![user-edit-account](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/user-edit-account.png)
 #### User edit account password
 Page for the user to edit his or her password.
 
-![user-edit-account-password](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account-password.png)
+![user-edit-account-password](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/user-edit-account-password.png)
 #### User edit account profile
 Page for the user to configure their profile information.
 
-![user-edit-account-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-edit-account-profile.png)
+![user-edit-account-profile](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/user-edit-account-profile.png)
 #### User profile
 Non-administrator user options page.
 
-![user-profile](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/user-profile.png)
+![user-profile](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/user-profile.png)
 ### Navigation diagram
 Once we have stablished which are the pages that compose our system, we shall take a look at the flow between pages.
 
-![navigation-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase2/navigationDiagram.png)
+![navigation-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/navigationDiagram.png)
 
 ## Phase 3
 
@@ -190,7 +190,7 @@ The application has been built following the Model-View-Controller architecture 
 - Controller: this is the layer in charge of responding to the requests that the user of the application will request through its interaction with the view. This layer is the one that provides functionality to the system, for this it serves as a bridge between the view and the model, receiving requests from the view that asks the model and implementing in between the logic and algorithms that support the application.
 Finally we can appreciate in a simpler way the functioning of this architecture by means of the following diagram:
 
-![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/architecture/architectureDiagram.png)
+![architecture-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/architecture/architectureDiagram.png)
 
 ### Database
 For the persistence of the data it was decided to use a relational database, due to the importance and abundance of relationships that exist between the entities that exist in the system as we will see later on. The need to store all these links between the data was the main factor that influenced the decision.
@@ -214,7 +214,7 @@ In the project we find the following tables:
 - user_disliked_courses: this table relates a user to the courses that he/she has disliked, so it is a relationship in which a single user can be associated to a multitude of different courses.
 Finally, we can find the relationship entity model that represents all of the above: 
 
-![database-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/database/drawDatabaseDiagram.png)
+![database-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/database/drawDatabaseDiagram.png)
 
 ### Backend implementation
 The backend of the system follows a layered design: controller layer, service layer, repository layer and model layer, each of them is in charge of a responsibility, but in general terms we could say that the application logic is integrated in the controller layer, while the business logic is present in the service, model and repository layers.
@@ -224,7 +224,7 @@ The backend of the system follows a layered design: controller layer, service la
 - Model layer: this layer defines the different entities that we will store in the database and the relationships between them, therefore they will be the objects with which we will operate in the system. All the layers must have access to this layer: the controller needs to know which objects it will receive and integrate in the view that it will return in the user's requests, the service must know the model to be able to operate on it and carry out the application's functionalities, and the repository needs to know the model to know how the information in the database it is trying to access is structured.
 In the following diagram we can see the interrelation between the different layers of the system:
 
-![backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/backend/backendDiagram.png)
+![backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/backend/backendDiagram.png)
 
 ## Phase 4
 
@@ -234,14 +234,14 @@ This will be the last phase of this first final degree project, in which we will
 This model is an extension of the backend implementation diagram presented at the end of the previous phase. 
 The current diagram shows all the classes that are contained under each of the layers, giving a more detailed view of the implementation.
 
-![extended-backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/class/classDiagram.png)
+![extended-backend-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase4/class/classDiagram.png)
 
 ### Use cases
 Use cases are an artefact that defines a sequence of actions that leads to an observable result, we will use them to represent the way in which a user interacts with the system in pursuit of a given objective. They graphically represent the functional requirements, as they define the functionalities that the system offers and that the user will use to achieve his objectives. 
 Use cases always pursue a specific objective, however, on many occasions we must achieve small objectives in order to reach a larger one, and this is where the relationships that link use cases that form part of the same flow of events come into play.
 Below is a diagram that shows the possible flows that can occur in the system from the use cases:
 
-![use-case-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/images/phase4/useCase/useCaseDiagram.png)
+![use-case-diagram](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase4/useCase/useCaseDiagram.png)
 
 ### Testing
 
@@ -274,5 +274,5 @@ ForeverLearn has the potential to be more than just a Final Degree Project, the 
 In recent years a great deal of work has been done in educational innovation exploring the possibilities offered by computer science and in the long term my intention is that ForeverLearn can contribute its grain of sand on that path. 
 
 <p align="center">
-  <img width="300" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/images/phase3/logo/logoNegro.png">
+  <img width="300" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/logo/logoNegro.png">
 </p>
