@@ -1,0 +1,327 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content pb-0">
+
+            <div class="mdk-box bg-dark mdk-box--bg-gradient-primary js-mdk-box mb-0" data-effects="blend-background">
+                <div class="mdk-box__content">
+                    <div class="hero py-64pt text-center text-sm-left">
+                        <div class="container">
+                            <h1 class="text-white">{{course.name}}</h1>
+                            <p class="lead text-white-50 measure-hero-lead">{{course.description}}</p>
+                            <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start">
+                                {{#activeUser}}
+                                    {{#courseOwner}}
+                                        <a href="#" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Eres el creador de este curso</a>
+                                    {{/courseOwner}}
+                                    {{^courseOwner}}
+
+                                        {{#courseEnrolled}}
+                                        <a href="/unenroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Desmatricularse</a>
+                                        {{/courseEnrolled}}
+                                        {{^courseEnrolled}}
+                                        <a href="/enroll-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Matricularse</a>
+                                        {{/courseEnrolled}}
+
+                                        {{#courseWished}}
+                                        <a href="/unwish-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Quitar de deseados</a>
+                                        {{/courseWished}}
+                                        {{^courseWished}}
+                                        <a href="/wish-course-{{course.id}}" class="btn btn-outline-white mb-16pt mb-sm-0 mr-sm-16pt">Añadir a deseados</a>
+                                        {{/courseWished}}
+
+                                    {{/courseOwner}}
+                                {{/activeUser}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar navbar-expand-sm navbar-submenu navbar-light navbar-list p-0 m-0 align-items-center">
+                <div class="container page__container">
+                    <ul class="nav navbar-nav flex align-items-sm-center">
+                        <li class="nav-item navbar-list__item">
+                            <div class="media align-items-center">
+                                <span class="media-left mr-16pt">
+                                    <img src="/user/{{course.author.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle">
+                                </span>
+                                <div class="media-body">
+                                    <a class="card-title m-0" href="/instructor-profile-{{course.author.id}}">{{course.author.name}}</a>
+                                    <p class="text-50 lh-1 mb-0">Profesor</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item navbar-list__item">
+                            <i class="material-icons text-muted icon--left">schedule</i>
+                            {{course.length}} horas
+                        </li>
+                        <li class="nav-item navbar-list__item">
+                            <i class="material-icons text-muted icon--left">assessment</i>
+                            {{course.difficulty}}
+                        </li>
+                        <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
+                            <div class="rating rating-24">
+                                {{#filledStars}}
+                                <div class="rating__item"><i class="material-icons">star</i></div>
+                                {{/filledStars}}
+                                {{#borderStars}}
+                                <div class="rating__item"><i class="material-icons">star_border</i></div>
+                                {{/borderStars}}
+                            </div>
+                        </li>
+                        {{#activeUser}}
+                            {{#likedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/quit-like-course-{{course.id}}">
+                                    <i class="material-icons icon--left" style="color: #19857c;">thumb_up</i>
+                                </a>
+                            </li>
+                            {{/likedCourse}}
+                            {{^likedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/like-course-{{course.id}}">
+                                    <i class="material-icons text-muted icon--left">thumb_up</i>
+                                </a>
+                            </li>
+                            {{/likedCourse}}
+                            {{#dislikedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/quit-dislike-course-{{course.id}}">
+                                    <i class="material-icons icon--left" style="color: #19857c;">thumb_down</i>
+                                </a>
+                            </li>
+                            {{/dislikedCourse}}
+                            {{^dislikedCourse}}
+                            <li class="nav-item navbar-list__item">
+                                <a href="/dislike-course-{{course.id}}">
+                                    <i class="material-icons text-muted icon--left">thumb_down</i>
+                                </a>
+                            </li>
+                            {{/dislikedCourse}}
+                        {{/activeUser}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-section border-bottom-2">
+                <div class="container page__container">
+                    {{#hasThemes}}
+                    <h4>Índice</h4>
+                    <div class="card-group card-group--lg-up mb-0">
+                        <div class="card col-lg-12 p-0">
+                            
+                            <ul class="accordion accordion--boxed js-accordion list-group-flush" id="course-toc">
+                                {{#course.themes}}
+                                <li class="accordion__item">
+                                    <a class="accordion__toggle" data-toggle="collapse" data-parent="#course-toc" href="#course-toc-{{idTheme}}">
+                                        <span class="flex">{{nameTheme}}</span>
+                                        <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                    </a>
+                                    <div class="accordion__menu">
+                                        <ul class="list-unstyled collapse" id="course-toc-{{idTheme}}">
+                                            {{#lessons}}
+                                            <li class="accordion__menu-link active">
+                                                <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
+                                                <a class="flex" href="/lesson-{{idLesson}}-from-course-{{course.id}}">{{nameLesson}}</a>
+                                            </li>
+                                            {{/lessons}}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {{/course.themes}}
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    {{/hasThemes}}
+                    {{^hasThemes}}
+                    <div class="d-flex justify-content-center">
+                        <h2>Este curso no tiene temario aún</h2>
+                    </div>
+                    {{/hasThemes}}
+                </div>
+            </div>
+
+            <div class="bg-white">
+
+                <div class="page-separator-mask page-section pb-0 js-read-more">
+                    <div class="container page__container">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-6">
+                                <h4>Requisitos</h4>
+                                <ul class="list-unstyled">
+                                    {{#hasRequirements}}
+                                        {{#course.requirements}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="material-icons text-50 mr-8pt">check</span>
+                                            <span class="text-70">{{nameRequirement}}</span>
+                                        </li>
+                                        {{/course.requirements}}
+                                    {{/hasRequirements}}
+                                    {{^hasRequirements}}
+                                    <li class="d-flex align-items-center">
+                                        <span class="text-70">Este curso no tiene requisitos</span>
+                                    </li>
+                                    {{/hasRequirements}}
+                                </ul>
+                            </div>
+                            <div class="col-md-5">
+                                <h4>Objetivos</h4>
+                                <ul class="list-unstyled">
+                                    {{#hasObjectives}}
+                                        {{#course.objectives}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="material-icons text-50 mr-8pt">check</span>
+                                            <span class="text-70">{{nameObjective}}</span>
+                                        </li>
+                                        {{/course.objectives}}
+                                    {{/hasObjectives}}
+                                    {{^hasObjectives}}
+                                        <li class="d-flex align-items-center">
+                                            <span class="text-70">Este curso no tiene objetivos</span>
+                                        </li>
+                                    {{/hasObjectives}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container page__container">
+                {{#hasThemes}}
+                <div class="row">
+                    <div class="col-lg-7">
+
+                        <div class="border-left-2 page-section pl-32pt">
+
+                            <div class="page-nav__content">
+                                <h2 class="mb-16pt">Temario</h2>
+                            </div>
+
+                            {{#course.themes}}
+
+                                <div class="d-flex align-items-center page-num-container">
+                                    <div id="theme-{{idTheme}}" class="page-num">{{-index}}</div>
+                                    <h4>{{nameTheme}}</h4>
+                                </div>
+
+                                <p class="text-70 mb-24pt">{{descriptionTheme}}</p>
+
+                                <div class="card mb-32pt mb-lg-64pt">
+                                    <ul class="accordion accordion--boxed js-accordion mb-0" id="toc-{{idTheme}}">
+                                        <li class="accordion__item">
+                                            <a class="accordion__toggle" data-toggle="collapse" data-parent="#toc-{{idTheme}}" href="#toc-content-{{idTheme}}">
+                                                <span class="flex">Lecciones</span>
+                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                            </a>
+                                            <div class="accordion__menu">
+                                                <ul class="list-unstyled collapse" id="toc-content-{{idTheme}}">
+                                                    {{#lessons}}
+                                                        <li class="accordion__menu-link">
+                                                            <span class="material-icons icon-16pt icon--left text-primary">play_circle_outline</span>
+                                                            <a class="flex" href="/lesson-{{idLesson}}-from-course-{{course.id}}">{{nameLesson}}</a>
+                                                        </li>
+                                                    {{/lessons}}
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            {{/course.themes}}
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 page-nav">
+                        <div class="page-section">
+                            <div class="page-nav__content">
+                                <h4 class="mb-16pt">Índice</h4>
+                            </div>
+                            <nav class="nav page-nav__menu">
+                                {{#course.themes}}
+                                    <a class="nav-link" href="#theme-{{idTheme}}">{{nameTheme}}</a>
+                                {{/course.themes}}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {{/hasThemes}}
+            </div>
+
+            <div class="page-section bg-white border-bottom-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 mb-24pt mb-md-0">
+                            <h4>Sobre el autor</h4>
+                            <p class="text-70 mb-24pt">{{course.author.description}}</p>
+
+                        </div>
+                        <div class="col-md-5 border-left-md pt-sm-32pt pt-md-0 d-flex flex-column align-items-center justify-content-center">
+                            <div class="text-center">
+                                <p class="mb-16pt">
+                                    <img src="/user/{{course.author.id}}/profilePhoto" alt="guy-6" class="rounded-circle" width="64">
+                                </p>
+                                <h4 class="m-0">{{course.author.name}}</h4>
+                                <p class="lh-1">
+                                </p>
+                                <div class="d-flex flex-column align-items-center justify-content-start">
+                                    <a href="/instructor-profile-{{course.author.id}}" class="btn btn-outline-secondary">Ver perfil</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{>footer}}
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    {{>drawer}}
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+
+
+</body>
+
+</html>
