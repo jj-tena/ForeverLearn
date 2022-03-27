@@ -13,9 +13,34 @@ MOOCs, as their acronym indicates, are massive open online courses that seek to 
 
 ForeverLearn seeks to create a virtual space that allows its users to teach, search and enroll in cMOOCs, which will be accompanied by a forum system in which students can discuss, clarify their doubts and expand the course content. Students will be graded based on their participation in these forums, which will be incentivized through a gamification system that will give them different levels of privileges.
 
-The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2, 3 and 4, secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out starting in phase 5.
+This repository is therefore divided into two projects corresponding to a first TFG in which a virtual classroom will be developed that implements all the necessary tools so that students and teachers can interact through cMOOCs, and a second TFG in which educational innovation will be developed through the evaluation of students based on their participation encouraged through gamification techniques.
 
 # TFG 1: A virtual space for education with a focus on cMOOCs
+
+ForeverLearn is an educational innovation project that aims to create a platform for both MOOC-based learning and delivery
+for both the delivery and learning based on MOOCs, offering tools for the creation and
+for the creation and learning of this type of courses.
+The project is framed within the OER initiative, eliminating any features that prevent access to MOOCs.
+that prevents access to the courses, so they will be free of charge and all their content will be accessible without the need to register.
+content without the need to register. The platform has focused on cMOOCs,
+a variant of MOOCs that emphasises the community that can be created around the course due to the large number of courses.
+around the course due to its large number of learners.
+ForeverLearn offers users the freedom to be both teachers and learners.
+As teachers, they will have at their disposal multiple tools for creating and managing the
+content of their courses, such as the possibility of inserting embedded content from other websites.
+websites. As students, they will be able to rate, enrol and manage their list of desired courses.
+This first work therefore serves to establish a platform for open courseware
+MOOC modality and the principles of the OER movement, which allows its users to be teachers by creating
+users to be teachers creating courses, students being able to receive training from them, and to
+has multiple administration options.
+This work will be carried out taking into account that it should serve as a basis to be expanded in a second final project.
+expanded in a second final degree project that will follow. The second
+work will focus mainly on educational innovation, implementing a course evaluation system based on the
+based on the participation of the users, motivated by Gamification techniques, in pursuit of the
+Gamification techniques, in order to create a knowledge network that involves the course.
+With all of the above, the objective is to create a system that enables education through
+that integrates the latest educational currents and that represents a viable alternative to the classical
+to the classical type of evaluation.
 
 ## Phase 1
 In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
@@ -275,9 +300,5 @@ With the work carried out in this first project, we now have a public and open c
 Although the real educational innovation will be developed in the next work, here we have added small advances that are not common in this kind of site.
 ForeverLearn has the potential to be more than just a Final Degree Project, the system we are creating as well as the concepts of: CMOOC, Open Educational Resources and Gamification that it integrates can become a serious alternative to classic assessment systems.
 In recent years a great deal of work has been done in educational innovation exploring the possibilities offered by computer science and in the long term my intention is that ForeverLearn can contribute its grain of sand on that path. 
-
-<p align="center">
-  <img width="300" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/logo/logoNegro.png">
-</p>
 
 # TFG 2: A connectivist approach to education with a focus on CMOOC
