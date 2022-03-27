@@ -20,11 +20,13 @@ This repository is therefore divided into two projects corresponding to a first 
 ForeverLearn is an educational innovation project that aims to create a platform for both MOOC-based learning and delivery
 for both the delivery and learning based on MOOCs, offering tools for the creation and
 for the creation and learning of this type of courses.
+
 The project is framed within the OER initiative, eliminating any features that prevent access to MOOCs.
 that prevents access to the courses, so they will be free of charge and all their content will be accessible without the need to register.
 content without the need to register. The platform has focused on cMOOCs,
 a variant of MOOCs that emphasises the community that can be created around the course due to the large number of courses.
 around the course due to its large number of learners.
+
 ForeverLearn offers users the freedom to be both teachers and learners.
 As teachers, they will have at their disposal multiple tools for creating and managing the
 content of their courses, such as the possibility of inserting embedded content from other websites.
@@ -33,11 +35,13 @@ This first work therefore serves to establish a platform for open courseware
 MOOC modality and the principles of the OER movement, which allows its users to be teachers by creating
 users to be teachers creating courses, students being able to receive training from them, and to
 has multiple administration options.
+
 This work will be carried out taking into account that it should serve as a basis to be expanded in a second final project.
 expanded in a second final degree project that will follow. The second
 work will focus mainly on educational innovation, implementing a course evaluation system based on the
 based on the participation of the users, motivated by Gamification techniques, in pursuit of the
 Gamification techniques, in order to create a knowledge network that involves the course.
+
 With all of the above, the objective is to create a system that enables education through
 that integrates the latest educational currents and that represents a viable alternative to the classical
 to the classical type of evaluation.
