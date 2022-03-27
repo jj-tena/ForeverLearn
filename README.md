@@ -14,6 +14,9 @@ MOOCs, as their acronym indicates, are massive open online courses that seek to 
 ForeverLearn seeks to create a virtual space that allows its users to teach, search and enroll in cMOOCs, which will be accompanied by a forum system in which students can discuss, clarify their doubts and expand the course content. Students will be graded based on their participation in these forums, which will be incentivized through a gamification system that will give them different levels of privileges.
 
 The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2, 3 and 4, secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out starting in phase 5.
+
+# TFG 1: ForeverLearn: Un espacio virtual para la educación centrado en cMOOC
+
 ## Phase 1
 In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
 
@@ -156,7 +159,7 @@ Page where the user can see the list of courses they have liked.
 #### Terms of service
 Page where you can see the terms of use of the system.
 
-![terms-of-service](https://github.com/jj-tena/ForeverLearn/blob/main/images/TFG1/phase2/terms-of-service.png)
+![terms-of-service](https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase2/terms-of-service.png)
 #### User edit account
 Page for the user to configure their base information.
 
@@ -276,3 +279,5 @@ In recent years a great deal of work has been done in educational innovation exp
 <p align="center">
   <img width="300" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/logo/logoNegro.png">
 </p>
+
+# TFG 2: ForeverLearn: Un enfoque conectivista de la educación centrado en CMOOC
