@@ -15,7 +15,7 @@ ForeverLearn seeks to create a virtual space that allows its users to teach, sea
 
 The project is thus divided into two main parts: firstly, a virtual classroom where the courses are created, stored and accessed, the development of which will take place during phases 1, 2, 3 and 4, secondly, a forum system that expands them and will serve as to evaluate the students, whose development will be carried out starting in phase 5.
 
-# TFG 1 - ForeverLearn: A virtual space for education with a focus on cMOOCs
+# TFG 1: A virtual space for education with a focus on cMOOCs
 
 ## Phase 1
 In this phase we will define the objectives to be achieved, the types of users of the system, as well as the requirements to be met to satisfy their needs, and we will begin to consider the more technical aspects of the project: languages, environments, database entities and tools, which may be appropriate for the solution we intend to implement.
@@ -280,4 +280,4 @@ In recent years a great deal of work has been done in educational innovation exp
   <img width="300" height="300" src="https://github.com/jj-tena/ForeverLearn/blob/main/TFG1/images/phase3/logo/logoNegro.png">
 </p>
 
-# TFG 2 - ForeverLearn: A connectivist approach to education with a focus on CMOOC
+# TFG 2: A connectivist approach to education with a focus on CMOOC
