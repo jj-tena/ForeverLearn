@@ -385,7 +385,7 @@ In order to endorse and refine the educational approach, it was decided to follo
 
 ### User Centered Design (UCD)
 
-The user-centred design process is a product creation methodology that puts the end-user at the centre of the design process in order to make him/her a part of the design process with the aim of offering a product that meets his/her needs with the highest possible degree of satisfaction.
+The user centered design process is a product creation methodology that puts the end-user at the centre of the design process in order to make him/her a part of the design process with the aim of offering a product that meets his/her needs with the highest possible degree of satisfaction.
 
 ForeverLearn proposes various aspects of educational innovation that represent a break with traditional implementation methods and therefore cannot rely on the decisions made by previous systems, for which it aims to bring together ideas from different currents such as CMOOCs and Gamification.
 
@@ -398,3 +398,31 @@ For the sake of order, it has been decided to divide this process into 3 stages:
 3. The intermediate prototype will again pass through the hands of the specialists who are giving their assistance. After that, their final verdicts will be examined and final changes will be included to shape the final design.
 
 For each of the stages, the creative decisions involved, the features included and the contributions of all those who helped are detailed below.
+
+### Initial prototype
+
+This first point of the design process will be particularly extensive because it must explain all the ideas that will form the basis from which it will begin to iterate.
+
+It is essential to create a space within the course in which users can make contact and upload their productions, this has been called "Student Area", within this space the functionalities of participation and incentivisation of the students will be developed.
+
+Firstly, everything related to the participation of the user enrolled in a course is explained. To do so, access the "Student area" within the course, where you will find two ways of interaction:
+
+- Forums. The forums section allows the student to create posts, which are publications in which the user can contribute their grain of sand to the network of course content by offering their point of view on aspects of the course, sharing documents from other authors, starting debates, etc.
+
+Each post will have its own comments section that expands the conversation around the topic, so that when a user enters the forum section they will be able to participate in two ways participate in two ways: by writing a new post or by commenting on existing posts.
+
+The forum section will consist of a list of posts in which only users will be able to participate, both to create original content and to comment, only those enrolled in the course. the course. In order to offer a barrier-free education, all the content of this section will be accessible without the
+all the content of this section without the need to register in the system.
+
+- Questions. The questions section is focused on the resolution of doubts and problems that may arise during the problems that may arise while following the course material, for which students can upload their questions.
+
+Unlike the previous section, the main objective of this section is not to expand the course content, but rather to facilitate the
+the course content, but to facilitate progress through the course in order to reduce dropout. In order to achieve this purpose, the questions section
+section allows you to participate in two ways: by uploading new questions or by answering existing ones.
+
+The user who has uploaded a question will be able to highlight from among all the answers the one he/she considers to be the best answer.
+the one he/she considers to be the best answer. A question has a series of answers that aim to solve the problem, unlike the comments of a post, not all the answers are unlike the comments of a post, not all questions are equally valid, which is why we give the is the opportunity to highlight the one that offers the best solution to the question posed. The best answer will be the first one that appears in the list of answers to the question, in order to facilitate the way for those with the same doubt.
+
+The questions section will function as a list of questions in which only registered users will be able to ask and answer only those users registered in the course will be able to ask and answer questions. As in the section, ForeverLearn's commitment to the openness of education is favoured by an unrestricted access to this section.
+
+
