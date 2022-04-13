@@ -407,14 +407,14 @@ It is essential to create a space within the course in which users can make cont
 
 Firstly, everything related to the participation of the user enrolled in a course is explained. To do so, access the "Student area" within the course, where you will find two ways of interaction:
 
-- Forums. The forums section allows the student to create posts, which are publications in which the user can contribute their grain of sand to the network of course content by offering their point of view on aspects of the course, sharing documents from other authors, starting debates, etc.
+Forums. The forums section allows the student to create posts, which are publications in which the user can contribute their grain of sand to the network of course content by offering their point of view on aspects of the course, sharing documents from other authors, starting debates, etc.
 
 Each post will have its own comments section that expands the conversation around the topic, so that when a user enters the forum section they will be able to participate in two ways participate in two ways: by writing a new post or by commenting on existing posts.
 
 The forum section will consist of a list of posts in which only users will be able to participate, both to create original content and to comment, only those enrolled in the course. the course. In order to offer a barrier-free education, all the content of this section will be accessible without the
 all the content of this section without the need to register in the system.
 
-- Questions. The questions section is focused on the resolution of doubts and problems that may arise during the problems that may arise while following the course material, for which students can upload their questions.
+Questions. The questions section is focused on the resolution of doubts and problems that may arise during the problems that may arise while following the course material, for which students can upload their questions.
 
 Unlike the previous section, the main objective of this section is not to expand the course content, but rather to facilitate the
 the course content, but to facilitate progress through the course in order to reduce dropout. In order to achieve this purpose, the questions section
@@ -425,4 +425,17 @@ the one he/she considers to be the best answer. A question has a series of answe
 
 The questions section will function as a list of questions in which only registered users will be able to ask and answer only those users registered in the course will be able to ask and answer questions. As in the section, ForeverLearn's commitment to the openness of education is favoured by an unrestricted access to this section.
 
+The list of posts/issues will be organised into 3 levels of distinction
+
+Post/Question of interest. This type of post/question is the first to be shown in the list, these are posts/questions that have aroused the interest of the course teacher and have been highlighted by him/her, so they have a certified quality.
+To differentiate them from the other types they are highlighted in red.
+
+Featured post/question. This type of post/question is shown after the previous ones, only the user who wrote the post can mark it in this way, to do so he/she will have to use one of his/her bonuses to highlight posts/issues,
+The concept and operation of these bonuses will be explained later. 
+The posts/issues will be highlighted in yellow.
+
+Standard Post/Issue. This is the last type of post/issue to be shown in the list. Given
+they have not stood out above the others, they will be shown in white.
+
+Once the activities that users can carry out in the courses have been developed, we can discuss the Gamification techniques proposed to encourage these actions.
 
