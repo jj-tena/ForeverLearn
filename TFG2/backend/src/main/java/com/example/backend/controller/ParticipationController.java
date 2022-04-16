@@ -24,7 +24,7 @@ public class ParticipationController {
         this.categoryService = categoryService;
     }
 
-    private void setCommonData(Model model){
+    private void setHeaderInfo(Model model){
         Optional<User> activeUser = userService.getActiveUser();
         model.addAttribute("activeUser", activeUser.isPresent());
         if (activeUser.isPresent()){
@@ -36,27 +36,29 @@ public class ParticipationController {
         model.addAttribute("categories", categoryService.findAll());
     }
 
+
+
     @GetMapping("/students-area-link")
     public String studentsAreaLink(Model model){
-        setCommonData(model);
+        setHeaderInfo(model);
         return "students-area";
     }
 
     @GetMapping("/posts-link")
     public String postsLink(Model model){
-        setCommonData(model);
+        setHeaderInfo(model);
         return "posts";
     }
 
     @GetMapping("/post-link")
     public String postLink(Model model){
-        setCommonData(model);
+        setHeaderInfo(model);
         return "post";
     }
 
     @GetMapping("/create-post-link")
     public String createPostLink(Model model){
-        setCommonData(model);
+        setHeaderInfo(model);
         return "create-post";
     }
 
