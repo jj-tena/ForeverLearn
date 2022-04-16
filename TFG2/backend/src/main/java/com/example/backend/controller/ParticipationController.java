@@ -62,4 +62,10 @@ public class ParticipationController {
         return "create-post";
     }
 
+    @GetMapping("/participation-link")
+    public String participationLink(Model model){
+        setHeaderInfo(model);
+        return "participation";
+    }
+
 }
