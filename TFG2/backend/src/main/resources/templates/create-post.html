@@ -9,19 +9,21 @@
 
 
             <div class="container page__container">
-                <form action="/posts-link">
+                <form action="/publish-post-for-course-{{courseId}}">
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="page-section">
                                 <h4>Crear post</h4>
-
+                                <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
+                                    <a href="/posts-{{courseId}}" class="mr-3">Volver atrás</a>
+                                </p>
                                 <div class="list-group">
                                     <div class="list-group-item">
                                         <div class="form-group m-0" role="group" aria-labelledby="label-topic">
                                             <div class="form-row align-items-center">
                                                 <label id="label-title" for="title" class="col-md-3 col-form-label form-label">Título</label>
                                                 <div class="col-md-9">
-                                                    <input id="title" type="text" placeholder="Escribe el título del post..." value="Angular HttpClientModule" class="form-control">
+                                                    <input id="title" type="text" placeholder="Escribe el título del post..." value="" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -29,7 +31,7 @@
                                     <div class="list-group-item">
                                         <div role="group" aria-labelledby="label-question" class="m-0 form-group">
                                             <div class="form-row">
-                                                <label id="label-question" for="question" class="col-md-3 col-form-label form-label">Question details</label>
+                                                <label id="label-question" for="question" class="col-md-3 col-form-label form-label">Contenido</label>
                                                 <div class="col-md-9">
                                                     <textarea id="question" placeholder="Escribe el contenido del post..." rows="4" class="form-control"></textarea>
                                                 </div>
