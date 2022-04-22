@@ -30,15 +30,21 @@ public class Participation {
     @OneToMany
     private List<Comment> comments;
 
+    private String title;
+
     public Participation(User student, Course course) {
         this.student = student;
         this.course = course;
         this.points = 0;
         this.posts = new LinkedList<>();
         this.comments = new LinkedList<>();
+        this.title = "Principiante";
     }
 
     public Participation() {
+    }
 
+    public void addPost(Post post){
+        this.posts.add(post);
     }
 }

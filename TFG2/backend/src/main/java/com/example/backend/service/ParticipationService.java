@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Course;
 import com.example.backend.model.Participation;
+import com.example.backend.model.Post;
 import com.example.backend.model.User;
 import com.example.backend.repository.ParticipationRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,14 @@ public class ParticipationService {
 
     public Optional<Participation> existsParticipation(Long userId, Long courseId){
         return participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
+    }
+
+    public void addPost(Long courseId, Long userId, Post post){
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
+        if (optionalParticipation.isPresent()){
+            optionalParticipation.get().addPost(post);
+            participationRepository.save(optionalParticipation.get());
+        }
     }
 
 

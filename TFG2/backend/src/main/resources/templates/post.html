@@ -11,78 +11,93 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <h1 class="h2 mb-2">Acogerse a sagrado: legislación y religión.</h1>
+                            <h1 class="h2 mb-2">{{post.title}}</h1>
                             <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
-                                <a href="/posts-link" class="mr-3">Volver al foro</a>
+                                <a href="/posts-{{courseId}}" class="mr-3">Volver al foro</a>
                             </p>
 
                             <div class="card card-body">
                                 <div class="d-flex">
                                     <a href="" class="avatar mr-3">
-                                        <img src="assets/images/people/256/256_rsz_nicolas-horn-689011-unsplash.jpg" alt="people" class="avatar-img rounded-circle">
+                                        <img src="/user/{{post.participation.student.id}}/profilePhoto" alt="people" class="avatar-img rounded-circle">
                                     </a>
                                     <div class="flex">
                                         <p class="d-flex align-items-center mb-2">
-                                            <a href="student-profile.html" class="text-body mr-2"><strong>Jenell D. Matney</strong></a>
+                                            <a href="student-profile.html" class="text-body mr-2"><strong>{{post.participation.student.name}}</strong></a>
                                         </p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores beatae quisquam iste maiores libero, corrupti totam saepe itaque quidem perspiciatis?</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos culpa commodi consequuntur! Optio labore corporis quo a quia, incidunt unde soluta velit ad, eius exercitationem sequi ab laborum! Nostrum voluptate earum sit aperiam quaerat unde, vel excepturi quisquam nihil reprehenderit in minus laudantium eligendi odio iusto nemo, aspernatur, optio soluta!</p>
+                                        <p>{{post.title}}</p>
                                         <div class="d-flex align-items-center">
-                                            <a href="" class="text-50 d-flex align-items-center text-decoration-0"><i class="material-icons mr-1" style="font-size: inherit;">forum</i> 30</a>
-                                            <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> 130</a>
+                                            <a href="" class="text-50 d-flex align-items-center text-decoration-0"><i class="material-icons mr-1" style="font-size: inherit;">forum</i> {{post.commentsSize}}</a>
+                                            <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">thumb_up</i> {{post.likes}}</a>
+                                            <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">visibility</i> {{post.views}}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex mb-4">
-                                <a href="student-profile.html" class="avatar mr-3">
-                                    <img src="assets/images/people/50/guy-6.jpg" alt="people" class="avatar-img rounded-circle">
-                                </a>
-                                <div class="flex">
-                                    <div class="form-group">
-                                        <label for="comment" class="form-label">Tu comentario</label>
-                                        <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Escribe aquí un comentario al post..."></textarea>
+                            <form action="/comment-post-{{post.id}}-course-{{courseId}}">
+                                <div class="d-flex mb-4">
+                                    <a href="student-profile.html" class="avatar mr-3">
+                                        <img src="/user/{{user.id}}/profilePhoto" alt="people" class="avatar-img rounded-circle">
+                                    </a>
+                                    <div class="flex">
+                                        <div class="form-group">
+                                            <label for="comment" class="form-label">Tu comentario</label>
+                                            <textarea class="form-control" name="content" id="comment" rows="3" placeholder="Escribe aquí un comentario al post..."></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-accent">Comentar</button>
                                     </div>
-                                    <button class="btn btn-accent">Comentar</button>
                                 </div>
-                            </div>
-                            <div class="pt-3">
-                                <h4>2 Comentarios</h4>
+                            </form>
 
+
+                            <div class="pt-3">
+                                <h4>{{post.commentsSize}} Comentarios</h4>
+
+                                {{#outstandingComments}}
                                 <div class="mt-3 card p-3" style="background-color: #8fe3ff">
                                     <div class="col-md-12 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
                                         <strong>Comentario destacado</strong>
                                     </div>
                                     <div class="d-flex">
                                         <a href="#" class="avatar avatar-xs mr-3">
-                                            <img src="assets/images/people/110/guy-6.jpg" alt="Guy" class="avatar-img rounded-circle">
+                                            <img src="/user/{{participation.student.id}}/profilePhoto" alt="Guy" class="avatar-img rounded-circle">
                                         </a>
                                         <div class="flex">
                                             <div class="d-flex align-items-center">
-                                                <a href="profile.html" class="text-body"><strong>FrontendMatter</strong></a>
+                                                <a href="profile.html" class="text-body"><strong>{{participation.student.name}}</strong></a>
                                             </div>
-                                            <p class="mt-1 mb-0 text-70">Hi Joseph,<br> Thank you for purchasing our course! <br><br>Please have a look at the charts library documentation <a href="#">here</a> and follow the instructions.</p>
+                                            <div class="d-flex align-items-center">
+                                                <a href="profile.html" class="text-body">{{participation.title}}</a>
+                                            </div>
+                                            <p class="mt-1 mb-0 text-70">{{content}}</p>
                                         </div>
                                     </div>
                                 </div>
+                                {{/outstandingComments}}
 
+                                {{#standardComments}}
                                 <div class="mt-3 card p-3" style="background-color: #def7ff">
                                     <div class="col-md-12 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
                                         <strong>Comentario estándar</strong>
                                     </div>
                                     <div class="d-flex">
                                         <a href="#" class="avatar avatar-xs mr-3">
-                                            <img src="assets/images/people/110/guy-6.jpg" alt="Guy" class="avatar-img rounded-circle">
+                                            <img src="/user/{{participation.student.id}}/profilePhoto" alt="Guy" class="avatar-img rounded-circle">
                                         </a>
                                         <div class="flex">
                                             <div class="d-flex align-items-center">
-                                                <a href="profile.html" class="text-body"><strong>FrontendMatter</strong></a>
+                                                <a href="profile.html" class="text-body"><strong>{{participation.student.name}}</strong></a>
                                             </div>
-                                            <p class="mt-1 mb-0 text-70">Hi Joseph,<br> Thank you for purchasing our course! <br><br>Please have a look at the charts library documentation <a href="#">here</a> and follow the instructions.</p>
+                                            <div class="d-flex align-items-center">
+                                                <a href="profile.html" class="text-body">{{participation.title}}</a>
+                                            </div>
+                                            <p class="mt-1 mb-0 text-70">{{content}}</p>
                                         </div>
                                     </div>
                                 </div>
+                                {{/standardComments}}
+
 
                             </div>
                         </div>

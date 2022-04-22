@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Category;
 import com.example.backend.model.Course;
+import com.example.backend.model.Post;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -171,5 +172,11 @@ public class CourseService {
                 courseRepository.delete(optionalCourse.get());
             }
         }
+    }
+
+    public void addPost(Long courseId, Post post){
+        Course course = courseRepository.getById(courseId);
+        course.addPost(post);
+        courseRepository.save(course);
     }
 }

@@ -51,6 +51,9 @@ public class Course {
 
     private Boolean banned = false;
 
+    @OneToMany
+    private List<Post> posts;
+
     public Course() {
 
     }
@@ -124,6 +127,13 @@ public class Course {
 
     public void unban(){
         this.banned = false;
+    }
+
+    public void addPost(Post post){
+        if (Objects.isNull(this.posts)){
+            this.posts = new LinkedList<>();
+        }
+        this.posts.add(post);
     }
 
 }

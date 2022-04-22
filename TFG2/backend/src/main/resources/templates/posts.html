@@ -37,24 +37,25 @@
 
                         <div class="list-group list-group-flush">
 
-                            <div class="list-group-item p-3" style="background-color:#FF6666;">
+                            {{#interestingPosts}}
+                            <div class="list-group-item p-3"  style="background-color:#FF6666;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
                                         <div class="media">
                                             <div class="media-left mr-16pt">
-                                                <a href="student-profile.html"><img src="assets/images/people/110/guy-1.jpg" width="40" alt="avatar" class="rounded-circle"></a>
+                                                <a href="student-profile.html"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
                                             </div>
                                             <div class="media-body media-middle">
-                                                <p class="m-0"><a href="student-profile.html" class="text-body">Laza Bogdan</a></p>
-                                                <p class="text-muted m-0">Principiante</p>
+                                                <p class="m-0"><a href="student-profile.html" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-link-course-{{courseId}}" class="text-body"><strong>Using Angular HttpClientModule instead of HttpModule</strong></a></p>
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">1</h5>
+                                        <h5 class="m-0">{{commentsSize}}</h5>
                                         <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
@@ -63,25 +64,27 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/interestingPosts}}
 
+                            {{#outstandingPosts}}
                             <div class="list-group-item p-3" style="background-color:#FFB072;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
                                         <div class="media">
                                             <div class="media-left mr-16pt">
-                                                <a href="student-profile.html"><img src="assets/images/people/110/guy-1.jpg" width="40" alt="avatar" class="rounded-circle"></a>
+                                                <a href="student-profile.html"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
                                             </div>
                                             <div class="media-body media-middle">
-                                                <p class="m-0"><a href="student-profile.html" class="text-body">Laza Bogdan</a></p>
-                                                <p class="text-muted m-0">Principiante</p>
+                                                <p class="m-0"><a href="student-profile.html" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-link-course-{{courseId}}" class="text-body"><strong>Using Angular HttpClientModule instead of HttpModule</strong></a></p>
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">1</h5>
+                                        <h5 class="m-0">{{commentsSize}}</h5>
                                         <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
@@ -90,25 +93,27 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/outstandingPosts}}
 
+                            {{#standardPosts}}
                             <div class="list-group-item p-3" style="background-color:#FFE3B3;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
                                         <div class="media">
                                             <div class="media-left mr-16pt">
-                                                <a href="student-profile.html"><img src="assets/images/people/110/guy-1.jpg" width="40" alt="avatar" class="rounded-circle"></a>
+                                                <a href="student-profile.html"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
                                             </div>
                                             <div class="media-body media-middle">
-                                                <p class="m-0"><a href="student-profile.html" class="text-body">Laza Bogdan</a></p>
-                                                <p class="text-muted m-0">Principiante</p>
+                                                <p class="m-0"><a href="student-profile.html" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-link-course-{{courseId}}" class="text-body"><strong>Using Angular HttpClientModule instead of HttpModule</strong></a></p>
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">1</h5>
+                                        <h5 class="m-0">{{commentsSize}}</h5>
                                         <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
@@ -117,6 +122,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{/standardPosts}}
 
 
                         </div>
