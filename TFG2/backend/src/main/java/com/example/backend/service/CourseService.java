@@ -1,9 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.model.Category;
-import com.example.backend.model.Course;
-import com.example.backend.model.Post;
-import com.example.backend.model.User;
+import com.example.backend.model.*;
 import com.example.backend.repository.CourseRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.core.io.ClassPathResource;
@@ -177,6 +174,12 @@ public class CourseService {
     public void addPost(Long courseId, Post post){
         Course course = courseRepository.getById(courseId);
         course.addPost(post);
+        courseRepository.save(course);
+    }
+
+    public void addQuestion(Long courseId, Question question){
+        Course course = courseRepository.getById(courseId);
+        course.addQuestion(question);
         courseRepository.save(course);
     }
 }

@@ -27,7 +27,7 @@
 
 
                         <div class="col-lg-6">
-                            <div class="card" onclick="location.href='/student-section';" style="cursor:pointer; background: grey;">
+                            <div class="card" onclick="location.href='/questions-{{courseId}}';" style="cursor:pointer; background: grey;">
                                 <div class="card-header d-flex justify-content-center"> 
                                     <div class="h2 mb-0 mr-3 text-70">
                                         Cuestiones
@@ -64,10 +64,10 @@
                                             <div class="mr-3">
                                                 <strong>{{-index}}</strong>
                                             </div>
-                                            <a href="student-profile.html" class="avatar avatar-xs mr-3">
+                                            <a href="/participation-user-{{student.id}}-course-{{courseId}}" class="avatar avatar-xs mr-3">
                                                 <img src="/user/{{student.id}}/profilePhoto" alt="course" class="avatar-img rounded-circle">
                                             </a>
-                                            <a href="student-profile.html" class="flex mr-2 text-body"><strong>{{student.name}}</strong></a>
+                                            <a href="/participation-user-{{student.id}}-course-{{courseId}}" class="flex mr-2 text-body"><strong>{{student.name}}</strong></a>
                                             <span class="text-70 mr-2">{{points}}</span>
                                         </div>
                                         {{/topGlobal}}

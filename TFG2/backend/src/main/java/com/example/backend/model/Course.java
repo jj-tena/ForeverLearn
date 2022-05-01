@@ -54,6 +54,9 @@ public class Course {
     @OneToMany
     private List<Post> posts;
 
+    @OneToMany
+    private List<Question> questions;
+
     public Course() {
 
     }
@@ -134,5 +137,12 @@ public class Course {
             this.posts = new LinkedList<>();
         }
         this.posts.add(post);
+    }
+
+    public void addQuestion(Question question){
+        if (Objects.isNull(this.questions)){
+            this.questions = new LinkedList<>();
+        }
+        this.questions.add(question);
     }
 }

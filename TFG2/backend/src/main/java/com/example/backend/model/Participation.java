@@ -34,6 +34,15 @@ public class Participation {
     private List<Comment> comments;
 
     @OneToMany
+    private List<Question> questions;
+
+    @OneToMany
+    private List<Question> likedQuestions;
+
+    @OneToMany
+    private List<Answer> answers;
+
+    @OneToMany
     private List<Comment> likedComments;
 
     private String title;
@@ -48,6 +57,9 @@ public class Participation {
         this.posts = new LinkedList<>();
         this.likedPosts = new LinkedList<>();
         this.comments = new LinkedList<>();
+        this.questions = new LinkedList<>();
+        this.likedQuestions = new LinkedList<>();
+        this.answers = new LinkedList<>();
         this.likedComments = new LinkedList<>();
         this.title = "Principiante";
         this.badges = new LinkedList<>();
@@ -99,6 +111,40 @@ public class Participation {
         final int[] totalInteresting = {0};
         this.posts.forEach(post -> {
             if (post.isInteresting()){
+                totalInteresting[0] ++;
+            }
+        });
+        return totalInteresting[0];
+    }
+
+    public void addQuestion(Question question){
+        this.questions.add(question);
+    }
+
+    public void likeQuestion(Question question){
+        this.likedQuestions.add(question);
+    }
+
+    public void quitLikeQuestion(Question question) {
+        this.likedQuestions.remove(question);
+    }
+
+    public int totalLikesInQuestions(){
+        final int[] totalLikes = {0};
+        this.questions.forEach(question -> totalLikes[0] +=question.getLikes());
+        return totalLikes[0];
+    }
+
+    public int totalViewsInQuestions() {
+        final int[] totalViews = {0};
+        this.questions.forEach(question -> totalViews[0] +=question.getViews());
+        return totalViews[0];
+    }
+
+    public int totalInterestingQuestions() {
+        final int[] totalInteresting = {0};
+        this.questions.forEach(question -> {
+            if (question.isInteresting()){
                 totalInteresting[0] ++;
             }
         });

@@ -9,7 +9,7 @@
             <div class="container page__container">
                 <div class="page-section">
 
-                    <h4>Posts</h4>
+                    <h4>Preguntas</h4>
                     <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
                         <a href="/students-area-{{courseId}}" class="mr-3">Volver a la sección inicial</a>
                     </p>
@@ -18,7 +18,7 @@
                             <div class="row align-items-center" style="white-space: nowrap;">
                                 <div class="col-lg-auto">
                                     <form class="search-form search-form--light d-lg-inline-flex mb-8pt mb-lg-0" action="student-discussions.html">
-                                        <input type="text" class="form-control w-lg-auto" placeholder="Buscar posts">
+                                        <input type="text" class="form-control w-lg-auto" placeholder="Buscar preguntas">
                                         <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
                                     </form>
                                 </div>
@@ -28,7 +28,7 @@
                                     <div class="mr-8pt">
                                     </div>
                                     {{#enrolledUser}}
-                                    <a href="/create-post-for-course-{{courseId}}" class="btn btn-accent">Crear post</a>
+                                    <a href="/create-question-for-course-{{courseId}}" class="btn btn-accent">Crear pregunta</a>
                                     {{/enrolledUser}}
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
 
                         <div class="list-group list-group-flush">
 
-                            {{#interestingPosts}}
+                            {{#interestingQuestions}}
                             <div class="list-group-item p-3"  style="background-color:#FF6666;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
@@ -52,21 +52,21 @@
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                        <p class="mb-8pt"><a href="/question-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">{{commentsSize}}</h5>
-                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                        <h5 class="m-0">{{answersSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">respuestas</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">Post</h5>
+                                        <h5 class="m-0">Pregunta</h5>
                                         <h5 class="m-0">interesante</h5>
                                     </div>
                                 </div>
                             </div>
-                            {{/interestingPosts}}
+                            {{/interestingQuestions}}
 
-                            {{#outstandingPosts}}
+                            {{#outstandingQuestions}}
                             <div class="list-group-item p-3" style="background-color:#FFB072;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
@@ -81,21 +81,21 @@
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                        <p class="mb-8pt"><a href="/question-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">{{commentsSize}}</h5>
-                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                        <h5 class="m-0">{{answersSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">respuestas</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">Post</h5>
-                                        <h5 class="m-0">destacado</h5>
+                                        <h5 class="m-0">Pregunta</h5>
+                                        <h5 class="m-0">destacada</h5>
                                     </div>
                                 </div>
                             </div>
-                            {{/outstandingPosts}}
+                            {{/outstandingQuestions}}
 
-                            {{#standardPosts}}
+                            {{#standardQuestions}}
                             <div class="list-group-item p-3" style="background-color:#FFE3B3;">
                                 <div class="row align-items-center">
                                     <div class="col-md-3 mb-8pt mb-md-0">
@@ -110,26 +110,26 @@
                                         </div>
                                     </div>
                                     <div class="col mb-8pt mb-md-0">
-                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                        <p class="mb-8pt"><a href="/question-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
                                     </div>
                                     <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">{{commentsSize}}</h5>
-                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                        <h5 class="m-0">{{answersSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">respuestas</small></p>
                                     </div>
                                     <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
-                                        <h5 class="m-0">Post</h5>
+                                        <h5 class="m-0">Pregunta</h5>
                                         <h5 class="m-0">estándar</h5>
                                     </div>
                                 </div>
                             </div>
-                            {{/standardPosts}}
+                            {{/standardQuestions}}
 
 
                         </div>
 
 
                         <div class="card-body text-center">
-                            <a href="" class="text-black-70 text-underline">Ver más posts</a>
+                            <a href="" class="text-black-70 text-underline">Ver más preguntas</a>
                         </div>
                     </div>
 

@@ -37,6 +37,14 @@ public class ParticipationService {
         }
     }
 
+    public void addQuestion(Long courseId, Long userId, Question question){
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
+        if (optionalParticipation.isPresent()){
+            optionalParticipation.get().addQuestion(question);
+            participationRepository.save(optionalParticipation.get());
+        }
+    }
+
 
     public void likePost(Long courseId, Long userId, Post post) {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
@@ -46,14 +54,34 @@ public class ParticipationService {
         }
     }
 
+    public void likeQuestion(Long courseId, Long userId, Question question) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
+        if (optionalParticipation.isPresent()){
+            optionalParticipation.get().likeQuestion(question);
+            participationRepository.save(optionalParticipation.get());
+        }
+    }
+
     public boolean isPostLiked(Long courseId, long userId, Post post) {
         return participationRepository.existsParticipationByStudentIdAndCourseIdAndLikedPostsContains(userId, courseId, post);
+    }
+
+    public boolean isQuestionLiked(Long courseId, long userId, Question question) {
+        return participationRepository.existsParticipationByStudentIdAndCourseIdAndLikedQuestionsContains(userId, courseId, question);
     }
 
     public void quitLikePost(Long courseId, long userId, Post post) {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
         if (optionalParticipation.isPresent()){
             optionalParticipation.get().quitLikePost(post);
+            participationRepository.save(optionalParticipation.get());
+        }
+    }
+
+    public void quitLikeQuestion(Long courseId, long userId, Question question) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
+        if (optionalParticipation.isPresent()){
+            optionalParticipation.get().quitLikeQuestion(question);
             participationRepository.save(optionalParticipation.get());
         }
     }
