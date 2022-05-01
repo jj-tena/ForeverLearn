@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Comment;
 import com.example.backend.model.Participation;
+import com.example.backend.model.Post;
 import com.example.backend.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,21 @@ public class CommentService {
 
     public List<Comment> getStandardComments(List<Comment> comments) {
         return comments.stream().filter(comment -> !comment.isOutstanding()).collect(Collectors.toList());
+    }
+
+    public void like(Long commentId) {
+        Comment comment = commentRepository.getById(commentId);
+        comment.like();
+        commentRepository.save(comment);
+    }
+
+    public void quitLike(Long commentId) {
+        Comment comment = commentRepository.getById(commentId);
+        comment.quitLike();
+        commentRepository.save(comment);
+    }
+
+    public Comment getComment(Long commentId) {
+        return commentRepository.getById(commentId);
     }
 }

@@ -135,5 +135,4 @@ public class Course {
         }
         this.posts.add(post);
     }
-
 }

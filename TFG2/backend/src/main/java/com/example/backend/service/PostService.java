@@ -63,4 +63,16 @@ public class PostService {
         post.addComment(comment);
         postRepository.save(post);
     }
+
+    public void like(Long postId) {
+        Post post = postRepository.getById(postId);
+        post.like();
+        postRepository.save(post);
+    }
+
+    public void quitLike(Long postId) {
+        Post post = postRepository.getById(postId);
+        post.quitLike();
+        postRepository.save(post);
+    }
 }

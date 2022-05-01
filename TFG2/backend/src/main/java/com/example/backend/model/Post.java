@@ -64,4 +64,12 @@ public class Post {
         this.comments.add(comment);
         this.commentsSize++;
     }
+
+    public void like() {
+        this.likes++;
+    }
+
+    public void quitLike() {
+        this.likes--;
+    }
 }

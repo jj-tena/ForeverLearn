@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -59,16 +61,50 @@ public class ParticipationController {
         }
     }
 
-    private void setCommentsInfo(Model model, Long postId){
+    private void setCommentsInfo(Model model, Long postId, Long courseId){
         Post post = postService.getPost(postId);
-        model.addAttribute("outstandingComments", commentService.getOutstandingComments(post.getComments()));
-        model.addAttribute("standardComments", commentService.getStandardComments(post.getComments()));
+        List<Comment> outstandingComments = commentService.getOutstandingComments(post.getComments());
+        List<Comment> standardComments = commentService.getStandardComments(post.getComments());
+        Optional<User> optionalUser = userService.getActiveUser();
+        /*
+        if (optionalUser.isPresent()){
+            List<CommentDAO> outstandingCommentsDAO = new LinkedList<>();
+            outstandingComments.forEach(c -> {
+                Participation participation = c.getParticipation();
+                outstandingCommentsDAO.add(new CommentDAO(participation, c.getContent(), participationService.isCommentLiked(courseId, optionalUser.get().getId(), c)));
+            });
+            model.addAttribute("outstandingComments", outstandingCommentsDAO);
+            List<CommentDAO> standardCommentsDAO = new LinkedList<>();
+            standardComments.forEach(c -> {
+                Participation participation = c.getParticipation();
+                standardCommentsDAO.add(new CommentDAO(participation, c.getContent(), participationService.isCommentLiked(courseId, optionalUser.get().getId(), c)));
+            });
+            model.addAttribute("standardComments", standardCommentsDAO);
+        } else {
+            model.addAttribute("outstandingComments", outstandingComments);
+            model.addAttribute("standardComments", standardComments);
+        }
+        */
+        model.addAttribute("outstandingComments", outstandingComments);
+        model.addAttribute("standardComments", standardComments);
+
+    }
+
+    private void setPostInfo(Model model, Long postId, Long courseId){
+        Boolean postLiked = false;
+        Post post = postService.getPost(postId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            postLiked = participationService.isPostLiked(courseId, optionalUser.get().getId(), post);
+        }
+        model.addAttribute("likedPost", postLiked);
     }
 
     @GetMapping("/students-area-{courseId}")
     public String studentsAreaLink(Model model, @PathVariable Long courseId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
+        model.addAttribute("topGlobal", participationService.getTopGlobal(courseId));
         return "students-area";
     }
 
@@ -86,7 +122,8 @@ public class ParticipationController {
         setParticipationHeader(model, courseId);
         postService.addView(postId);
         model.addAttribute("post", postService.getPost(postId));
-        setCommentsInfo(model, postId);
+        setCommentsInfo(model, postId, courseId);
+        setPostInfo(model, postId, courseId);
         return "post";
     }
 
@@ -167,13 +204,6 @@ public class ParticipationController {
         return "posts";
     }
 
-    @GetMapping("/participation-{courseId}")
-    public String participationLink(Model model, @PathVariable Long courseId){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        return "participation";
-    }
-
     @GetMapping("/comment-post-{postId}-course-{courseId}")
     public String comment(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content){
         setHeaderInfo(model);
@@ -184,10 +214,11 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 postService.addComment(postId, comment);
-                setCommentsInfo(model, postId);
             }
         }
         model.addAttribute("post", postService.getPost(postId));
+        setCommentsInfo(model, postId, courseId);
+        setPostInfo(model, postId, courseId);
         return "post";
     }
 
@@ -201,10 +232,11 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 postService.addComment(postId, comment);
-                setCommentsInfo(model, postId);
+                setCommentsInfo(model, postId, courseId);
             }
         }
         model.addAttribute("post", postService.getPost(postId));
+        setPostInfo(model, postId, courseId);
         return "post";
     }
 
@@ -219,11 +251,92 @@ public class ParticipationController {
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 commentService.setOutstanding(comment);
                 postService.addComment(postId, comment);
-                setCommentsInfo(model, postId);
+                setCommentsInfo(model, postId, courseId);
             }
         }
         model.addAttribute("post", postService.getPost(postId));
+        setPostInfo(model, postId, courseId);
         return "post";
     }
 
+    @GetMapping("/participation-user-{userId}-course-{courseId}")
+    public String participationLink(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
+        if (optionalParticipation.isPresent()){
+            model.addAttribute("participation", optionalParticipation.get());
+            model.addAttribute("postNumber", optionalParticipation.get().getPosts().size());
+            model.addAttribute("commentNumber", optionalParticipation.get().getComments().size());
+            model.addAttribute("postLikes", optionalParticipation.get().totalLikesInPosts());
+            model.addAttribute("postViews", optionalParticipation.get().totalViewsInPosts());
+            model.addAttribute("interestingPosts", optionalParticipation.get().totalInterestingPosts());
+            int badge = 0;
+            for (int i = 0; i < 25; i++) {
+                badge = i+1;
+                model.addAttribute("badge"+badge, optionalParticipation.get().getBadge(i));
+            }
+        }
+        return "participation";
+    }
+
+    @GetMapping("/like-post-{postId}-course-{courseId}")
+    public String likePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            postService.like(postId);
+            participationService.likePost(courseId, optionalUser.get().getId(), postService.getPost(postId));
+            model.addAttribute("likedPost", true);
+        }
+        model.addAttribute("post", postService.getPost(postId));
+        setCommentsInfo(model, postId, courseId);
+        return "post";
+    }
+
+    @GetMapping("/quit-like-post-{postId}-course-{courseId}")
+    public String quitLikePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            postService.quitLike(postId);
+            participationService.quitLikePost(courseId, optionalUser.get().getId(), postService.getPost(postId));
+            model.addAttribute("likedPost", false);
+        }
+        model.addAttribute("post", postService.getPost(postId));
+        setCommentsInfo(model, postId, courseId);
+        return "post";
+    }
+
+    @GetMapping("/like-comment-post-{postId}-course-{courseId}")
+    public String likeComment(Model model, @PathVariable Long commentId, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            commentService.like(commentId);
+            participationService.likeComment(courseId, optionalUser.get().getId(), commentService.getComment(commentId));
+        }
+        model.addAttribute("post", postService.getPost(postId));
+        setCommentsInfo(model, postId, courseId);
+        setPostInfo(model, postId, courseId);
+        return "post";
+    }
+
+    @GetMapping("/quit-like-comment-{commentId}-post-{postId}-course-{courseId}")
+    public String quitLikeComment(Model model, @PathVariable Long commentId, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            commentService.quitLike(commentId);
+            participationService.quitLikeComment(courseId, optionalUser.get().getId(), commentService.getComment(commentId));
+        }
+        model.addAttribute("post", postService.getPost(postId));
+        setCommentsInfo(model, postId, courseId);
+        setPostInfo(model, postId, courseId);
+        return "post";
+    }
 }

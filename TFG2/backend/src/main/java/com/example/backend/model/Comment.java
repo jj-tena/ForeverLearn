@@ -36,5 +36,12 @@ public class Comment {
         this.outstanding = true;
     }
 
+    public void like() {
+        this.likes++;
+    }
+
+    public void quitLike() {
+        this.likes--;
+    }
 
 }
