@@ -20,6 +20,7 @@ public class CommentService {
 
     public Comment createComment(Participation participation, String content) {
         Comment comment = new Comment(participation, content);
+        participation.addComment(comment);
         return commentRepository.save(comment);
     }
 

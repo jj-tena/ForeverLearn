@@ -27,7 +27,7 @@ public class Participation {
     @OneToMany
     private List<Post> posts;
 
-    @OneToMany
+    @ManyToMany
     private List<Post> likedPosts;
 
     @OneToMany
@@ -36,13 +36,13 @@ public class Participation {
     @OneToMany
     private List<Question> questions;
 
-    @OneToMany
+    @ManyToMany
     private List<Question> likedQuestions;
 
     @OneToMany
     private List<Answer> answers;
 
-    @OneToMany
+    @ManyToMany
     private List<Comment> likedComments;
 
     private String title;
@@ -73,6 +73,15 @@ public class Participation {
 
     public void addPost(Post post){
         this.posts.add(post);
+        this.points += 5;
+        if (this.posts.size()==1){
+            this.badges.set(0, true);
+            this.points += 10;
+        } else if (this.posts.size()==10){
+            this.badges.set(16, true);
+            this.points += 30;
+        }
+
     }
 
     public void likePost(Post post){
@@ -119,6 +128,14 @@ public class Participation {
 
     public void addQuestion(Question question){
         this.questions.add(question);
+        this.points += 5;
+        if (this.questions.size()==1){
+            this.badges.set(1, true);
+            this.points += 10;
+        } else if (this.questions.size()==10){
+            this.badges.set(17, true);
+            this.points += 30;
+        }
     }
 
     public void likeQuestion(Question question){
@@ -158,4 +175,74 @@ public class Participation {
     public boolean getBadge(int badge){
         return this.badges.get(badge);
     }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+        this.points += 3;
+        if (this.comments.size()==1){
+            this.badges.set(2, true);
+            this.points += 10;
+        } else if (this.comments.size()==10){
+            this.badges.set(18, true);
+            this.points += 30;
+        }
+    }
+
+    public void addAnswer(Answer answer){
+        this.answers.add(answer);
+        this.points += 3;
+        if (this.answers.size()==1){
+            this.badges.set(3, true);
+            this.points += 10;
+        } else if (this.answers.size()==10){
+            this.badges.set(19, true);
+            this.points += 30;
+        }
+    }
+
+    public void receiveCommentInPost(){
+        this.points+=2;
+    }
+
+    public void receiveAnswerInQuestion(){
+        this.points+=2;
+    }
+
+    public void receiveLikeInPost(){
+        this.points+=1;
+        if (this.totalLikesInPosts()==1){
+            this.badges.set(4, true);
+            this.points += 5;
+        } else if (this.totalLikesInPosts()==10){
+            this.badges.set(11, true);
+            this.points += 15;
+        }
+    }
+
+    public void receiveLikeInQuestion(){
+        this.points+=1;
+        if (this.totalLikesInQuestions()==1){
+            this.badges.set(5, true);
+            this.points += 5;
+        } else if (this.totalLikesInQuestions()==10){
+            this.badges.set(12, true);
+            this.points += 15;
+        }
+    }
+
+    public void checkViewsInPosts(){
+        if (this.totalViewsInPosts()==20){
+            this.badges.set(9, true);
+            this.points += 20;
+        }
+    }
+
+    public void checkViewsInQuestions(){
+        if (this.totalViewsInQuestions()==20){
+            this.badges.set(10, true);
+            this.points += 20;
+        }
+    }
+
+
 }

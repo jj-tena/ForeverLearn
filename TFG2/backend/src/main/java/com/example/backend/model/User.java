@@ -45,13 +45,13 @@ public class User {
     @OneToMany
     private List<Course> userCourses;
 
-    @OneToMany
+    @ManyToMany
     private List<Course> completedCourses = new LinkedList<>();
 
-    @OneToMany
+    @ManyToMany
     private List<Course> enrolledCourses = new LinkedList<>();
 
-    @OneToMany
+    @ManyToMany
     private List<Course> wishedCourses = new LinkedList<>();
 
     @ManyToMany

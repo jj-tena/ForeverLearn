@@ -20,6 +20,7 @@ public class AnswerService {
 
     public Answer createAnswer(Participation participation, String content) {
         Answer answer = new Answer(participation, content);
+        participation.addAnswer(answer);
         return answerRepository.save(answer);
     }
 

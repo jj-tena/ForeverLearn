@@ -50,6 +50,7 @@ public class ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
         if (optionalParticipation.isPresent()){
             optionalParticipation.get().likePost(post);
+            participationRepository.getParticipationByPostsContains(post).receiveLikeInPost();
             participationRepository.save(optionalParticipation.get());
         }
     }
@@ -58,6 +59,7 @@ public class ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(userId, courseId);
         if (optionalParticipation.isPresent()){
             optionalParticipation.get().likeQuestion(question);
+            participationRepository.getParticipationByQuestionsContains(question).receiveLikeInQuestion();
             participationRepository.save(optionalParticipation.get());
         }
     }
@@ -112,5 +114,17 @@ public class ParticipationService {
             return top.subList(0,9);
         }
         return top;
+    }
+
+    public void checkViewsInPosts(Post post) {
+        Participation participation = participationRepository.getParticipationByPostsContains(post);
+        participation.checkViewsInPosts();
+        participationRepository.save(participation);
+    }
+
+    public void checkViewsInQuestions(Question question) {
+        Participation participation = participationRepository.getParticipationByQuestionsContains(question);
+        participation.checkViewsInQuestions();
+        participationRepository.save(participation);
     }
 }

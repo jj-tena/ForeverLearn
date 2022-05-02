@@ -162,7 +162,9 @@ public class ParticipationController {
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         postService.addView(postId);
-        model.addAttribute("post", postService.getPost(postId));
+        Post post = postService.getPost(postId);
+        participationService.checkViewsInPosts(post);
+        model.addAttribute("post", post);
         setCommentsInfo(model, postId, courseId);
         setPostInfo(model, postId, courseId);
         return "post";
@@ -173,7 +175,9 @@ public class ParticipationController {
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         questionService.addView(questionId);
-        model.addAttribute("question", questionService.getQuestion(questionId));
+        Question question = questionService.getQuestion(questionId);
+        participationService.checkViewsInQuestions(question);
+        model.addAttribute("question", question);
         setAnswersInfo(model, questionId, courseId);
         setQuestionInfo(model, questionId, courseId);
         return "question";
@@ -442,6 +446,7 @@ public class ParticipationController {
         if (optionalUser.isPresent()) {
             postService.like(postId);
             participationService.likePost(courseId, optionalUser.get().getId(), postService.getPost(postId));
+
             model.addAttribute("likedPost", true);
         }
         model.addAttribute("post", postService.getPost(postId));
