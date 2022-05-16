@@ -72,4 +72,11 @@ public class QuestionService {
         question.quitLike();
         questionRepository.save(question);
     }
+
+    public void setBestAnswer(Long questionId, Answer answer) {
+        Question question = getQuestion(questionId);
+        question.setBestAnswer(answer);
+        questionRepository.save(question);
+
+    }
 }

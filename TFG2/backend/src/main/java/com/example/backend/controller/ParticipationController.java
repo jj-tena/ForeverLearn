@@ -273,6 +273,24 @@ public class ParticipationController {
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
             if (optionalParticipation.isPresent()){
+                Post post = postService.createPost(optionalParticipation.get(), title, content);
+                postService.setOutstanding(post.getId());
+                participationService.addPost(courseId, optionalUser.get().getId(), post);
+                courseService.addPost(courseId, post);
+                setPostsInfo(model, courseId);
+            }
+        }
+        return "posts";
+    }
+
+    @GetMapping("/publish-question-outstanding-for-course-{courseId}")
+    public String publishQuestionOutstanding(Model model, @PathVariable Long courseId, String title, String content){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
                 Question question = questionService.createQuestion(optionalParticipation.get(), title, content);
                 questionService.setOutstanding(question.getId());
                 participationService.addQuestion(courseId, optionalUser.get().getId(), question);
@@ -284,7 +302,25 @@ public class ParticipationController {
     }
 
     @GetMapping("/publish-post-interesting-for-course-{courseId}")
-    public String publishPostInteresting(Model model, @PathVariable Long courseId, String title, String content){
+    public String publishPostInteresting(Model model, @PathVariable Long courseId, String title, String content) {
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()) {
+                Post post = postService.createPost(optionalParticipation.get(), title, content);
+                postService.setInteresting(post.getId());
+                participationService.addPost(courseId, optionalUser.get().getId(), post);
+                courseService.addPost(courseId, post);
+                setPostsInfo(model, courseId);
+            }
+        }
+        return "posts";
+    }
+
+    @GetMapping("/publish-question-interesting-for-course-{courseId}")
+    public String publishQuestionInteresting(Model model, @PathVariable Long courseId, String title, String content){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -311,6 +347,7 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 postService.addComment(postId, comment);
+                participationService.receiveComment(postService.getPost(postId).getParticipation());
             }
         }
         model.addAttribute("post", postService.getPost(postId));
@@ -329,6 +366,7 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
                 questionService.addAnswer(questionId, answer);
+                participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
             }
         }
         model.addAttribute("question", questionService.getQuestion(questionId));
@@ -347,6 +385,7 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 postService.addComment(postId, comment);
+                participationService.receiveComment(postService.getPost(postId).getParticipation());
             }
         }
         model.addAttribute("post", postService.getPost(postId));
@@ -365,7 +404,7 @@ public class ParticipationController {
             if (optionalParticipation.isPresent()){
                 Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
                 questionService.addAnswer(questionId, answer);
-
+                participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
             }
         }
         model.addAttribute("question", questionService.getQuestion(questionId));
@@ -386,6 +425,7 @@ public class ParticipationController {
                 commentService.setOutstanding(comment);
                 postService.addComment(postId, comment);
                 setCommentsInfo(model, postId, courseId);
+                participationService.receiveComment(postService.getPost(postId).getParticipation());
             }
         }
         model.addAttribute("post", postService.getPost(postId));
@@ -404,6 +444,7 @@ public class ParticipationController {
                 Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
                 questionService.setOutstanding(questionId);
                 questionService.addAnswer(questionId, answer);
+                participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
             }
         }
         model.addAttribute("question", questionService.getQuestion(questionId));
@@ -530,6 +571,25 @@ public class ParticipationController {
         return "post";
     }
     */
+
+    @GetMapping("/set-best-answer-{answerIed-question-{questionId}-course-{courseId}")
+    public String answer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId, String content){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                Answer answer = answerService.getAnswer(answerId);
+                questionService.setBestAnswer(questionId, answer);
+                participationService.receiveBestAnswer(answer.getParticipation());
+            }
+        }
+        model.addAttribute("question", questionService.getQuestion(questionId));
+        setAnswersInfo(model, questionId, courseId);
+        setQuestionInfo(model, questionId, courseId);
+        return "question";
+    }
 
 
 }

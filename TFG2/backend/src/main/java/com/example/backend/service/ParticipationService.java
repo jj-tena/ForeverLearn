@@ -127,4 +127,19 @@ public class ParticipationService {
         participation.checkViewsInQuestions();
         participationRepository.save(participation);
     }
+
+    public void receiveComment(Participation participation){
+        participation.receiveComment();
+        participationRepository.save(participation);
+    }
+
+    public void receiveAnswer(Participation participation){
+        participation.receiveAnswer();
+        participationRepository.save(participation);
+    }
+
+    public void receiveBestAnswer(Participation participation) {
+        participation.receiveBestAnswer();
+        participationRepository.save(participation);
+    }
 }

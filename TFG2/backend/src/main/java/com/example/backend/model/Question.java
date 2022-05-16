@@ -36,6 +36,9 @@ public class Question {
 
     private int answersSize;
 
+    @OneToOne
+    private Answer bestAnswer;
+
     public Question(Participation participation, String title, String content) {
         this.participation = participation;
         this.title = title;
@@ -71,5 +74,13 @@ public class Question {
 
     public void quitLike() {
         this.likes--;
+    }
+
+    public Answer getBestAnswer() {
+        return bestAnswer;
+    }
+
+    public void setBestAnswer(Answer bestAnswer) {
+        this.bestAnswer = bestAnswer;
     }
 }

@@ -27,6 +27,8 @@ public class Participation {
     @OneToMany
     private List<Post> posts;
 
+    private int commentsReceived;
+
     @ManyToMany
     private List<Post> likedPosts;
 
@@ -35,6 +37,8 @@ public class Participation {
 
     @OneToMany
     private List<Question> questions;
+
+    private int answersReceived;
 
     @ManyToMany
     private List<Question> likedQuestions;
@@ -55,9 +59,11 @@ public class Participation {
         this.course = course;
         this.points = 0;
         this.posts = new LinkedList<>();
+        this.commentsReceived = 0;
         this.likedPosts = new LinkedList<>();
         this.comments = new LinkedList<>();
         this.questions = new LinkedList<>();
+        this.answersReceived = 0;
         this.likedQuestions = new LinkedList<>();
         this.answers = new LinkedList<>();
         this.likedComments = new LinkedList<>();
@@ -73,15 +79,18 @@ public class Participation {
 
     public void addPost(Post post){
         this.posts.add(post);
-        this.points += 5;
+        updatePoints(5);
         if (this.posts.size()==1){
             this.badges.set(0, true);
-            this.points += 10;
-        } else if (this.posts.size()==10){
+            updatePoints(10);
+        } else if (this.posts.size()==15){
             this.badges.set(16, true);
-            this.points += 30;
+            updatePoints(30);
         }
-
+        if (!this.badges.get(21) && post.isInteresting()){
+            this.badges.set(21, true);
+            updatePoints(30);
+        }
     }
 
     public void likePost(Post post){
@@ -128,13 +137,17 @@ public class Participation {
 
     public void addQuestion(Question question){
         this.questions.add(question);
-        this.points += 5;
+        updatePoints(5);
         if (this.questions.size()==1){
             this.badges.set(1, true);
-            this.points += 10;
-        } else if (this.questions.size()==10){
+            updatePoints(10);
+        } else if (this.questions.size()==15){
             this.badges.set(17, true);
-            this.points += 30;
+            updatePoints(30);
+        }
+        if (!this.badges.get(22) && question.isInteresting()){
+            this.badges.set(22, true);
+            updatePoints(30);
         }
     }
 
@@ -178,69 +191,135 @@ public class Participation {
 
     public void addComment(Comment comment){
         this.comments.add(comment);
-        this.points += 3;
+        updatePoints(3);
         if (this.comments.size()==1){
             this.badges.set(2, true);
-            this.points += 10;
-        } else if (this.comments.size()==10){
+            updatePoints(5);
+        } else if (this.comments.size()==5){
+            this.badges.set(8, true);
+            updatePoints(10);
+        }else if (this.comments.size()==15){
             this.badges.set(18, true);
-            this.points += 30;
+            updatePoints(20);
         }
     }
 
     public void addAnswer(Answer answer){
         this.answers.add(answer);
-        this.points += 3;
+        updatePoints(3);
         if (this.answers.size()==1){
             this.badges.set(3, true);
-            this.points += 10;
-        } else if (this.answers.size()==10){
+            updatePoints(5);
+        } else if (this.answers.size()==5){
+            this.badges.set(15, true);
+            updatePoints(10);
+        }else if (this.answers.size()==15){
             this.badges.set(19, true);
-            this.points += 30;
+            updatePoints(20);
         }
     }
 
     public void receiveCommentInPost(){
-        this.points+=2;
+        updatePoints(2);
     }
 
     public void receiveAnswerInQuestion(){
-        this.points+=2;
+        updatePoints(2);
     }
 
     public void receiveLikeInPost(){
-        this.points+=1;
+        updatePoints(1);
         if (this.totalLikesInPosts()==1){
             this.badges.set(4, true);
-            this.points += 5;
+            updatePoints(5);
         } else if (this.totalLikesInPosts()==10){
             this.badges.set(11, true);
-            this.points += 15;
+            updatePoints(15);
+        } else if (this.totalLikesInPosts()==25){
+            this.badges.set(20, true);
+            updatePoints(20);
         }
     }
 
     public void receiveLikeInQuestion(){
-        this.points+=1;
+        updatePoints(1);
         if (this.totalLikesInQuestions()==1){
             this.badges.set(5, true);
-            this.points += 5;
+            updatePoints(5);
         } else if (this.totalLikesInQuestions()==10){
             this.badges.set(12, true);
-            this.points += 15;
+            updatePoints(15);
+        } else if (this.totalLikesInQuestions()==25){
+            this.badges.set(23, true);
+            updatePoints(20);
         }
     }
 
     public void checkViewsInPosts(){
         if (this.totalViewsInPosts()==20){
             this.badges.set(9, true);
-            this.points += 20;
+            updatePoints(15);
         }
     }
 
     public void checkViewsInQuestions(){
         if (this.totalViewsInQuestions()==20){
             this.badges.set(10, true);
-            this.points += 20;
+            updatePoints(15);
+        }
+    }
+
+    public void updatePoints(int points){
+        this.points+=points;
+        checkTitle();
+    }
+
+    public void checkTitle(){
+        switch (this.title){
+            case "Principiante":
+                if (this.points>=50) this.title = "Intermedio";
+                break;
+            case "Intermedio":
+                if (this.points>=150) this.title = "Avanzado";
+                break;
+            case "Avanzado":
+                if (this.points>=270) this.title = "Experto";
+                break;
+            case "Experto":
+                if (this.points>=350) this.title = "Héroe";
+                break;
+            case "Héroe":
+                if (this.points>=400) this.title = "Leyenda";
+                break;
+        }
+    }
+
+    public void receiveComment(){
+        this.commentsReceived++;
+        if (this.commentsReceived==1){
+            this.badges.set(6, true);
+            updatePoints(5);
+        } else if (this.commentsReceived==10){
+            this.badges.set(13, true);
+            updatePoints(15);
+        }
+    }
+
+    public void receiveAnswer(){
+        this.answersReceived++;
+        if (this.answersReceived==1){
+            this.badges.set(7, true);
+            updatePoints(5);
+        } else if (this.answersReceived==10){
+            this.badges.set(14, true);
+            updatePoints(15);
+        }
+    }
+
+    public void receiveBestAnswer(){
+        if(!this.badges.get(24)){
+            this.badges.set(24, true);
+            updatePoints(50);
         }
     }
 
