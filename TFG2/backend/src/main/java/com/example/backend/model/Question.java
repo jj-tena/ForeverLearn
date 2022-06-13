@@ -59,6 +59,10 @@ public class Question {
         this.interesting = true;
     }
 
+    public void resetInteresting() {
+        this.interesting = false;
+    }
+
     public void addView(){
         this.views++;
     }
@@ -78,5 +82,12 @@ public class Question {
 
     public boolean isBestAnswer(Answer answer){
         return this.bestAnswer.equals(answer);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                '}';
     }
 }

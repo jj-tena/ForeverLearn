@@ -56,6 +56,10 @@ public class Post {
         this.interesting = true;
     }
 
+    public void resetInteresting() {
+        this.interesting = false;
+    }
+
     public void addView(){
         this.views++;
     }

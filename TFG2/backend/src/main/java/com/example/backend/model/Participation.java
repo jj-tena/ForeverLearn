@@ -321,7 +321,23 @@ public class Participation {
             this.badges.set(24, true);
             updatePoints(50);
         }
+        updatePoints(15);
     }
 
+    public void receiveInterestingQuestion(){
+        if(!this.badges.get(22)){
+            this.badges.set(22, true);
+            updatePoints(30);
+        }
+        updatePoints(10);
+    }
+
+    public void receiveInterestingPost(){
+        if(!this.badges.get(23)){
+            this.badges.set(23, true);
+            updatePoints(30);
+        }
+        updatePoints(10);
+    }
 
 }

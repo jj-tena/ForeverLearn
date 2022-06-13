@@ -36,6 +36,12 @@ public class PostService {
         postRepository.save(post);
     }
 
+    public void resetInteresting(Long postId){
+        Post post = postRepository.getById(postId);
+        post.resetInteresting();
+        postRepository.save(post);
+    }
+
     public List<Post> getStandardPosts(List<Post> posts){
         return posts.stream().filter(post -> (!post.isInteresting() && !post.isOutstanding())).collect(Collectors.toList());
     }

@@ -23,16 +23,18 @@
                                             <img src="/user/{{question.participation.student.id}}/profilePhoto" alt="people" class="avatar-img rounded-circle">
                                         </a>
                                         {{#enrolledUser}}
-                                            {{^likedQuestion}}
-                                            <a href="/like-question-{{question.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
-                                                <i class="material-icons mr-1" style="font-size: xx-large;">thumb_up</i>
-                                            </a>
-                                            {{/likedQuestion}}
-                                            {{#likedQuestion}}
-                                            <a href="/quit-like-question-{{question.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
-                                                <i class="material-icons mr-1" style="font-size: xx-large; color: #19857c;">thumb_up</i>
-                                            </a>
-                                            {{/likedQuestion}}
+                                            {{^isOwnQuestion}}
+                                                {{^likedQuestion}}
+                                                <a href="/like-question-{{question.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
+                                                    <i class="material-icons mr-1" style="font-size: xx-large;">thumb_up</i>
+                                                </a>
+                                                {{/likedQuestion}}
+                                                {{#likedQuestion}}
+                                                <a href="/quit-like-question-{{question.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
+                                                    <i class="material-icons mr-1" style="font-size: xx-large; color: #19857c;">thumb_up</i>
+                                                </a>
+                                                {{/likedQuestion}}
+                                            {{/isOwnQuestion}}
                                         {{/enrolledUser}}
                                     </div>
                                     <div class="flex">
@@ -46,6 +48,16 @@
                                             <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">visibility</i> {{question.views}}</a>
                                         </div>
                                     </div>
+                                    {{#isOwnCourse}}
+                                    <div>
+                                        {{^interestingQuestion}}
+                                        <a href="/set-question-{{question.id}}-interesting-for-course-{{courseId}}" class="btn btn-accent">Marcar pregunta interesante</a>
+                                        {{/interestingQuestion}}
+                                        {{#interestingQuestion}}
+                                        <a href="/reset-question-{{question.id}}-interesting-for-course-{{courseId}}" class="btn btn-dark">Quitar pregunta interesante</a>
+                                        {{/interestingQuestion}}
+                                    </div>
+                                    {{/isOwnCourse}}
                                 </div>
                             </div>
 

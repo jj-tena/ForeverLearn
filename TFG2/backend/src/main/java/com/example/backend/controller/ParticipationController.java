@@ -99,26 +99,36 @@ public class ParticipationController {
 
     private void setPostInfo(Model model, Long postId, Long courseId){
         Boolean postLiked = false;
+        Boolean isOwnPost = false;
+        Boolean isOwnCourse = false;
         Post post = postService.getPost(postId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             postLiked = participationService.isPostLiked(courseId, optionalUser.get().getId(), post);
+            isOwnPost = participationService.isOwnPost(courseId, optionalUser.get(), post);
+            isOwnCourse = courseService.isOwnCourse(courseId, optionalUser.get());
         }
         model.addAttribute("likedPost", postLiked);
+        model.addAttribute("isOwnPost", isOwnPost);
+        model.addAttribute("isOwnCourse", isOwnCourse);
+        model.addAttribute("interestingPost", post.isInteresting());
     }
 
     private void setQuestionInfo(Model model, Long questionId, Long courseId){
         Boolean questionLiked = false;
         Boolean isOwnQuestion = false;
+        Boolean isOwnCourse = false;
         Question question = questionService.getQuestion(questionId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             questionLiked = participationService.isQuestionLiked(courseId, optionalUser.get().getId(), question);
             isOwnQuestion = participationService.isOwnQuestion(courseId, optionalUser.get(), question);
+            isOwnCourse = courseService.isOwnCourse(courseId, optionalUser.get());
         }
         model.addAttribute("likedQuestion", questionLiked);
         model.addAttribute("isOwnQuestion", isOwnQuestion);
-
+        model.addAttribute("isOwnCourse", isOwnCourse);
+        model.addAttribute("interestingQuestion", question.isInteresting());
     }
 
     @GetMapping("/students-area-{courseId}")
@@ -289,40 +299,58 @@ public class ParticipationController {
         return "questions";
     }
 
-    @GetMapping("/publish-post-interesting-for-course-{courseId}")
-    public String publishPostInteresting(Model model, @PathVariable Long courseId, String title, String content) {
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()) {
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()) {
-                Post post = postService.createPost(optionalParticipation.get(), title, content);
-                postService.setInteresting(post.getId());
-                participationService.addPost(courseId, optionalUser.get().getId(), post);
-                courseService.addPost(courseId, post);
-                setPostsInfo(model, courseId);
-            }
-        }
-        return "posts";
-    }
-
-    @GetMapping("/publish-question-interesting-for-course-{courseId}")
-    public String publishQuestionInteresting(Model model, @PathVariable Long courseId, String title, String content){
+    @GetMapping("/set-post-{postId}-interesting-for-course-{courseId}")
+    public String setPostInteresting(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Question question = questionService.createQuestion(optionalParticipation.get(), title, content);
-                questionService.setInteresting(question.getId());
-                participationService.addQuestion(courseId, optionalUser.get().getId(), question);
-                courseService.addQuestion(courseId, question);
-                setQuestionsInfo(model, courseId);
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                postService.setInteresting(postId);
+                participationService.receiveInterestingPost(courseId, postService.getPost(postId).getParticipation().getStudent());
             }
         }
-        return "questions";
+        return postLink(model, postId, courseId);
+    }
+
+    @GetMapping("/reset-post-{postId}-interesting-for-course-{courseId}")
+    public String resetPostInteresting(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                postService.resetInteresting(postId);
+            }
+        }
+        return postLink(model, postId, courseId);
+    }
+
+    @GetMapping("/set-question-{questionId}-interesting-for-course-{courseId}")
+    public String setQuestionInteresting(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                questionService.setInteresting(questionId);
+                participationService.receiveInterestingQuestion(courseId, questionService.getQuestion(questionId).getParticipation().getStudent());
+            }
+        }
+        return questionLink(model, questionId, courseId);
+    }
+
+    @GetMapping("/reset-question-{questionId}-interesting-for-course-{courseId}")
+    public String resetQuestionInteresting(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                questionService.resetInteresting(questionId);
+            }
+        }
+        return questionLink(model, questionId, courseId);
     }
 
     @GetMapping("/comment-post-{postId}-course-{courseId}")
@@ -527,38 +555,6 @@ public class ParticipationController {
         setAnswersInfo(model, questionId, courseId);
         return "question";
     }
-
-    /*
-    @GetMapping("/like-comment-post-{postId}-course-{courseId}")
-    public String likeComment(Model model, @PathVariable Long commentId, @PathVariable Long postId, @PathVariable Long courseId){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()) {
-            commentService.like(commentId);
-            participationService.likeComment(courseId, optionalUser.get().getId(), commentService.getComment(commentId));
-        }
-        model.addAttribute("post", postService.getPost(postId));
-        setCommentsInfo(model, postId, courseId);
-        setPostInfo(model, postId, courseId);
-        return "post";
-    }
-
-    @GetMapping("/quit-like-comment-{commentId}-post-{postId}-course-{courseId}")
-    public String quitLikeComment(Model model, @PathVariable Long commentId, @PathVariable Long postId, @PathVariable Long courseId){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()) {
-            commentService.quitLike(commentId);
-            participationService.quitLikeComment(courseId, optionalUser.get().getId(), commentService.getComment(commentId));
-        }
-        model.addAttribute("post", postService.getPost(postId));
-        setCommentsInfo(model, postId, courseId);
-        setPostInfo(model, postId, courseId);
-        return "post";
-    }
-    */
 
     @GetMapping("/set-best-answer-{answerId}-question-{questionId}-course-{courseId}")
     public String answer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId){

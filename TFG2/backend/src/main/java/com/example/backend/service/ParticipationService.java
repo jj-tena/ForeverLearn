@@ -152,4 +152,23 @@ public class ParticipationService {
         }
         return isOwnQuestion;
     }
+
+    public void receiveInterestingQuestion(Long courseId, User user) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        optionalParticipation.ifPresent(Participation::receiveInterestingQuestion);
+    }
+
+    public void receiveInterestingPost(Long courseId, User user) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        optionalParticipation.ifPresent(Participation::receiveInterestingPost);
+    }
+
+    public Boolean isOwnPost(Long courseId, User user, Post post) {
+        boolean isOwnPost = false;
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        if (optionalParticipation.isPresent()) {
+            isOwnPost = optionalParticipation.get().getPosts().contains(post);
+        }
+        return isOwnPost;
+    }
 }

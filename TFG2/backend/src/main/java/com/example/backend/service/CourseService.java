@@ -182,4 +182,9 @@ public class CourseService {
         course.addQuestion(question);
         courseRepository.save(course);
     }
+
+    public Boolean isOwnCourse(Long courseId, User user) {
+        Course course = courseRepository.getById(courseId);
+        return course.getAuthor().equals(user);
+    }
 }

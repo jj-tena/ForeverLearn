@@ -33,6 +33,12 @@ public class QuestionService {
         questionRepository.save(question);
     }
 
+    public void resetInteresting(Long questionId) {
+        Question question = questionRepository.getById(questionId);
+        question.resetInteresting();
+        questionRepository.save(question);
+    }
+
     public List<Question> getStandardQuestions(List<Question> questions){
         return questions.stream().filter(question -> (!question.isInteresting() && !question.isOutstanding())).collect(Collectors.toList());
     }

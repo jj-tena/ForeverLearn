@@ -23,16 +23,18 @@
                                             <img src="/user/{{post.participation.student.id}}/profilePhoto" alt="people" class="avatar-img rounded-circle">
                                         </a>
                                         {{#enrolledUser}}
-                                            {{^likedPost}}
-                                            <a href="/like-post-{{post.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
-                                                <i class="material-icons mr-1" style="font-size: xx-large;">thumb_up</i>
-                                            </a>
-                                            {{/likedPost}}
-                                            {{#likedPost}}
-                                            <a href="/quit-like-post-{{post.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
-                                                <i class="material-icons mr-1" style="font-size: xx-large; color: #19857c;">thumb_up</i>
-                                            </a>
-                                            {{/likedPost}}
+                                            {{^isOwnPost}}
+                                                {{^likedPost}}
+                                                <a href="/like-post-{{post.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
+                                                    <i class="material-icons mr-1" style="font-size: xx-large;">thumb_up</i>
+                                                </a>
+                                                {{/likedPost}}
+                                                {{#likedPost}}
+                                                <a href="/quit-like-post-{{post.id}}-course-{{courseId}}" class="text-50 d-flex align-items-center text-decoration-0 ml-2 mt-3">
+                                                    <i class="material-icons mr-1" style="font-size: xx-large; color: #19857c;">thumb_up</i>
+                                                </a>
+                                                {{/likedPost}}
+                                            {{/isOwnPost}}
                                         {{/enrolledUser}}
                                     </div>
                                     <div class="flex">
@@ -46,6 +48,16 @@
                                             <a href="" class="text-50 d-flex align-items-center text-decoration-0 ml-3"><i class="material-icons mr-1" style="font-size: inherit;">visibility</i> {{post.views}}</a>
                                         </div>
                                     </div>
+                                    {{#isOwnCourse}}
+                                    <div>
+                                        {{^interestingPost}}
+                                        <a href="/set-post-{{post.id}}-interesting-for-course-{{courseId}}" class="btn btn-accent">Marcar post interesante</a>
+                                        {{/interestingPost}}
+                                        {{#interestingPost}}
+                                        <a href="/reset-post-{{post.id}}-interesting-for-course-{{courseId}}" class="btn btn-dark">Quitar post interesante</a>
+                                        {{/interestingPost}}
+                                    </div>
+                                    {{/isOwnCourse}}
                                 </div>
                             </div>
 
