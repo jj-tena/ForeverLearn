@@ -70,9 +70,34 @@
 
                             <div class="pt-3">
                                 <h4>{{question.answersSize}} Respuestas</h4>
-
-
-
+                                {{#bestAnswer}}
+                                <div class="mt-3 card p-3" style="background-color: #35F9BA">
+                                    <div class="col-md-12 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <strong>Mejor respuesta</strong>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div>
+                                            <a href="/participation-user-{{participation.student.id}}-course-{{courseId}}" class="avatar mr-3">
+                                                <img src="/user/{{participation.student.id}}/profilePhoto" alt="Guy" class="avatar-img rounded-circle">
+                                            </a>
+                                        </div>
+                                        <div class="flex">
+                                            <div class="d-flex align-items-center">
+                                                <a href="/participation-user-{{participation.student.id}}-course-{{courseId}}" class="text-body"><strong>{{participation.student.name}}</strong></a>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="/participation-user-{{participation.student.id}}-course-{{courseId}}" class="text-body">{{participation.title}}</a>
+                                            </div>
+                                            <p class="mt-1 mb-0 text-70">{{bestAnswer.content}}</p>
+                                        </div>
+                                        {{#isOwnQuestion}}
+                                        <div>
+                                            <a href="/reset-best-answer-question-{{question.id}}-course-{{courseId}}" class="btn btn-dark">Quitar mejor respuesta</a>
+                                        </div>
+                                        {{/isOwnQuestion}}
+                                    </div>
+                                </div>
+                                {{/bestAnswer}}
                                 {{#outstandingAnswers}}
                                 <div class="mt-3 card p-3" style="background-color: #8fe3ff">
                                     <div class="col-md-12 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
@@ -93,6 +118,11 @@
                                             </div>
                                             <p class="mt-1 mb-0 text-70">{{content}}</p>
                                         </div>
+                                        {{#isOwnQuestion}}
+                                        <div>
+                                            <button class="btn btn-accent" href="/set-best-answer-{{id}}-question-{{question.id}}-course-{{courseId}}" >Mejor respuesta</button>
+                                        </div>
+                                        {{/isOwnQuestion}}
                                     </div>
                                 </div>
                                 {{/outstandingAnswers}}
@@ -117,6 +147,11 @@
                                             </div>
                                             <p class="mt-1 mb-0 text-70">{{content}}</p>
                                         </div>
+                                        {{#isOwnQuestion}}
+                                        <div>
+                                            <a href="/set-best-answer-{{id}}-question-{{question.id}}-course-{{courseId}}" class="btn btn-accent">Mejor respuesta</a>
+                                        </div>
+                                        {{/isOwnQuestion}}
                                     </div>
                                 </div>
                                 {{/standardAnswers}}

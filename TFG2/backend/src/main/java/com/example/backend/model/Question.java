@@ -76,11 +76,7 @@ public class Question {
         this.likes--;
     }
 
-    public Answer getBestAnswer() {
-        return bestAnswer;
-    }
-
-    public void setBestAnswer(Answer bestAnswer) {
-        this.bestAnswer = bestAnswer;
+    public boolean isBestAnswer(Answer answer){
+        return this.bestAnswer.equals(answer);
     }
 }

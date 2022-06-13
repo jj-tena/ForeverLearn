@@ -4,6 +4,7 @@ import com.example.backend.model.*;
 import com.example.backend.repository.ParticipationRepository;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.OAEPParameterSpec;
 import java.util.List;
 import java.util.Optional;
 
@@ -141,5 +142,14 @@ public class ParticipationService {
     public void receiveBestAnswer(Participation participation) {
         participation.receiveBestAnswer();
         participationRepository.save(participation);
+    }
+
+    public Boolean isOwnQuestion(Long courseId, User user, Question question) {
+        boolean isOwnQuestion = false;
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        if (optionalParticipation.isPresent()) {
+            isOwnQuestion = optionalParticipation.get().getQuestions().contains(question);
+        }
+        return isOwnQuestion;
     }
 }

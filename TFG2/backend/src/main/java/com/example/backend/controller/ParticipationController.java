@@ -80,25 +80,6 @@ public class ParticipationController {
         List<Comment> outstandingComments = commentService.getOutstandingComments(post.getComments());
         List<Comment> standardComments = commentService.getStandardComments(post.getComments());
         Optional<User> optionalUser = userService.getActiveUser();
-        /*
-        if (optionalUser.isPresent()){
-            List<CommentDAO> outstandingCommentsDAO = new LinkedList<>();
-            outstandingComments.forEach(c -> {
-                Participation participation = c.getParticipation();
-                outstandingCommentsDAO.add(new CommentDAO(participation, c.getContent(), participationService.isCommentLiked(courseId, optionalUser.get().getId(), c)));
-            });
-            model.addAttribute("outstandingComments", outstandingCommentsDAO);
-            List<CommentDAO> standardCommentsDAO = new LinkedList<>();
-            standardComments.forEach(c -> {
-                Participation participation = c.getParticipation();
-                standardCommentsDAO.add(new CommentDAO(participation, c.getContent(), participationService.isCommentLiked(courseId, optionalUser.get().getId(), c)));
-            });
-            model.addAttribute("standardComments", standardCommentsDAO);
-        } else {
-            model.addAttribute("outstandingComments", outstandingComments);
-            model.addAttribute("standardComments", standardComments);
-        }
-        */
         model.addAttribute("outstandingComments", outstandingComments);
         model.addAttribute("standardComments", standardComments);
 
@@ -106,11 +87,14 @@ public class ParticipationController {
 
     private void setAnswersInfo(Model model, Long questionId, Long courseId){
         Question question = questionService.getQuestion(questionId);
-        List<Answer> outstandingAnswers = answerService.getOutstandingAnswers(question.getAnswers());
-        List<Answer> standardAnswers = answerService.getStandardAnswers(question.getAnswers());
+        List<Answer> answers = question.getAnswers();
+        Answer bestAnswer = question.getBestAnswer();
+        answers.remove(bestAnswer);
+        List<Answer> outstandingAnswers = answerService.getOutstandingAnswers(answers);
+        List<Answer> standardAnswers = answerService.getStandardAnswers(answers);
         model.addAttribute("outstandingAnswers", outstandingAnswers);
         model.addAttribute("standardAnswers", standardAnswers);
-
+        model.addAttribute("bestAnswer", bestAnswer);
     }
 
     private void setPostInfo(Model model, Long postId, Long courseId){
@@ -125,12 +109,16 @@ public class ParticipationController {
 
     private void setQuestionInfo(Model model, Long questionId, Long courseId){
         Boolean questionLiked = false;
+        Boolean isOwnQuestion = false;
         Question question = questionService.getQuestion(questionId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             questionLiked = participationService.isQuestionLiked(courseId, optionalUser.get().getId(), question);
+            isOwnQuestion = participationService.isOwnQuestion(courseId, optionalUser.get(), question);
         }
         model.addAttribute("likedQuestion", questionLiked);
+        model.addAttribute("isOwnQuestion", isOwnQuestion);
+
     }
 
     @GetMapping("/students-area-{courseId}")
@@ -572,8 +560,8 @@ public class ParticipationController {
     }
     */
 
-    @GetMapping("/set-best-answer-{answerIed-question-{questionId}-course-{courseId}")
-    public String answer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId, String content){
+    @GetMapping("/set-best-answer-{answerId}-question-{questionId}-course-{courseId}")
+    public String answer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -590,6 +578,25 @@ public class ParticipationController {
         setQuestionInfo(model, questionId, courseId);
         return "question";
     }
+
+    @GetMapping("/reset-best-answer-question-{questionId}-course-{courseId}")
+    public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                questionService.resetBestAnswer(questionId);
+            }
+        }
+        model.addAttribute("question", questionService.getQuestion(questionId));
+        setAnswersInfo(model, questionId, courseId);
+        setQuestionInfo(model, questionId, courseId);
+        return "question";
+    }
+
+
 
 
 }

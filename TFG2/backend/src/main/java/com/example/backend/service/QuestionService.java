@@ -77,6 +77,11 @@ public class QuestionService {
         Question question = getQuestion(questionId);
         question.setBestAnswer(answer);
         questionRepository.save(question);
+    }
 
+    public void resetBestAnswer(Long questionId) {
+        Question question = getQuestion(questionId);
+        question.setBestAnswer(null);
+        questionRepository.save(question);
     }
 }
