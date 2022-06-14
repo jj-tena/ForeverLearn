@@ -16,8 +16,8 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question createQuestion(Participation participation, String title, String content) {
-        Question question = new Question(participation, title, content);
+    public Question createQuestion(Participation participation, String title, String content, Theme theme) {
+        Question question = new Question(participation, title, content, theme);
         return questionRepository.save(question);
     }
 

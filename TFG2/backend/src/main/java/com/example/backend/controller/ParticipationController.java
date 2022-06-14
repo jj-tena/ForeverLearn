@@ -7,8 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class ParticipationController {
@@ -18,14 +17,13 @@ public class ParticipationController {
     private final CategoryService categoryService;
     private final PostService postService;
     private final CourseService courseService;
-
     private final CommentService commentService;
-
     private final QuestionService questionService;
-
     private final AnswerService answerService;
 
-    public ParticipationController(ParticipationService participationService, UserService userService, CategoryService categoryService, PostService postService, CourseService courseService, CommentService commentService, QuestionService questionService, AnswerService answerService) {
+    private final ThemeService themeService;
+
+    public ParticipationController(ParticipationService participationService, UserService userService, CategoryService categoryService, PostService postService, CourseService courseService, CommentService commentService, QuestionService questionService, AnswerService answerService, ThemeService themeService) {
         this.participationService = participationService;
         this.userService = userService;
         this.categoryService = categoryService;
@@ -34,6 +32,7 @@ public class ParticipationController {
         this.commentService = commentService;
         this.questionService = questionService;
         this.answerService = answerService;
+        this.themeService = themeService;
     }
 
     private void setHeaderInfo(Model model){
@@ -45,6 +44,7 @@ public class ParticipationController {
             model.addAttribute("user", user);
         }
         model.addAttribute("categories", categoryService.findAll());
+
     }
 
     private void setParticipationHeader(Model model, Long courseId){
@@ -55,23 +55,59 @@ public class ParticipationController {
         }
         model.addAttribute("enrolledUser", optionalParticipation.isPresent());
         model.addAttribute("courseId", courseId);
-    }
-
-    private void setPostsInfo(Model model, Long courseId){
+        List<Theme> themes = new ArrayList<>();
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         if (optionalCourse.isPresent()){
-            model.addAttribute("interestingPosts", postService.getInterestingPosts(optionalCourse.get().getPosts()));
-            model.addAttribute("outstandingPosts", postService.getOutstandingPosts(optionalCourse.get().getPosts()));
-            model.addAttribute("standardPosts", postService.getStandardPosts(optionalCourse.get().getPosts()));
+            themes = optionalCourse.get().getThemes();
+        }
+        model.addAttribute("themes", themes);
+    }
+
+    private void setPostsInfo(Model model, Long courseId, Long themeId){
+        Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+        if (optionalCourse.isPresent()){
+            List<Post> postList = new LinkedList<>();
+            if (themeId == -2) {
+                postList = optionalCourse.get().getPosts();
+            } else if (themeId == -1) {
+                List<Post> finalPostList = postList;
+                optionalCourse.get().getPosts().forEach(post -> {if (Objects.isNull(post.getTheme())) {
+                    finalPostList.add(post);}});
+                postList = finalPostList;
+            } else if (optionalTheme.isPresent()){
+                List<Post> finalPostList = postList;
+                optionalCourse.get().getPosts().forEach(post -> {if (post.getTheme().equals(optionalTheme.get())) {
+                    finalPostList.add(post);}});
+                postList = finalPostList;
+            }
+            model.addAttribute("interestingPosts", postService.getInterestingPosts(postList));
+            model.addAttribute("outstandingPosts", postService.getOutstandingPosts(postList));
+            model.addAttribute("standardPosts", postService.getStandardPosts(postList));
         }
     }
 
-    private void setQuestionsInfo(Model model, Long courseId){
+    private void setQuestionsInfo(Model model, Long courseId, Long themeId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
         if (optionalCourse.isPresent()){
-            model.addAttribute("interestingQuestions", questionService.getInterestingQuestions(optionalCourse.get().getQuestions()));
-            model.addAttribute("outstandingQuestions", questionService.getOutstandingQuestions(optionalCourse.get().getQuestions()));
-            model.addAttribute("standardQuestions", questionService.getStandardQuestions(optionalCourse.get().getQuestions()));
+            List<Question> questionList = new LinkedList<>();
+            if (themeId == -2) {
+                questionList = optionalCourse.get().getQuestions();
+            } else if (themeId == -1) {
+                List<Question> finalQuestionList = questionList;
+                optionalCourse.get().getQuestions().forEach(question -> {if (Objects.isNull(question.getTheme())) {
+                    finalQuestionList.add(question);}});
+                questionList = finalQuestionList;
+            } else if (optionalTheme.isPresent()){
+                List<Question> finalQuestionList = questionList;
+                optionalCourse.get().getQuestions().forEach(question -> {if (question.getTheme().equals(optionalTheme.get())) {
+                    finalQuestionList.add(question);}});
+                questionList = finalQuestionList;
+            }
+            model.addAttribute("interestingQuestions", questionService.getInterestingQuestions(questionList));
+            model.addAttribute("outstandingQuestions", questionService.getOutstandingQuestions(questionList));
+            model.addAttribute("standardQuestions", questionService.getStandardQuestions(questionList));
         }
     }
 
@@ -98,9 +134,9 @@ public class ParticipationController {
     }
 
     private void setPostInfo(Model model, Long postId, Long courseId){
-        Boolean postLiked = false;
-        Boolean isOwnPost = false;
-        Boolean isOwnCourse = false;
+        boolean postLiked = false;
+        boolean isOwnPost = false;
+        boolean isOwnCourse = false;
         Post post = postService.getPost(postId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
@@ -115,9 +151,9 @@ public class ParticipationController {
     }
 
     private void setQuestionInfo(Model model, Long questionId, Long courseId){
-        Boolean questionLiked = false;
-        Boolean isOwnQuestion = false;
-        Boolean isOwnCourse = false;
+        boolean questionLiked = false;
+        boolean isOwnQuestion = false;
+        boolean isOwnCourse = false;
         Question question = questionService.getQuestion(questionId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
@@ -139,19 +175,19 @@ public class ParticipationController {
         return "students-area";
     }
 
-    @GetMapping("/posts-{courseId}")
-    public String postsLink(Model model, @PathVariable Long courseId){
+    @GetMapping("/posts-{courseId}-for-theme-{themeId}")
+    public String postsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
-        setPostsInfo(model, courseId);
+        setPostsInfo(model, courseId, themeId);
         return "posts";
     }
 
-    @GetMapping("/questions-{courseId}")
-    public String questionsLink(Model model, @PathVariable Long courseId){
+    @GetMapping("/questions-{courseId}-for-theme-{themeId}")
+    public String questionsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
-        setQuestionsInfo(model, courseId);
+        setQuestionsInfo(model, courseId, themeId);
         return "questions";
     }
 
@@ -196,104 +232,90 @@ public class ParticipationController {
     }
 
     @GetMapping("/publish-post-for-course-{courseId}")
-    public String publishPost(Model model, @PathVariable Long courseId, String title, String content){
+    public String publishPost(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
             if (optionalParticipation.isPresent()){
-                Post post = postService.createPost(optionalParticipation.get(), title, content);
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                Post post = postService.createPost(optionalParticipation.get(), title, content, theme);
                 participationService.addPost(courseId, optionalUser.get().getId(), post);
                 courseService.addPost(courseId, post);
-                setPostsInfo(model, courseId);
+                setPostsInfo(model, courseId, (long) -2);
             }
         }
         return "posts";
     }
 
     @GetMapping("/publish-question-for-course-{courseId}")
-    public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content){
+    public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
             if (optionalParticipation.isPresent()){
-                Question question = questionService.createQuestion(optionalParticipation.get(), title, content);
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                Question question = questionService.createQuestion(optionalParticipation.get(), title, content, theme);
                 participationService.addQuestion(courseId, optionalUser.get().getId(), question);
                 courseService.addQuestion(courseId, question);
-                setQuestionsInfo(model, courseId);
+                setQuestionsInfo(model, courseId, themeId);
             }
         }
         return "questions";
     }
 
-    @GetMapping("/publish-post-standard-for-course-{courseId}")
-    public String publishPostStandard(Model model, @PathVariable Long courseId, String title, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Post post = postService.createPost(optionalParticipation.get(), title, content);
-                participationService.addPost(courseId, optionalUser.get().getId(), post);
-                courseService.addPost(courseId, post);
-                setPostsInfo(model, courseId);
-            }
-        }
-        return "posts";
-    }
-
-    @GetMapping("/publish-question-standard-for-course-{courseId}")
-    public String publishQuestionStandard(Model model, @PathVariable Long courseId, String title, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Question question = questionService.createQuestion(optionalParticipation.get(), title, content);
-                participationService.addQuestion(courseId, optionalUser.get().getId(), question);
-                courseService.addQuestion(courseId, question);
-                setQuestionsInfo(model, courseId);
-            }
-        }
-        return "posts";
-    }
-
     @GetMapping("/publish-post-outstanding-for-course-{courseId}")
-    public String publishPostOutstanding(Model model, @PathVariable Long courseId, String title, String content){
+    public String publishPostOutstanding(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
             if (optionalParticipation.isPresent()){
-                Post post = postService.createPost(optionalParticipation.get(), title, content);
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                Post post = postService.createPost(optionalParticipation.get(), title, content, theme);
                 postService.setOutstanding(post.getId());
                 participationService.addPost(courseId, optionalUser.get().getId(), post);
                 courseService.addPost(courseId, post);
-                setPostsInfo(model, courseId);
+                setPostsInfo(model, courseId, (long) -2);
             }
         }
         return "posts";
     }
 
     @GetMapping("/publish-question-outstanding-for-course-{courseId}")
-    public String publishQuestionOutstanding(Model model, @PathVariable Long courseId, String title, String content){
+    public String publishQuestionOutstanding(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
             if (optionalParticipation.isPresent()){
-                Question question = questionService.createQuestion(optionalParticipation.get(), title, content);
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                Question question = questionService.createQuestion(optionalParticipation.get(), title, content, theme);
                 questionService.setOutstanding(question.getId());
                 participationService.addQuestion(courseId, optionalUser.get().getId(), question);
                 courseService.addQuestion(courseId, question);
-                setQuestionsInfo(model, courseId);
+                setQuestionsInfo(model, courseId, themeId);
             }
         }
         return "questions";
@@ -486,7 +508,7 @@ public class ParticipationController {
             model.addAttribute("questionLikes", optionalParticipation.get().totalLikesInQuestions());
             model.addAttribute("questionViews", optionalParticipation.get().totalViewsInQuestions());
             model.addAttribute("interestingQuestions", optionalParticipation.get().totalInterestingQuestions());
-            int badge = 0;
+            int badge;
             for (int i = 0; i < 25; i++) {
                 badge = i+1;
                 model.addAttribute("badge"+badge, optionalParticipation.get().getBadge(i));
@@ -591,8 +613,5 @@ public class ParticipationController {
         setQuestionInfo(model, questionId, courseId);
         return "question";
     }
-
-
-
 
 }

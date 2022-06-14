@@ -17,10 +17,22 @@
                         <div class="card-header">
                             <div class="row align-items-center" style="white-space: nowrap;">
                                 <div class="col-lg-auto">
-                                    <form class="search-form search-form--light d-lg-inline-flex mb-8pt mb-lg-0" action="student-discussions.html">
-                                        <input type="text" class="form-control w-lg-auto" placeholder="Buscar preguntas">
-                                        <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
-                                    </form>
+                                    <ul class="accordion js-accordion m-0" id="library-category">
+                                        <li class="accordion__item">
+                                            <a class="accordion__toggle collapsed" data-toggle="collapse" data-parent="#library-category" href="#library-all">
+                                                <span class="flex">Temas</span>
+                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                            </a>
+                                            <nav class="accordion__menu collapse" id="library-all">
+                                                <a class="accordion__menu-link active" href="/questions-{{courseId}}-for-theme--2">Todos los temas</a>
+                                                <a class="accordion__menu-link" href="/questions-{{courseId}}-for-theme--1">Tema libre</a>
+                                                {{#themes}}
+                                                <a class="accordion__menu-link" href="/questions-{{courseId}}-for-theme-{{idTheme}}">{{nameTheme}}</a>
+                                                {{/themes}}
+                                            </nav>
+
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="col-lg d-flex flex-wrap align-items-center">
                                     <div class="ml-lg-auto">

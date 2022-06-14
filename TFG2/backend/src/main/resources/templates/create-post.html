@@ -38,6 +38,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="list-group-item">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-form-label col-sm-3" for="theme">Tema</label>
+                                            <div class="col-sm-9">
+                                                <select id="theme" name="themeId" required="" class="custom-select">
+                                                    <option value="-1">Tema libre</option>
+                                                    {{#themes}}
+                                                    <option value="{{idTheme}}">{{nameTheme}}</option>
+                                                    {{/themes}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                     <div class="list-group-item justify-content-center d-flex">

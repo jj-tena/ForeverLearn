@@ -36,7 +36,14 @@ public class Post {
 
     private int commentsSize;
 
-    public Post(Participation participation, String title, String content) {
+    @ManyToOne
+    private Theme theme;
+
+    public Post() {
+
+    }
+
+    public Post(Participation participation, String title, String content, Theme theme) {
         this.participation = participation;
         this.title = title;
         this.content = content;
@@ -44,9 +51,9 @@ public class Post {
         this.views = 0;
         this.comments = new LinkedList<>();
         this.commentsSize = 0;
+        this.theme = theme;
     }
 
-    public Post(){}
 
     public void setOutstanding() {
         this.outstanding = true;

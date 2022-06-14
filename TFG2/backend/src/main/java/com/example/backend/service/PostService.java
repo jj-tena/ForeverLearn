@@ -1,9 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.model.Comment;
-import com.example.backend.model.Participation;
-import com.example.backend.model.Post;
-import com.example.backend.model.User;
+import com.example.backend.model.*;
 import com.example.backend.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +16,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost(Participation participation, String title, String content){
-        Post post = new Post(participation, title, content);
+    public Post createPost(Participation participation, String title, String content, Theme theme){
+        Post post = new Post(participation, title, content, theme);
         return postRepository.save(post);
     }
 

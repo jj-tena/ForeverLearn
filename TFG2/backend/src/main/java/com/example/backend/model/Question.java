@@ -36,10 +36,13 @@ public class Question {
 
     private int answersSize;
 
+    @ManyToOne
+    private Theme theme;
+
     @OneToOne
     private Answer bestAnswer;
 
-    public Question(Participation participation, String title, String content) {
+    public Question(Participation participation, String title, String content, Theme theme) {
         this.participation = participation;
         this.title = title;
         this.content = content;
@@ -47,6 +50,7 @@ public class Question {
         this.views = 0;
         this.answers = new LinkedList<>();
         this.answersSize = 0;
+        this.theme = theme;
     }
 
     public Question(){}
