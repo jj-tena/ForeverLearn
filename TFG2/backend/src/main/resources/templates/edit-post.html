@@ -9,11 +9,11 @@
 
 
             <div class="container page__container">
-                <form action="/publish-post-for-course-{{courseId}}">
+                <form action="/edit-post-{{post.id}}-course-{{courseId}}">
                     <div class="row">
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div class="page-section">
-                                <h4>Crear post</h4>
+                                <h4>Editar post</h4>
                                 <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
                                     <a href="/posts-{{courseId}}-for-theme--2" class="mr-3">Volver atrás</a>
                                 </p>
@@ -23,7 +23,7 @@
                                             <div class="form-row align-items-center">
                                                 <label id="label-title" for="title" class="col-md-3 col-form-label form-label">Título</label>
                                                 <div class="col-md-9">
-                                                    <input id="title" name="title" type="text" placeholder="Escribe el título del post..." value="" class="form-control">
+                                                    <input id="title" name="title" type="text" placeholder="Escribe el título del post..." value="{{post.title}}" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -33,7 +33,7 @@
                                             <div class="form-row">
                                                 <label id="label-question" for="content" class="col-md-3 col-form-label form-label">Contenido</label>
                                                 <div class="col-md-9">
-                                                    <textarea id="content" name="content" placeholder="Escribe el contenido del post..." rows="4" class="form-control"></textarea>
+                                                    <textarea id="content" name="content" placeholder="{{post.content}}" rows="4" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,23 +54,10 @@
 
 
                                     <div class="list-group-item justify-content-center d-flex">
-                                        <button type="submit" class="btn btn-accent">Publicar</button>
+                                        <button type="submit" class="btn btn-accent">Editar</button>
                                     </div>
                                 </div>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-3 page-nav">
-                            <div data-perfect-scrollbar data-perfect-scrollbar-wheel-propagation="true">
-                                <div class="page-section pt-lg-112pt">
-                                    <div class="nav page-nav__menu">
-                                        <a href="javascript:void(0)" class="nav-link active">Antes de que publiques tu post</a>
-                                    </div>
-                                    <div class="page-nav__content">
-                                        <p class="text-70">Quizás existan otros posts previos comentando lo mismo que tu.</p>
-                                        <p class="text-70">Realiza una búsqueda rápida para asegurarte de que tu post es único.</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

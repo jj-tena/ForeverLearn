@@ -83,4 +83,20 @@ public class Post {
     public void quitLike() {
         this.likes--;
     }
+
+    public void edit(String title, String content, Theme theme) {
+        if (!title.contentEquals("")){
+            this.title = title;
+        } if (!content.contentEquals("")){
+            this.content = content;
+        }
+        this.theme = theme;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                '}';
+    }
 }

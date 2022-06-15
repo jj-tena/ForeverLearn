@@ -187,4 +187,16 @@ public class CourseService {
         Course course = courseRepository.getById(courseId);
         return course.getAuthor().equals(user);
     }
+
+    public void deletePost(Long courseId, Post post) {
+        Course course = courseRepository.getById(courseId);
+        course.getPosts().remove(post);
+        courseRepository.save(course);
+    }
+
+    public void deleteQuestion(Long courseId, Question question) {
+        Course course = courseRepository.getById(courseId);
+        course.getQuestions().remove(question);
+        courseRepository.save(course);
+    }
 }

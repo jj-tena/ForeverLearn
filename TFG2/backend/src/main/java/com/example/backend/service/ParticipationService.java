@@ -171,4 +171,20 @@ public class ParticipationService {
         }
         return isOwnPost;
     }
+
+    public void deletePost(Long courseId, User user, Post post) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        if (optionalParticipation.isPresent()) {
+            optionalParticipation.get().getPosts().remove(post);
+            participationRepository.save(optionalParticipation.get());
+        }
+    }
+
+    public void deleteQuestion(Long courseId, User user, Question question) {
+        Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
+        if (optionalParticipation.isPresent()) {
+            optionalParticipation.get().getQuestions().remove(question);
+            participationRepository.save(optionalParticipation.get());
+        }
+    }
 }

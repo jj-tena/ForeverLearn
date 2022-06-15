@@ -843,14 +843,26 @@
 
                                     {{#participation.posts}}
                                     <div class="card card-sm">
-                                        <div class="card-body d-flex align-items-center">
+                                        <div class="card-body d-flex align-items-center card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                                             <div class="flex">
                                                 <a class="card-title mb-4pt" href="/post-{{id}}-course-{{courseId}}">{{title}}</a>
                                             </div>
                                         </div>
+                                        <div class="popoverContainer d-none">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-4">
+                                                    <a href="/post-{{id}}-course-{{courseId}}" class="btn btn-primary">Ver</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="/link-edit-post-{{id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="/delete-post-{{id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     {{/participation.posts}}
-
                                 </div>
 
                             </div>
@@ -863,9 +875,22 @@
 
                                     {{#participation.questions}}
                                     <div class="card card-sm">
-                                        <div class="card-body d-flex align-items-center">
+                                        <div class="card-body d-flex align-items-center card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                                             <div class="flex">
                                                 <a class="card-title mb-4pt" href="/question-{{id}}-course-{{courseId}}">{{title}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="popoverContainer d-none">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-4">
+                                                    <a href="/question-{{id}}-course-{{courseId}}" class="btn btn-primary">Ver</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="/link-edit-question-{{id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="/delete-question-{{id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

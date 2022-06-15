@@ -94,4 +94,13 @@ public class Question {
                 "id=" + id +
                 '}';
     }
+
+    public void edit(String title, String content, Theme theme) {
+        if (!title.contentEquals("")){
+            this.title = title;
+        } if (!content.contentEquals("")){
+            this.content = content;
+        }
+        this.theme = theme;
+    }
 }

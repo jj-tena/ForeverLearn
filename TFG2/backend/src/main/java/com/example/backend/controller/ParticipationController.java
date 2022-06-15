@@ -77,7 +77,7 @@ public class ParticipationController {
                 postList = finalPostList;
             } else if (optionalTheme.isPresent()){
                 List<Post> finalPostList = postList;
-                optionalCourse.get().getPosts().forEach(post -> {if (post.getTheme().equals(optionalTheme.get())) {
+                optionalCourse.get().getPosts().forEach(post -> {if (Objects.nonNull(post.getTheme()) && post.getTheme().equals(optionalTheme.get())) {
                     finalPostList.add(post);}});
                 postList = finalPostList;
             }
@@ -101,7 +101,7 @@ public class ParticipationController {
                 questionList = finalQuestionList;
             } else if (optionalTheme.isPresent()){
                 List<Question> finalQuestionList = questionList;
-                optionalCourse.get().getQuestions().forEach(question -> {if (question.getTheme().equals(optionalTheme.get())) {
+                optionalCourse.get().getQuestions().forEach(question -> {if (Objects.nonNull(question.getTheme()) && question.getTheme().equals(optionalTheme.get())) {
                     finalQuestionList.add(question);}});
                 questionList = finalQuestionList;
             }
@@ -612,6 +612,100 @@ public class ParticipationController {
         setAnswersInfo(model, questionId, courseId);
         setQuestionInfo(model, questionId, courseId);
         return "question";
+    }
+
+    @GetMapping("/delete-post-{postId}-course-{courseId}")
+    public String deletePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        Post post = postService.getPost(postId);
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent() && participationService.isOwnPost(courseId, optionalUser.get(), post)){
+                courseService.deletePost(courseId, post);
+                participationService.deletePost(courseId, optionalUser.get(), post);
+                post.getComments().forEach(commentService::delete);
+                postService.delete(postId);
+            }
+        }
+        return postsLink(model, courseId, (long) -2);
+    }
+
+    @GetMapping("/delete-question-{questionId}-course-{courseId}")
+    public String deleteQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        Question question = questionService.getQuestion(questionId);
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent() && participationService.isOwnQuestion(courseId, optionalUser.get(), question)){
+                courseService.deleteQuestion(courseId, question);
+                participationService.deleteQuestion(courseId, optionalUser.get(), question);
+                question.getAnswers().forEach(answerService::delete);
+                questionService.delete(questionId);
+            }
+        }
+        return questionsLink(model, courseId, (long) -2);
+    }
+
+    @GetMapping("/link-edit-post-{postId}-course-{courseId}")
+    public String linkEditPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        model.addAttribute("post", postService.getPost(postId));
+        return "edit-post";
+    }
+
+    @GetMapping("/edit-post-{postId}-course-{courseId}")
+    public String editPost(Model model, @PathVariable Long postId, @PathVariable Long courseId, String title, String content, Long themeId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            Post post = postService.getPost(postId);
+            if (optionalParticipation.isPresent() && participationService.isOwnPost(courseId, optionalUser.get(), post)){
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                postService.editPost(postId, title, content, theme);
+                setPostsInfo(model, courseId, (long) -2);
+            }
+        }
+        return "posts";
+    }
+
+    @GetMapping("/link-edit-question-{questionId}-course-{courseId}")
+    public String linkEditQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        model.addAttribute("question", questionService.getQuestion(questionId));
+        return "edit-question";
+    }
+
+    @GetMapping("/edit-question-{questionId}-course-{courseId}")
+    public String editQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String title, String content, Long themeId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            Question question = questionService.getQuestion(questionId);
+            if (optionalParticipation.isPresent() && participationService.isOwnQuestion(courseId, optionalUser.get(), question)){
+                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
+                Theme theme = null;
+                if (optionalTheme.isPresent()){
+                    theme = optionalTheme.get();
+                }
+                questionService.editQuestion(questionId, title, content, theme);
+                setQuestionsInfo(model, courseId, (long) -2);
+            }
+        }
+        return "questions";
     }
 
 }

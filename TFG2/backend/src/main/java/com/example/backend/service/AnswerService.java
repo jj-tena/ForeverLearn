@@ -52,4 +52,8 @@ public class AnswerService {
     public Answer getAnswer(Long answerId) {
         return answerRepository.getById(answerId);
     }
+
+    public void delete(Answer answer) {
+        answerRepository.delete(answer);
+    }
 }

@@ -44,4 +44,10 @@ public class Comment {
         this.likes--;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                '}';
+    }
 }

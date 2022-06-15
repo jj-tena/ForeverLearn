@@ -90,4 +90,14 @@ public class QuestionService {
         question.setBestAnswer(null);
         questionRepository.save(question);
     }
+
+    public void delete(Long questionId) {
+        questionRepository.deleteById(questionId);
+    }
+
+    public void editQuestion(Long questionId, String title, String content, Theme theme) {
+        Question question = questionRepository.getById(questionId);
+        question.edit(title, content, theme);
+        questionRepository.save(question);
+    }
 }

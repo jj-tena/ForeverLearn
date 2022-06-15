@@ -78,4 +78,14 @@ public class PostService {
         post.quitLike();
         postRepository.save(post);
     }
+
+    public void delete(Long postId) {
+        postRepository.deleteById(postId);
+    }
+
+    public void editPost(Long postId, String title, String content, Theme theme) {
+        Post post = postRepository.getById(postId);
+        post.edit(title, content, theme);
+        postRepository.save(post);
+    }
 }
