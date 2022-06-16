@@ -52,9 +52,11 @@
                                         </div>
                                     </div>
 
-
                                     <div class="list-group-item justify-content-center d-flex">
-                                        <button type="submit" class="btn btn-accent">Publicar</button>
+                                        <input value="Estandar" name="type" type="submit" class="btn btn-info">
+                                        {{#postToOutstand}}
+                                        <input value="Destacado" name="type" type="submit" class="ml-5 btn btn-accent">
+                                        {{/postToOutstand}}
                                     </div>
                                 </div>
 

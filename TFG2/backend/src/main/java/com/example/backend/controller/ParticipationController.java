@@ -137,34 +137,50 @@ public class ParticipationController {
         boolean postLiked = false;
         boolean isOwnPost = false;
         boolean isOwnCourse = false;
+        boolean commentToOutstand = false;
         Post post = postService.getPost(postId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             postLiked = participationService.isPostLiked(courseId, optionalUser.get().getId(), post);
             isOwnPost = participationService.isOwnPost(courseId, optionalUser.get(), post);
             isOwnCourse = courseService.isOwnCourse(courseId, optionalUser.get());
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                if (optionalParticipation.get().getCommentsToOutstand()>0){
+                    commentToOutstand = true;
+                }
+            }
         }
         model.addAttribute("likedPost", postLiked);
         model.addAttribute("isOwnPost", isOwnPost);
         model.addAttribute("isOwnCourse", isOwnCourse);
         model.addAttribute("interestingPost", post.isInteresting());
+        model.addAttribute("commentToOutstand", commentToOutstand);
     }
 
     private void setQuestionInfo(Model model, Long questionId, Long courseId){
         boolean questionLiked = false;
         boolean isOwnQuestion = false;
         boolean isOwnCourse = false;
+        boolean answerToOutstand = false;
         Question question = questionService.getQuestion(questionId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             questionLiked = participationService.isQuestionLiked(courseId, optionalUser.get().getId(), question);
             isOwnQuestion = participationService.isOwnQuestion(courseId, optionalUser.get(), question);
             isOwnCourse = courseService.isOwnCourse(courseId, optionalUser.get());
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                if (optionalParticipation.get().getAnswersToOutstand()>0){
+                    answerToOutstand = true;
+                }
+            }
         }
         model.addAttribute("likedQuestion", questionLiked);
         model.addAttribute("isOwnQuestion", isOwnQuestion);
         model.addAttribute("isOwnCourse", isOwnCourse);
         model.addAttribute("interestingQuestion", question.isInteresting());
+        model.addAttribute("answerToOutstand", answerToOutstand);
     }
 
     @GetMapping("/students-area-{courseId}")
@@ -221,6 +237,17 @@ public class ParticipationController {
     public String createPostLink(Model model, @PathVariable Long courseId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
+        boolean postToOutstand = false;
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                if (optionalParticipation.get().getPostsToOutstand()>0){
+                    postToOutstand = true;
+                }
+            }
+        }
+        model.addAttribute("postToOutstand", postToOutstand);
         return "create-post";
     }
 
@@ -228,11 +255,22 @@ public class ParticipationController {
     public String createQuestionLink(Model model, @PathVariable Long courseId){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
+        boolean questionToOutstand = false;
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                if (optionalParticipation.get().getQuestionsToOutstand()>0){
+                    questionToOutstand = true;
+                }
+            }
+        }
+        model.addAttribute("questionToOutstand", questionToOutstand);
         return "create-question";
     }
 
     @GetMapping("/publish-post-for-course-{courseId}")
-    public String publishPost(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
+    public String publishPost(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -247,6 +285,10 @@ public class ParticipationController {
                 Post post = postService.createPost(optionalParticipation.get(), title, content, theme);
                 participationService.addPost(courseId, optionalUser.get().getId(), post);
                 courseService.addPost(courseId, post);
+                if (type.contentEquals("Destacado") && (optionalParticipation.get().getPostsToOutstand()>0)){
+                    participationService.outstandPost(optionalParticipation.get());
+                    postService.setOutstanding(post.getId());
+                }
                 setPostsInfo(model, courseId, (long) -2);
             }
         }
@@ -254,7 +296,7 @@ public class ParticipationController {
     }
 
     @GetMapping("/publish-question-for-course-{courseId}")
-    public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
+    public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -269,52 +311,10 @@ public class ParticipationController {
                 Question question = questionService.createQuestion(optionalParticipation.get(), title, content, theme);
                 participationService.addQuestion(courseId, optionalUser.get().getId(), question);
                 courseService.addQuestion(courseId, question);
-                setQuestionsInfo(model, courseId, themeId);
-            }
-        }
-        return "questions";
-    }
-
-    @GetMapping("/publish-post-outstanding-for-course-{courseId}")
-    public String publishPostOutstanding(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
-                Theme theme = null;
-                if (optionalTheme.isPresent()){
-                    theme = optionalTheme.get();
+                if (type.contentEquals("Destacado") && (optionalParticipation.get().getQuestionsToOutstand()>0)){
+                    participationService.outstandQuestion(optionalParticipation.get());
+                    questionService.setOutstanding(question.getId());
                 }
-                Post post = postService.createPost(optionalParticipation.get(), title, content, theme);
-                postService.setOutstanding(post.getId());
-                participationService.addPost(courseId, optionalUser.get().getId(), post);
-                courseService.addPost(courseId, post);
-                setPostsInfo(model, courseId, (long) -2);
-            }
-        }
-        return "posts";
-    }
-
-    @GetMapping("/publish-question-outstanding-for-course-{courseId}")
-    public String publishQuestionOutstanding(Model model, @PathVariable Long courseId, String title, String content, Long themeId){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
-                Theme theme = null;
-                if (optionalTheme.isPresent()){
-                    theme = optionalTheme.get();
-                }
-                Question question = questionService.createQuestion(optionalParticipation.get(), title, content, theme);
-                questionService.setOutstanding(question.getId());
-                participationService.addQuestion(courseId, optionalUser.get().getId(), question);
-                courseService.addQuestion(courseId, question);
                 setQuestionsInfo(model, courseId, themeId);
             }
         }
@@ -376,7 +376,7 @@ public class ParticipationController {
     }
 
     @GetMapping("/comment-post-{postId}-course-{courseId}")
-    public String comment(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content){
+    public String comment(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content, String type){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -386,6 +386,10 @@ public class ParticipationController {
                 Comment comment = commentService.createComment(optionalParticipation.get(), content);
                 postService.addComment(postId, comment);
                 participationService.receiveComment(postService.getPost(postId).getParticipation());
+                if (type.contentEquals("Destacado") && (optionalParticipation.get().getCommentsToOutstand()>0)){
+                    participationService.outstandComment(optionalParticipation.get());
+                    commentService.setOutstanding(comment);
+                }
             }
         }
         model.addAttribute("post", postService.getPost(postId));
@@ -395,7 +399,7 @@ public class ParticipationController {
     }
 
     @GetMapping("/answer-question-{questionId}-course-{courseId}")
-    public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content){
+    public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content, String type){
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -405,89 +409,15 @@ public class ParticipationController {
                 Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
                 questionService.addAnswer(questionId, answer);
                 participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
+                if (type.contentEquals("Destacado") && (optionalParticipation.get().getAnswersToOutstand()>0)){
+                    participationService.outstandAnswer(optionalParticipation.get());
+                    answerService.setOutstanding(answer);
+                }
             }
         }
         model.addAttribute("question", questionService.getQuestion(questionId));
         setAnswersInfo(model, questionId, courseId);
         setQuestionInfo(model, questionId, courseId);
-        return "question";
-    }
-
-    @GetMapping("/comment-standard-post-{postId}-course-{courseId}")
-    public String commentStandard(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Comment comment = commentService.createComment(optionalParticipation.get(), content);
-                postService.addComment(postId, comment);
-                participationService.receiveComment(postService.getPost(postId).getParticipation());
-            }
-        }
-        model.addAttribute("post", postService.getPost(postId));
-        setPostInfo(model, postId, courseId);
-        setCommentsInfo(model, postId, courseId);
-        return "post";
-    }
-
-    @GetMapping("/answer-standard-question-{questionId}-course-{courseId}")
-    public String answerStandard(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
-                questionService.addAnswer(questionId, answer);
-                participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
-            }
-        }
-        model.addAttribute("question", questionService.getQuestion(questionId));
-        setQuestionInfo(model, questionId, courseId);
-        setAnswersInfo(model, questionId, courseId);
-        return "question";
-    }
-
-    @GetMapping("/comment-outstanding-post-{postId}-course-{courseId}")
-    public String commentOutstanding(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Comment comment = commentService.createComment(optionalParticipation.get(), content);
-                commentService.setOutstanding(comment);
-                postService.addComment(postId, comment);
-                setCommentsInfo(model, postId, courseId);
-                participationService.receiveComment(postService.getPost(postId).getParticipation());
-            }
-        }
-        model.addAttribute("post", postService.getPost(postId));
-        setPostInfo(model, postId, courseId);
-        return "post";
-    }
-
-    @GetMapping("/answer-outstanding-question-{questionId}-course-{courseId}")
-    public String answerOutstanding(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content){
-        setHeaderInfo(model);
-        setParticipationHeader(model, courseId);
-        Optional<User> optionalUser = userService.getActiveUser();
-        if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                Answer answer = answerService.createAnswer(optionalParticipation.get(), content);
-                questionService.setOutstanding(questionId);
-                questionService.addAnswer(questionId, answer);
-                participationService.receiveAnswer(questionService.getQuestion(questionId).getParticipation());
-            }
-        }
-        model.addAttribute("question", questionService.getQuestion(questionId));
-        setQuestionInfo(model, questionId, courseId);
-        setAnswersInfo(model, questionId, courseId);
         return "question";
     }
 

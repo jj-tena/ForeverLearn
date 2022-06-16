@@ -187,4 +187,24 @@ public class ParticipationService {
             participationRepository.save(optionalParticipation.get());
         }
     }
+
+    public void outstandPost(Participation participation) {
+        participation.outstandPost();
+        participationRepository.save(participation);
+    }
+
+    public void outstandQuestion(Participation participation) {
+        participation.outstandQuestion();
+        participationRepository.save(participation);
+    }
+
+    public void outstandComment(Participation participation) {
+        participation.outstandComment();
+        participationRepository.save(participation);
+    }
+
+    public void outstandAnswer(Participation participation) {
+        participation.outstandAnswer();
+        participationRepository.save(participation);
+    }
 }

@@ -72,7 +72,10 @@
                                             <label for="comment" class="form-label">Tu comentario</label>
                                             <textarea class="form-control" name="content" id="comment" rows="3" placeholder="Escribe aquí un comentario al post..."></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-accent">Comentar</button>
+                                        <input value="Estandar" name="type" type="submit" class="btn btn-info">
+                                        {{#commentToOutstand}}
+                                        <input value="Destacado" name="type" type="submit" class="ml-5 btn btn-accent">
+                                        {{/commentToOutstand}}
                                     </div>
                                 </div>
                             </form>

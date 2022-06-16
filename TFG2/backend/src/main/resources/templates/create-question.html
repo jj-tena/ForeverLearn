@@ -15,7 +15,7 @@
                             <div class="page-section">
                                 <h4>Crear pregunta</h4>
                                 <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
-                                    <a href="/questions-{{courseId}}" class="mr-3">Volver atrás</a>
+                                    <a href="/questions-{{courseId}}-for-theme--2" class="mr-3">Volver atrás</a>
                                 </p>
                                 <div class="list-group">
                                     <div class="list-group-item">
@@ -54,7 +54,10 @@
 
 
                                     <div class="list-group-item justify-content-center d-flex">
-                                        <button type="submit" class="btn btn-accent">Publicar</button>
+                                        <input value="Estandar" name="type" type="submit" class="btn btn-info">
+                                        {{#questionToOutstand}}
+                                        <input value="Destacado" name="type" type="submit" class="ml-5 btn btn-accent">
+                                        {{/questionToOutstand}}
                                     </div>
                                 </div>
 

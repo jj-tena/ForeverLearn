@@ -54,6 +54,14 @@ public class Participation {
     @ElementCollection
     private List<Boolean> badges;
 
+    private int postsToOutstand;
+
+    private int questionsToOutstand;
+
+    private int commentsToOutstand;
+
+    private int answersToOutstand;
+
     public Participation(User student, Course course) {
         this.student = student;
         this.course = course;
@@ -72,6 +80,10 @@ public class Participation {
         for (int i = 0; i < 25; i++) {
             this.badges.add(false);
         }
+        this.postsToOutstand = 0;
+        this.questionsToOutstand = 0;
+        this.commentsToOutstand = 0;
+        this.answersToOutstand = 0;
     }
 
     public Participation() {
@@ -277,21 +289,44 @@ public class Participation {
     public void checkTitle(){
         switch (this.title){
             case "Principiante":
-                if (this.points>=50) this.title = "Intermedio";
+                if (this.points>=50){
+                    this.title = "Intermedio";
+                    updateElementsToOutstand(1);
+                }
                 break;
             case "Intermedio":
-                if (this.points>=150) this.title = "Avanzado";
+                if (this.points>=150){
+                    this.title = "Avanzado";
+                    updateElementsToOutstand(2);
+                }
                 break;
             case "Avanzado":
-                if (this.points>=270) this.title = "Experto";
+                if (this.points>=270) {
+                    this.title = "Experto";
+                    updateElementsToOutstand(3);
+                }
                 break;
             case "Experto":
-                if (this.points>=350) this.title = "Héroe";
+                if (this.points>=350) {
+                    this.title = "Héroe";
+                    updateElementsToOutstand(4);
+                }
                 break;
             case "Héroe":
-                if (this.points>=400) this.title = "Leyenda";
+                if (this.points>=400){
+                    this.title = "Leyenda";
+                    this.student.getEnrolledCourses().remove(this.course);
+                    this.student.getCompletedCourses().add(this.course);
+                }
                 break;
         }
+    }
+
+    public void updateElementsToOutstand(int number){
+        this.postsToOutstand += number;
+        this.questionsToOutstand += number;
+        this.commentsToOutstand += number;
+        this.answersToOutstand += number;
     }
 
     public void receiveComment(){
@@ -340,4 +375,19 @@ public class Participation {
         updatePoints(10);
     }
 
+    public void outstandPost() {
+        this.postsToOutstand--;
+    }
+
+    public void outstandQuestion() {
+        this.questionsToOutstand--;
+    }
+
+    public void outstandComment() {
+        this.commentsToOutstand--;
+    }
+
+    public void outstandAnswer() {
+        this.answersToOutstand--;
+    }
 }
