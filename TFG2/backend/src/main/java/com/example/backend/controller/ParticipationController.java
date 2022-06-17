@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class ParticipationController {
@@ -188,6 +189,13 @@ public class ParticipationController {
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         model.addAttribute("topGlobal", participationService.getTopGlobal(courseId));
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()) {
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()) {
+                model.addAttribute("topRelative", participationService.getTopRelative(courseId, optionalParticipation.get()));
+            }
+        }
         return "students-area";
     }
 
@@ -636,6 +644,40 @@ public class ParticipationController {
             }
         }
         return "questions";
+    }
+
+    @GetMapping("/statistics-course-{courseId}")
+    public String statisticsLink(Model model, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+        if (optionalUser.isPresent() && optionalCourse.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            model.addAttribute("topPoints", participationService.getTopGlobal(courseId));
+            model.addAttribute("topPosts", participationService.getTopPosts(courseId));
+            model.addAttribute("topQuestions", participationService.getTopQuestions(courseId));
+            List<Participation> participations = participationService.getStudents(courseId);
+            int totalParticipations = participations.size();
+            AtomicInteger totalPoints = new AtomicInteger();
+            AtomicInteger totalPosts = new AtomicInteger();
+            AtomicInteger totalQuestions = new AtomicInteger();
+            AtomicInteger totalComments = new AtomicInteger();
+            AtomicInteger totalAnswers = new AtomicInteger();
+            participations.forEach(participation -> {
+                totalPoints.addAndGet(participation.getPoints());
+                totalPosts.addAndGet(participation.getPostsSize());
+                totalQuestions.addAndGet(participation.getQuestionsSize());
+                totalComments.addAndGet(participation.getComments().size());
+                totalAnswers.addAndGet(participation.getAnswers().size());
+            });
+            model.addAttribute("totalParticipations", totalParticipations);
+            model.addAttribute("totalPoints", totalPoints);
+            model.addAttribute("totalPosts", totalPosts);
+            model.addAttribute("totalQuestions", totalQuestions);
+            model.addAttribute("totalComments", totalComments);
+            model.addAttribute("totalAnswers", totalAnswers);
+        }
+        return "statistics";
     }
 
 }

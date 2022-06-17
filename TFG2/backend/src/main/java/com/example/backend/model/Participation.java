@@ -62,6 +62,10 @@ public class Participation {
 
     private int answersToOutstand;
 
+    private int postsSize;
+
+    private int questionsSize;
+
     public Participation(User student, Course course) {
         this.student = student;
         this.course = course;
@@ -84,6 +88,8 @@ public class Participation {
         this.questionsToOutstand = 0;
         this.commentsToOutstand = 0;
         this.answersToOutstand = 0;
+        this.postsSize = 0;
+        this.questionsSize = 0;
     }
 
     public Participation() {
@@ -91,6 +97,7 @@ public class Participation {
 
     public void addPost(Post post){
         this.posts.add(post);
+        this.postsSize++;
         updatePoints(5);
         if (this.posts.size()==1){
             this.badges.set(0, true);
@@ -103,6 +110,10 @@ public class Participation {
             this.badges.set(21, true);
             updatePoints(30);
         }
+    }
+
+    public void deletePost(){
+        this.postsSize--;
     }
 
     public void likePost(Post post){
@@ -149,6 +160,7 @@ public class Participation {
 
     public void addQuestion(Question question){
         this.questions.add(question);
+        this.questionsSize++;
         updatePoints(5);
         if (this.questions.size()==1){
             this.badges.set(1, true);
@@ -161,6 +173,10 @@ public class Participation {
             this.badges.set(22, true);
             updatePoints(30);
         }
+    }
+
+    public void deleteQuestion(){
+        this.questionsSize--;
     }
 
     public void likeQuestion(Question question){

@@ -22,8 +22,14 @@ public interface ParticipationRepository extends JpaRepository<Participation, Lo
 
     List<Participation> getParticipationsByCourseIdOrderByPointsDesc(Long courseId);
 
+    List<Participation> getParticipationsByCourseIdOrderByPostsSizeDesc(Long courseId);
+
+    List<Participation> getParticipationsByCourseIdOrderByQuestionsSizeDesc(Long courseId);
+
     Participation getParticipationByPostsContains(Post post);
 
     Participation getParticipationByQuestionsContains(Question question);
+
+    List<Participation> getParticipationsByCourseId(Long courseId);
 
 }

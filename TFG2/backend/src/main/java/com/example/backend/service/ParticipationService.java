@@ -5,6 +5,7 @@ import com.example.backend.repository.ParticipationRepository;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.OAEPParameterSpec;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,9 +113,22 @@ public class ParticipationService {
     public List<Participation> getTopGlobal(Long courseId) {
         List<Participation> top = participationRepository.getParticipationsByCourseIdOrderByPointsDesc(courseId);
         if (top.size()>10){
-            return top.subList(0,9);
+            return top.subList(0,10);
         }
         return top;
+    }
+
+    public List<Participation> getTopRelative(Long courseId, Participation participation) {
+        List<Participation> top = participationRepository.getParticipationsByCourseIdOrderByPointsDesc(courseId);
+        if (top.contains(participation)){
+            int index = top.indexOf(participation);
+            if (index<=10){
+                return top;
+            } else {
+                return top.subList(index-10,index);
+            }
+        }
+        return new ArrayList<>();
     }
 
     public void checkViewsInPosts(Post post) {
@@ -176,6 +190,7 @@ public class ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
         if (optionalParticipation.isPresent()) {
             optionalParticipation.get().getPosts().remove(post);
+            optionalParticipation.get().deletePost();
             participationRepository.save(optionalParticipation.get());
         }
     }
@@ -184,6 +199,7 @@ public class ParticipationService {
         Optional<Participation> optionalParticipation = participationRepository.findParticipationByStudentIdAndCourseId(user.getId(), courseId);
         if (optionalParticipation.isPresent()) {
             optionalParticipation.get().getQuestions().remove(question);
+            optionalParticipation.get().deleteQuestion();
             participationRepository.save(optionalParticipation.get());
         }
     }
@@ -206,5 +222,25 @@ public class ParticipationService {
     public void outstandAnswer(Participation participation) {
         participation.outstandAnswer();
         participationRepository.save(participation);
+    }
+
+    public Object getTopPosts(Long courseId) {
+        List<Participation> top = participationRepository.getParticipationsByCourseIdOrderByPostsSizeDesc(courseId);
+        if (top.size()>10){
+            return top.subList(0,9);
+        }
+        return top;
+    }
+
+    public Object getTopQuestions(Long courseId) {
+        List<Participation> top = participationRepository.getParticipationsByCourseIdOrderByQuestionsSizeDesc(courseId);
+        if (top.size()>10){
+            return top.subList(0,9);
+        }
+        return top;
+    }
+
+    public List<Participation> getStudents(Long courseId){
+        return participationRepository.getParticipationsByCourseId(courseId);
     }
 }
