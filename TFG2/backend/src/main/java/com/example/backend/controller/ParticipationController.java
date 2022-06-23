@@ -451,6 +451,12 @@ public class ParticipationController {
                 badge = i+1;
                 model.addAttribute("badge"+badge, optionalParticipation.get().getBadge(i));
             }
+            Optional<User> activeUser = userService.getActiveUser();
+            boolean isOwnParticipation = false;
+            if (activeUser.isPresent()){
+                isOwnParticipation = (activeUser.get().equals(optionalParticipation.get().getStudent()));
+            }
+            model.addAttribute("isOwnParticipation", isOwnParticipation);
         }
         return "participation";
     }
@@ -696,8 +702,107 @@ public class ParticipationController {
             model.addAttribute("totalQuestions", totalQuestions);
             model.addAttribute("totalComments", totalComments);
             model.addAttribute("totalAnswers", totalAnswers);
+            model.addAttribute("courseId", courseId);
+            model.addAttribute("reportedPosts", optionalCourse.get().getReportedPosts());
+            model.addAttribute("reportedQuestions", optionalCourse.get().getReportedQuestions());
+            model.addAttribute("reportedParticipations", optionalCourse.get().getReportedParticipations());
+            model.addAttribute("bannedParticipations", optionalCourse.get().getBannedParticipations());
         }
         return "statistics";
+    }
+
+    @GetMapping("/report-post-{postId}-course-{courseId}")
+    public String reportPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        Post post = postService.getPost(postId);
+        if (optionalUser.isPresent()){
+            courseService.reportPost(courseId, post);
+        }
+        return postsLink(model, courseId, (long) -2);
+    }
+
+    @GetMapping("/report-question-{questionId}-course-{courseId}")
+    public String reportQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        Question question = questionService.getQuestion(questionId);
+        if (optionalUser.isPresent()){
+            courseService.reportQuestion(courseId, question);
+        }
+        return postsLink(model, courseId, (long) -2);
+    }
+
+    @GetMapping("/report-participation-user-{userId}-course-{courseId}")
+    public String reportParticipation(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
+            optionalParticipation.ifPresent(participation -> courseService.reportParticipation(courseId, participation));
+        }
+        return postsLink(model, courseId, (long) -2);
+    }
+
+    @GetMapping("/unreport-participation-user-{userId}-course-{courseId}")
+    public String unreportParticipation(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
+            optionalParticipation.ifPresent(participation -> courseService.unreportParticipation(courseId, participation));
+        }
+        return statisticsLink(model, courseId);
+    }
+
+    @GetMapping("/unreport-post-{postId}-course-{courseId}")
+        public String unreportPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            courseService.unreportPost(courseId, postService.getPost(postId));
+        }
+        return statisticsLink(model, courseId);
+    }
+
+    @GetMapping("/unreport-question-{postId}-course-{courseId}")
+    public String unreportQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            courseService.unreportQuestion(courseId, questionService.getQuestion(questionId));
+        }
+        return statisticsLink(model, courseId);
+    }
+
+    @GetMapping("/ban-participation-user-{userId}-course-{courseId}")
+    public String banParticipation(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
+            optionalParticipation.ifPresent(participation -> courseService.banParticipation(courseId, participation));
+        }
+        return statisticsLink(model, courseId);
+    }
+
+    @GetMapping("/unban-participation-user-{userId}-course-{courseId}")
+    public String unbanParticipation(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent() && courseService.isOwnCourse(courseId, optionalUser.get())){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
+            optionalParticipation.ifPresent(participation -> courseService.unbanParticipation(courseId, participation));
+        }
+        return statisticsLink(model, courseId);
     }
 
 }

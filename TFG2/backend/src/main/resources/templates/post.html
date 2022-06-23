@@ -54,7 +54,7 @@
                                         <a href="/set-post-{{post.id}}-interesting-for-course-{{courseId}}" class="btn btn-primary">Marcar post interesante</a>
                                         {{/interestingPost}}
                                         {{#interestingPost}}
-                                        <a href="/reset-post-{{post.id}}-interesting-for-course-{{courseId}}" class="btn btn-dark">Quitar post interesante</a>
+                                        <a href="/reset-post-{{post.id}}-interesting-for-course-{{courseId}}" class="btn btn-secondary">Quitar post interesante</a>
                                         {{/interestingPost}}
                                         <a href="/link-edit-post-{{post.id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
                                         <a href="/delete-post-{{post.id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
@@ -64,6 +64,11 @@
                                     <div>
                                         <a href="/link-edit-post-{{post.id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
                                         <a href="/delete-post-{{post.id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
+                                    </div>
+                                    {{/isOwnPost}}
+                                    {{^isOwnPost}}
+                                    <div>
+                                        <a href="/report-post-{{post.id}}-course-{{courseId}}" class="btn btn-warning">Reportar</a>
                                     </div>
                                     {{/isOwnPost}}
                                 </div>

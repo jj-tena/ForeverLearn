@@ -199,4 +199,66 @@ public class CourseService {
         course.getQuestions().remove(question);
         courseRepository.save(course);
     }
+
+    public void reportParticipation(Long courseId, Participation reportedParticipation) {
+        Course course = courseRepository.getById(courseId);
+        if (!course.getReportedParticipations().contains(reportedParticipation)){
+            course.getReportedParticipations().add(reportedParticipation);
+        }
+        courseRepository.save(course);
+    }
+
+    public void unreportParticipation(Long courseId, Participation reportedParticipation) {
+        Course course = courseRepository.getById(courseId);
+        course.getReportedParticipations().remove(reportedParticipation);
+        courseRepository.save(course);
+    }
+
+    public void banParticipation(Long courseId, Participation bannedParticipation) {
+        Course course = courseRepository.getById(courseId);
+        if (course.getReportedParticipations().contains(bannedParticipation) && !course.getBannedParticipations().contains(bannedParticipation)){
+            course.getReportedParticipations().remove(bannedParticipation);
+            course.getBannedParticipations().add(bannedParticipation);
+        }
+        courseRepository.save(course);
+    }
+
+    public void unbanParticipation(Long courseId, Participation bannedParticipation) {
+        Course course = courseRepository.getById(courseId);
+        course.getBannedParticipations().remove(bannedParticipation);
+        courseRepository.save(course);
+    }
+
+    public void reportPost(Long courseId, Post post) {
+        Course course = courseRepository.getById(courseId);
+        if (!course.getReportedPosts().contains(post)){
+            course.getReportedPosts().add(post);
+        }
+        courseRepository.save(course);
+    }
+
+    public void unreportPost(Long courseId, Post post) {
+        Course course = courseRepository.getById(courseId);
+        course.getReportedPosts().remove(post);
+        courseRepository.save(course);
+    }
+
+    public void reportQuestion(Long courseId, Question question) {
+        Course course = courseRepository.getById(courseId);
+        if (!course.getReportedQuestions().contains(question)){
+            course.getReportedQuestions().add(question);
+        }
+        courseRepository.save(course);
+    }
+
+    public void unreportQuestion(Long courseId, Question question) {
+        Course course = courseRepository.getById(courseId);
+        course.getReportedQuestions().remove(question);
+        courseRepository.save(course);
+    }
+
+    public boolean isUserBanned(Long courseId, Participation participation){
+        Course course = courseRepository.getById(courseId);
+        return course.getBannedParticipations().contains(participation);
+    }
 }

@@ -52,10 +52,22 @@ public class Course {
     private Boolean banned = false;
 
     @OneToMany
+    private List<Participation> reportedParticipations;
+
+    @OneToMany
+    private List<Participation> bannedParticipations;
+
+    @OneToMany
     private List<Post> posts;
 
     @OneToMany
+    private List<Post> reportedPosts;
+
+    @OneToMany
     private List<Question> questions;
+
+    @OneToMany
+    private List<Question> reportedQuestions;
 
     public Course() {
 

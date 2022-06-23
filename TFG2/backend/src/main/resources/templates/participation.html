@@ -22,7 +22,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-6 col-md-6 mb-24pt mb-md-0">
-                                <h4 class="card-title">Estadísticas</h4>
+                                {{^isOwnParticipation}}
+                                <div>
+                                    <a href="/report-participation-user-{{participation.student.id}}-course-{{courseId}}" class="btn btn-warning">Reportar</a>
+                                </div>
+                                {{/isOwnParticipation}}
+                                <h4 class="mt-4 card-title">Estadísticas</h4>
                                 <p class="card-subtitle mb-24pt">Métricas de participación en el curso.</p>
                             </div>
                         </div>
@@ -128,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                {{#isOwnParticipation}}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -186,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+                {{/isOwnParticipation}}
             </div>
 
 
