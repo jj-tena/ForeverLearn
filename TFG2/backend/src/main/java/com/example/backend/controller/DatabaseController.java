@@ -38,28 +38,28 @@ public class DatabaseController {
 
     @PostConstruct
     public void initialize() throws IOException {
-        User savedUser1 = userService.createFromParameters("Sergio", "Peinado", "sergio@email.com", "se", "/static/assets/images/people/110/sergioPeinado.jpg",
-                "Hola soy Sergio Peinado, deportista aficionado y profesional del mundo de la salud, me apasiona mantenerme en movimiento y saber más sobre" +
+        User savedUser1 = userService.createFromParameters("Sergio", "Abad", "sergio@email.com", "se", "/static/assets/images/people/110/guy-1.jpg",
+                "Hola soy Sergio Abad, deportista aficionado y profesional del mundo de la salud, me apasiona mantenerme en movimiento y saber más sobre" +
                         " mi cuerpo para mejorar en mi profesión, en mis cursos hablaré sobre los deportes que domino y diversas áreas sobre las que me he formado" +
                         " como sanitario. Además debido a mi relación con el deporte y la salud he ejercicido como coach y motivador personal. Espero que os" +
                         " guste todo lo que tengo que enseñar. ","Podéis contactar conmigo a través de mi número de teléfono: 612345678, atenderé encantado " +
-                        "cualquiera de vuestras consultas.","EntrenaConSergioPeinado","Sergio_Trainer","https://www.youtube.com/c/EntrenaSergioPeinado");
+                        "cualquiera de vuestras consultas.","","","");
         userService.makeAdmin(savedUser1.getId());
-        User savedUser2 = userService.createFromParameters("Marc", "Vidal", "marc@email.com", "ma", "/static/assets/images/people/110/marcVidal.jpg",
-                "Me presento, soy Marc Vidal, me dedico a la economía y las finanzas, tema del que me gustar hablar y compartir con mis seguidores," +
+        User savedUser2 = userService.createFromParameters("Marc", "Bueno", "marc@email.com", "ma", "/static/assets/images/people/110/guy-2.jpg",
+                "Me presento, soy Marc Bueno, me dedico a la economía y las finanzas, tema del que me gustar hablar y compartir con mis seguidores," +
                         " también suelo hablar de las profesiones más demandadas y los retos del futuro a los que nos enfrentamos como sociedad. Si quieres" +
                         " estar informado no te pierdas mis cursos. ","Podéis contactar conmigo a través de mi dirección de correo electrónico: " +
-                        " marc@email.com.","vidal.marc","marcvidal","https://www.youtube.com/c/MarcVidalVlog");
-        User savedUser3 = userService.createFromParameters("Sara", "Fructuoso", "sara@email.com", "sa", "/static/assets/images/people/110/saraFructuoso.jpg",
+                        " marc@email.com.","","","");
+        User savedUser3 = userService.createFromParameters("Sara", "Campos", "sara@email.com", "sa", "/static/assets/images/people/110/woman-1.jpg",
                 "Soy una creadora de contenido todo en uno, en mis producciones trabajo desde las fases iniciales del diseño hasta el marketing " +
                         "para publicitarlas, pasando por fotografía, vídeo y producción, a veces incluso me atrevo a componer algún tema de la banda sonora.","Puedes contactarme " +
                         "a través de mis redes sociales, estoy abierta a nuevas colaboraciones y proyectos. Si te gusta lo que haga no dudes en contactar,",
-                "","sarafructuoso__","https://www.youtube.com/channel/UCeZq-em4g_Jp-jMQdynKvBw");
-        User savedUser4 = userService.createFromParameters("Amy", "Hennig", "amy@email.com", "am", "/static/assets/images/people/110/amyHennig.jpg",
+                "","","");
+        User savedUser4 = userService.createFromParameters("Amy", "Duarte", "amy@email.com", "am", "/static/assets/images/people/110/woman-2.jpg",
                 "Soy una profesional de la industria de los videojuegos. Con más de 20 años de experiencia, tengo créditos tanto en juegos para Atari 7800 como para " +
-                        "títulos actuales como ‘Uncharted: Drake’s Fortune’. Además dedico mi tiempo a aprender sobre disciplinas como la física y las matemáticas." +
-                        "En mis cursos trataré de hacer ver mi pasión por mis interesés","Actualmente mis datos de contacto son privados, disculpen las molestias.",
-                "","amy_hennig","");
+                        "títulos actuales. Además dedico mi tiempo a aprender sobre disciplinas como la física y las matemáticas." +
+                        "En mis cursos trataré de hacer ver mi pasión por mis intereses","Actualmente mis datos de contacto son privados, disculpen las molestias.",
+                "","","");
 
         //Categories initialization
         Category category1 = categoryService.create("Crecimiento personal", "/static/assets/images/categories/personal/dificil.png");

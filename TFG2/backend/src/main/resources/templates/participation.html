@@ -133,7 +133,7 @@
                         <div class="row">
                             <div class="col-6 col-md-6 mb-24pt mb-md-0">
                                 <h4 class="card-title">Elementos destacables</h4>
-                                <p class="card-subtitle mb-24pt">Número de elementos que puedes destacar.</p>
+                                <p class="card-subtitle mb-24pt">Número de elementos que puede destacar.</p>
                             </div>
                         </div>
 
@@ -905,6 +905,7 @@
                                             <div class="flex">
                                                 <a class="card-title mb-4pt" href="/post-{{id}}-course-{{courseId}}">{{title}}</a>
                                             </div>
+                                            <a href="#" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
                                         </div>
                                         <div class="popoverContainer d-none">
                                             <div class="row align-items-center">
@@ -928,15 +929,14 @@
                             <div class="col-6 col-md-6 mb-24pt mb-md-0">
                                 <h4 class="card-title">Preguntas</h4>
                                 <p class="card-subtitle mb-24pt">Preguntas publicadas en este curso.</p>
-
                                 <div class="mb-4">
-
                                     {{#participation.questions}}
                                     <div class="card card-sm">
                                         <div class="card-body d-flex align-items-center card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
                                             <div class="flex">
                                                 <a class="card-title mb-4pt" href="/question-{{id}}-course-{{courseId}}">{{title}}</a>
                                             </div>
+                                            <a href="#" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
                                         </div>
                                         <div class="popoverContainer d-none">
                                             <div class="row align-items-center">

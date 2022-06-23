@@ -51,13 +51,21 @@
                                     {{#isOwnCourse}}
                                     <div>
                                         {{^interestingQuestion}}
-                                        <a href="/set-question-{{question.id}}-interesting-for-course-{{courseId}}" class="btn btn-accent">Marcar pregunta interesante</a>
+                                        <a href="/set-question-{{question.id}}-interesting-for-course-{{courseId}}" class="btn btn-primary">Marcar pregunta interesante</a>
                                         {{/interestingQuestion}}
                                         {{#interestingQuestion}}
                                         <a href="/reset-question-{{question.id}}-interesting-for-course-{{courseId}}" class="btn btn-dark">Quitar pregunta interesante</a>
                                         {{/interestingQuestion}}
+                                        <a href="/link-edit-question-{{question.id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
+                                        <a href="/delete-question-{{question.id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
                                     </div>
                                     {{/isOwnCourse}}
+                                    {{#isOwnQuestion}}
+                                    <div>
+                                        <a href="/link-edit-question-{{question.id}}-course-{{courseId}}" class="btn btn-accent">Editar</a>
+                                        <a href="/delete-question-{{question.id}}-course-{{courseId}}" class="btn btn-dark">Borrar</a>
+                                    </div>
+                                    {{/isOwnQuestion}}
                                 </div>
                             </div>
 

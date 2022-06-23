@@ -559,10 +559,15 @@ public class ParticipationController {
         Optional<User> optionalUser = userService.getActiveUser();
         Post post = postService.getPost(postId);
         if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent() && participationService.isOwnPost(courseId, optionalUser.get(), post)){
+            Optional<Participation> optionalParticipation;
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                optionalParticipation = Optional.of(postService.getPost(postId).getParticipation());
+            } else {
+                optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            }
+            if (optionalParticipation.isPresent() && (participationService.isOwnPost(courseId, optionalUser.get(), post) || courseService.isOwnCourse(courseId, optionalUser.get()))){
                 courseService.deletePost(courseId, post);
-                participationService.deletePost(courseId, optionalUser.get(), post);
+                participationService.deletePost(courseId, optionalParticipation.get().getStudent(), post);
                 post.getComments().forEach(commentService::delete);
                 postService.delete(postId);
             }
@@ -577,10 +582,15 @@ public class ParticipationController {
         Optional<User> optionalUser = userService.getActiveUser();
         Question question = questionService.getQuestion(questionId);
         if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent() && participationService.isOwnQuestion(courseId, optionalUser.get(), question)){
+            Optional<Participation> optionalParticipation;
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                optionalParticipation = Optional.of(questionService.getQuestion(questionId).getParticipation());
+            } else {
+                optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            }
+            if (optionalParticipation.isPresent() && (participationService.isOwnQuestion(courseId, optionalUser.get(), question) || courseService.isOwnCourse(courseId, optionalUser.get()))){
                 courseService.deleteQuestion(courseId, question);
-                participationService.deleteQuestion(courseId, optionalUser.get(), question);
+                participationService.deleteQuestion(courseId, optionalParticipation.get().getStudent(), question);
                 question.getAnswers().forEach(answerService::delete);
                 questionService.delete(questionId);
             }
@@ -602,9 +612,14 @@ public class ParticipationController {
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            Optional<Participation> optionalParticipation;
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                optionalParticipation = Optional.of(postService.getPost(postId).getParticipation());
+            } else {
+                optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            }
             Post post = postService.getPost(postId);
-            if (optionalParticipation.isPresent() && participationService.isOwnPost(courseId, optionalUser.get(), post)){
+            if (optionalParticipation.isPresent() && (participationService.isOwnPost(courseId, optionalUser.get(), post) || courseService.isOwnCourse(courseId, optionalUser.get()))){
                 Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
                 Theme theme = null;
                 if (optionalTheme.isPresent()){
@@ -631,9 +646,14 @@ public class ParticipationController {
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
-            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            Optional<Participation> optionalParticipation;
+            if (courseService.isOwnCourse(courseId, optionalUser.get())){
+                optionalParticipation = Optional.of(questionService.getQuestion(questionId).getParticipation());
+            } else {
+                optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            }
             Question question = questionService.getQuestion(questionId);
-            if (optionalParticipation.isPresent() && participationService.isOwnQuestion(courseId, optionalUser.get(), question)){
+            if (optionalParticipation.isPresent() && (participationService.isOwnQuestion(courseId, optionalUser.get(), question) || courseService.isOwnCourse(courseId, optionalUser.get()))){
                 Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
                 Theme theme = null;
                 if (optionalTheme.isPresent()){
