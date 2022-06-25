@@ -406,4 +406,11 @@ public class Participation {
     public void outstandAnswer() {
         this.answersToOutstand--;
     }
+
+    @Override
+    public String toString() {
+        return "Participation{" +
+                "id=" + id +
+                '}';
+    }
 }

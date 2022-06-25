@@ -157,4 +157,11 @@ public class Course {
         }
         this.questions.add(question);
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                '}';
+    }
 }

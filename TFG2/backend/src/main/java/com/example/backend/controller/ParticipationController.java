@@ -64,6 +64,20 @@ public class ParticipationController {
         model.addAttribute("themes", themes);
     }
 
+    private boolean isUserBanned(Long courseId){
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Course> optionalCourse = courseService.findCourseById(courseId);
+            if (optionalCourse.isPresent()){
+                Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+                if (optionalParticipation.isPresent()) {
+                    return courseService.isUserBanned(courseId, optionalParticipation.get());
+                }
+            }
+        }
+        return false;
+    }
+
     private void setPostsInfo(Model model, Long courseId, Long themeId){
         Optional<Course> optionalCourse = courseService.findCourseById(courseId);
         Optional<Theme> optionalTheme = themeService.findThemeById(themeId);
@@ -186,21 +200,25 @@ public class ParticipationController {
 
     @GetMapping("/students-area-{courseId}")
     public String studentsAreaLink(Model model, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         model.addAttribute("topGlobal", participationService.getTopGlobal(courseId));
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()) {
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()) {
-                model.addAttribute("topRelative", participationService.getTopRelative(courseId, optionalParticipation.get()));
-            }
+            optionalParticipation.ifPresent(participation -> model.addAttribute("topRelative", participationService.getTopRelative(courseId, participation)));
         }
         return "students-area";
     }
 
     @GetMapping("/posts-{courseId}-for-theme-{themeId}")
     public String postsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         setPostsInfo(model, courseId, themeId);
@@ -209,6 +227,9 @@ public class ParticipationController {
 
     @GetMapping("/questions-{courseId}-for-theme-{themeId}")
     public String questionsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         setQuestionsInfo(model, courseId, themeId);
@@ -217,6 +238,9 @@ public class ParticipationController {
 
     @GetMapping("/post-{postId}-course-{courseId}")
     public String postLink(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         postService.addView(postId);
@@ -230,6 +254,9 @@ public class ParticipationController {
 
     @GetMapping("/question-{questionId}-course-{courseId}")
     public String questionLink(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         questionService.addView(questionId);
@@ -243,6 +270,9 @@ public class ParticipationController {
 
     @GetMapping("/create-post-for-course-{courseId}")
     public String createPostLink(Model model, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         boolean postToOutstand = false;
@@ -261,6 +291,9 @@ public class ParticipationController {
 
     @GetMapping("/create-question-for-course-{courseId}")
     public String createQuestionLink(Model model, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         boolean questionToOutstand = false;
@@ -279,6 +312,9 @@ public class ParticipationController {
 
     @GetMapping("/publish-post-for-course-{courseId}")
     public String publishPost(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -305,6 +341,9 @@ public class ParticipationController {
 
     @GetMapping("/publish-question-for-course-{courseId}")
     public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -385,6 +424,9 @@ public class ParticipationController {
 
     @GetMapping("/comment-post-{postId}-course-{courseId}")
     public String comment(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content, String type){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -408,6 +450,9 @@ public class ParticipationController {
 
     @GetMapping("/answer-question-{questionId}-course-{courseId}")
     public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content, String type){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -463,6 +508,9 @@ public class ParticipationController {
 
     @GetMapping("/like-post-{postId}-course-{courseId}")
     public String likePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -479,6 +527,9 @@ public class ParticipationController {
 
     @GetMapping("/like-question-{questionId}-course-{courseId}")
     public String likeQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -494,6 +545,9 @@ public class ParticipationController {
 
     @GetMapping("/quit-like-post-{postId}-course-{courseId}")
     public String quitLikePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -509,6 +563,9 @@ public class ParticipationController {
 
     @GetMapping("/quit-like-question-{questionId}-course-{courseId}")
     public String quitLikeQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -523,7 +580,10 @@ public class ParticipationController {
     }
 
     @GetMapping("/set-best-answer-{answerId}-question-{questionId}-course-{courseId}")
-    public String answer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId){
+    public String setBestAnswer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -542,7 +602,10 @@ public class ParticipationController {
     }
 
     @GetMapping("/reset-best-answer-question-{questionId}-course-{courseId}")
-    public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+    public String resetBestAnswer(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -560,6 +623,9 @@ public class ParticipationController {
 
     @GetMapping("/delete-post-{postId}-course-{courseId}")
     public String deletePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -583,6 +649,9 @@ public class ParticipationController {
 
     @GetMapping("/delete-question-{questionId}-course-{courseId}")
     public String deleteQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -606,6 +675,9 @@ public class ParticipationController {
 
     @GetMapping("/link-edit-post-{postId}-course-{courseId}")
     public String linkEditPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         model.addAttribute("post", postService.getPost(postId));
@@ -614,6 +686,9 @@ public class ParticipationController {
 
     @GetMapping("/edit-post-{postId}-course-{courseId}")
     public String editPost(Model model, @PathVariable Long postId, @PathVariable Long courseId, String title, String content, Long themeId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -640,6 +715,9 @@ public class ParticipationController {
 
     @GetMapping("/link-edit-question-{questionId}-course-{courseId}")
     public String linkEditQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         model.addAttribute("question", questionService.getQuestion(questionId));
@@ -648,6 +726,9 @@ public class ParticipationController {
 
     @GetMapping("/edit-question-{questionId}-course-{courseId}")
     public String editQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String title, String content, Long themeId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -713,6 +794,9 @@ public class ParticipationController {
 
     @GetMapping("/report-post-{postId}-course-{courseId}")
     public String reportPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -725,6 +809,9 @@ public class ParticipationController {
 
     @GetMapping("/report-question-{questionId}-course-{courseId}")
     public String reportQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -737,6 +824,9 @@ public class ParticipationController {
 
     @GetMapping("/report-participation-user-{userId}-course-{courseId}")
     public String reportParticipation(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+        if (isUserBanned(courseId)){
+            return "error";
+        }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
@@ -804,5 +894,7 @@ public class ParticipationController {
         }
         return statisticsLink(model, courseId);
     }
+
+    
 
 }
