@@ -1,0 +1,127 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
+
+            <div class="bg-gradient-primary border-bottom-white py-32pt">
+                <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+                    <a href="/user-profile" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/teacher/128/white.svg" width="75" alt="Tutorio">
+                    </a>    
+                    <div class="flex mb-32pt mb-md-0">
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
+                        <p class="lead text-white-50 d-flex align-items-center">Profesor</p>
+                    </div>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
+                </div>
+            </div>
+
+
+
+            <div class="container page__container page-section">
+                <div class="mb-heading d-flex align-items-center">
+                    <h4 class="flex m-0">Cursos propios</h4>
+                    <a href="/instructor-create-course" class="btn btn-accent">Crear curso</a>
+                </div>
+                <div class="row">
+
+                    {{#courses}}
+                        <div class="col-sm-6 col-md-4 col-xl-3">
+
+                        <div class="card card--elevated card-course overlay js-overlay mdk-reveal js-mdk-reveal " data-partial-height="40" data-toggle="popover" data-trigger="click">
+                            <a href="/instructor-edit-course-{{id}}" class="js-image " data-position="">
+                                <img src="/courses/{{id}}/picture" width="100" height="200" alt="course">
+                                <span class="overlay__content">
+                                    <span class="overlay__action d-flex flex-column text-center">
+                                        Opciones
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="mdk-reveal__content">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex">
+                                            <a class="card-title mb-4pt" href="/instructor-edit-course-{{id}}">{{name}}</a>
+                                        </div>
+                                        <a href="/instructor-edit-course-{{id}}" class="ml-4pt material-icons text-black-20 card-course__icon-favorite">edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popoverContainer d-none">
+
+
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <a href="/course-{{id}}" class="btn btn-primary">Ver curso</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="/instructor-edit-course-{{id}}" class="btn btn-accent">Editar curso</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="/instructor-delete-course-{{id}}" class="btn btn-dark">Borrar curso</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {{/courses}}
+
+                </div>
+
+                {{^coursesFound}}
+                <h1>No tienes ningún curso creado</h1>
+                {{/coursesFound}}
+
+            </div>
+
+
+
+            {{>footer}}
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    {{>drawer}}
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+
+
+</body>
+
+</html>

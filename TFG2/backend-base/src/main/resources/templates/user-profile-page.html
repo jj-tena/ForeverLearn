@@ -1,0 +1,118 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
+
+            <div class="bg-gradient-primary border-bottom-white py-32pt">
+                <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+                    <a href="/user-profile" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/user/128/w.svg" width="75" alt="Tutorio">
+                    </a>
+                    <div class="flex mb-32pt mb-md-0">
+                        <h2 class="text-white mb-0">{{user.name}}</h2>
+                        <p class="lead text-white-50 d-flex align-items-center">Usuario</p>
+                    </div>
+                    <a href="/user-edit-account" class="btn btn-outline-white">Editar cuenta</a>
+                </div>
+            </div>
+
+
+            <div class="page-section bg-gradient-primary">
+                <div class="container page__container">
+                    <div class="row">
+
+                        <div class="col-lg-6" >
+                            <div class="card" onclick="location.href='/instructor-section';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center">
+                                    <div class="h2 mb-0 mr-3 text-70">
+                                        Área profesor
+                                    </div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="d-flex justify-content-center" style="height: 344px;">
+                                        <img src="assets/images/illustration/teacher/128/white.svg" style="display: block; width: 350px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="card" onclick="location.href='/student-section';" style="cursor:pointer; background: grey;">
+                                <div class="card-header d-flex justify-content-center"> 
+                                    <div class="h2 mb-0 mr-3 text-70">Área alumno</div>
+                                </div>
+                                <div class="card-body p-24pt">
+                                    <div class="d-flex justify-content-center" style="height: 344px;">
+                                        <img src="assets/images/illustration/student/128/white.svg" style="display: block; width: 460px; height: 344px;" class="mr-md-32pt mb-32pt mb-md-0" alt="student">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            {{>footer}}
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    {{>drawer}}
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+    <!-- Global Settings -->
+    <script src="assets/js/settings.js"></script>
+
+    <!-- Moment.js -->
+    <script src="assets/vendor/moment.min.js"></script>
+    <script src="assets/vendor/moment-range.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- Charts JS -->
+    <script src="assets/js/chartjs.js"></script>
+
+    <!-- Chart.js Samples -->
+    <script src="assets/js/page.student-profile.js"></script>
+
+</body>
+
+</html>

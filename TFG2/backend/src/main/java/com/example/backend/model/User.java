@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Data
+@Table(name = "userTable")
 public class User {
 
     @Id

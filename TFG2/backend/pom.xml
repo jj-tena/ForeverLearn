@@ -37,6 +37,10 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -110,6 +114,22 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <env>
+                            <BPE_OVERRIDE_JAVA_TOOL_OPTIONS>
+                                -Xss256K
+                                -XX:ReservedCodeCacheSize=64M
+                                -XX:MaxMetaspaceSize=100000K
+                                -Xmx64M
+                            </BPE_OVERRIDE_JAVA_TOOL_OPTIONS>
+                        </env>
+                    </image>
                 </configuration>
             </plugin>
         </plugins>

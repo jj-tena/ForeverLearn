@@ -1,0 +1,300 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
+
+            <div class="bg-gradient-primary border-bottom-white py-32pt">
+                <div class="container d-flex flex-column flex-md-row align-items-center text-center text-md-left">
+                    <a href="/admin-options" class="navbar-brand">
+                        <img class="navbar-brand-icon mr-0 mr-md-8pt" src="assets/images/illustration/admin/128/police-svgrepo-com.svg" width="75" alt="Tutorio">
+                    </a>                    <div class="flex mb-32pt mb-md-0">
+                        <h2 class="text-white mb-0">{{user.name}} {{user.surname}}</h2>
+                        <p class="lead text-white-50 d-flex align-items-center">Administrador</p>
+                    </div>
+                    <a href="/user-profile" class="btn btn-outline-white">Ver perfil</a>
+                </div>
+            </div>
+
+
+            <div class="container page__container page-section">
+
+                <div class="page-headline text-center">
+                    <h2>Administrar categorías</h2>
+                    <div class="lead text-70 col-lg-4 mx-auto justify-content-center">
+                        <form class="search-form search-form--black search-form-courses d-none d-md-flex " action="/admin-search-category">
+                            <input type="text" name="name" class="form-control" placeholder="¿Buscas alguna categoría?">
+                            <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="page-headline text-center">
+                    <a data-toggle="modal" data-target="#createCategory" class="ml-4pt btn btn-accent text-white mr-4pt">Crear categoría</a>
+                </div>
+
+                <div>
+
+                    {{#pageCategories}}
+                    <div class="card card-path js-overlay stack stack--1 " data-toggle="popover" data-trigger="click">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded mr-16pt z-0 o-hidden">
+                                            <div class="overlay">
+                                                <div class="avatar avatar-4by3 mr-16pt">
+                                                    <img src="/categories/{{id}}/picture" alt="Angular Routing In-Depth" class="avatar-img rounded">
+                                                </div>
+                                                <span class="overlay__content overlay__content-transparent">
+                                                        <span class="overlay__action d-flex flex-column text-center lh-1">
+                                                            <small class="h6 small text-white mb-0" style="font-weight: 500;"></small>
+                                                        </span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex">
+                                            <div class="card-title text-body mb-4pt">{{name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a data-toggle="modal" data-target="#editCategory-{{id}}" class="ml-4pt btn btn-accent text-white mr-4pt">Editar</a>
+                                <a data-toggle="modal" data-target="#deleteCategory-{{id}}" class="ml-4pt btn btn-black text-white">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/pageCategories}}
+
+                    {{#categoriesFound}}
+                    <!-- Pagination -->
+
+                    <ul class="pagination justify-content-center pagination-sm">
+                        <li class="page-item {{#firstPage}} disabled {{/firstPage}}">
+                            <a class="page-link" href="/admin-categories-prev-page-{{pageNumber}}" aria-label="Previous">
+                                <span aria-hidden="true" class="material-icons">chevron_left</span>
+                            </a>
+                        </li>
+
+
+                        <li class="page-item active">
+                            <a class="page-link" href="#" aria-label="1">
+                                <span>{{numberPage}}</span>
+                            </a>
+                        </li>
+
+                        <li class="page-item {{#lastPage}} disabled {{/lastPage}}">
+                            <a class="page-link" href="/admin-categories-next-page-{{pageNumber}}" aria-label="Next">
+                                <span aria-hidden="true" class="material-icons">chevron_right</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    {{/categoriesFound}}
+
+                    {{^categoriesFound}}
+                    <h1>No se han encontrado categorías que administrar</h1>
+                    {{/categoriesFound}}
+
+                </div>
+            </div>
+
+
+            {{>footer}}
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+<!-- // Modal create requirement-->
+<div class="modal fade" id="createCategory">
+    <form action="/create-category" method="post" id="create-category-form" enctype="multipart/form-data">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Crear categoría</h4>
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Categoría</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" class="form-control" placeholder="Introduce la nueva categoría" required="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Miniatura</label>
+                                <div class="col-sm-9 media align-items-center">
+                                    <div class="media-body">
+                                        <div class="custom-file">
+                                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile01" accept="image/png, image/jpeg" required="">
+                                            <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="create-category-form" value="Submit" class="btn btn-lg btn-accent">Crear categoría</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+{{#pageCategories}}
+
+<!-- // Modal edit requirement-->
+<div class="modal fade" id="editCategory-{{id}}">
+    <form action="/edit-category-{{id}}" method="post" id="edit-category-{{id}}-form" enctype="multipart/form-data">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar categoría</h4>
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body">
+                    <div class="list-group list-group-form">
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Categoría</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="name" value="{{name}}" class="form-control" placeholder="Introduce la categoría modificada">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item">
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-sm-3">Miniatura</label>
+                                <div class="col-sm-9 media align-items-center">
+                                    <div class="media-body">
+                                        <div class="custom-file">
+                                            <input name="image" type="file" class="custom-file-input" id="inputGroupFile00" accept="image/png, image/jpeg">
+                                            <label class="custom-file-label" for="inputGroupFile00">Elegir archivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" form="edit-category-{{id}}-form" value="Submit" class="btn btn-lg btn-accent">Editar categoría</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- // Modal delete requirement-->
+<div class="modal fade" id="deleteCategory-{{id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- cabecera del diálogo -->
+            <div class="modal-header">
+                <h4 class="modal-title">Borrar categoría</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+
+            <!-- cuerpo del diálogo -->
+            <div class="modal-body">
+                ¿Está seguro de que desea borrar la categoría: {{name}}?
+            </div>
+
+            <!-- pie del diálogo -->
+            <div class="modal-footer">
+                <div class="text-center">
+                    <a href="/delete-category-{{id}}" class="btn btn-lg btn-accent">Borrar categoría</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/pageCategories}}
+
+    {{>drawer}}
+
+
+<!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+    <!-- Global Settings -->
+    <script src="assets/js/settings.js"></script>
+
+    <!-- Moment.js -->
+    <script src="assets/vendor/moment.min.js"></script>
+    <script src="assets/vendor/moment-range.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- Charts JS -->
+    <script src="assets/js/chartjs.js"></script>
+
+    <!-- Chart.js Samples -->
+    <script src="assets/js/page.student-profile.js"></script>
+
+</body>
+
+</html>

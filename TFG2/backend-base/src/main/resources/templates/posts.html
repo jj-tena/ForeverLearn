@@ -1,0 +1,208 @@
+{{>header}}
+
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content pb-0">
+
+            {{>participation-header}}
+
+            <div class="container page__container">
+
+                <div class="page-section">
+
+                    <h4>Posts</h4>
+                    <p class="text-muted d-flex align-items-center mb-32pt mb-lg-48pt">
+                        <a href="/students-area-{{courseId}}" class="mr-3">Volver a la sección inicial</a>
+                    </p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center" style="white-space: nowrap;">
+                                <div class="col-lg-auto">
+                                    <ul class="accordion js-accordion m-0" id="library-category">
+                                        <li class="accordion__item">
+                                            <a class="accordion__toggle collapsed" data-toggle="collapse" data-parent="#library-category" href="#library-all">
+                                                <span class="flex">Temas</span>
+                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                            </a>
+                                            <nav class="accordion__menu collapse" id="library-all">
+                                                <a class="accordion__menu-link active" href="/posts-{{courseId}}-for-theme--2">Todos los temas</a>
+                                                <a class="accordion__menu-link" href="/posts-{{courseId}}-for-theme--1">Tema libre</a>
+                                                {{#themes}}
+                                                <a class="accordion__menu-link" href="/posts-{{courseId}}-for-theme-{{idTheme}}">{{nameTheme}}</a>
+                                                {{/themes}}
+                                            </nav>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg d-flex flex-wrap align-items-center">
+                                    <div class="ml-lg-auto">
+                                    </div>
+                                    <div class="mr-8pt">
+                                    </div>
+                                    {{#enrolledUser}}
+                                        <a href="/create-post-for-course-{{courseId}}" class="btn btn-accent">Crear post</a>
+                                    {{/enrolledUser}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="list-group list-group-flush">
+
+                            {{#interestingPosts}}
+                            <div class="list-group-item p-3"  style="background-color:#FF6666;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 mb-8pt mb-md-0">
+                                        <div class="media">
+                                            <div class="media-left mr-16pt">
+                                                <a href="participation-user-{{participation.student.id}}-course-{{courseId}}"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
+                                            </div>
+                                            <div class="media-body media-middle">
+                                                <p class="m-0"><a href="participation-user-{{participation.student.id}}-course-{{courseId}}" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-8pt mb-md-0">
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                    </div>
+                                    {{#theme}}
+                                    <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">TEMA</h5>
+                                        <h5 class="m-0">{{theme.nameTheme}}</h5>
+                                    </div>
+                                    {{/theme}}
+                                    {{^theme}}
+                                    <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">TEMA</h5>
+                                        <h5 class="m-0">Libre</h5>
+                                    </div>
+                                    {{/theme}}
+                                    <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">{{commentsSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                    </div>
+                                    <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">Post</h5>
+                                        <h5 class="m-0">interesante</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/interestingPosts}}
+
+                            {{#outstandingPosts}}
+                            <div class="list-group-item p-3" style="background-color:#FFB072;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 mb-8pt mb-md-0">
+                                        <div class="media">
+                                            <div class="media-left mr-16pt">
+                                                <a href="/participation-user-{{participation.student.id}}-course-{{courseId}}"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
+                                            </div>
+                                            <div class="media-body media-middle">
+                                                <p class="m-0"><a href="/participation-user-{{participation.student.id}}-course-{{courseId}}" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-8pt mb-md-0">
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                    </div>
+                                    <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">{{commentsSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                    </div>
+                                    <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">Post</h5>
+                                        <h5 class="m-0">destacado</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/outstandingPosts}}
+
+                            {{#standardPosts}}
+                            <div class="list-group-item p-3" style="background-color:#FFE3B3;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 mb-8pt mb-md-0">
+                                        <div class="media">
+                                            <div class="media-left mr-16pt">
+                                                <a href="/participation-user-{{participation.student.id}}-course-{{courseId}}"><img src="/user/{{participation.student.id}}/profilePhoto" width="40" alt="avatar" class="rounded-circle"></a>
+                                            </div>
+                                            <div class="media-body media-middle">
+                                                <p class="m-0"><a href="/participation-user-{{participation.student.id}}-course-{{courseId}}" class="text-body">{{participation.student.name}}</a></p>
+                                                <p class="text-muted m-0">{{participation.title}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-8pt mb-md-0">
+                                        <p class="mb-8pt"><a href="/post-{{id}}-course-{{courseId}}" class="text-body"><strong>{{title}}</strong></a></p>
+                                    </div>
+                                    <div class="col-md-1 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">{{commentsSize}}</h5>
+                                        <p class="lh-1 mb-0"><small class="text-70">comentarios</small></p>
+                                    </div>
+                                    <div class="col-md-2 mb-3pt mb-md-0 d-flex flex-column align-items-center justify-content-center">
+                                        <h5 class="m-0">Post</h5>
+                                        <h5 class="m-0">estándar</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/standardPosts}}
+
+
+                        </div>
+
+
+                        <div class="card-body text-center">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {{>footer}}
+
+        </div>
+        <!-- // END Header Layout Content -->
+
+    </div>
+    <!-- // END Header Layout -->
+
+    {{>drawer}}
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/vendor/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap.min.js"></script>
+
+    <!-- Perfect Scrollbar -->
+    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
+
+    <!-- DOM Factory -->
+    <script src="assets/vendor/dom-factory.js"></script>
+
+    <!-- MDK -->
+    <script src="assets/vendor/material-design-kit.js"></script>
+
+    <!-- Fix Footer -->
+    <script src="assets/vendor/fix-footer.js"></script>
+
+    <!-- Chart.js -->
+    <script src="assets/vendor/Chart.min.js"></script>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="assets/js/hljs.js"></script>
+
+    <!-- App Settings (safe to remove) -->
+    <script src="assets/js/app-settings.js"></script>
+
+
+
+
+</body>
+
+</html>

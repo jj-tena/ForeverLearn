@@ -1,0 +1,53 @@
+<!-- DRAWER (MOBILE NAVBAR) -->
+<div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+    <div class="mdk-drawer__content">
+        <div class="sidebar sidebar-dark sidebar-left" data-perfect-scrollbar>
+            <div class="sidebar-p-a sidebar-b-b sidebar-m-b pt-0">
+
+                <!-- Brand -->
+                <a href="/index" class="sidebar-brand">
+                    <img class="sidebar-brand-icon" src="assets/images/logoBlanco.png" width="40" alt="Tutorio">
+                    <span>ForeverLearn</span>
+                </a>
+                <!-- // END Brand -->
+
+                <!-- Search -->
+                <form action="/find-course" class="search-form search-form--black">
+                    <input type="text" name="name" class="form-control" placeholder="Búsqueda">
+                    <button class="btn" type="submit" role="button"><i class="material-icons">search</i></button>
+                </form>
+
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="/category--1-library-page-0">Cursos</a>
+                </li>
+
+                {{^activeUser}}
+                    <li class="sidebar-menu-item">
+                        <a href="/login" class="sidebar-menu-button" >Iniciar sesión</a>
+                    </li>
+                    {{/activeUser}}
+
+                    {{#activeUser}}
+                        {{#activeUserAdmin}}
+                            <li class="sidebar-menu-item">
+                                <a href="/admin-options" class="sidebar-menu-button" >Administrar</a>
+                            </li>
+                        {{/activeUserAdmin}}
+                    <li class="sidebar-menu-item">
+                        <a href="/user-profile" class="sidebar-menu-button" >Ver perfil</a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="/logout" class="sidebar-menu-button" >Cerrar sesión</a>
+                    </li>
+                {{/activeUser}}
+
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- // END drawer -->
