@@ -1,10 +1,12 @@
 package com.example.backend.service;
 
+import com.example.backend.model.ActiveUser;
 import com.example.backend.model.Course;
 import com.example.backend.model.User;
 import com.example.backend.repository.CourseRepository;
 import com.example.backend.repository.UserRepository;
 import org.hibernate.engine.jdbc.BlobProxy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -23,7 +25,8 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private Long activeId;
+    @Autowired
+    private ActiveUser activeUser;
 
     private final UserRepository userRepository;
 
@@ -35,11 +38,19 @@ public class UserService {
     }
 
     public Optional<User> getActiveUser() {
-        return userRepository.findUserById(activeId);
+        if (Objects.isNull(activeUser.getUser())){
+            return Optional.empty();
+        }
+        return userRepository.findUserById(activeUser.getUser().getId());
     }
 
-    public void setActiveUser(User activeUser) {
-        this.activeId = activeUser.getId();
+    public void setActiveUser(User connectedUser) {
+        Optional<User> optionalUser = userRepository.findUserById(connectedUser.getId());
+        optionalUser.ifPresent(user -> this.activeUser.setUser(user));
+    }
+
+    public void logout() {
+        this.activeUser.setUser(null);
     }
 
     @Transactional
@@ -142,10 +153,6 @@ public class UserService {
                 courseRepository.delete(course);
             }
         }
-    }
-
-    public void logout() {
-        this.activeId = null;
     }
 
     @Transactional
@@ -309,4 +316,7 @@ public class UserService {
         }
     }
 
+    public boolean isCourseCompleted(User user, Course course) {
+        return user.getCompletedCourses().contains(course);
+    }
 }

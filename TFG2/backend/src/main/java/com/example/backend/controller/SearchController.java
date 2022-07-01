@@ -202,14 +202,17 @@ public class SearchController {
             Boolean courseOwner = false;
             Boolean courseEnrolled = false;
             Boolean courseWished = false;
+            Boolean courseCompleted = false;
             if (activeUser.isPresent()){
                 courseOwner = userService.isCourseOwner(activeUser.get(), course.get());
                 courseEnrolled = userService.isCourseEnrolled(activeUser.get(), course.get());
                 courseWished = userService.isCourseWished(activeUser.get(), course.get());
+                courseCompleted = userService.isCourseCompleted(activeUser.get(), course.get());
             }
             model.addAttribute("courseOwner", courseOwner);
             model.addAttribute("courseEnrolled", courseEnrolled);
             model.addAttribute("courseWished", courseWished);
+            model.addAttribute("courseCompleted", courseCompleted);
             if (activeUser.isPresent()){
                 model.addAttribute("likedCourse", userService.isCourseLiked(activeUser.get(), course.get()));
                 model.addAttribute("dislikedCourse", userService.isCourseDisliked(activeUser.get(), course.get()));

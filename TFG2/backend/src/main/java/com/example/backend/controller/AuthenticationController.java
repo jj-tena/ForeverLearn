@@ -75,9 +75,6 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public String logoutUser(Model model){
         userService.logout();
-        Optional<User> activeUser = userService.getActiveUser();
-        model.addAttribute("activeUser", activeUser.isPresent());
-        activeUser.ifPresent(user -> model.addAttribute("activeUserAdmin", user.isAdmin()));
         model.addAttribute("categories", categoryService.findAll());
         return "index";
     }

@@ -7,8 +7,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.MalformedURLException;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ParticipationController {
@@ -201,7 +216,7 @@ public class ParticipationController {
     @GetMapping("/students-area-{courseId}")
     public String studentsAreaLink(Model model, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -217,7 +232,7 @@ public class ParticipationController {
     @GetMapping("/posts-{courseId}-for-theme-{themeId}")
     public String postsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -228,7 +243,7 @@ public class ParticipationController {
     @GetMapping("/questions-{courseId}-for-theme-{themeId}")
     public String questionsLink(Model model, @PathVariable Long courseId, @PathVariable Long themeId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -239,7 +254,7 @@ public class ParticipationController {
     @GetMapping("/post-{postId}-course-{courseId}")
     public String postLink(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -255,7 +270,7 @@ public class ParticipationController {
     @GetMapping("/question-{questionId}-course-{courseId}")
     public String questionLink(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -271,7 +286,7 @@ public class ParticipationController {
     @GetMapping("/create-post-for-course-{courseId}")
     public String createPostLink(Model model, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -292,7 +307,7 @@ public class ParticipationController {
     @GetMapping("/create-question-for-course-{courseId}")
     public String createQuestionLink(Model model, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -313,7 +328,7 @@ public class ParticipationController {
     @GetMapping("/publish-post-for-course-{courseId}")
     public String publishPost(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -342,7 +357,7 @@ public class ParticipationController {
     @GetMapping("/publish-question-for-course-{courseId}")
     public String publishQuestion(Model model, @PathVariable Long courseId, String title, String content, Long themeId, String type){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -425,7 +440,7 @@ public class ParticipationController {
     @GetMapping("/comment-post-{postId}-course-{courseId}")
     public String comment(Model model, @PathVariable Long postId, @PathVariable Long courseId, String content, String type){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -451,7 +466,7 @@ public class ParticipationController {
     @GetMapping("/answer-question-{questionId}-course-{courseId}")
     public String answer(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String content, String type){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -475,7 +490,7 @@ public class ParticipationController {
     }
 
     @GetMapping("/participation-user-{userId}-course-{courseId}")
-    public String participationLink(Model model, @PathVariable Long userId, @PathVariable Long courseId){
+    public String participationLink(Model model, @PathVariable Long userId, @PathVariable Long courseId) throws DocumentException, FileNotFoundException {
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<Participation> optionalParticipation = participationService.existsParticipation(userId, courseId);
@@ -509,7 +524,7 @@ public class ParticipationController {
     @GetMapping("/like-post-{postId}-course-{courseId}")
     public String likePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -528,7 +543,7 @@ public class ParticipationController {
     @GetMapping("/like-question-{questionId}-course-{courseId}")
     public String likeQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -546,7 +561,7 @@ public class ParticipationController {
     @GetMapping("/quit-like-post-{postId}-course-{courseId}")
     public String quitLikePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -564,7 +579,7 @@ public class ParticipationController {
     @GetMapping("/quit-like-question-{questionId}-course-{courseId}")
     public String quitLikeQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -582,7 +597,7 @@ public class ParticipationController {
     @GetMapping("/set-best-answer-{answerId}-question-{questionId}-course-{courseId}")
     public String setBestAnswer(Model model, @PathVariable Long answerId, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -604,7 +619,7 @@ public class ParticipationController {
     @GetMapping("/reset-best-answer-question-{questionId}-course-{courseId}")
     public String resetBestAnswer(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -624,7 +639,7 @@ public class ParticipationController {
     @GetMapping("/delete-post-{postId}-course-{courseId}")
     public String deletePost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -650,7 +665,7 @@ public class ParticipationController {
     @GetMapping("/delete-question-{questionId}-course-{courseId}")
     public String deleteQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -676,7 +691,7 @@ public class ParticipationController {
     @GetMapping("/link-edit-post-{postId}-course-{courseId}")
     public String linkEditPost(Model model, @PathVariable Long postId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -687,7 +702,7 @@ public class ParticipationController {
     @GetMapping("/edit-post-{postId}-course-{courseId}")
     public String editPost(Model model, @PathVariable Long postId, @PathVariable Long courseId, String title, String content, Long themeId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -716,7 +731,7 @@ public class ParticipationController {
     @GetMapping("/link-edit-question-{questionId}-course-{courseId}")
     public String linkEditQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -727,7 +742,7 @@ public class ParticipationController {
     @GetMapping("/edit-question-{questionId}-course-{courseId}")
     public String editQuestion(Model model, @PathVariable Long questionId, @PathVariable Long courseId, String title, String content, Long themeId){
         if (isUserBanned(courseId)){
-            return "error";
+            return "ban";
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
@@ -819,7 +834,7 @@ public class ParticipationController {
         if (optionalUser.isPresent()){
             courseService.reportQuestion(courseId, question);
         }
-        return postsLink(model, courseId, (long) -2);
+        return questionsLink(model, courseId, (long) -2);
     }
 
     @GetMapping("/report-participation-user-{userId}-course-{courseId}")
@@ -894,6 +909,96 @@ public class ParticipationController {
         }
         return statisticsLink(model, courseId);
     }
+
+    @GetMapping("/certificate-course-{courseId}")
+    public String certificate(Model model, @PathVariable Long courseId) throws DocumentException, FileNotFoundException {
+        if (isUserBanned(courseId)){
+            return "error";
+        }
+        setHeaderInfo(model);
+        setParticipationHeader(model, courseId);
+        Optional<User> optionalUser = userService.getActiveUser();
+        if (optionalUser.isPresent()){
+            Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent()){
+                generateCertificate(optionalParticipation.get().getStudent().getName() + " " + optionalParticipation.get().getStudent().getSurname(),
+                        optionalParticipation.get().getCourse().getName(),
+                        optionalParticipation.get().getCourse().getAuthor().getName() + " " + optionalParticipation.get().getCourse().getAuthor().getSurname(),
+                        optionalParticipation.get().getPoints(), optionalParticipation.get().getPosts().size(), optionalParticipation.get().getQuestions().size(),
+                        optionalParticipation.get().totalViewsInPosts() + optionalParticipation.get().totalViewsInQuestions(),
+                        optionalParticipation.get().totalLikesInPosts() + optionalParticipation.get().totalLikesInQuestions()
+                );
+                return participationLink(model, optionalUser.get().getId(), courseId);
+            }
+        }
+        return "error";
+    }
+
+    public static void generateCertificate(String student, String course, String teacher, int points, int posts, int questions, int visits, int likes) throws FileNotFoundException, DocumentException {
+        Document document = new Document();
+        FileOutputStream pdfFile = new FileOutputStream("diploma.pdf");
+        PdfWriter.getInstance(document, pdfFile);
+        document.open();
+
+        document.setMargins(1,1,1,1);
+
+        Paragraph foreverlearn = new Paragraph("Forever Learn \n\n",
+                FontFactory.getFont("arial", 32, Font.BOLD, BaseColor.BLACK));
+        foreverlearn.setAlignment(1);
+        Paragraph studentP = new Paragraph("Se complace en otorgar al estudiante: \n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
+        studentP.setAlignment(1);
+        Paragraph studentName = new Paragraph(student + "\n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
+        studentName.setAlignment(1);
+        Paragraph courseP = new Paragraph("El diploma de superación del curso: \n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
+        courseP.setAlignment(1);
+        Paragraph courseName = new Paragraph(course + "\n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
+        courseName.setAlignment(1);
+        Paragraph teacherP = new Paragraph("Impartido por el profesor: \n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
+        teacherP.setAlignment(1);
+        Paragraph teacherName = new Paragraph(teacher + "\n\n\n",
+                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
+        teacherName.setAlignment(1);
+
+        document.add(foreverlearn);
+        document.add(studentP);
+        document.add(studentName);
+        document.add(courseP);
+        document.add(courseName);
+        document.add(teacherP);
+        document.add(teacherName);
+
+        Paragraph participation = new Paragraph("Consiguiendo las siguientes métricas de participación: \n\n",
+                FontFactory.getFont("times-roman", 20, Font.BOLD, BaseColor.LIGHT_GRAY));
+        participation.setAlignment(1);
+
+        document.add(participation);
+
+        PdfPTable statistics = new PdfPTable(5);
+        statistics.addCell("PUNTOS");
+        statistics.addCell("POSTS");
+        statistics.addCell("PREGUNTAS");
+        statistics.addCell("VISITAS");
+        statistics.addCell("ME GUSTAS");
+
+        statistics.addCell(String.valueOf(points));
+        statistics.addCell(String.valueOf(posts));
+        statistics.addCell(String.valueOf(questions));
+        statistics.addCell(String.valueOf(visits));
+        statistics.addCell(String.valueOf(likes));
+
+        document.add(statistics);
+
+        document.close();
+
+
+
+    }
+
 
 
 
