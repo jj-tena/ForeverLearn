@@ -38,6 +38,11 @@ public class DatabaseController {
 
     @PostConstruct
     public void initialize() throws IOException {
+
+        if (userService.countUsers() > 0){
+            return;
+        }
+
         User savedUser1 = userService.createFromParameters("Sergio", "Abad", "sergio@email.com", "se", "/static/assets/images/people/110/guy-1.jpg",
                 "Hola soy Sergio Abad, deportista aficionado y profesional del mundo de la salud, me apasiona mantenerme en movimiento y saber más sobre" +
                         " mi cuerpo para mejorar en mi profesión, en mis cursos hablaré sobre los deportes que domino y diversas áreas sobre las que me he formado" +

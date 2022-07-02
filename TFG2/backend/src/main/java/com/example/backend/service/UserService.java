@@ -319,4 +319,8 @@ public class UserService {
     public boolean isCourseCompleted(User user, Course course) {
         return user.getCompletedCourses().contains(course);
     }
+
+    public long countUsers(){
+        return courseRepository.count();
+    }
 }

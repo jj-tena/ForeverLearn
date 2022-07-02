@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.util.*;
 import java.util.List;
@@ -910,95 +909,22 @@ public class ParticipationController {
         return statisticsLink(model, courseId);
     }
 
-    @GetMapping("/certificate-course-{courseId}")
-    public String certificate(Model model, @PathVariable Long courseId) throws DocumentException, FileNotFoundException {
+    public Optional<Participation> certificate(Model model, @PathVariable Long courseId) throws DocumentException, IOException {
+        Optional<Participation> result = Optional.empty();
         if (isUserBanned(courseId)){
-            return "error";
+            return result;
         }
         setHeaderInfo(model);
         setParticipationHeader(model, courseId);
         Optional<User> optionalUser = userService.getActiveUser();
         if (optionalUser.isPresent()){
             Optional<Participation> optionalParticipation = participationService.existsParticipation(optionalUser.get().getId(), courseId);
-            if (optionalParticipation.isPresent()){
-                generateCertificate(optionalParticipation.get().getStudent().getName() + " " + optionalParticipation.get().getStudent().getSurname(),
-                        optionalParticipation.get().getCourse().getName(),
-                        optionalParticipation.get().getCourse().getAuthor().getName() + " " + optionalParticipation.get().getCourse().getAuthor().getSurname(),
-                        optionalParticipation.get().getPoints(), optionalParticipation.get().getPosts().size(), optionalParticipation.get().getQuestions().size(),
-                        optionalParticipation.get().totalViewsInPosts() + optionalParticipation.get().totalViewsInQuestions(),
-                        optionalParticipation.get().totalLikesInPosts() + optionalParticipation.get().totalLikesInQuestions()
-                );
-                return participationLink(model, optionalUser.get().getId(), courseId);
+            if (optionalParticipation.isPresent() && (optionalParticipation.get().getTitle().contentEquals("Leyenda"))){
+                return optionalParticipation;
             }
         }
-        return "error";
+        return result;
     }
-
-    public static void generateCertificate(String student, String course, String teacher, int points, int posts, int questions, int visits, int likes) throws FileNotFoundException, DocumentException {
-        Document document = new Document();
-        FileOutputStream pdfFile = new FileOutputStream("diploma.pdf");
-        PdfWriter.getInstance(document, pdfFile);
-        document.open();
-
-        document.setMargins(1,1,1,1);
-
-        Paragraph foreverlearn = new Paragraph("Forever Learn \n\n",
-                FontFactory.getFont("arial", 32, Font.BOLD, BaseColor.BLACK));
-        foreverlearn.setAlignment(1);
-        Paragraph studentP = new Paragraph("Se complace en otorgar al estudiante: \n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
-        studentP.setAlignment(1);
-        Paragraph studentName = new Paragraph(student + "\n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
-        studentName.setAlignment(1);
-        Paragraph courseP = new Paragraph("El diploma de superación del curso: \n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
-        courseP.setAlignment(1);
-        Paragraph courseName = new Paragraph(course + "\n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
-        courseName.setAlignment(1);
-        Paragraph teacherP = new Paragraph("Impartido por el profesor: \n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.GRAY));
-        teacherP.setAlignment(1);
-        Paragraph teacherName = new Paragraph(teacher + "\n\n\n",
-                FontFactory.getFont("times-roman", 22, Font.BOLD, BaseColor.DARK_GRAY));
-        teacherName.setAlignment(1);
-
-        document.add(foreverlearn);
-        document.add(studentP);
-        document.add(studentName);
-        document.add(courseP);
-        document.add(courseName);
-        document.add(teacherP);
-        document.add(teacherName);
-
-        Paragraph participation = new Paragraph("Consiguiendo las siguientes métricas de participación: \n\n",
-                FontFactory.getFont("times-roman", 20, Font.BOLD, BaseColor.LIGHT_GRAY));
-        participation.setAlignment(1);
-
-        document.add(participation);
-
-        PdfPTable statistics = new PdfPTable(5);
-        statistics.addCell("PUNTOS");
-        statistics.addCell("POSTS");
-        statistics.addCell("PREGUNTAS");
-        statistics.addCell("VISITAS");
-        statistics.addCell("ME GUSTAS");
-
-        statistics.addCell(String.valueOf(points));
-        statistics.addCell(String.valueOf(posts));
-        statistics.addCell(String.valueOf(questions));
-        statistics.addCell(String.valueOf(visits));
-        statistics.addCell(String.valueOf(likes));
-
-        document.add(statistics);
-
-        document.close();
-
-
-
-    }
-
 
 
 
