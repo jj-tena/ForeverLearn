@@ -122,10 +122,10 @@ public class ParticipationService {
         List<Participation> top = participationRepository.getParticipationsByCourseIdOrderByPointsDesc(courseId);
         if (top.contains(participation)){
             int index = top.indexOf(participation);
-            if (index<=10){
+            if (index<=9){
                 return top;
             } else {
-                return top.subList(index-10,index);
+                return top.subList(index-9,index+1);
             }
         }
         return new ArrayList<>();
