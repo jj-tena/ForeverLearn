@@ -383,23 +383,7 @@ ForeverLearn supports a large part of its educational innovation in these two co
 
 In order to endorse and refine the educational approach, it was decided to follow a User Centered Design approach for this phase.
 
-### User Centered Design (UCD)
-
-The user centered design process is a product creation methodology that puts the end-user at the centre of the design process in order to make him/her a part of the design process with the aim of offering a product that meets his/her needs with the highest possible degree of satisfaction.
-
-ForeverLearn proposes various aspects of educational innovation that represent a break with traditional implementation methods and therefore cannot rely on the decisions made by previous systems, for which it aims to bring together ideas from different currents such as CMOOCs and Gamification.
-
-User-centred design was selected to implement the modules of user participation within the course and Gamification to incentivise them, due to the need to back up one's own ideas through a committee of experts in educational innovation to assess their quality and provide feedback that can improve the course of the project.
-
-For the sake of order, it has been decided to divide this process into 3 stages:
-
-1. First an initial prototype is developed that integrates the original design ideas and decisions.
-2. The initial prototype will go through a series of interviews in which different experts will comment on their first impressions and offer their feedback. Their opinions will then be assessed and the feasibility of their proposals will be studied, and this work will be reflected in an intermediate prototype.
-3. The intermediate prototype will again pass through the hands of the specialists who are giving their assistance. After that, their final verdicts will be examined and final changes will be included to shape the final design.
-
-For each of the stages, the creative decisions involved, the features included and the contributions of all those who helped are detailed below.
-
-### Initial prototype
+### Design Proposal
 
 This first point of the design process will be particularly extensive because it must explain all the ideas that will form the basis from which it will begin to iterate.
 
