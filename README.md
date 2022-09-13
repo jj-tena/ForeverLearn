@@ -383,7 +383,7 @@ ForeverLearn supports a large part of its educational innovation in these two co
 
 In order to endorse and refine the educational approach, it was decided to follow a User Centered Design approach for this phase.
 
-### Design Proposal
+### Participation tools
 
 This first point of the design process will be particularly extensive because it must explain all the ideas that will form the basis from which it will begin to iterate.
 
@@ -422,4 +422,37 @@ Standard Post/Issue. This is the last type of post/issue to be shown in the list
 they have not stood out above the others, they will be shown in white.
 
 Once the activities that users can carry out in the courses have been developed, we can discuss the Gamification techniques proposed to encourage these actions.
+
+### Gamification
+
+Regarding the gamification techniques used, the following have been chosen:
+
+Points: participation in the courses gives the student a specific number of points according to the work done.
+
+Medals: as the user reaches specific milestones within the course, they obtain medals that reward their efforts and allow them to distinguish themselves from their peers, these medals also give the user points.
+
+Ranking: all the courses have a public top of the 10 best students of the course based on the points they got in it, in addition the student will see a top relative to his position with the 10 students immediately superior to him in points.
+
+Title: as the number of points increases, the user obtains a higher title within the course that shows their level of maturity in the subject, upon reaching the final title it is considered that the student has successfully passed the course and therefore he is worthy of deserving his diploma.
+
+## Phase 3
+In this phase, the project was expanded through the use of a pdf emission technology to generate the diploma of the courses and with the upload of the final system to a server in order to make it accessible to the entire world.
+
+### Diploma
+
+As specified in the design proposal, when the student of a course obtains
+the legend title is considered to have passed it and therefore has access to its
+diploma.
+
+It was proposed to make an original use of the diploma, which would not only show the data of
+name of the student, the course and the teacher, but taking advantage of all the information
+that we have of your participation in the course, show your metrics associated with this face
+to endorse their dedication and production quality.
+
+To generate the certificate was used the iTextPDF library that stood out for its simplicity,
+in it, a previous template is not designed, but in the code itself, the
+layout features and the content you want to appear in the document,
+was easily integrated into the project code and finally it was decided to use this
+technology to generate the diplomas in the application.
+
 
