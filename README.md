@@ -431,6 +431,8 @@ Points: participation in the courses gives the student a specific number of poin
 
 Medals: as the user reaches specific milestones within the course, they obtain medals that reward their efforts and allow them to distinguish themselves from their peers, these medals also give the user points.
 
+![medals](https://github.com/jj-tena/ForeverLearn/blob/main/TFG2/images/phase1/medals/pyramid/color/pyramid.jpg)
+
 Ranking: all the courses have a public top of the 10 best students of the course based on the points they got in it, in addition the student will see a top relative to his position with the 10 students immediately superior to him in points.
 
 Title: as the number of points increases, the user obtains a higher title within the course that shows their level of maturity in the subject, upon reaching the final title it is considered that the student has successfully passed the course and therefore he is worthy of deserving his diploma.
@@ -440,19 +442,35 @@ In this phase, the project was expanded through the use of a pdf emission techno
 
 ### Diploma
 
-As specified in the design proposal, when the student of a course obtains
-the legend title is considered to have passed it and therefore has access to its
-diploma.
+As specified in the design proposal, when the student of a course obtains the legend title is considered to have passed it and therefore has access to its diploma.
 
-It was proposed to make an original use of the diploma, which would not only show the data of
-name of the student, the course and the teacher, but taking advantage of all the information
-that we have of your participation in the course, show your metrics associated with this face
-to endorse their dedication and production quality.
+It was proposed to make an original use of the diploma, which would not only show the data of name of the student, the course and the teacher, but taking advantage of all the information that we have of your participation in the course, show your metrics associated with this face to endorse their dedication and production quality.
 
-To generate the certificate was used the iTextPDF library that stood out for its simplicity,
-in it, a previous template is not designed, but in the code itself, the
-layout features and the content you want to appear in the document,
-was easily integrated into the project code and finally it was decided to use this
-technology to generate the diplomas in the application.
+To generate the certificate was used the iTextPDF library that stood out for its simplicity, in it, a previous template is not designed, but in the code itself, the layout features and the content you want to appear in the document, was easily integrated into the project code and finally it was decided to use this technology to generate the diplomas in the application.
 
+### Deployment
 
+The publication of the application on a server, thus allowing it to be accessible by any device through the internet, was one of the great challenges that this project faced, due to the fact that it did not have previous experience in this type of process. , since it was a necessary requirement so that those who participated in the survey presented in chapter 4, could operate with the application about which they were going to be asked.
+
+The platform selected for the deployment was Heroku, which offers free hosting on its servers, compatible with projects developed in multiple programming languages, with an intermediate security layer using the https protocol, but under a series of technical limitations such as a maximum of 550 hours of activity of the application, a cessation of the execution when it detects that 30 minutes have passed without being used and a start-up time of around 1 minute.
+
+Beyond the technical limitations and the learning of the process, it was an obstacle that ForeverLearn had been developed using a MySQL database, while Heroku is designed to host databases implemented in PostgreSQL, this implies that for ForeverLearn to run on a Heroku server you had to modify your code to work with a PostgreSQL database.
+
+Despite this drawback, ForeverLearn has the advantage of using Hibernate as an ORM (object-relational mapping) interface for database access and manipulation, so once it managed to connect to the PostgreSQL database it would not have problems operating with it. Finally, a code was used that allowed the connection with the PostgreSQL database that was on the server when the project was deployed on it.
+
+Once the necessary changes were made so that the code was ready to work on the server, the following steps were followed for the publishing process:
+1. Create an account on the Heroku website.
+2. Creation of an application (space to host my code) from the Heroku website.
+3. Download Heroku client for terminal on my device.
+4. Client login for terminal.
+5. Creation of a PostgreSQL database on the server.
+6. Creating a Docker image from the dependencies pom.xml file.
+7. Upload the generated image to the Heroku image registry.8. Publish the image uploaded to your record to the Heroku app.
+ 
+Finally, the application is available at the address: https://foreverlearn.herokuapp.com/.
+
+## Phase 4
+
+This phase closed the project, with all the proposed functionalities already implemented and taking advantage of the fact that the platform was accessible through the internet, a survey was published aimed at people specialized in the subject through google forms to find out the strong and weak points of the project. 
+
+Once the user feedback had been analyzed and the corresponding changes had been implemented, the project was considered finished.
